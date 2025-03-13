@@ -1,7 +1,5 @@
-if (theme.plugins.mermaid.enable === true) {
-  try {
-    swup.hooks.on("page:view", () => {
-      mermaid.initialize();
-    });
-  } catch (e) {}
+function initMermaid() {
+    if (window.mermaid) {
+        mermaid.initialize({theme: 'default'});
+    }
 }

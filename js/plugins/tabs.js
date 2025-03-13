@@ -1,29 +1,24 @@
-function setTabs() {
-  let tabs = document.querySelectorAll(".tabs .nav-tabs");
-  if (!tabs) return;
+function initTabs() {
+    $('.tabs').each(function () {
+        var $navTabs = $(this).find('.nav-tabs');
+        var $tabContents = $(this).find('.tab-contents');
 
-  tabs.forEach((tab) => {
-    tab.querySelectorAll("a").forEach((link) => {
-      link.addEventListener("click", (e) => {
-        e.preventDefault();
-        e.stopPropagation();
+        $navTabs.find('button').each(function () {
+            $(this).on('click', function () {
+                var dataHref = $(this).data('href');
 
-        const parentTab = e.target.parentElement.parentElement.parentElement;
-        parentTab.querySelector(".nav-tabs .active").classList.remove("active");
-        e.target.parentElement.classList.add("active");
-        parentTab
-          .querySelector(".tab-content .active")
-          .classList.remove("active");
-        parentTab.querySelector(e.target.className).classList.add("active");
+                // 添加 active 类到对应的 tab-item-content
+                $tabContents.find('#' + dataHref).addClass('active');
 
-        return false;
-      });
+                // 移除其他 tab-item-content 的 active 类
+                $tabContents.find('.tab-item-content').not('#' + dataHref).removeClass('active');
+
+                // 添加 active 类到当前按钮
+                $(this).addClass('active');
+
+                // 移除其他按钮的 active 类
+                $(this).siblings().removeClass('active');
+            });
+        });
     });
-  });
 }
-
-try {
-  swup.hooks.on("page:view", setTabs);
-} catch (e) {}
-
-document.addEventListener("DOMContentLoaded", setTabs);
