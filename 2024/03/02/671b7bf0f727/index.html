@@ -1,0 +1,362 @@
+<!DOCTYPE html><html lang="en" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>Codeforces Round 931 (Div. 2) | Little_sk</title><meta name="author" content="Little_sk"><meta name="copyright" content="Little_sk"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="题目链接 -  Codeforces Round 931 (Div. 2) A. Too Min Too Max题意给出一个数组， 现在要你选择四个下标$i,j,k,l$ , 问$|a_i - a_j|+|a_j - a_k|+|a_k - a_l|+|a_l - a_i|$ 最大是多少。（$i , j,k,l$ 必须互不相同） 思路题目要求的其实就是选出四个数组成一个环，使得相邻两个数的差的和最">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Codeforces Round 931 (Div. 2)">
+<meta property="og:url" content="https://lsk404.github.io/2024/03/02/671b7bf0f727/index.html">
+<meta property="og:site_name" content="Little_sk">
+<meta property="og:description" content="题目链接 -  Codeforces Round 931 (Div. 2) A. Too Min Too Max题意给出一个数组， 现在要你选择四个下标$i,j,k,l$ , 问$|a_i - a_j|+|a_j - a_k|+|a_k - a_l|+|a_l - a_i|$ 最大是多少。（$i , j,k,l$ 必须互不相同） 思路题目要求的其实就是选出四个数组成一个环，使得相邻两个数的差的和最">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://lsk404.github.io/img/avator.jpg">
+<meta property="article:published_time" content="2024-03-02T04:00:00.000Z">
+<meta property="article:modified_time" content="2025-03-13T13:55:52.781Z">
+<meta property="article:author" content="Little_sk">
+<meta property="article:tag" content="C++">
+<meta property="article:tag" content="题解">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://lsk404.github.io/img/avator.jpg"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Codeforces Round 931 (Div. 2)",
+  "url": "https://lsk404.github.io/2024/03/02/671b7bf0f727/",
+  "image": "https://lsk404.github.io/img/avator.jpg",
+  "datePublished": "2024-03-02T04:00:00.000Z",
+  "dateModified": "2025-03-13T13:55:52.781Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "Little_sk",
+      "url": "https://lsk404.github.io/lsk404.github.io"
+    }
+  ]
+}</script><link rel="shortcut icon" href="/img/favicon.ico"><link rel="canonical" href="https://lsk404.github.io/2024/03/02/671b7bf0f727/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//www.google-analytics.com" crossorigin=""/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script async="async" src="https://www.googletagmanager.com/gtag/js?id=G-745T2DDK98"></script><script>window.dataLayer = window.dataLayer || []
+function gtag(){dataLayer.push(arguments)}
+gtag('js', new Date())
+gtag('config', 'G-745T2DDK98')
+btf.addGlobalFn('pjaxComplete', () => {
+  gtag('config', 'G-745T2DDK98', {'page_path': window.location.pathname})
+}, 'google_analytics')
+</script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: 'Copy Successful',
+    error: 'Copy Failed',
+    noSupport: 'Browser Not Supported'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: 'days',
+  dateSuffix: {
+    just: 'Just now',
+    min: 'minutes ago',
+    hour: 'hours ago',
+    day: 'days ago',
+    month: 'months ago'
+  },
+  copyright: {"limitCount":150,"languages":{"author":"Author: Little_sk","link":"Link: ","source":"Source: Little_sk","info":"Copyright belongs to the author. For commercial use, please contact the author for authorization. For non-commercial use, please indicate the source."}},
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: 'Load More'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: true,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: true,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'Codeforces Round 931 (Div. 2)',
+  isHighlightShrink: false,
+  isToc: true,
+  pageType: 'post'
+}</script><meta name="generator" content="Hexo 7.3.0"></head><body><div id="web_bg" style="background-image: url(img/bg3.png);"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/avator.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">48</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">15</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">5</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-clock"></i><span> 时间线</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg fixed" id="page-header" style="background-image: url(/img/bg.png);"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><img class="site-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/favicon.ico" alt="Logo"></a><a class="nav-page-title" href="/"><span class="site-name">Codeforces Round 931 (Div. 2)</span></a></span><div id="menus"><div id="search-button"><span class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> Search</span></span></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-clock"></i><span> 时间线</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="post-info"><h1 class="post-title">Codeforces Round 931 (Div. 2)</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">Created</span><time class="post-meta-date-created" datetime="2024-03-02T04:00:00.000Z" title="Created 2024-03-02 12:00:00">2024-03-02</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">Updated</span><time class="post-meta-date-updated" datetime="2025-03-13T13:55:52.781Z" title="Updated 2025-03-13 21:55:52">2025-03-13</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E9%A2%98%E8%A7%A3/">题解</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">Word Count:</span><span class="word-count">2.9k</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">Post Views:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><p><a target="_blank" rel="noopener" href="https://codeforces.com/contest/1934">题目链接 -  Codeforces Round 931 (Div. 2)</a></p>
+<h1 id="A-Too-Min-Too-Max"><a href="#A-Too-Min-Too-Max" class="headerlink" title="A. Too Min Too Max"></a>A. Too Min Too Max</h1><h2 id="题意"><a href="#题意" class="headerlink" title="题意"></a>题意</h2><p>给出一个数组， 现在要你选择四个下标$i,j,k,l$ , 问$|a_i - a_j|+|a_j - a_k|+|a_k - a_l|+|a_l - a_i|$ 最大是多少。（$i , j,k,l$ 必须互不相同）</p>
+<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>题目要求的其实就是选出四个数组成一个环，使得相邻两个数的差的和最大。</p>
+<p>于是我们先探究 ： 如果选出了某四个数，如何调整他们在环中的顺序能使得总和最大。 不难想到， 将较大的两个数放在第一和第三位， 较小的两个数放在第二和第四位时， 得到的结果最大。 此时为($a_i - a_j) +( a_k - a_j )+ (a_k - a_l)+(a_i - a_l)$ ，即$2*(a_i + a_k - a_j -a_l)$ </p>
+<p>第二步我们考虑如何选择这四个数能使得结果最大。 很明显我们需要尽可能让 较大的两个数$a_i,a_k$ 更大，较小的两个数$a_j.a_l$更小。</p>
+<p>于是对于整个数组，选出最大的两个数，以及最小的两个数，就可以得到最优结果。</p>
+<p>对数组a进行排序， 就得到了最终结果为 $2*(a<em>n + a</em>{n-1} - a_1 - a_2)$</p>
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="meta">#<span class="keyword">define</span> IO ios::sync_with_stdio(false);cin.tie(0);cout.tie(0);</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> int long long</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> rep(i,l,r) for(int i = l;i&lt;=r;i++)</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> per(i,r,l) for(int i = r;i&gt;=l;i--)</span></span><br><span class="line"><span class="type">const</span> <span class="type">int</span> INF = <span class="number">0x3f3f3f3f3f3f3f3f</span>;</span><br><span class="line"><span class="keyword">typedef</span> pair&lt;<span class="type">int</span>,<span class="type">int</span>&gt; PII;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">solve</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="type">int</span> n;</span><br><span class="line">	cin&gt;&gt;n;</span><br><span class="line">	vector&lt;<span class="type">int</span>&gt; a;</span><br><span class="line">	<span class="built_in">rep</span>(i,<span class="number">1</span>,n)&#123;<span class="type">int</span> num;cin&gt;&gt;num;a.<span class="built_in">push_back</span>(num);&#125;</span><br><span class="line">	<span class="built_in">sort</span>(a.<span class="built_in">begin</span>(),a.<span class="built_in">end</span>());</span><br><span class="line">	cout&lt;&lt;<span class="number">2</span>*(a[n<span class="number">-1</span>]+a[n<span class="number">-2</span>]-a[<span class="number">0</span>]-a[<span class="number">1</span>])&lt;&lt;<span class="string">&#x27;\n&#x27;</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">signed</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="type">int</span> T = <span class="number">1</span>;</span><br><span class="line">	cin&gt;&gt;T;</span><br><span class="line">	<span class="keyword">while</span>(T--)&#123;</span><br><span class="line">		<span class="built_in">solve</span>();</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="B-Yet-Another-Coin-Problem"><a href="#B-Yet-Another-Coin-Problem" class="headerlink" title="B. Yet Another Coin Problem"></a>B. Yet Another Coin Problem</h1><h2 id="题意-1"><a href="#题意-1" class="headerlink" title="题意"></a>题意</h2><p>现在有一些面值为$1,3,6,10,15$ 的硬币 ， 问如何选择各个硬币的数量，使得总面值恰好为n，并且硬币的总数量最少。</p>
+<p>$(1 \le n \le 10^9)$</p>
+<h2 id="思路-1"><a href="#思路-1" class="headerlink" title="思路"></a>思路</h2><p>我们观察这些硬币的面值，可以发现$3,6,15$ 都是3的倍数。而另一个大面值硬币又可以表示为$10 = 3*3+1$ 。于是我们有如下策略：</p>
+<ol>
+<li>尽可能多地选择3 ，此时可能剩下$[0,2]$的面值。即$md = 0,1,2$ , 如果md 为0，那么我们就可以将这些面值为3的硬币尽可能多地兑换为面值为15和6的硬币。</li>
+<li><p>如果有剩余， 若手中面值3的硬币的数量大于等于3 ，就可以将这三个3和一个1 换成一个10。 </p>
+</li>
+<li><p>如果有剩余并且手中的面值3的硬币数量小于3，那么就只能用面值为1的硬币来填补这个空缺了。</p>
+</li>
+</ol>
+<h2 id="代码-1"><a href="#代码-1" class="headerlink" title="代码"></a>代码</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="meta">#<span class="keyword">define</span> IO ios::sync_with_stdio(false);cin.tie(0);cout.tie(0);</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> int long long</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> rep(i,l,r) for(int i = l;i&lt;=r;i++)</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> per(i,r,l) for(int i = r;i&gt;=l;i--)</span></span><br><span class="line"><span class="type">const</span> <span class="type">int</span> INF = <span class="number">0x3f3f3f3f3f3f3f3f</span>;</span><br><span class="line"><span class="keyword">typedef</span> pair&lt;<span class="type">int</span>,<span class="type">int</span>&gt; PII;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">solve</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="type">int</span> n;</span><br><span class="line">	cin&gt;&gt;n;</span><br><span class="line">	<span class="type">int</span> md = n%<span class="number">3</span>; <span class="comment">//md是除以3后的余数</span></span><br><span class="line">	<span class="type">int</span> t = n/<span class="number">3</span>;<span class="comment">// t是除以3后的结果</span></span><br><span class="line">	<span class="type">int</span> ans = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">if</span>(md == <span class="number">2</span>)&#123;<span class="comment">//如果余两个,那么就尝试将一个余数和3个3结合。</span></span><br><span class="line">		<span class="keyword">if</span>(t&gt;=<span class="number">3</span>) &#123;ans++;t-=<span class="number">3</span>;&#125;<span class="comment">//成功结合</span></span><br><span class="line">		<span class="keyword">else</span> ans++;<span class="comment">//不能结合</span></span><br><span class="line">		md = <span class="number">1</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span>(md == <span class="number">1</span>)&#123;<span class="comment">//同理</span></span><br><span class="line">		<span class="keyword">if</span>(t &gt;= <span class="number">3</span>) &#123;ans++;t-=<span class="number">3</span>;&#125;</span><br><span class="line">		<span class="keyword">else</span> ans++;</span><br><span class="line">		md = <span class="number">0</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">//这时候md一定为0</span></span><br><span class="line">    ans += t / <span class="number">5</span>; <span class="comment">// 能换成多少个15</span></span><br><span class="line">    t %= <span class="number">5</span>;</span><br><span class="line">    ans += t / <span class="number">2</span>;<span class="comment">// 剩下的还能换成多少个6</span></span><br><span class="line">    t %= <span class="number">2</span>;</span><br><span class="line">    ans+=t; <span class="comment">// 都换不成了，就用3吧</span></span><br><span class="line">    <span class="comment">//输出答案</span></span><br><span class="line">	cout&lt;&lt;ans&lt;&lt;<span class="string">&#x27;\n&#x27;</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">signed</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="type">int</span> T = <span class="number">1</span>;</span><br><span class="line">	cin&gt;&gt;T;</span><br><span class="line">	<span class="keyword">while</span>(T--)&#123;</span><br><span class="line">		<span class="built_in">solve</span>();</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="C-Find-a-Mine"><a href="#C-Find-a-Mine" class="headerlink" title="C. Find a Mine"></a>C. Find a Mine</h1><h2 id="题意-2"><a href="#题意-2" class="headerlink" title="题意"></a>题意</h2><p>和上一场的C一样，又是交互题。 给出一个n *m的网格，其中有两个位置有地雷，但你不知道他们在哪， 你最多可以询问四次。</p>
+<p>每次提供一个坐标， 裁判会告诉你两个地雷距离这个坐标的<strong>曼哈顿距离</strong> 中的最小值是多少。 现在需要你在最多四次询问之后，给出任意一颗地雷的具体坐标。</p>
+<hr>
+<p><strong>曼哈顿距离</strong> ： 两个坐标$(x1 ,y1) , (x2,y2)$ 的曼哈顿距离为$|x1-x2|+|y1-y2|$ 。对于如下5*5的网格， 点$(3,3)$与所有点的曼哈顿距离如下</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img-blog.csdnimg.cn/direct/c973e460ff2e494a825b401370902c50.jpeg#pic_center" alt="picture1"></p>
+<h2 id="思路-2"><a href="#思路-2" class="headerlink" title="思路"></a>思路</h2><p>我们发现确定一个点以及一个曼哈顿距离后 ，我们可以得到可能的范围是一个菱形。 如果我们将询问点设置在表格的一角，那么表格中可能的格子就组成了一个对角线。 于是我们询问地图的三个角，就得到了三条对角线，他们三者相交一定最多次出现两个交点。（也可能是一个）。之后我们再询问其中一个交点，如果给出的答案是0，就代表他是地雷，如果不是0，就代表另一个是地雷。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img-blog.csdnimg.cn/direct/125e47c86af345418a45d7be3affd375.jpeg#pic_center" alt="picture2"></p>
+<p>我们可能遇到两个对角线相交没有准确格子的情况（如上图中的红对角线和蓝对角线，二者没有共同的格子）</p>
+<h2 id="代码-2"><a href="#代码-2" class="headerlink" title="代码"></a>代码</h2><p>这里有些地方需要讲解一下：</p>
+<p>在代码中，先询问了左上，右下，右上三个角。得到了三个曼哈顿距离 $a, b,c$。</p>
+<p>怎么求两个交点呢？ 先看左上和右上两个对角线形成的交点。假设为$(x_1,y_1)$ ，那么就有</p>
+<p>$x_1 - 1 + y_1 - 1 = a$</p>
+<p>$m - y_1 + x_1 - 1 = c$  解方程可以得到 $x_1 = \frac{a+c-m+3}{2} , y_1 = \frac{a-c+1+m}{2}$ , 但我们发现可能会出现x和y不是整数的时候（也就是$a+c-m$为偶数的时候），这时候就不可取。（代码中表示为将x和y都设置为-1）</p>
+<p>按照同样的方法</p>
+<p>$m - y_2 + x_2 - 1 = c$</p>
+<p>$n-x_2 + m - y_2 = b$  </p>
+<p>可以找到另一个交点$x_2 = \frac{2*m+n-b-c-1}{2} , y_2 = \frac{n+c-b+1}{2}$。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="meta">#<span class="keyword">define</span> IO ios::sync_with_stdio(false);cin.tie(0);cout.tie(0);</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> int long long</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> rep(i,l,r) for(int i = l;i&lt;=r;i++)</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> per(i,r,l) for(int i = r;i&gt;=l;i--)</span></span><br><span class="line"><span class="type">const</span> <span class="type">int</span> INF = <span class="number">0x3f3f3f3f3f3f3f3f</span>;</span><br><span class="line"><span class="keyword">typedef</span> pair&lt;<span class="type">int</span>,<span class="type">int</span>&gt; PII;</span><br><span class="line"><span class="type">int</span> n,m;</span><br><span class="line"><span class="function"><span class="type">bool</span> <span class="title">inrange</span><span class="params">(<span class="type">int</span> x,<span class="type">int</span> y)</span></span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(x&lt;=n &amp;&amp; x &gt;= <span class="number">1</span> &amp;&amp; <span class="number">1</span>&lt;=y &amp;&amp; y&lt;=m) <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">	<span class="keyword">else</span> <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">solve</span><span class="params">()</span></span>&#123;</span><br><span class="line">	cin&gt;&gt;n&gt;&gt;m;</span><br><span class="line">	cout&lt;&lt;<span class="string">&quot;? 1 1&quot;</span>&lt;&lt;endl;</span><br><span class="line">	<span class="type">int</span> a; cin&gt;&gt;a;</span><br><span class="line">	cout&lt;&lt;<span class="string">&quot;? &quot;</span>&lt;&lt;n&lt;&lt;<span class="string">&quot; &quot;</span>&lt;&lt;m&lt;&lt;endl;</span><br><span class="line">	<span class="type">int</span> b;cin&gt;&gt;b;</span><br><span class="line">	cout&lt;&lt;<span class="string">&quot;? 1 &quot;</span>&lt;&lt;m&lt;&lt;endl;</span><br><span class="line">	<span class="type">int</span> c;cin&gt;&gt;c;</span><br><span class="line">	<span class="type">int</span> x1,y1,x2,y2;</span><br><span class="line">	<span class="type">int</span> t = a+c - (m<span class="number">-1</span>);</span><br><span class="line">	<span class="keyword">if</span>(t%<span class="number">2</span>)&#123;x1 = y1 = <span class="number">-1</span>;&#125;</span><br><span class="line">	<span class="keyword">else</span> &#123;y1 = t/<span class="number">2</span><span class="number">+1</span>;x1 = (a-t/<span class="number">2</span>)<span class="number">+1</span>;&#125;</span><br><span class="line">	t = b+c - (n<span class="number">-1</span>);</span><br><span class="line">	<span class="keyword">if</span>(t%<span class="number">2</span>)&#123;x2 = y2 = <span class="number">-1</span>;&#125;</span><br><span class="line">	<span class="keyword">else</span>&#123;y2 = m-t/<span class="number">2</span>;x2=(c-t/<span class="number">2</span>)<span class="number">+1</span>;&#125;</span><br><span class="line">	<span class="keyword">if</span>(!<span class="built_in">inrange</span>(x1,y1)) &#123;cout&lt;&lt;<span class="string">&quot;! &quot;</span>&lt;&lt;x2&lt;&lt;<span class="string">&quot; &quot;</span>&lt;&lt;y2&lt;&lt;endl;&#125;</span><br><span class="line">	<span class="keyword">else</span> <span class="keyword">if</span>(!<span class="built_in">inrange</span>(x2,y2)) &#123;cout&lt;&lt;<span class="string">&quot;! &quot;</span>&lt;&lt;x1&lt;&lt;<span class="string">&quot; &quot;</span>&lt;&lt;y1&lt;&lt;endl;&#125;</span><br><span class="line">	<span class="keyword">else</span>&#123;</span><br><span class="line">		cout&lt;&lt;<span class="string">&quot;? &quot;</span>&lt;&lt;x1&lt;&lt;<span class="string">&quot; &quot;</span>&lt;&lt;y1&lt;&lt;endl;</span><br><span class="line">		<span class="type">int</span> d;cin&gt;&gt;d;</span><br><span class="line">		<span class="keyword">if</span>(d == <span class="number">0</span>) cout&lt;&lt;<span class="string">&quot;! &quot;</span>&lt;&lt;x1&lt;&lt;<span class="string">&quot; &quot;</span>&lt;&lt;y1&lt;&lt;endl;</span><br><span class="line">		<span class="keyword">else</span> cout&lt;&lt;<span class="string">&quot;! &quot;</span>&lt;&lt;x2&lt;&lt;<span class="string">&quot; &quot;</span>&lt;&lt;y2&lt;&lt;endl;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">signed</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="type">int</span> T = <span class="number">1</span>;</span><br><span class="line">	cin&gt;&gt;T;</span><br><span class="line">	<span class="keyword">while</span>(T--)&#123;</span><br><span class="line">		<span class="built_in">solve</span>();</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="D1-XOR-Break-—-Solo-Version"><a href="#D1-XOR-Break-—-Solo-Version" class="headerlink" title="D1. XOR Break — Solo Version"></a>D1. XOR Break — Solo Version</h1><h2 id="题意-3"><a href="#题意-3" class="headerlink" title="题意"></a>题意</h2><p>给出操作方法为：若操作前的数值为$y$，那么选择一个x ，使得$x&lt;y , x \oplus y&lt;y$ , 之后令$y = x$或$y = y \oplus x$ 。</p>
+<p>给出n和m$(m&lt;n)$  问能否让n进行一定次数的操作后， 变为m。</p>
+<p>$\oplus$ 为异或符号， $x \oplus y $表示$x$和$y$的异或 。</p>
+<h2 id="思路-3"><a href="#思路-3" class="headerlink" title="思路"></a>思路</h2><p>首先应该注意到的是： 我们不论选择$y = x$还是$y = y \oplus x$ ，都是等价的,因为若令$y = y \oplus x $ 那么不妨将我们设置的原先的$x_1$更改为$y\oplus x_2$ 这样选择$y = y \oplus x_2 = y \oplus (y \oplus x_1) = x1$ 是等价的。 因此我们对于某个y，他可以一步变化的数为集合${x| x&lt;n\&amp; x\oplus y &lt; y }$</p>
+<p>接下来我们可以发现如下两个规律：</p>
+<ol>
+<li>如果$y$是11111（全1），那么y可以变为任意小于$y$的数。</li>
+<li>如果$y$= 10000（只有一个1），那么y再也不能变化了 。</li>
+</ol>
+<p>接下来我们找对于n所形成的可达的集合。其中的最大值：</p>
+<p>先找到n的前两个为1的位置。（如果n只有一个1那么根据规律2可知无解），假设为a和b，如</p>
+<p>当$n = 1010001_{(2)}$ 时，$a = 1，b = 3$ 。（从左往右标注从1开始的下标）</p>
+<p>那么为了使得$m$和$n \oplus m$都比$n$小，二者必须有一个变成0。</p>
+<p>并且此时得知一个引论： 在a和b中间的这部分数位，m中的该部分必须全为0 。(反例：n = 101000，m = 01000,这里在m的第2位为1于是n一定不能到达m) ，否则便无解。</p>
+<p>于是新的n（我们将他命名为$nn$）则是$nn = 0010001$ 或者 $nn = 1000001$。我们发现对于b右边的数位（也就是第二个1之后的数位），无论他如何改变，都可以满足nn^n 和nn均小于n（因为最靠前的两个1位$a,b$已经保证了这个性质），那么我们不妨让之后的数位都变为1（因为这样子可以尽可能地满足规律1，使得$nn$到$m$更有可能）</p>
+<p>于是我们得到如下结论，在令一个原本为1的位置变为0后，如果n中已经出现过至少两个1，那么之后的数位都可以变为1 。</p>
+<p>那么应该把哪一位的1变为0呢？</p>
+<p>检查n和m的二进制数，然后从大端找，找第一个n和m数位不同的地方，这时候一定是n的数位是1，m的数位是0<br>比如</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">n = 111000</span><br><span class="line">m = 101000</span><br></pre></td></tr></table></figure>
+<p>发现左边第二位是1，于是将这一位置为0 , 这样就保证了对于前两位的1，有 m 和n^m都小于n。在此之后，将之后的位置（第3位到第6位）都变为1，便得到了nn = 101111 。我们构造的这个$nn$保证了在前半部分和m完全相同，无需理会，后半部分又全是1，可以随意变换。也就是说，只要nn大于m，那么一定可以从$nn$变成$m$。</p>
+<p>因此我们得知了变化顺序$n \to nn \to m$ ，由于$nn$可能等于$m$，因此也可能是$n \to m$ 。</p>
+<h2 id="代码-3"><a href="#代码-3" class="headerlink" title="代码"></a>代码</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="meta">#<span class="keyword">define</span> IO ios::sync_with_stdio(false);cin.tie(0);cout.tie(0);</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> int long long</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> rep(i,l,r) for(int i = l;i&lt;=r;i++)</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> per(i,r,l) for(int i = r;i&gt;=l;i--)</span></span><br><span class="line"><span class="type">const</span> <span class="type">int</span> INF = <span class="number">0x3f3f3f3f3f3f3f3f</span>;</span><br><span class="line"><span class="keyword">typedef</span> pair&lt;<span class="type">int</span>,<span class="type">int</span>&gt; PII;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">solve</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="type">int</span> n,m;</span><br><span class="line">    cin&gt;&gt;n&gt;&gt;m;</span><br><span class="line">    <span class="type">int</span> nn = n;</span><br><span class="line">    <span class="type">int</span> flag = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">62</span>;i&gt;=<span class="number">0</span>;i--)&#123;</span><br><span class="line">        <span class="keyword">if</span>(flag == <span class="number">0</span> &amp;&amp; ((n&gt;&gt;i)&amp;<span class="number">1</span>)!=((m&gt;&gt;i)&amp;<span class="number">1</span>))&#123;</span><br><span class="line">            flag = <span class="number">1</span>;</span><br><span class="line">            nn -= (<span class="number">1</span>&lt;&lt;i);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span>(flag == <span class="number">1</span> &amp;&amp; (n&gt;&gt;i)&amp;<span class="number">1</span>==<span class="number">0</span>)&#123;</span><br><span class="line">            flag = <span class="number">2</span>;</span><br><span class="line">        &#125;<span class="keyword">else</span> <span class="keyword">if</span>(flag == <span class="number">2</span>)&#123;</span><br><span class="line">            nn |= (<span class="number">1</span>&lt;&lt;i);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(nn&lt;m)&#123;cout&lt;&lt;<span class="number">-1</span>&lt;&lt;endl;<span class="keyword">return</span>;&#125;</span><br><span class="line">    <span class="keyword">if</span>(nn == m)&#123;</span><br><span class="line">        cout&lt;&lt;<span class="number">2</span>&lt;&lt;endl;</span><br><span class="line">        cout&lt;&lt;n&lt;&lt;<span class="string">&quot; &quot;</span>&lt;&lt;m&lt;&lt;endl;</span><br><span class="line">    &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">        cout&lt;&lt;<span class="number">3</span>&lt;&lt;endl;</span><br><span class="line">        cout&lt;&lt;n&lt;&lt;<span class="string">&quot; &quot;</span>&lt;&lt;nn&lt;&lt;<span class="string">&quot; &quot;</span>&lt;&lt;m&lt;&lt;endl;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">signed</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="type">int</span> T = <span class="number">1</span>;</span><br><span class="line">    cin&gt;&gt;T;</span><br><span class="line">    <span class="keyword">while</span>(T--)&#123;</span><br><span class="line">        <span class="built_in">solve</span>();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>Author: </span><span class="post-copyright-info"><a href="lsk404.github.io">Little_sk</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>Link: </span><span class="post-copyright-info"><a href="https://lsk404.github.io/2024/03/02/671b7bf0f727/">https://lsk404.github.io/2024/03/02/671b7bf0f727/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>Copyright Notice: </span><span class="post-copyright-info">All articles on this blog are licensed under <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> unless otherwise stated.</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/C/">C++</a><a class="post-meta__tags" href="/tags/%E9%A2%98%E8%A7%A3/">题解</a></div><div class="post-share"><div class="social-share" data-image="/img/avator.jpg" data-sites="wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related" href="/2024/02/29/1bf0beed8499/" title="Codeforces Round 929 (Div. 3)"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info"><div class="info-1"><div class="info-item-1">Previous</div><div class="info-item-2">Codeforces Round 929 (Div. 3)</div></div><div class="info-2"><div class="info-item-1">题目链接 A. Turtle Puzzle: Rearrange and Negate题意有一个长度为n的数组a，进行两步操作，第一步重新排列数组内元素的顺序， 第二部选择一个连续区间，将其中的元素取反。问进行完这两步操作后，数组元素的值的总和 最大是多少。 思路 很显然，把所有的负数放到一起，然后把这段区间取反即可。答案就是所有数的绝对值的和。 代码1234567891011121314151617181920212223242526#include&lt;bits/stdc++.h&gt;using namespace std;#define IO ios::sync_with_stdio(false);cin.tie(0);cout.tie(0);#define int long long#define rep(i,l,r) for(int i = l;i&lt;=r;i++)#define per(i,r,l) for(int i = r;i&gt;=l;i--)const int INF = 0x3f3f3f3f3f3f3f3f;typedef...</div></div></div></a><a class="pagination-related" href="/2024/03/03/8eac4d8e9423/" title="牛客周赛 35"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-right"><div class="info-1"><div class="info-item-1">Next</div><div class="info-item-2">牛客周赛 35</div></div><div class="info-2"><div class="info-item-1">题目链接-牛客周赛 Round 35 A - 小红的字符串切割题意给出一个长度为偶数的字符串，分别输出前一半和后一半 思路&amp;代码按题意输出即可 12345678910111213141516171819202122#include&lt;bits/stdc++.h&gt;using namespace std;#define IO ios::sync_with_stdio(false);cin.tie(0);cout.tie(0);#define int long long#define rep(i,l,r) for(int i = l;i&lt;=r;i++)#define per(i,r,l) for(int i = r;i&gt;=l;i--)const int INF = 0x3f3f3f3f3f3f3f3f;typedef pair&lt;int,int&gt; PII;void solve()&#123;    string str;    cin&gt;&gt;str;   ...</div></div></div></a></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>Related Articles</span></div><div class="relatedPosts-list"><a class="pagination-related" href="/2023/09/18/3b4839b3d1b7/" title="2023ICPC网络赛第一场"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2023-09-18</div><div class="info-item-2">2023ICPC网络赛第一场</div></div><div class="info-2"><div class="info-item-1">The 2023 ICPC Asia Regionals Online Contest (1)，不要选时光机，用签到送的金币就可以练习 G Spanning Tree题意起初树只有n个节点，没有边，按照如下操作进行n-1次，对于第i次操作，选择$a_i,b_i$ ,从$a_i$ 所在的块中随机选出一个节点$u_i$，从$b_i$ 所在的块中随机选出一个节点$v_i$， 连接$u_i,v_i$保证最终会形成一个树，求构造出的这个树和给出的标准的树T能够完全相同的期望（对 998244353取模） 保证第$i$次操作前,$a_i,b_i$ 不在同一个块。 定义一个节点v所在的块即v能到达的所有节点的集合（包括v本身） 请注意，所求的期望可能是0。 思路可以得出，最终期望一定是0或者 $\frac{1}{s}$ ： 每次连接两个块时，最多只有一种连接方式能够使得所连边的情况和最终的树匹配。而本次操作会使得操作前的期望$s_{i-1}$ 再乘上 $\frac{1}{sz_a*sz_b}$ ($sz_a,sz_b$表示a和b当前所在块的节点数量)。 ...</div></div></div></a><a class="pagination-related" href="/2023/11/12/026c0040b952/" title="2023ICPC网络赛第二场"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2023-11-12</div><div class="info-item-2">2023ICPC网络赛第二场</div></div><div class="info-2"><div class="info-item-1">The 2023 ICPC Asia Regionals Online Contest (2) (pintia.cn) K Super-knight题意有一个士兵，起初在n*n的棋盘的左下角，每次向右移动a格，向上移动b格，当越过地图边界时，则到地图的另一边（类似于没有边界墙的贪吃蛇），对这个士兵能到达的格子做标记，所有被标记的格子中，离左下角格子最近的距离是多少。（假设最近的格子为$(x, y)$，就输出$(x - 1)^2+(y - 1)^2$ ) （ $2 \le n \le 10^{18}, 1 \le a,b \le 200$) 思路可以得出，在经过n次移动后，一定回回到起始点，所以最终的路径一定是循环的。 但n太大，无法通过这样判断所有的被标记的点。 可以发现，在移动了若干次后，除非穿过地图边界，否则只会增加 与原点的距离。因此我们只需要考虑刚穿过地图边界的点...</div></div></div></a><a class="pagination-related" href="/2023/10/29/c6413222be25/" title="2023年10月ZZUACM实验室招新赛题解"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2023-10-29</div><div class="info-item-2">2023年10月ZZUACM实验室招新赛题解</div></div><div class="info-2"><div class="info-item-1">注意事项请注意！：  题解仅代表个人看法，不代表最优解  每道题都会附上ac代码，但是仅作参考，要看懂后再了解代码。补题不要直接抄代码！禁止自欺欺人！  只提供题解，不提供题目信息 ac代码为C++版本，如果遇到不懂的语法请自行百度 ac代码中的循环经常用到了for(int i = 1;i&lt;=n;i++) ，这种在for的括号中int i的操作只有大于等于C++11标准才可以使用，编译错误时请检查自己编译使用的标准。  A.数位分解对于一个数x，   使用  x % 10 (% 是取余数) ，就可以得到他的最后一位 使用 x /= 10  (除以十并取整数)，就可以舍掉他的最后一位  使用while(x) 来进行循环 1234567891011#include&lt;iostream&gt;using namespace std;int main()&#123;	int x;	cin&gt;&gt;x;	while(x)&#123;		cout&lt;&lt; x % 10 &lt;&lt;&quot; &quot;;		x = x / 10;	&#125;	return...</div></div></div></a><a class="pagination-related" href="/2024/09/09/17fe9a65a7dc/" title="AtCoder Beginner Contest 346"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2024-09-09</div><div class="info-item-2">AtCoder Beginner Contest 346</div></div><div class="info-2"><div class="info-item-1">AtCoder Beginner Contest 346 A - Adjacent Product题意给你一个数组$a1,a_2,…,a_n$ ，现在有$b_i = a_i * a{i+1}$ 输出$b1,b_2,…,b{n-1}$ 思路照着题意写就行 代码12345n = int(input())lst = [int(x) for x in input().split()]ans = []for i in range(len(lst)-1):    print(lst[i] * lst[i+1],end=&#x27; &#x27;) B - Piano题意有一个字符串，由无数个wbwbwwbwbwbw 重复得来，现在给出两个数W和B$(1\le W,B \le 100 )$ 问是否存在某个子串满足：包含$W$个w以及$B$ 个b 思路这个子串一定不会超过200位，所以我们重复wbwbwwbwbwbw 40次(长度$12*40 = 480$)就可以保证所有的子串都在其中，然后我们求所有长度为$W+B$...</div></div></div></a><a class="pagination-related" href="/2023/09/12/1f41d16e4fe3/" title="Codeforces Round 897 (Div. 2)"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2023-09-12</div><div class="info-item-2">Codeforces Round 897 (Div. 2)</div></div><div class="info-2"><div class="info-item-1">Dashboard - Codeforces Round 897 (Div. 2) - Codeforces A - green_gold_dog, array and permutation题意有一个长度为n的数组a，请你找出一个长度为n的排列b。 根据数组a和b来构造出数组c。$c[i] = a[i] - b[i]$ ，尽可能地使c数组中的 互不相同的数的数量。 思路好妙的思路！ 让最小的$a[i]$ 减去n,次小的减去$n-1$ ,这样每个$c[i]$ 都不一样。 代码1234567891011121314151617181920212223242526272829303132333435#include&lt;iostream&gt;#include&lt;set&gt;#include&lt;vector&gt;#include&lt;algorithm&gt;using namespace std;const int N = 4e4 + 5;pair&lt;int,int&gt; a[N];pair&lt;int,int&gt; b[N];int...</div></div></div></a><a class="pagination-related" href="/2023/10/27/b104fde463a2/" title="Codeforces Round 904 (Div. 2)"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2023-10-27</div><div class="info-item-2">Codeforces Round 904 (Div. 2)</div></div><div class="info-2"><div class="info-item-1">Dashboard - Codeforces Round 904 (Div. 2) - Codeforces C. Medium Design题意给长度为m的数组a，初始均为0。$1\le m \le 10^9$ 给出一些区间，请你选出其中某些区间。每选择一个区间，就令区间中的数都加一，问 数组中最大值$max(a)$ ,和最小值$ min(a)$ 的差，最大为多少。 思路考虑以下贪心策略：如果我们确定了最终第$i$个数是最大的那个数，即$ a[i] = max(a)$ , 那么我们就可以选择所有的包含$i$的区间。然后摒弃所有不包含$i$的区间。（选上包含$i$的区间一定会令$max(a)++$) , 这样我们可以遍历所有的数组下标$i$。 计算假使$i$为最大数时的$ans$，最终选择最大的$ans$即可。 我们可以先对区间进行排序。 然后根据右端点从小到大维护优先队列$pq$。这样按顺序遍历区间数组，就可以引入所有左端点小于等于$ i $的区间。然后通过剔除优先队列中的右端点小于i的区间。 这样优先队列中就保存了所有的包含$i$的区间。  因此有 $max(a) =...</div></div></div></a></div></div><hr class="custom-hr"/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> Comments</span></div></div><div class="comment-wrap"><div><div class="vcomment" id="vcomment"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/avator.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">Little_sk</div><div class="author-info-description"></div><div class="site-data"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">48</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">15</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">5</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/lsk404/"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>Announcement</span></div><div class="announcement_content">加我友链！</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>Contents</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#A-Too-Min-Too-Max"><span class="toc-number">1.</span> <span class="toc-text">A. Too Min Too Max</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%A2%98%E6%84%8F"><span class="toc-number">1.1.</span> <span class="toc-text">题意</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%9D%E8%B7%AF"><span class="toc-number">1.2.</span> <span class="toc-text">思路</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81"><span class="toc-number">1.3.</span> <span class="toc-text">代码</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#B-Yet-Another-Coin-Problem"><span class="toc-number">2.</span> <span class="toc-text">B. Yet Another Coin Problem</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%A2%98%E6%84%8F-1"><span class="toc-number">2.1.</span> <span class="toc-text">题意</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%9D%E8%B7%AF-1"><span class="toc-number">2.2.</span> <span class="toc-text">思路</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81-1"><span class="toc-number">2.3.</span> <span class="toc-text">代码</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#C-Find-a-Mine"><span class="toc-number">3.</span> <span class="toc-text">C. Find a Mine</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%A2%98%E6%84%8F-2"><span class="toc-number">3.1.</span> <span class="toc-text">题意</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%9D%E8%B7%AF-2"><span class="toc-number">3.2.</span> <span class="toc-text">思路</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81-2"><span class="toc-number">3.3.</span> <span class="toc-text">代码</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#D1-XOR-Break-%E2%80%94-Solo-Version"><span class="toc-number">4.</span> <span class="toc-text">D1. XOR Break — Solo Version</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%A2%98%E6%84%8F-3"><span class="toc-number">4.1.</span> <span class="toc-text">题意</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%9D%E8%B7%AF-3"><span class="toc-number">4.2.</span> <span class="toc-text">思路</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81-3"><span class="toc-number">4.3.</span> <span class="toc-text">代码</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>Recent Posts</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/03/09/0ed69ce9ed7c/" title="电子扫盲">电子扫盲</a><time datetime="2025-03-09T04:00:00.000Z" title="Created 2025-03-09 12:00:00">2025-03-09</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/02/12/27d697c28fe4/" title="十六届蓝桥杯模拟赛3题解">十六届蓝桥杯模拟赛3题解</a><time datetime="2025-02-12T04:00:00.000Z" title="Created 2025-02-12 12:00:00">2025-02-12</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/12/09/67f3ead662d5/" title="蓝桥杯python语法速通">蓝桥杯python语法速通</a><time datetime="2024-12-09T04:00:00.000Z" title="Created 2024-12-09 12:00:00">2024-12-09</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/12/02/c836153aa73d/" title="十六届蓝桥杯模拟赛1题解">十六届蓝桥杯模拟赛1题解</a><time datetime="2024-12-02T04:00:00.000Z" title="Created 2024-12-02 12:00:00">2024-12-02</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/11/28/c31164113f39/" title="Codeforces Round 986 (Div. 2)">Codeforces Round 986 (Div. 2)</a><time datetime="2024-11-28T04:00:00.000Z" title="Created 2024-11-28 12:00:00">2024-11-28</time></div></div></div></div></div></div></main><footer id="footer" style="background-image: url(img/bg3.png);"><div id="footer-wrap"><div class="framework-info"><span>Framework </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo 7.3.0</a><span class="footer-separator">|</span><span>Theme </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly 5.3.5</a></div><div class="footer_custom_text"><a href="https://icp.gov.moe/?keyword=20250258" target="_blank">萌ICP备20250258号</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="Reading Mode"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="Toggle Between Light and Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle Between Single-column and Double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="Settings"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="Table of Contents"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="Scroll to Comments"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="Back to Top"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload/dist/lazyload.iife.min.js"></script><div class="js-pjax"><script>(async () => {
+  const showKatex = () => {
+    document.querySelectorAll('#article-container .katex').forEach(el => el.classList.add('katex-show'))
+  }
+
+  if (!window.katex_js_css) {
+    window.katex_js_css = true
+    await btf.getCSS('https://cdn.jsdelivr.net/npm/katex/dist/katex.min.css')
+    if (true) {
+      await btf.getScript('https://cdn.jsdelivr.net/npm/katex/dist/contrib/copy-tex.min.js')
+    }
+  }
+
+  showKatex()
+})()</script><script>(() => {
+  const runMermaid = ele => {
+    window.loadMermaid = true
+    const theme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'default'
+
+    ele.forEach((item, index) => {
+      const mermaidSrc = item.firstElementChild
+      const mermaidThemeConfig = `%%{init:{ 'theme':'${theme}'}}%%\n`
+      const mermaidID = `mermaid-${index}`
+      const mermaidDefinition = mermaidThemeConfig + mermaidSrc.textContent
+
+      const renderFn = mermaid.render(mermaidID, mermaidDefinition)
+      const renderMermaid = svg => {
+        mermaidSrc.insertAdjacentHTML('afterend', svg)
+      }
+
+      // mermaid v9 and v10 compatibility
+      typeof renderFn === 'string' ? renderMermaid(renderFn) : renderFn.then(({ svg }) => renderMermaid(svg))
+    })
+  }
+
+  const codeToMermaid = () => {
+    const codeMermaidEle = document.querySelectorAll('pre > code.mermaid')
+    if (codeMermaidEle.length === 0) return
+
+    codeMermaidEle.forEach(ele => {
+      const preEle = document.createElement('pre')
+      preEle.className = 'mermaid-src'
+      preEle.hidden = true
+      preEle.textContent = ele.textContent
+      const newEle = document.createElement('div')
+      newEle.className = 'mermaid-wrap'
+      newEle.appendChild(preEle)
+      ele.parentNode.replaceWith(newEle)
+    })
+  }
+
+  const loadMermaid = () => {
+    if (false) codeToMermaid()
+    const $mermaid = document.querySelectorAll('#article-container .mermaid-wrap')
+    if ($mermaid.length === 0) return
+
+    const runMermaidFn = () => runMermaid($mermaid)
+    btf.addGlobalFn('themeChange', runMermaidFn, 'mermaid')
+    window.loadMermaid ? runMermaidFn() : btf.getScript('https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js').then(runMermaidFn)
+  }
+
+  btf.addGlobalFn('encrypt', loadMermaid, 'mermaid')
+  window.pjax ? loadMermaid() : document.addEventListener('DOMContentLoaded', loadMermaid)
+})()</script><script>(() => {
+  const isShuoshuo = GLOBAL_CONFIG_SITE.pageType === 'shuoshuo'
+  const option = null
+
+  const initValine = (el, path) => {
+    if (isShuoshuo) {
+      window.shuoshuoComment.destroyValine = () => {
+        if (el.children.length) {
+          el.innerHTML = ''
+          el.classList.add('no-comment')
+        }
+      }
+    }
+
+    const valineConfig = {
+      el: '#vcomment',
+      appId: 'jY5tnMLwMUhZNOv61yXvepci-gzGzoHsz',
+      appKey: 'gZbn0Lr7joLZ83iUlbqPfk4J',
+      avatar: 'monsterid',
+      serverURLs: '',
+      emojiMaps: "",
+      visitor: false,
+      ...option,
+      path: isShuoshuo ? path : (option && option.path) || window.location.pathname
+    }
+
+    new Valine(valineConfig)
+  }
+
+  const loadValine = async (el, path) => {
+    if (typeof Valine === 'function') {
+      initValine(el, path)
+    } else {
+      await btf.getScript('https://cdn.jsdelivr.net/npm/valine/dist/Valine.min.js')
+      initValine(el, path)
+    }
+  }
+
+  if (isShuoshuo) {
+    'Valine' === 'Valine'
+      ? window.shuoshuoComment = { loadComment: loadValine }
+      : window.loadOtherComment = loadValine
+    return
+  }
+
+  if ('Valine' === 'Valine' || !true) {
+    if (true) btf.loadComment(document.getElementById('vcomment'),loadValine)
+    else setTimeout(loadValine, 0)
+  } else {
+    window.loadOtherComment = loadValine
+  }
+})()</script></div><script id="click-heart" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/click-heart.min.js" async="async" mobile="false"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div class="docsearch-wrap"><div id="docsearch" style="display:none"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@docsearch/css/dist/style.min.css"/><script src="https://cdn.jsdelivr.net/npm/@docsearch/js/dist/umd/index.min.js"></script><script>(() => {
+  docsearch(Object.assign({
+    appId: '01FHVVY2XK',
+    apiKey: 'd84b05b830df4908372d996f666ebca2',
+    indexName: 'lsk404io',
+    container: '#docsearch',
+    placeholder: 'Search what you want to search',
+  }, null))
+
+  const handleClick = () => {
+    document.querySelector('.DocSearch-Button').click()
+  }
+
+  const searchClickFn = () => {
+    btf.addEventListenerPjax(document.querySelector('#search-button > .search'), 'click', handleClick)
+  }
+
+  searchClickFn()
+  window.addEventListener('pjax:complete', searchClickFn)
+})()</script></div></div></body></html>

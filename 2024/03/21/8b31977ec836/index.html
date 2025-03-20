@@ -1,0 +1,337 @@
+<!DOCTYPE html><html lang="en" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>Codeforces Round 935 (Div. 3) | Little_sk</title><meta name="author" content="Little_sk"><meta name="copyright" content="Little_sk"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="题目链接 A. Setting up Camp题意有一些屋子，每个屋子最多容纳三个人，有三种人，内向人必须一个人一个屋，外向人必须三个人同时一个屋子，综合人随意（一个两个三个都可） 现在有$a$ 个内向人， $b$  个外向人， $c$ 个综合人。 问最少需要多少个屋子才能满足所有人的要求，如果无论如何都不能满足那么就输出-1 思路我们很容易发现， 对于内向人，不会导致输出-1.因为给他们一人一个">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Codeforces Round 935 (Div. 3)">
+<meta property="og:url" content="https://lsk404.github.io/2024/03/21/8b31977ec836/index.html">
+<meta property="og:site_name" content="Little_sk">
+<meta property="og:description" content="题目链接 A. Setting up Camp题意有一些屋子，每个屋子最多容纳三个人，有三种人，内向人必须一个人一个屋，外向人必须三个人同时一个屋子，综合人随意（一个两个三个都可） 现在有$a$ 个内向人， $b$  个外向人， $c$ 个综合人。 问最少需要多少个屋子才能满足所有人的要求，如果无论如何都不能满足那么就输出-1 思路我们很容易发现， 对于内向人，不会导致输出-1.因为给他们一人一个">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://lsk404.github.io/img/avator.jpg">
+<meta property="article:published_time" content="2024-03-21T04:00:00.000Z">
+<meta property="article:modified_time" content="2025-03-13T13:57:07.249Z">
+<meta property="article:author" content="Little_sk">
+<meta property="article:tag" content="C++">
+<meta property="article:tag" content="题解">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://lsk404.github.io/img/avator.jpg"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Codeforces Round 935 (Div. 3)",
+  "url": "https://lsk404.github.io/2024/03/21/8b31977ec836/",
+  "image": "https://lsk404.github.io/img/avator.jpg",
+  "datePublished": "2024-03-21T04:00:00.000Z",
+  "dateModified": "2025-03-13T13:57:07.249Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "Little_sk",
+      "url": "https://lsk404.github.io/lsk404.github.io"
+    }
+  ]
+}</script><link rel="shortcut icon" href="/img/favicon.ico"><link rel="canonical" href="https://lsk404.github.io/2024/03/21/8b31977ec836/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//www.google-analytics.com" crossorigin=""/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script async="async" src="https://www.googletagmanager.com/gtag/js?id=G-745T2DDK98"></script><script>window.dataLayer = window.dataLayer || []
+function gtag(){dataLayer.push(arguments)}
+gtag('js', new Date())
+gtag('config', 'G-745T2DDK98')
+btf.addGlobalFn('pjaxComplete', () => {
+  gtag('config', 'G-745T2DDK98', {'page_path': window.location.pathname})
+}, 'google_analytics')
+</script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: 'Copy Successful',
+    error: 'Copy Failed',
+    noSupport: 'Browser Not Supported'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: 'days',
+  dateSuffix: {
+    just: 'Just now',
+    min: 'minutes ago',
+    hour: 'hours ago',
+    day: 'days ago',
+    month: 'months ago'
+  },
+  copyright: {"limitCount":150,"languages":{"author":"Author: Little_sk","link":"Link: ","source":"Source: Little_sk","info":"Copyright belongs to the author. For commercial use, please contact the author for authorization. For non-commercial use, please indicate the source."}},
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: 'Load More'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: true,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: true,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'Codeforces Round 935 (Div. 3)',
+  isHighlightShrink: false,
+  isToc: true,
+  pageType: 'post'
+}</script><meta name="generator" content="Hexo 7.3.0"></head><body><div id="web_bg" style="background-image: url(img/bg3.png);"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/avator.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">48</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">15</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">5</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-clock"></i><span> 时间线</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg fixed" id="page-header" style="background-image: url(/img/bg.png);"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><img class="site-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/favicon.ico" alt="Logo"></a><a class="nav-page-title" href="/"><span class="site-name">Codeforces Round 935 (Div. 3)</span></a></span><div id="menus"><div id="search-button"><span class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> Search</span></span></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-clock"></i><span> 时间线</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="post-info"><h1 class="post-title">Codeforces Round 935 (Div. 3)</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">Created</span><time class="post-meta-date-created" datetime="2024-03-21T04:00:00.000Z" title="Created 2024-03-21 12:00:00">2024-03-21</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">Updated</span><time class="post-meta-date-updated" datetime="2025-03-13T13:57:07.249Z" title="Updated 2025-03-13 21:57:07">2025-03-13</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E9%A2%98%E8%A7%A3/">题解</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">Word Count:</span><span class="word-count">2.3k</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">Post Views:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><p><a target="_blank" rel="noopener" href="https://codeforces.com/contest/1945">题目链接</a></p>
+<h1 id="A-Setting-up-Camp"><a href="#A-Setting-up-Camp" class="headerlink" title="A. Setting up Camp"></a>A. Setting up Camp</h1><h2 id="题意"><a href="#题意" class="headerlink" title="题意"></a>题意</h2><p>有一些屋子，每个屋子最多容纳三个人，有三种人，<strong>内向人</strong>必须一个人一个屋，<strong>外向人</strong>必须三个人同时一个屋子，综合人随意（一个两个三个都可）</p>
+<p>现在有$a$ 个内向人， $b$  个外向人， $c$ 个综合人。 问最少需要多少个屋子才能满足所有人的要求，如果无论如何都不能满足那么就输出-1</p>
+<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>我们很容易发现， 对于内向人，不会导致输出-1.因为给他们一人一个屋子即可。 对于综合人同样不会导致输出-1. 只有当外向人在引入几个综合人之后，仍然无法成为3的倍数时，会导致出现-1的情况。 换成代码语言即为$ b\%3+c&lt;3$ </p>
+<p>只要不是输出-1 的情况，我们的答案即为$a+ \lceil \frac{b+c}{3}\rceil$ </p>
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">solve</span>():</span><br><span class="line">    <span class="keyword">pass</span></span><br><span class="line">    a,b,c = [<span class="built_in">int</span>(x) <span class="keyword">for</span> x <span class="keyword">in</span> <span class="built_in">input</span>().split()]</span><br><span class="line">    <span class="keyword">if</span> b%<span class="number">3</span> != <span class="number">0</span> <span class="keyword">and</span> b % <span class="number">3</span> + c &lt; <span class="number">3</span> :</span><br><span class="line">        <span class="built_in">print</span>(-<span class="number">1</span>)</span><br><span class="line">        <span class="keyword">return</span></span><br><span class="line">    <span class="built_in">print</span>((b+c+<span class="number">2</span>)//<span class="number">3</span>+a)</span><br><span class="line">    <span class="keyword">return</span></span><br><span class="line"><span class="comment">###########</span></span><br><span class="line"><span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">int</span>(<span class="built_in">input</span>())):</span><br><span class="line">    solve()</span><br></pre></td></tr></table></figure>
+<h1 id="B-Fireworks"><a href="#B-Fireworks" class="headerlink" title="B. Fireworks"></a>B. Fireworks</h1><h2 id="题意-1"><a href="#题意-1" class="headerlink" title="题意"></a>题意</h2><p>有两个烟花发射器， 第一个烟花发射器会每隔a分钟发射一个烟花，第二个烟花发射器会每隔b分钟发射一个烟花。</p>
+<p>而每个烟花会在天空持续$m+1$分钟，即若烟花在$t$时刻被点燃，那么在$t,t+1,…,t+n$ 时刻都被视为在天空中的时间。现在问天空中最多同时出现多少个烟花。</p>
+<h2 id="思路-1"><a href="#思路-1" class="headerlink" title="思路"></a>思路</h2><p>很明显，在刚开始时，A和B烟花会同时开始释放，此刻在$m+1$分钟内有可能放出最多的量的烟花。这段时间中，这两个发射器都在第1时刻放出了一个烟花， 之后的m分钟则会各自再放出$\frac{m}{a} , \frac{m}{b}$ 个烟花。于是我们便知道了总数为$2+\frac{m}{a} , \frac{m}{b}$</p>
+<h2 id="代码-1"><a href="#代码-1" class="headerlink" title="代码"></a>代码</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">solve</span>():</span><br><span class="line">    <span class="keyword">pass</span></span><br><span class="line">    a,b,m = [<span class="built_in">int</span>(x) <span class="keyword">for</span> x <span class="keyword">in</span> <span class="built_in">input</span>().split()]</span><br><span class="line">    ans = <span class="number">2</span></span><br><span class="line">    ans += (m)//a</span><br><span class="line">    ans += (m)//b</span><br><span class="line">    <span class="built_in">print</span>(ans)</span><br><span class="line"><span class="comment">###########</span></span><br><span class="line"><span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">int</span>(<span class="built_in">input</span>())):</span><br><span class="line">    solve()</span><br></pre></td></tr></table></figure>
+<h1 id="C-Left-and-Right-Houses"><a href="#C-Left-and-Right-Houses" class="headerlink" title="C. Left and Right Houses"></a>C. Left and Right Houses</h1><h2 id="题意-2"><a href="#题意-2" class="headerlink" title="题意"></a>题意</h2><p>现在有一些居民$a<em>1,a_2,…,a_n$ 排成一条线，他们各自意愿要住在路的左边或者右边。你需要修建一条路，修在$a_i$和$a</em>{i+1}$的中间$i = 0,1,..,n-1,n$  并且要求你对于路两边的居民，满足意愿的居民数量都大于等于不满足意愿的居民数量。</p>
+<p>在这前提下，你要尽可能地将路修在中间，即$|\frac{n}{2} - i|$   尽可能地小。如果两个最小的 $|\frac{n}{2} - i|$ 都满足，输出较小的那个。</p>
+<h2 id="思路-2"><a href="#思路-2" class="headerlink" title="思路"></a>思路</h2><p>可以使用前缀和来记录满足意愿在左边的数量，这样如果路修在了i的位置，那么满足条件的表达式即为$x-sum[x]&gt;=sum[x] \&amp;\&amp; sum[n]-sum[x]&gt;=n-x-sum[n]+sum[x]$</p>
+<p>我们直接枚举$|\frac{n}{2} - i|$ 的值，然后推算出两个$i$ ， 分别判断是否满足情况。</p>
+<h2 id="代码-2"><a href="#代码-2" class="headerlink" title="代码"></a>代码</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">solve</span>():</span><br><span class="line">    <span class="keyword">pass</span></span><br><span class="line">    n = <span class="built_in">int</span>(<span class="built_in">input</span>())</span><br><span class="line">    lst = [<span class="number">0</span>]</span><br><span class="line">    lst += [<span class="built_in">int</span>(x) <span class="keyword">for</span> x <span class="keyword">in</span> <span class="built_in">input</span>()]</span><br><span class="line">    <span class="built_in">sum</span> = [<span class="number">0</span>]*(n+<span class="number">2</span>)</span><br><span class="line">    ans = []</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>,n+<span class="number">1</span>):</span><br><span class="line">        <span class="built_in">sum</span>[i] = <span class="built_in">sum</span>[i-<span class="number">1</span>] + lst[i]</span><br><span class="line">    <span class="keyword">for</span> x <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>,n+<span class="number">1</span>):</span><br><span class="line">        <span class="keyword">if</span> x-<span class="built_in">sum</span>[x]&gt;=<span class="built_in">sum</span>[x] <span class="keyword">and</span> <span class="built_in">sum</span>[n]-<span class="built_in">sum</span>[x]&gt;=n-x-<span class="built_in">sum</span>[n]+<span class="built_in">sum</span>[x]:</span><br><span class="line">           ans.append(x)</span><br><span class="line">    dis = ans</span><br><span class="line">    mn = <span class="number">9999999</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(ans)):</span><br><span class="line">        mn = <span class="built_in">min</span>(mn,<span class="built_in">abs</span>(n/<span class="number">2</span>-ans[i]))</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(ans)):</span><br><span class="line">        <span class="keyword">if</span>(<span class="built_in">abs</span>(n/<span class="number">2</span>-ans[i]) == mn):</span><br><span class="line">            <span class="built_in">print</span>(ans[i])</span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line"></span><br><span class="line"><span class="comment">###########</span></span><br><span class="line"><span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">int</span>(<span class="built_in">input</span>())):</span><br><span class="line">    solve()</span><br></pre></td></tr></table></figure>
+<h1 id="D-Seraphim-the-Owl"><a href="#D-Seraphim-the-Owl" class="headerlink" title="D. Seraphim the Owl"></a>D. Seraphim the Owl</h1><h2 id="题意-3"><a href="#题意-3" class="headerlink" title="题意"></a>题意</h2><p>同学A想插队 ，他前面有n个人， 他想要查到前$m$人中 ，现在有两个数组 $a,b$ 。若同学A从位置$y$插队到位置$x$那么他就需要支付$a_x$的金币，以及给中间所有人$b_i(x&lt;i&lt;y)$ 个金币。他可以选择插队多次。 问最少需要花费多少金币才能够插到前m的位置。</p>
+<h2 id="思路-3"><a href="#思路-3" class="headerlink" title="思路"></a>思路</h2><p>我们若最终想要插队到第i的位置，那么所有$i&lt;j\le n$ 的人都需要支付一个$a_j$或者$b_j$ ，我们取其中的较小值。 而最后还要支付$a_i$ 给第i个人。因此我们预处理$c_i = min(a_i,b_i) , 1\le i \le n$ 然后求出c的后缀数组，这样我们就可以用$O(1)$   的时间得到到达第i位置需要的最少的金币，设为 $ans_i$ 我们从1到m中找到最小的 ans即可。 </p>
+<h2 id="代码-3"><a href="#代码-3" class="headerlink" title="代码"></a>代码</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">solve</span>():</span><br><span class="line">    <span class="keyword">pass</span></span><br><span class="line">    n,m = [<span class="built_in">int</span>(x) <span class="keyword">for</span> x <span class="keyword">in</span> <span class="built_in">input</span>().split()]</span><br><span class="line">    a = [<span class="built_in">int</span>(x) <span class="keyword">for</span> x <span class="keyword">in</span> <span class="built_in">input</span>().split()]</span><br><span class="line">    b = [<span class="built_in">int</span>(x) <span class="keyword">for</span> x <span class="keyword">in</span> <span class="built_in">input</span>().split()]</span><br><span class="line">    c = []</span><br><span class="line">    <span class="keyword">for</span> aa,bb <span class="keyword">in</span> <span class="built_in">zip</span>(a,b):</span><br><span class="line">        c.append(<span class="built_in">min</span>(aa,bb))</span><br><span class="line">    ans = [<span class="number">0</span>]*(n+<span class="number">1</span>)</span><br><span class="line">    <span class="built_in">sum</span> = [<span class="number">0</span>]*(n+<span class="number">1</span>)</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(n-<span class="number">1</span>,-<span class="number">1</span>,-<span class="number">1</span>):</span><br><span class="line">        <span class="built_in">sum</span>[i] = <span class="built_in">sum</span>[i+<span class="number">1</span>] + c[i]</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(n-<span class="number">1</span>,-<span class="number">1</span>,-<span class="number">1</span>):</span><br><span class="line">        ans[i] = <span class="built_in">sum</span>[i+<span class="number">1</span>]+a[i]</span><br><span class="line">    <span class="built_in">print</span>(<span class="built_in">min</span>(ans[<span class="number">0</span>:m]))</span><br><span class="line"><span class="comment">###########</span></span><br><span class="line"><span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">int</span>(<span class="built_in">input</span>())):</span><br><span class="line">    </span><br><span class="line">    solve()</span><br></pre></td></tr></table></figure>
+<h2 id="E-Binary-Search"><a href="#E-Binary-Search" class="headerlink" title="E. Binary Search"></a>E. Binary Search</h2><h2 id="题意-4"><a href="#题意-4" class="headerlink" title="题意"></a>题意</h2><p>安东要按照二分搜索来从p这个排列中找x这个数，然他没发现这个排列并不是有序的。因此他可能最终找不到x这个数，现在需要你至多进行两次交换，来使得安东按照二分查找后可以找到$x$这个数。</p>
+<p>二分策略如下：起初让$l = 1,r = n+1$</p>
+<ol>
+<li>如果$r - l == 1$ 结束循环</li>
+<li>m = $\lfloor \frac{l+r}{2} \rfloor$</li>
+<li>如果$p_m \le x $ ，$l = m$ ,否则$r =m $</li>
+</ol>
+<p>最终的$p_l$即为答案</p>
+<h2 id="思路-4"><a href="#思路-4" class="headerlink" title="思路"></a>思路</h2><p>很无趣的题目，直接按照题目中给出的二分方法找到最终的错误答案，然后将他和x所在的位置进行交换即可。</p>
+<h2 id="代码-4"><a href="#代码-4" class="headerlink" title="代码"></a>代码</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">solve</span>():</span><br><span class="line">    <span class="keyword">pass</span></span><br><span class="line">    n,x = [<span class="built_in">int</span>(x) <span class="keyword">for</span> x <span class="keyword">in</span> <span class="built_in">input</span>().split()]</span><br><span class="line">    lst = [<span class="number">0</span>]</span><br><span class="line">    lst += [<span class="built_in">int</span>(x) <span class="keyword">for</span> x <span class="keyword">in</span> <span class="built_in">input</span>().split()]</span><br><span class="line">    l = <span class="number">1</span>;r = n + <span class="number">1</span></span><br><span class="line">    p = <span class="number">0</span></span><br><span class="line">    <span class="keyword">for</span> i,y <span class="keyword">in</span> <span class="built_in">enumerate</span>(lst):</span><br><span class="line">        <span class="keyword">if</span> y == x : </span><br><span class="line">            p = i</span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line">    <span class="keyword">while</span>(<span class="number">1</span>):</span><br><span class="line">        <span class="keyword">if</span>(r - l == <span class="number">1</span>):</span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line">        m = (l+r)//<span class="number">2</span></span><br><span class="line">        <span class="keyword">if</span> lst[m]&lt;=x:</span><br><span class="line">            l = m</span><br><span class="line">        <span class="keyword">else</span> : r = m</span><br><span class="line">    <span class="built_in">print</span>(<span class="number">1</span>)</span><br><span class="line">    <span class="built_in">print</span>(p,l)</span><br><span class="line"><span class="comment">###########</span></span><br><span class="line"><span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">int</span>(<span class="built_in">input</span>())):</span><br><span class="line">    solve()</span><br></pre></td></tr></table></figure>
+<h1 id="F-Kirill-and-Mushrooms"><a href="#F-Kirill-and-Mushrooms" class="headerlink" title="F. Kirill and Mushrooms"></a>F. Kirill and Mushrooms</h1><h2 id="题意-5"><a href="#题意-5" class="headerlink" title="题意"></a>题意</h2><p>有一些蘑菇，用一个数组v,$v<em>1,v_2,..,v_n$ 表示每个蘑菇的价值。现在你可以采摘其中一些蘑菇，来获得<strong>蘑菇总数乘以采摘蘑菇中最小价值</strong> 的总价值。接下来还有一个排列p，$p_1,p_2,…,p_n$ ，并且若你采摘了k个蘑菇，那么下标为$p_1,p_2,..,p</em>{k-1}$ 的蘑菇的价值就会变为0，也就是说你将不能采摘这些蘑菇。</p>
+<p>问可采摘的最大价值是多少</p>
+<h2 id="思路-5"><a href="#思路-5" class="headerlink" title="思路"></a>思路</h2><p>这场出现好多很无趣的题目，</p>
+<p>使用一个标记数组$ba$记录哪些蘑菇不允许再采摘（一共三个状态，$ba[i]=0$表示可以采摘，$ba[i]=1$表示不允许采摘他了，$ba[i]= 2$表示被采摘过了。直接枚举采摘的数量，因为我们枚举的采摘数量越来越多，所以被ban掉的蘑菇只会越来越多。我们贪心地选择未被ban的蘑菇中，最大的那些即可。并且选择的这些蘑菇，同样可以在上一步所选中扩展而来，于是可以在$O(nlogn)$的排序过后就可以在$O(n)$ 的复杂度下选出答案。</p>
+<h2 id="代码-5"><a href="#代码-5" class="headerlink" title="代码"></a>代码</h2><p>代码解释可以看代码中的注释</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="meta">#<span class="keyword">define</span> IO ios::sync_with_stdio(false);cin.tie(0);cout.tie(0);</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> int long long</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> rep(i,l,r) for(int i = l;i&lt;=r;i++)</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> per(i,r,l) for(int i = r;i&gt;=l;i--)</span></span><br><span class="line"><span class="type">const</span> <span class="type">int</span> INF = <span class="number">0x3f3f3f3f3f3f3f3f</span>;</span><br><span class="line"><span class="keyword">typedef</span> pair&lt;<span class="type">int</span>,<span class="type">int</span>&gt; PII;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">solve</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="type">int</span> n ;</span><br><span class="line">    cin&gt;&gt;n;</span><br><span class="line">    <span class="function">vector&lt;<span class="type">int</span>&gt; <span class="title">v</span><span class="params">(n<span class="number">+5</span>)</span></span>;</span><br><span class="line">    <span class="built_in">rep</span>(i,<span class="number">1</span>,n) cin&gt;&gt;v[i];</span><br><span class="line">    <span class="function">vector&lt;<span class="type">int</span>&gt; <span class="title">p</span><span class="params">(n<span class="number">+5</span>)</span></span>;</span><br><span class="line">    <span class="built_in">rep</span>(i,<span class="number">1</span>,n) cin&gt;&gt;p[i];</span><br><span class="line">    vector&lt;PII&gt; node;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">1</span>;i&lt;=n;i++)&#123;</span><br><span class="line">        node.<span class="built_in">push_back</span>(&#123;v[i],i&#125;);<span class="comment">//将蘑菇和原始序号绑定</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">sort</span>(node.<span class="built_in">begin</span>(),node.<span class="built_in">end</span>());<span class="built_in">reverse</span>(node.<span class="built_in">begin</span>(),node.<span class="built_in">end</span>()); <span class="comment">//升序排序</span></span><br><span class="line">    <span class="function">vector&lt;<span class="type">int</span>&gt; <span class="title">ba</span><span class="params">(n<span class="number">+5</span>)</span></span>;<span class="comment">//ba数组</span></span><br><span class="line">    <span class="type">int</span> ans = <span class="number">-1</span>;<span class="comment">//最终答案</span></span><br><span class="line">    <span class="type">int</span> ansc = <span class="number">0</span>;<span class="comment">//answer count最终答案要采摘的数量</span></span><br><span class="line">    <span class="type">int</span> mn = <span class="number">0</span>;<span class="comment">//min,较小值</span></span><br><span class="line">    <span class="type">int</span> nowp = <span class="number">0</span>;<span class="comment">//轮到采摘哪个蘑菇了</span></span><br><span class="line">    <span class="type">int</span> nowc = <span class="number">0</span>;<span class="comment">//现在采摘了多少个蘑菇了</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> cnt = <span class="number">1</span>;cnt &lt;= (n<span class="number">+1</span>)/<span class="number">2</span>;cnt++)&#123;<span class="comment">//最多选择(n+1)/2个蘑菇</span></span><br><span class="line">        <span class="keyword">if</span>(ba[p[cnt<span class="number">-1</span>]] == <span class="number">2</span>)&#123;<span class="comment">//如果之前有蘑菇被采摘，后来被ban了,那么应该扔掉它</span></span><br><span class="line">            nowc --;<span class="comment">//即将nowc减一。（扔掉它之后一定不影响最小值，所以不需要更改其他变量）</span></span><br><span class="line">        &#125;</span><br><span class="line">        ba[p[cnt<span class="number">-1</span>]] = <span class="number">1</span>;<span class="comment">//ban掉这一轮的蘑菇</span></span><br><span class="line">        <span class="keyword">while</span>(nowp&lt;n &amp;&amp; nowc &lt; cnt)&#123;<span class="comment">//选取蘑菇直到足够cnt个</span></span><br><span class="line">            <span class="keyword">if</span>(ba[node[nowp].second] == <span class="number">1</span>)&#123;<span class="comment">//如果当前蘑菇被ban了就换下一个</span></span><br><span class="line">                nowp++;<span class="keyword">continue</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            mn = node[nowp].first;<span class="comment">//当前的值一定比mn原先的更小，所以直接赋值即可</span></span><br><span class="line">            nowc++;</span><br><span class="line">            <span class="keyword">if</span>(ans&lt;mn*nowc)&#123;<span class="comment">//更新答案</span></span><br><span class="line">                ans = mn*nowc;</span><br><span class="line">                ansc = nowc;</span><br><span class="line">            &#125;</span><br><span class="line">            ba[node[nowp].second] = <span class="number">2</span>;<span class="comment">//这个蘑菇采摘过了</span></span><br><span class="line">            nowp++;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    cout&lt;&lt;ans&lt;&lt;<span class="string">&quot; &quot;</span>&lt;&lt;ansc&lt;&lt;endl;<span class="comment">//输出答案</span></span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">signed</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="type">int</span> T = <span class="number">1</span>;</span><br><span class="line">    cin&gt;&gt;T;</span><br><span class="line">    <span class="keyword">while</span>(T--)&#123;</span><br><span class="line">        <span class="built_in">solve</span>();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>Author: </span><span class="post-copyright-info"><a href="lsk404.github.io">Little_sk</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>Link: </span><span class="post-copyright-info"><a href="https://lsk404.github.io/2024/03/21/8b31977ec836/">https://lsk404.github.io/2024/03/21/8b31977ec836/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>Copyright Notice: </span><span class="post-copyright-info">All articles on this blog are licensed under <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> unless otherwise stated.</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/C/">C++</a><a class="post-meta__tags" href="/tags/%E9%A2%98%E8%A7%A3/">题解</a></div><div class="post-share"><div class="social-share" data-image="/img/avator.jpg" data-sites="wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related" href="/2024/03/12/00ffdd51d0b6/" title="Codeforces Round 933 (Div. 3)"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info"><div class="info-1"><div class="info-item-1">Previous</div><div class="info-item-2">Codeforces Round 933 (Div. 3)</div></div><div class="info-2"><div class="info-item-1"> 题目链接 - Codeforces Round 933 (Div. 3) 博客中的代码仅供参考，请勿直接提交源代码，这对提升实力毫无作用!!! 题目写一半，自己不小心把编译器搞坏了，中途又重新下载mingw呜呜呜,好在这场时间长 A. Rudolf and the Ticket题意有两个数组a和b，长度分别为n，m。即$a_1,a_2,…,a_n,b_1,b_2,..,b_m$ 。 现要求你从两个数组中各选择一个数$a_i,b_j$  并且要求$a_i + b_j \le k$ ,问有多少种选法。 思路二分查找， 对b数组排序，然后枚举$a_i$ , 使用upperbound来在b中查找第一个大于$k - a_i$ 的下标p，那么b数组中的区间$[0,p-1]$上的数都满足和$a_i$ 相加之后小于等于$k$。 于是产生了$p$的贡献。按此理计算出总贡献即可。复杂度$O(nlogn)$ 代码12345678910111213141516171819202122232425262728293031323334#include&lt;bits/stdc++.h&gt;using...</div></div></div></a><a class="pagination-related" href="/2024/03/23/6f9f5c409815/" title="Codeforces Round 936 (Div. 2)"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-right"><div class="info-1"><div class="info-item-1">Next</div><div class="info-item-2">Codeforces Round 936 (Div. 2)</div></div><div class="info-2"><div class="info-item-1">题目链接 A. Median of an Array题意给出一个数组$a$，每次操作可以让其中一个数增加一。 问最少需要几次操作能改变中位数的值。 长度为n的数组a的中位数表示为，令b是a排完序后的数组，那么$b_{\lceil \frac{n}{2}\rceil}$ 即为a的中位数。 思路假设中位数为$m$ ，那么我们就需要让最终的中位数变为$m+1$ 。做法就是对一些值为$m$ 各进行一次操作。我们假设小于等于m的数的数量为$cnt$ , 起初一定有$cnt \ge \lceil \frac{n}{2}\rceil$为了让$m+1$是中位数，就必须$cnt&lt; \lceil \frac{n}{2}\rceil$ 。 每次操作能使得cnt减少1 。于是我们需要的操作数量就是$cnt - \lceil \frac{n}{2}\rceil + 1$ 代码123456789101112131415161718192021222324252627282930313233343536#include&lt;bits/stdc++.h&gt;using namespace...</div></div></div></a></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>Related Articles</span></div><div class="relatedPosts-list"><a class="pagination-related" href="/2023/09/18/3b4839b3d1b7/" title="2023ICPC网络赛第一场"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2023-09-18</div><div class="info-item-2">2023ICPC网络赛第一场</div></div><div class="info-2"><div class="info-item-1">The 2023 ICPC Asia Regionals Online Contest (1)，不要选时光机，用签到送的金币就可以练习 G Spanning Tree题意起初树只有n个节点，没有边，按照如下操作进行n-1次，对于第i次操作，选择$a_i,b_i$ ,从$a_i$ 所在的块中随机选出一个节点$u_i$，从$b_i$ 所在的块中随机选出一个节点$v_i$， 连接$u_i,v_i$保证最终会形成一个树，求构造出的这个树和给出的标准的树T能够完全相同的期望（对 998244353取模） 保证第$i$次操作前,$a_i,b_i$ 不在同一个块。 定义一个节点v所在的块即v能到达的所有节点的集合（包括v本身） 请注意，所求的期望可能是0。 思路可以得出，最终期望一定是0或者 $\frac{1}{s}$ ： 每次连接两个块时，最多只有一种连接方式能够使得所连边的情况和最终的树匹配。而本次操作会使得操作前的期望$s_{i-1}$ 再乘上 $\frac{1}{sz_a*sz_b}$ ($sz_a,sz_b$表示a和b当前所在块的节点数量)。 ...</div></div></div></a><a class="pagination-related" href="/2023/11/12/026c0040b952/" title="2023ICPC网络赛第二场"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2023-11-12</div><div class="info-item-2">2023ICPC网络赛第二场</div></div><div class="info-2"><div class="info-item-1">The 2023 ICPC Asia Regionals Online Contest (2) (pintia.cn) K Super-knight题意有一个士兵，起初在n*n的棋盘的左下角，每次向右移动a格，向上移动b格，当越过地图边界时，则到地图的另一边（类似于没有边界墙的贪吃蛇），对这个士兵能到达的格子做标记，所有被标记的格子中，离左下角格子最近的距离是多少。（假设最近的格子为$(x, y)$，就输出$(x - 1)^2+(y - 1)^2$ ) （ $2 \le n \le 10^{18}, 1 \le a,b \le 200$) 思路可以得出，在经过n次移动后，一定回回到起始点，所以最终的路径一定是循环的。 但n太大，无法通过这样判断所有的被标记的点。 可以发现，在移动了若干次后，除非穿过地图边界，否则只会增加 与原点的距离。因此我们只需要考虑刚穿过地图边界的点...</div></div></div></a><a class="pagination-related" href="/2023/10/29/c6413222be25/" title="2023年10月ZZUACM实验室招新赛题解"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2023-10-29</div><div class="info-item-2">2023年10月ZZUACM实验室招新赛题解</div></div><div class="info-2"><div class="info-item-1">注意事项请注意！：  题解仅代表个人看法，不代表最优解  每道题都会附上ac代码，但是仅作参考，要看懂后再了解代码。补题不要直接抄代码！禁止自欺欺人！  只提供题解，不提供题目信息 ac代码为C++版本，如果遇到不懂的语法请自行百度 ac代码中的循环经常用到了for(int i = 1;i&lt;=n;i++) ，这种在for的括号中int i的操作只有大于等于C++11标准才可以使用，编译错误时请检查自己编译使用的标准。  A.数位分解对于一个数x，   使用  x % 10 (% 是取余数) ，就可以得到他的最后一位 使用 x /= 10  (除以十并取整数)，就可以舍掉他的最后一位  使用while(x) 来进行循环 1234567891011#include&lt;iostream&gt;using namespace std;int main()&#123;	int x;	cin&gt;&gt;x;	while(x)&#123;		cout&lt;&lt; x % 10 &lt;&lt;&quot; &quot;;		x = x / 10;	&#125;	return...</div></div></div></a><a class="pagination-related" href="/2024/09/09/17fe9a65a7dc/" title="AtCoder Beginner Contest 346"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2024-09-09</div><div class="info-item-2">AtCoder Beginner Contest 346</div></div><div class="info-2"><div class="info-item-1">AtCoder Beginner Contest 346 A - Adjacent Product题意给你一个数组$a1,a_2,…,a_n$ ，现在有$b_i = a_i * a{i+1}$ 输出$b1,b_2,…,b{n-1}$ 思路照着题意写就行 代码12345n = int(input())lst = [int(x) for x in input().split()]ans = []for i in range(len(lst)-1):    print(lst[i] * lst[i+1],end=&#x27; &#x27;) B - Piano题意有一个字符串，由无数个wbwbwwbwbwbw 重复得来，现在给出两个数W和B$(1\le W,B \le 100 )$ 问是否存在某个子串满足：包含$W$个w以及$B$ 个b 思路这个子串一定不会超过200位，所以我们重复wbwbwwbwbwbw 40次(长度$12*40 = 480$)就可以保证所有的子串都在其中，然后我们求所有长度为$W+B$...</div></div></div></a><a class="pagination-related" href="/2023/09/12/1f41d16e4fe3/" title="Codeforces Round 897 (Div. 2)"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2023-09-12</div><div class="info-item-2">Codeforces Round 897 (Div. 2)</div></div><div class="info-2"><div class="info-item-1">Dashboard - Codeforces Round 897 (Div. 2) - Codeforces A - green_gold_dog, array and permutation题意有一个长度为n的数组a，请你找出一个长度为n的排列b。 根据数组a和b来构造出数组c。$c[i] = a[i] - b[i]$ ，尽可能地使c数组中的 互不相同的数的数量。 思路好妙的思路！ 让最小的$a[i]$ 减去n,次小的减去$n-1$ ,这样每个$c[i]$ 都不一样。 代码1234567891011121314151617181920212223242526272829303132333435#include&lt;iostream&gt;#include&lt;set&gt;#include&lt;vector&gt;#include&lt;algorithm&gt;using namespace std;const int N = 4e4 + 5;pair&lt;int,int&gt; a[N];pair&lt;int,int&gt; b[N];int...</div></div></div></a><a class="pagination-related" href="/2023/10/27/b104fde463a2/" title="Codeforces Round 904 (Div. 2)"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2023-10-27</div><div class="info-item-2">Codeforces Round 904 (Div. 2)</div></div><div class="info-2"><div class="info-item-1">Dashboard - Codeforces Round 904 (Div. 2) - Codeforces C. Medium Design题意给长度为m的数组a，初始均为0。$1\le m \le 10^9$ 给出一些区间，请你选出其中某些区间。每选择一个区间，就令区间中的数都加一，问 数组中最大值$max(a)$ ,和最小值$ min(a)$ 的差，最大为多少。 思路考虑以下贪心策略：如果我们确定了最终第$i$个数是最大的那个数，即$ a[i] = max(a)$ , 那么我们就可以选择所有的包含$i$的区间。然后摒弃所有不包含$i$的区间。（选上包含$i$的区间一定会令$max(a)++$) , 这样我们可以遍历所有的数组下标$i$。 计算假使$i$为最大数时的$ans$，最终选择最大的$ans$即可。 我们可以先对区间进行排序。 然后根据右端点从小到大维护优先队列$pq$。这样按顺序遍历区间数组，就可以引入所有左端点小于等于$ i $的区间。然后通过剔除优先队列中的右端点小于i的区间。 这样优先队列中就保存了所有的包含$i$的区间。  因此有 $max(a) =...</div></div></div></a></div></div><hr class="custom-hr"/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> Comments</span></div></div><div class="comment-wrap"><div><div class="vcomment" id="vcomment"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/avator.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">Little_sk</div><div class="author-info-description"></div><div class="site-data"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">48</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">15</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">5</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/lsk404/"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>Announcement</span></div><div class="announcement_content">加我友链！</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>Contents</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#A-Setting-up-Camp"><span class="toc-number">1.</span> <span class="toc-text">A. Setting up Camp</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%A2%98%E6%84%8F"><span class="toc-number">1.1.</span> <span class="toc-text">题意</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%9D%E8%B7%AF"><span class="toc-number">1.2.</span> <span class="toc-text">思路</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81"><span class="toc-number">1.3.</span> <span class="toc-text">代码</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#B-Fireworks"><span class="toc-number">2.</span> <span class="toc-text">B. Fireworks</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%A2%98%E6%84%8F-1"><span class="toc-number">2.1.</span> <span class="toc-text">题意</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%9D%E8%B7%AF-1"><span class="toc-number">2.2.</span> <span class="toc-text">思路</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81-1"><span class="toc-number">2.3.</span> <span class="toc-text">代码</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#C-Left-and-Right-Houses"><span class="toc-number">3.</span> <span class="toc-text">C. Left and Right Houses</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%A2%98%E6%84%8F-2"><span class="toc-number">3.1.</span> <span class="toc-text">题意</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%9D%E8%B7%AF-2"><span class="toc-number">3.2.</span> <span class="toc-text">思路</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81-2"><span class="toc-number">3.3.</span> <span class="toc-text">代码</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#D-Seraphim-the-Owl"><span class="toc-number">4.</span> <span class="toc-text">D. Seraphim the Owl</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%A2%98%E6%84%8F-3"><span class="toc-number">4.1.</span> <span class="toc-text">题意</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%9D%E8%B7%AF-3"><span class="toc-number">4.2.</span> <span class="toc-text">思路</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81-3"><span class="toc-number">4.3.</span> <span class="toc-text">代码</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#E-Binary-Search"><span class="toc-number">4.4.</span> <span class="toc-text">E. Binary Search</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%A2%98%E6%84%8F-4"><span class="toc-number">4.5.</span> <span class="toc-text">题意</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%9D%E8%B7%AF-4"><span class="toc-number">4.6.</span> <span class="toc-text">思路</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81-4"><span class="toc-number">4.7.</span> <span class="toc-text">代码</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#F-Kirill-and-Mushrooms"><span class="toc-number">5.</span> <span class="toc-text">F. Kirill and Mushrooms</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%A2%98%E6%84%8F-5"><span class="toc-number">5.1.</span> <span class="toc-text">题意</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%9D%E8%B7%AF-5"><span class="toc-number">5.2.</span> <span class="toc-text">思路</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81-5"><span class="toc-number">5.3.</span> <span class="toc-text">代码</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>Recent Posts</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/03/09/0ed69ce9ed7c/" title="电子扫盲">电子扫盲</a><time datetime="2025-03-09T04:00:00.000Z" title="Created 2025-03-09 12:00:00">2025-03-09</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/02/12/27d697c28fe4/" title="十六届蓝桥杯模拟赛3题解">十六届蓝桥杯模拟赛3题解</a><time datetime="2025-02-12T04:00:00.000Z" title="Created 2025-02-12 12:00:00">2025-02-12</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/12/09/67f3ead662d5/" title="蓝桥杯python语法速通">蓝桥杯python语法速通</a><time datetime="2024-12-09T04:00:00.000Z" title="Created 2024-12-09 12:00:00">2024-12-09</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/12/02/c836153aa73d/" title="十六届蓝桥杯模拟赛1题解">十六届蓝桥杯模拟赛1题解</a><time datetime="2024-12-02T04:00:00.000Z" title="Created 2024-12-02 12:00:00">2024-12-02</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/11/28/c31164113f39/" title="Codeforces Round 986 (Div. 2)">Codeforces Round 986 (Div. 2)</a><time datetime="2024-11-28T04:00:00.000Z" title="Created 2024-11-28 12:00:00">2024-11-28</time></div></div></div></div></div></div></main><footer id="footer" style="background-image: url(img/bg3.png);"><div id="footer-wrap"><div class="framework-info"><span>Framework </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo 7.3.0</a><span class="footer-separator">|</span><span>Theme </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly 5.3.5</a></div><div class="footer_custom_text"><a href="https://icp.gov.moe/?keyword=20250258" target="_blank">萌ICP备20250258号</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="Reading Mode"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="Toggle Between Light and Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle Between Single-column and Double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="Settings"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="Table of Contents"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="Scroll to Comments"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="Back to Top"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload/dist/lazyload.iife.min.js"></script><div class="js-pjax"><script>(async () => {
+  const showKatex = () => {
+    document.querySelectorAll('#article-container .katex').forEach(el => el.classList.add('katex-show'))
+  }
+
+  if (!window.katex_js_css) {
+    window.katex_js_css = true
+    await btf.getCSS('https://cdn.jsdelivr.net/npm/katex/dist/katex.min.css')
+    if (true) {
+      await btf.getScript('https://cdn.jsdelivr.net/npm/katex/dist/contrib/copy-tex.min.js')
+    }
+  }
+
+  showKatex()
+})()</script><script>(() => {
+  const runMermaid = ele => {
+    window.loadMermaid = true
+    const theme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'default'
+
+    ele.forEach((item, index) => {
+      const mermaidSrc = item.firstElementChild
+      const mermaidThemeConfig = `%%{init:{ 'theme':'${theme}'}}%%\n`
+      const mermaidID = `mermaid-${index}`
+      const mermaidDefinition = mermaidThemeConfig + mermaidSrc.textContent
+
+      const renderFn = mermaid.render(mermaidID, mermaidDefinition)
+      const renderMermaid = svg => {
+        mermaidSrc.insertAdjacentHTML('afterend', svg)
+      }
+
+      // mermaid v9 and v10 compatibility
+      typeof renderFn === 'string' ? renderMermaid(renderFn) : renderFn.then(({ svg }) => renderMermaid(svg))
+    })
+  }
+
+  const codeToMermaid = () => {
+    const codeMermaidEle = document.querySelectorAll('pre > code.mermaid')
+    if (codeMermaidEle.length === 0) return
+
+    codeMermaidEle.forEach(ele => {
+      const preEle = document.createElement('pre')
+      preEle.className = 'mermaid-src'
+      preEle.hidden = true
+      preEle.textContent = ele.textContent
+      const newEle = document.createElement('div')
+      newEle.className = 'mermaid-wrap'
+      newEle.appendChild(preEle)
+      ele.parentNode.replaceWith(newEle)
+    })
+  }
+
+  const loadMermaid = () => {
+    if (false) codeToMermaid()
+    const $mermaid = document.querySelectorAll('#article-container .mermaid-wrap')
+    if ($mermaid.length === 0) return
+
+    const runMermaidFn = () => runMermaid($mermaid)
+    btf.addGlobalFn('themeChange', runMermaidFn, 'mermaid')
+    window.loadMermaid ? runMermaidFn() : btf.getScript('https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js').then(runMermaidFn)
+  }
+
+  btf.addGlobalFn('encrypt', loadMermaid, 'mermaid')
+  window.pjax ? loadMermaid() : document.addEventListener('DOMContentLoaded', loadMermaid)
+})()</script><script>(() => {
+  const isShuoshuo = GLOBAL_CONFIG_SITE.pageType === 'shuoshuo'
+  const option = null
+
+  const initValine = (el, path) => {
+    if (isShuoshuo) {
+      window.shuoshuoComment.destroyValine = () => {
+        if (el.children.length) {
+          el.innerHTML = ''
+          el.classList.add('no-comment')
+        }
+      }
+    }
+
+    const valineConfig = {
+      el: '#vcomment',
+      appId: 'jY5tnMLwMUhZNOv61yXvepci-gzGzoHsz',
+      appKey: 'gZbn0Lr7joLZ83iUlbqPfk4J',
+      avatar: 'monsterid',
+      serverURLs: '',
+      emojiMaps: "",
+      visitor: false,
+      ...option,
+      path: isShuoshuo ? path : (option && option.path) || window.location.pathname
+    }
+
+    new Valine(valineConfig)
+  }
+
+  const loadValine = async (el, path) => {
+    if (typeof Valine === 'function') {
+      initValine(el, path)
+    } else {
+      await btf.getScript('https://cdn.jsdelivr.net/npm/valine/dist/Valine.min.js')
+      initValine(el, path)
+    }
+  }
+
+  if (isShuoshuo) {
+    'Valine' === 'Valine'
+      ? window.shuoshuoComment = { loadComment: loadValine }
+      : window.loadOtherComment = loadValine
+    return
+  }
+
+  if ('Valine' === 'Valine' || !true) {
+    if (true) btf.loadComment(document.getElementById('vcomment'),loadValine)
+    else setTimeout(loadValine, 0)
+  } else {
+    window.loadOtherComment = loadValine
+  }
+})()</script></div><script id="click-heart" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/click-heart.min.js" async="async" mobile="false"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div class="docsearch-wrap"><div id="docsearch" style="display:none"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@docsearch/css/dist/style.min.css"/><script src="https://cdn.jsdelivr.net/npm/@docsearch/js/dist/umd/index.min.js"></script><script>(() => {
+  docsearch(Object.assign({
+    appId: '01FHVVY2XK',
+    apiKey: 'd84b05b830df4908372d996f666ebca2',
+    indexName: 'lsk404io',
+    container: '#docsearch',
+    placeholder: 'Search what you want to search',
+  }, null))
+
+  const handleClick = () => {
+    document.querySelector('.DocSearch-Button').click()
+  }
+
+  const searchClickFn = () => {
+    btf.addEventListenerPjax(document.querySelector('#search-button > .search'), 'click', handleClick)
+  }
+
+  searchClickFn()
+  window.addEventListener('pjax:complete', searchClickFn)
+})()</script></div></div></body></html>
