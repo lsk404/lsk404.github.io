@@ -1500,6 +1500,13 @@ a {
 a:hover {
   color: #49b1f5;
 }
+#site-title,
+#site-subtitle,
+.site-name,
+#aside-content .author-info-name,
+#aside-content .author-info-description {
+  font-family: https://fonts.googleapis.com/css2?family=Jaro:opsz@6..72&display=swap;
+}
 .text-center {
   text-align: center;
 }
@@ -1875,6 +1882,7 @@ figure.highlight pre .javascript .function {
   height: 100%;
   vertical-align: top;
   text-align: center;
+  font-family: https://fonts.googleapis.com/css2?family=Jaro:opsz@6..72&display=swap;
 }
 @media screen and (max-width: 768px) {
   .type-404 .error-content .error-info {
