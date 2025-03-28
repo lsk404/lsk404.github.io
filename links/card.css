@@ -1,0 +1,58 @@
+
+
+/* 容器设置 */
+.container {
+display: flex; /* 使用 Flexbox 布局 */
+justify-content: center; /* 水平居中对齐 */
+gap: 20px; /* 卡片之间的间距 */
+max-width: 1200px; /* 设置容器的最大宽度 */
+margin: 0 auto; /* 让容器水平居中 */
+padding: 20px; /* 内边距，避免内容贴边 */
+flex-wrap: wrap; /* 允许换行 */
+}
+
+/* 卡片样式 */
+.card {
+background-color: #f0f8ff;
+border-radius: 10px;
+padding: 20px;
+width: calc(33.33% - 13.33px); /* 每行三个卡片，减去间距 */
+box-sizing: border-box; /* 确保宽度计算包括内边距和边框 */
+}
+
+/* 图片样式 */
+.card img {
+border-radius: 50%;
+width: 100px;
+display: block;
+margin: 0 auto; /* 图片水平居中 */
+}
+
+/* 按钮样式 */
+.button {
+background-color: red;
+color: white;
+border: none;
+padding: 10px 20px;
+text-align: center;
+text-decoration: none;
+display: inline-block;
+font-size: 16px;
+margin: 4px 2px;
+cursor: pointer;
+border-radius: 25px;
+}
+
+/* 当屏幕宽度小于 768px 时，每行显示两个卡片 */
+@media (max-width: 768px) {
+.card {
+  width: calc(50% - 10px); /* 每行两个卡片，减去间距 */
+}
+}
+
+/* 当屏幕宽度小于 480px 时，每行显示一个卡片 */
+@media (max-width: 480px) {
+.card {
+  width: 100%; /* 每行一个卡片 */
+}
+}

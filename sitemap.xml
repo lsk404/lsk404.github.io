@@ -2,6 +2,15 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://lsk404.github.io/links/index.html</loc>
+    
+    <lastmod>2025-03-28</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://lsk404.github.io/about/index.html</loc>
     
     <lastmod>2025-03-28</lastmod>
@@ -545,13 +554,6 @@
   </url>
   
   <url>
-    <loc>https://lsk404.github.io/tags/qqbot/</loc>
-    <lastmod>2025-03-28</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
     <loc>https://lsk404.github.io/tags/%E7%94%B5%E5%AD%90%E6%89%AB%E7%9B%B2/</loc>
     <lastmod>2025-03-28</lastmod>
     <changefreq>weekly</changefreq>
@@ -560,6 +562,13 @@
   
   <url>
     <loc>https://lsk404.github.io/tags/%E8%AE%B2%E5%BA%A7/</loc>
+    <lastmod>2025-03-28</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://lsk404.github.io/tags/qqbot/</loc>
     <lastmod>2025-03-28</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -589,14 +598,14 @@
   </url>
   
   <url>
-    <loc>https://lsk404.github.io/categories/%E6%90%AD%E5%BB%BA%E7%8E%AF%E5%A2%83/</loc>
+    <loc>https://lsk404.github.io/categories/%E8%AE%B2%E5%BA%A7/</loc>
     <lastmod>2025-03-28</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://lsk404.github.io/categories/%E8%AE%B2%E5%BA%A7/</loc>
+    <loc>https://lsk404.github.io/categories/%E6%90%AD%E5%BB%BA%E7%8E%AF%E5%A2%83/</loc>
     <lastmod>2025-03-28</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
