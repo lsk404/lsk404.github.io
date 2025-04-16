@@ -516,6 +516,13 @@
   </url>
   
   <url>
+    <loc>https://lsk404.github.io/tags/Python/</loc>
+    <lastmod>2025-04-16</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
     <loc>https://lsk404.github.io/tags/%E6%A8%A1%E6%9D%BF/</loc>
     <lastmod>2025-04-16</lastmod>
     <changefreq>weekly</changefreq>
@@ -524,13 +531,6 @@
   
   <url>
     <loc>https://lsk404.github.io/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/</loc>
-    <lastmod>2025-04-16</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://lsk404.github.io/tags/Python/</loc>
     <lastmod>2025-04-16</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
