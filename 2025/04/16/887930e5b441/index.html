@@ -1,0 +1,1681 @@
+<!DOCTYPE html><html lang="en" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>强化学习数学原理笔记 | Little_sk</title><meta name="author" content="Little_sk"><meta name="copyright" content="Little_sk"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="强化学习数学原理第一章基本概念 grid-world example ： 一个机器人走网格的经典例子，机器人尽量避免进入forbidden grid、尽量减少拐弯、不要走出边界、……  state: 状态，表示为一个节点，在grid-world中可以表示为一个格子（也可以添加其他信息到状态，如速度等）  state space：状态空间，所有状态的集合。  action：行动，能够使得状态变化的动">
+<meta property="og:type" content="article">
+<meta property="og:title" content="强化学习数学原理笔记">
+<meta property="og:url" content="https://lsk404.github.io/2025/04/16/887930e5b441/index.html">
+<meta property="og:site_name" content="Little_sk">
+<meta property="og:description" content="强化学习数学原理第一章基本概念 grid-world example ： 一个机器人走网格的经典例子，机器人尽量避免进入forbidden grid、尽量减少拐弯、不要走出边界、……  state: 状态，表示为一个节点，在grid-world中可以表示为一个格子（也可以添加其他信息到状态，如速度等）  state space：状态空间，所有状态的集合。  action：行动，能够使得状态变化的动">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://lsk404.github.io/img/avator.jpg">
+<meta property="article:published_time" content="2025-04-16T09:53:00.000Z">
+<meta property="article:modified_time" content="2025-04-16T09:55:20.145Z">
+<meta property="article:author" content="Little_sk">
+<meta property="article:tag" content="笔记">
+<meta property="article:tag" content="强化学习">
+<meta property="article:tag" content="数学">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://lsk404.github.io/img/avator.jpg"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "强化学习数学原理笔记",
+  "url": "https://lsk404.github.io/2025/04/16/887930e5b441/",
+  "image": "https://lsk404.github.io/img/avator.jpg",
+  "datePublished": "2025-04-16T09:53:00.000Z",
+  "dateModified": "2025-04-16T09:55:20.145Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "Little_sk",
+      "url": "https://lsk404.github.io/lsk404.github.io"
+    }
+  ]
+}</script><link rel="shortcut icon" href="/img/favicon.ico"><link rel="canonical" href="https://lsk404.github.io/2025/04/16/887930e5b441/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//www.google-analytics.com" crossorigin=""/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script async="async" src="https://www.googletagmanager.com/gtag/js?id=G-745T2DDK98"></script><script>window.dataLayer = window.dataLayer || []
+function gtag(){dataLayer.push(arguments)}
+gtag('js', new Date())
+gtag('config', 'G-745T2DDK98')
+btf.addGlobalFn('pjaxComplete', () => {
+  gtag('config', 'G-745T2DDK98', {'page_path': window.location.pathname})
+}, 'google_analytics')
+</script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: 'Copy Successful',
+    error: 'Copy Failed',
+    noSupport: 'Browser Not Supported'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: 'days',
+  dateSuffix: {
+    just: 'Just now',
+    min: 'minutes ago',
+    hour: 'hours ago',
+    day: 'days ago',
+    month: 'months ago'
+  },
+  copyright: {"limitCount":150,"languages":{"author":"Author: Little_sk","link":"Link: ","source":"Source: Little_sk","info":"Copyright belongs to the author. For commercial use, please contact the author for authorization. For non-commercial use, please indicate the source."}},
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: 'Load More'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: true,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: true,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '强化学习数学原理笔记',
+  isHighlightShrink: false,
+  isToc: true,
+  pageType: 'post'
+}</script><meta name="generator" content="Hexo 7.3.0"></head><body><div id="web_bg" style="background-image: url(img/bg3.png);"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/avator.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">50</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">18</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">6</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-clock"></i><span> 时间线</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg fixed" id="page-header" style="background-image: url(/img/bg.png);"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><img class="site-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/favicon.ico" alt="Logo"></a><a class="nav-page-title" href="/"><span class="site-name">强化学习数学原理笔记</span></a></span><div id="menus"><div id="search-button"><span class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> Search</span></span></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-clock"></i><span> 时间线</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="post-info"><h1 class="post-title">强化学习数学原理笔记</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">Created</span><time class="post-meta-date-created" datetime="2025-04-16T09:53:00.000Z" title="Created 2025-04-16 17:53:00">2025-04-16</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">Updated</span><time class="post-meta-date-updated" datetime="2025-04-16T09:55:20.145Z" title="Updated 2025-04-16 17:55:20">2025-04-16</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0/">强化学习</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">Word Count:</span><span class="word-count">16.5k</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">Post Views:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><h1 id="强化学习数学原理"><a href="#强化学习数学原理" class="headerlink" title="强化学习数学原理"></a>强化学习数学原理</h1><h2 id="第一章基本概念"><a href="#第一章基本概念" class="headerlink" title="第一章基本概念"></a>第一章基本概念</h2><ul>
+<li><p>grid-world example ： 一个机器人走网格的经典例子，机器人尽量避免进入forbidden grid、尽量减少拐弯、不要走出边界、……</p>
+</li>
+<li><p>state: 状态，表示为一个节点，在grid-world中可以表示为一个格子（也可以添加其他信息到状态，如速度等）</p>
+</li>
+<li><p>state space：状态空间，所有状态的集合。</p>
+</li>
+<li><p>action：行动，能够使得状态变化的动作。（如向上/下/左/右移动，等）</p>
+</li>
+<li><p>action space：行动的集合，通常依赖于当前的状态。</p>
+</li>
+<li><p>state transition：状态转移，从一个状态移动到另一个状态。</p>
+<p>  $s_5 \overset{a_1}{\rightarrow} s_6$ 表示从状态$s_5$ 经过动作$a_1$ 到达状态 $a_6$</p>
+</li>
+<li><p>state transition probability: 状态转移的条件概率。（例如：$p(s_2|s_1,a_2) = 0.8$ 代表在状态$s_1$，行动$a_2$ 下，$s_2$的概率是0.8)</p>
+</li>
+<li><p>Policy: 策略，用箭头来表示。表示在某个状态更倾向于走哪个action</p>
+<p>  $\pi(a<em>1|s_1)=0 ,\pi(a_2|s_1)=1,\pi(a_3|s_1)=0 ,\pi(a_4|s_1)=0$ 表示在状态$s_1$ 有1的概率进行行动$a_2$ 。显然$\sum</em>{i=1}^k \pi(a_i|s_1) = 1$</p>
+</li>
+<li><p>reward: 他是一个实数，代表我们的奖励，如果$reward&gt;0$,则代表希望它发生，$reward&lt;0$则表示不希望它发生。</p>
+<p>  例如我们可以将“尝试逃出边界的时候，我们设$r<em>{bound} = -1$ , 将到达目的地设为$r</em>{target} = 1$</p>
+<p>  因此我们可以通过设计reward来实现到达目的地。</p>
+<p>  $p(r=-1|s_1,a_1) = 1, p(r \not= -1 |s_1,a_1)=0$ 表示在状态$s_1$ 进行$a_1$ 得到-1的reward的概率是1，得到不是-1的reward的概率是0</p>
+</li>
+<li><p>trajectory：一个由state、action、reward连接成的链。</p>
+</li>
+<li><p>return：一个trajectory中所有的reward的总和。通过比较return来评估策略是好是坏</p>
+</li>
+<li><p>Discounted rate : $\gamma \in [0,1)$ 。$discounted return = r_0 + \gamma r_1 + \gamma ^2 r_2 + …$ ,</p>
+<p>  $\gamma$ 通常表示是否更看重未来，$\gamma$ 越小，则越看重现在。</p>
+</li>
+<li><p>Episode: 能够到达terminal states(停止状态) 的trajectory。一个Episode也叫一个Episode task与之对应的是continuing task（指永无止境的任务）。</p>
+</li>
+</ul>
+<h3 id="Markov-decision-process（MDP）"><a href="#Markov-decision-process（MDP）" class="headerlink" title="Markov decision process（MDP）"></a>Markov decision process（MDP）</h3><ul>
+<li><p>集合：</p>
+<ul>
+<li><p>State：状态集合</p>
+</li>
+<li><p>Action：对于每个状态s的行动集合$A(s)$</p>
+</li>
+<li><p>Reward：奖励集合$R(s,a)$</p>
+</li>
+</ul>
+</li>
+<li><p>概率要素(probability distribution)：</p>
+<ul>
+<li><p>State transition probability:$p(s’|s,a)$ 在状态s下，进行行动a，到达另一个状态$s’$的概率。</p>
+</li>
+<li><p>Reward probability: $p(r|s,a)$在状态s下，进行行动a，得到r的奖励的概率。</p>
+</li>
+<li><p>Policy: $\pi(a|s)$ 在状态s下，进行行动a的概率。</p>
+</li>
+</ul>
+</li>
+</ul>
+<p>MDP的独特性质（markov property）：与历史无关</p>
+<p>$p(s<em>{t+1} |a</em>{t+1}s<em>t…a_1s_0) = p(s</em>{t+1}|a_{t+1},s_t)$ </p>
+<p>$p(r<em>{t+1} |a</em>{t+1}s<em>t…a_1s_0) = p(r</em>{t+1}|a_{t+1},s_t)$ </p>
+<h2 id="第二章-贝尔曼公式"><a href="#第二章-贝尔曼公式" class="headerlink" title="第二章 贝尔曼公式"></a>第二章 贝尔曼公式</h2><h3 id="return"><a href="#return" class="headerlink" title="return"></a>return</h3><p>为什么return很重要？因为return评估的策略的好坏。</p>
+<p>如何计算return？用$v_i$ 表示从$s_i$ 出发得到的return。</p>
+<p>以下面的状态图为例：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="C:\Users\Laptop\AppData\Roaming\Typora\typora-user-images\RL2_1.png" alt="image-20250321154315912" style="zoom:50%;" /></p>
+<ul>
+<li><p>那么根据定义有</p>
+<p>  $v_1 = r_1 + \gamma r_2 + \gamma^2 r_3 + …$</p>
+<p>  $v_2 = r_2 + \gamma r_3 + \gamma^2 r_4 + …$</p>
+<p>  $v_3 = r_3 + \gamma r_4 + \gamma^2 r_1 + …$</p>
+<p>  $v_4 = r_4 + \gamma r_1 + \gamma^2 r_2 + …$</p>
+</li>
+<li><p>也可以递推得到(Booststrapping):一个状态依赖于其他状态</p>
+<p>  $v_1 = r_1 + \gamma(r_2 + \gamma r_3 + …) = r_1 + \gamma v_2$</p>
+<p>  $v_2 = r_2 + \gamma(r_3 + \gamma r_4 + …) = r_2 + \gamma v_3$</p>
+<p>  $v_3 = r_3 + \gamma(r_4 + \gamma r_1 + …) = r_3 + \gamma v_4$</p>
+<p>  $v_4 = r_4 + \gamma(r_1 + \gamma r_2 + …) = r_4 + \gamma v_1$</p>
+<p>  然后就有$v = r + \gamma P*v$ ，这里的$v,r$ 是向量，$P$是变换矩阵。于是就能求解得出v的值。</p>
+</li>
+</ul>
+<h3 id="state-value"><a href="#state-value" class="headerlink" title="state value"></a>state value</h3><p>$S<em>t \overset{A_t}{\to} R</em>{t+1},S<em>{t+1}$ ,指在$S_t$ 下经过$A_t$ 得到$(R</em>{t+1},S_{t+1})$</p>
+<p><strong>state value：</strong> $v_\pi(s) = \mathbb{E}[G_t|S_t=s]$当前状态为s的时候所有的return的期望值。</p>
+<p>考虑下面的trajectory:$S<em>t \overset{A_t}{\to} R</em>{t+1},S<em>{t+1}\overset{A</em>{t+1}}{\to} R<em>{t+2},S</em>{t+2}\overset{A<em>{t+2}}{\to} R</em>{t+3},S_{t+3}…$</p>
+<p>那么$G<em>t = R</em>{t+1} + \gamma R<em>{t+2} + \gamma^2 R</em>{t+3} + … = R<em>{t+1} + \gamma G</em>{t+1}$</p>
+<p>则有</p>
+<p>$v<em>\pi(s) = \mathbb{E}[G_t|S_t=s] \ = \mathbb{E}[R_t|S_t = s] + \mathbb{E}[G</em>{t+1}|S_t = s]$ </p>
+<p>公式中的第一项</p>
+<p>$\mathbb{E}[R_{t+1}|S_t = s] = \underset{a}{\sum} [\pi(a|s) \underset{r}{\sum}p(r|s,a)r]$</p>
+<p>公式中的第二项</p>
+<script type="math/tex; mode=display">
+\mathbb{E}[G_{t+1}|S_t = s] = \underset{s'}{\sum}\{\mathbb{E}[G_{t+1}|S_t=s,S_{t+1}=s']p(s'|s) \}
+\\ =\underset{s'}{\sum}\mathbb{E}[G_{t+1}|S_{t+1}=s']p(s'|s)
+\\ = \underset{s'}{\sum}\{v_\pi(s')p(s'|s)\} 
+\\ = \underset{s'}{\sum}\{ v_\pi(s')\underset{a}{\sum}[p(s'|s,a)\pi(a|s)]\}</script><ul>
+<li>于是，贝尔曼公式：</li>
+</ul>
+<script type="math/tex; mode=display">
+v_\pi(s) = \mathbb{E}[R_t|S_t = s] + \mathbb{E}[G_{t+1}|S_t = s]
+\\ 
+=\underset{a}{\sum} \pi(a|s) [\underset{r}{\sum}p(r|s,a)r+\gamma\underset{s'}{\sum}p(s'|s,a)v_\pi(s')]</script><ul>
+<li>之后我们列出每个$s<em>i$对应的$v</em>\pi(s_i)$的公式，然后求解方程组即可得到每个状态的state value。</li>
+</ul>
+<h3 id="贝尔曼公式的矩阵-向量形式"><a href="#贝尔曼公式的矩阵-向量形式" class="headerlink" title="贝尔曼公式的矩阵/向量形式"></a>贝尔曼公式的矩阵/向量形式</h3><ul>
+<li><p>由贝尔曼公式：$v<em>\pi(s)=\underset{a}{\sum} \pi(a|s) [\underset{r}{\sum}p(r|s,a)r+\gamma\underset{s’}{\sum}p(s’|s,a)v</em>\pi(s’)]$</p>
+<p>  可以简略写为$v<em>\pi(s) = r</em>\pi(s) + \gamma \underset{s’}{\sum}p<em>\pi(s’|s)v</em>\pi(s’)$ , (这里有$r<em>\pi(s) \iff \underset{a}{\sum} \pi(a|s)\underset{r}{\sum}p(r|s,a)r \ p</em>\pi(s’|s) \iff \underset{a}{\sum} \pi(a|s)p(s’|s,a)$ )</p>
+<p>  ​    对s进行标号得出$v<em>\pi(s_i) = r</em>\pi(s<em>i) + \gamma \underset{s_j}{\sum}p</em>\pi(s<em>j|s_i)v</em>\pi(s_j)$</p>
+<p>  于是化为矩阵向量形式：$v<em>\pi = r</em>\pi + \gamma P<em>\pi v</em>\pi$ ,这里的$v<em>\pi,r</em>\pi$ 均为向量，$P<em>\pi$ 为状态转移矩阵($[P</em>\pi]<em>{i,j} = p</em>\pi(s_j | s_i)$ )</p>
+</li>
+<li><p>求解贝尔曼公式，进而得到state value是评判策略好坏(policy evaluation)的关键。</p>
+</li>
+<li><p>求解贝尔曼公式：</p>
+<ul>
+<li><p>$v<em>\pi = (I - \gamma P</em>\pi)^{-1}r_{\pi}$ ,很简洁的公式，但是求逆太难算了。</p>
+</li>
+<li><p>迭代求法：$v<em>{k+1} = r</em>\pi + \gamma P_\pi v_k$  </p>
+<p>  当$k \to \infty$时 ,有$v<em>k = v</em>\pi$ </p>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="action-value"><a href="#action-value" class="headerlink" title="action value"></a>action value</h3><p>从一个状态出发， 选择了一个action之后， 得到的return的期望。</p>
+<p>在做判断时，根据Action value的大小来判断选择哪个Action。</p>
+<p>求解状态s下进行行动a的action value($q_{\pi}(s,a)$)</p>
+<script type="math/tex; mode=display">
+q_\pi(s,a) = \underset{r}{\sum}p(r|s,a)r+\gamma\underset{s'}{\sum}p(s'|s,a)v_\pi(s')</script><p>计算action value：</p>
+<ol>
+<li>根据state value求出</li>
+<li>直接计算action value</li>
+</ol>
+<h2 id="第三章-贝尔曼最优公式"><a href="#第三章-贝尔曼最优公式" class="headerlink" title="第三章 贝尔曼最优公式"></a>第三章 贝尔曼最优公式</h2><ul>
+<li>直观上地说，选择action value比较大的action，将他设置为1，其他设置为0。不断如此迭代，就可以找到最优的策略。</li>
+<li>严格证明则需要贝尔曼最优公式。</li>
+</ul>
+<p>如果对于所有的s，都有$v<em>{\pi_1}(s) \ge v</em>{\pi_2}(s) for\ all \ s \in S$ ,那么说$\pi_1$ 是比$\pi_2$要好的。</p>
+<ol>
+<li>问题一：这样最优的策略是否存在？</li>
+<li>问题二：这个最优的策略是唯一的吗？</li>
+<li>问题三：策略是stochastic还是deterministic？</li>
+<li>问题四：如何找到这么一个策略？</li>
+</ol>
+<h3 id="贝尔曼最优公式"><a href="#贝尔曼最优公式" class="headerlink" title="贝尔曼最优公式"></a>贝尔曼最优公式</h3><ul>
+<li>贝尔曼最优公式堂堂登场！</li>
+</ul>
+<script type="math/tex; mode=display">
+v(s) = max(\underset{a}{\sum} (\pi(a|s) q(s,a))) , s \in S</script><p> 可以发现，假设当$a = a’$时，$q(s,a)$ 最大，那么令$\pi(a|s) = \begin{equation}   \left{               \begin{array}{<strong>lr</strong>}               1 &amp;a = a’  \               0 &amp; a\not= a’                \end{array}   \right.   \end{equation} $ ,就会得到最大的$v(s)$。</p>
+<p>即$v(s) = max(\underset{a}{\sum} (\pi(a|s) q(s,a)))=\underset{a\in A(s)}{max}(q(s,a))$</p>
+<ul>
+<li>将公式变为矩阵-向量形式</li>
+</ul>
+<script type="math/tex; mode=display">
+v = \underset{\pi}{max}(r_\pi + \gamma P_\pi v)</script><p>我们设一个映射$f(v) := \underset{\pi}{max}(r<em>\pi + \gamma P</em>\pi v)$ ,那么原式就可以化为$v=f(v)$ </p>
+<h3 id="一些概念"><a href="#一些概念" class="headerlink" title="一些概念"></a>一些概念</h3><p>FixedPoint 不动点： 对于映射$f : X \to X$ ，存在$x \in X, f(x) = x$ ，那么x是不动点。</p>
+<p>Contraction mapping : 在映射后两点的距离更小。$||f(x_1)-f(x_2)|| = \gamma||x_1 - x_2|| ,\gamma &lt; 1$ 。(例如$f(x) = 0.5x$ 就是一个contraction mapping)</p>
+<h3 id="contraction-Theorem"><a href="#contraction-Theorem" class="headerlink" title="contraction Theorem"></a>contraction Theorem</h3><p>如果$f$是一个contraction mapping。那么一定有</p>
+<ol>
+<li>存在一个$x<em>$ , 满足$f(x^</em>) = x^<em>$ ，即$x^</em>$ 是一个FixedPoint</li>
+<li>这样的$x^*$ 一定有且只有一个</li>
+<li>可以通过迭代算法求出这个$x^<em>$ : $x_{k+1} = f(x_k)$ ，当$k \to \infty$ 时，有$x_k \to x^</em>$</li>
+</ol>
+<p>例如$f(x) = 0.5x$ ,那么$f(0) = 0, x^* = 0$ ,给出任意x，在不断进行$x = 0.5x$ 迭代后，会收敛于$0$</p>
+<h3 id="求解贝尔曼最优公式"><a href="#求解贝尔曼最优公式" class="headerlink" title="求解贝尔曼最优公式"></a>求解贝尔曼最优公式</h3><p>可以证明在贝尔曼最优公式中$f(v) = \underset{\pi}{max}(r<em>\pi + \gamma P</em>\pi v)$ 是一个contraction mapping，那么$v = f(v)$ 。于是就可以通过迭代算法来求解出来。</p>
+<p>假设$v^<em>$ 是贝尔曼最优公式的解，即是他的不动点。即$v^</em> = \underset{\pi}{max}(r<em>\pi + \gamma P</em>\pi v^*)$  </p>
+<p>所以就可以利用contraction Theorem中的迭代算法来求得$v^*$</p>
+<p>所以<strong>贝尔曼最优公式就是特殊的贝尔曼公式</strong>。</p>
+<h2 id="Value-iteration-amp-Policy-iteration"><a href="#Value-iteration-amp-Policy-iteration" class="headerlink" title="Value iteration &amp; Policy iteration"></a>Value iteration &amp; Policy iteration</h2><h3 id="Value-iteration-algorithm-值迭代算法"><a href="#Value-iteration-algorithm-值迭代算法" class="headerlink" title="Value iteration algorithm(值迭代算法)"></a>Value iteration algorithm(值迭代算法)</h3><p>值迭代算法就是根据贝尔曼最优公式来迭代求解优化问题。</p>
+<p>$v<em>{k+1} = f(v_k) = \underset{\pi}{max}(r</em>\pi + \gamma P<em>\pi v</em>\pi)$</p>
+<hr>
+<p><strong>求解步骤：</strong>最开始生成一个任意的状态$v_0$ ,不断循环以下两步</p>
+<ol>
+<li>policy update更新策略：$\pi<em>{k+1} = \underset{\pi}{argmax}(r</em>\pi + \gamma P_\pi v_k)$</li>
+<li>value update 更新值: $v<em>{k+1} = r</em>{\pi<em>{k+1}}+\gamma P</em>{\pi_{k+1}} v_k$</li>
+</ol>
+<p>需要注意的是$v_k$ 只是一个值，并不是一个state value。</p>
+<p>不断迭代直到$v<em>k-v</em>{k-1}$ 足够小就认为已经收敛了。</p>
+<h3 id="Policy-iteration-algorithm-策略迭代算法"><a href="#Policy-iteration-algorithm-策略迭代算法" class="headerlink" title="Policy iteration algorithm(策略迭代算法)"></a>Policy iteration algorithm(策略迭代算法)</h3><p>最开始生成一个任意策略$\pi_0$</p>
+<ol>
+<li>policy evalution(PE): $v<em>{\pi_k} = r</em>{\pi<em>k} + \gamma P</em>{\pi<em>k} v</em>{\pi_k}$</li>
+<li>policy improvement(PI): $\pi<em>{k+1}=\underset{\pi}{argmax}(r</em>\pi + \gamma P<em>\pi v</em>{\pi_k})$ </li>
+</ol>
+<p>整体过程即$\pi<em>0 \overset{PE}{\to}v</em>{\pi<em>0} \overset{PI}{\to}\pi_1\overset{PE}{\to}v</em>{\pi<em>1} \overset{PI}{\to}\pi_2\overset{PE}{\to}v</em>{\pi_2} \overset{PI}{\to}\pi_3….$</p>
+<ul>
+<li><p>几个核心问题：</p>
+<ol>
+<li><p>在policy evaluation中如何求解 state value？</p>
+</li>
+<li><p>为什么进行PI后， $\pi_{k+1}$比$\pi_k$  更优？</p>
+</li>
+<li><p>为什么最终能找到最优解？</p>
+</li>
+<li><p>Policy iteration和Value iteration 有什么关系？</p>
+</li>
+</ol>
+</li>
+<li><p>Q1: 有两种方法(即求解贝尔曼公式的两种方法)：</p>
+<ol>
+<li>closed-form solution : $v<em>{\pi_k} = (I-\gamma P</em>{\pi<em>k})^{-1} r</em>{\pi_k}$</li>
+<li><p>iterative solution: $v^{j+1}<em>{\pi_k} = r</em>{\pi<em>k} + \gamma P</em>{\pi<em>k}v</em>{\pi_k}^{(j)} , j = 0,1,2,…$</p>
+<p>Q2: $\pi<em>{k+1}=\underset{\pi}{argmax}(r</em>\pi + \gamma P<em>\pi v</em>{\pi<em>k})$ ，因为$\pi</em>{k+1}$ 一定比$\pi_k$ 要更大</p>
+<p>Q3：$v<em>{\pi_0} \le v</em>{\pi<em>1} \le v</em>{\pi<em>2} \le …\le v</em>{\pi_k} \le v^*$</p>
+<p>Q4: 二者是两个极端</p>
+</li>
+</ol>
+</li>
+</ul>
+<h3 id="truncated-policy-iteration-algorithm"><a href="#truncated-policy-iteration-algorithm" class="headerlink" title="truncated policy iteration algorithm"></a>truncated policy iteration algorithm</h3><p>他是值迭代算法和策略迭代算法的推广，值迭代算法和策略迭代算法是truncated policy iteration algorithm的极端情况。</p>
+<p>Policy iteration: $\pi<em>0 \overset{PE}{\to}v</em>{\pi<em>0} \overset{PI}{\to}\pi_1\overset{PE}{\to}v</em>{\pi<em>1} \overset{PI}{\to}\pi_2\overset{PE}{\to}v</em>{\pi_2} \overset{PI}{\to}\pi_3….$</p>
+<p>Value iteration:         $u_0\overset{PU}{\to}\pi_1’\overset{VU}{\to}u_1\overset{PU}{\to}\pi_2’\overset{VU}{\to}u_2…$</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Policy Iteration algorithm</th>
+<th>Value iteration algorithm</th>
+<th>Comments</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1）Policy：</td>
+<td>$\pi _0$</td>
+<td>N/A</td>
+<td></td>
+</tr>
+<tr>
+<td>2) Value:</td>
+<td>$v<em>{\pi_0} = r</em>{\pi<em>0}+\gamma P</em>{\pi<em>0} v</em>{\pi_0}$</td>
+<td>$v<em>0 := v</em>{\pi_0}$</td>
+<td></td>
+</tr>
+<tr>
+<td>3) Policy:</td>
+<td>$\pi<em>1 = \underset{\pi}{argmax}(r</em>\pi + \gamma P<em>\pi v</em>{\pi_0})$</td>
+<td>$\pi<em>1 = \underset{\pi}{argmax}(r</em>\pi + \gamma P_\pi v_0)$</td>
+<td>两个算法的第一步Policy是相同的。</td>
+</tr>
+<tr>
+<td>4) Value:</td>
+<td>$v<em>{\pi_1} = r</em>{\pi<em>1} + \gamma P</em>{\pi<em>1} \textcolor{ #FF0000}{v</em>{\pi_1}}$</td>
+<td>$v<em>1 = r</em>{\pi<em>1} + \gamma P</em>{\pi_1}\textcolor{ #FF0000}{v_0}$</td>
+<td>两个算法求$v_\pi$ 的方法是不一样的</td>
+</tr>
+<tr>
+<td>5）Policy：</td>
+<td>$\pi<em>2 = \underset{\pi}{argmax}(r</em>\pi + \gamma P<em>\pi v</em>{\pi_1})$</td>
+<td>$\pi<em>2’ = \underset{\pi}{argmax}(r</em>\pi + \gamma P_\pi v_1)$</td>
+<td></td>
+</tr>
+<tr>
+<td>…</td>
+<td>…</td>
+<td>…</td>
+<td>…</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>区别在于计算$v_{\pi_1}$的时候是使用贝尔曼公式求，还是直接继承上一步的求法。</p>
+<p>考虑公式$v<em>{\pi_1} = r</em>{\pi<em>1} + \gamma P</em>{\pi<em>1} v </em>{\pi_1}$ </p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+v_{\pi_1}^{(0)} &= v_0\\
+v_{\pi_1}^{(1)} &= r_{\pi_1} + \gamma P_{\pi_1} v _{\pi_1}^{(0)} & \to  value\ iteration\ \textcolor{ #FF0000}{v_1}\\
+v_{\pi_1}^{(2)} &= r_{\pi_1} + \gamma P_{\pi_1} v _{\pi_1}^{(1)} \\
+...\\
+v_{\pi_1}^{(j)} &= r_{\pi_1} + \gamma P_{\pi_1} v _{\pi_1}^{(j-1)} & \to truncated\ policy\ iteration\  \textcolor{ #FF0000}{\overline v_1}\\
+...\\
+v_{\pi_1}^{(\infty)} &= r_{\pi_1} + \gamma P_{\pi_1} v _{\pi_1}^{(\infty)} &\to policy\ iteration\ \textcolor{ #FF0000}{v_{\pi_1}}\\
+\end{aligned}</script><p>可以发现，value iteration就是在得到第一个$v$ 后就进行下一步操作；policy iteration则是不断你迭代直到收敛。 那么 truncated policy iteraion则是二者的结合，选择在中间的某一步停下。</p>
+<h2 id="MonteCarlo-learning"><a href="#MonteCarlo-learning" class="headerlink" title="MonteCarlo learning"></a>MonteCarlo learning</h2><p>蒙特卡洛方法是一个model-free RL的方法。（前面讲的算法都是model-based RL方法）</p>
+<h3 id="抛硬币例子"><a href="#抛硬币例子" class="headerlink" title="抛硬币例子"></a>抛硬币例子</h3><p>假设抛硬币问题： 抛一个硬币，正面价值为1，反面为-1，期望是多少？</p>
+<p>那么 model-based方法：直接计算数学期望$\mathbb{E}[X] = \underset{x}{\sum}xp(x) = 1<em>0.5+(-1)</em>0.5 = 0$</p>
+<p>结果很精确，但是通常很难找到这样的数学模型。<br>model-free方法：做实验，随机扔硬币，然后统计值，最终可以得到近似值。</p>
+<h3 id="一个简单的MC-based-RL算法"><a href="#一个简单的MC-based-RL算法" class="headerlink" title="一个简单的MC-based RL算法"></a>一个简单的MC-based RL算法</h3><p>（我们称这个算法为MC-basic算法）</p>
+<p>可以通过改变Policy iteration算法来变成model-free 算法。</p>
+<ol>
+<li>policy evalution(PE): $v<em>{\pi_k} = r</em>{\pi<em>k} + \gamma P</em>{\pi<em>k} v</em>{\pi_k}$</li>
+<li>policy improvement(PI): $\pi<em>{k+1}=\underset{\pi}{argmax}(r</em>\pi + \gamma P<em>\pi v</em>{\pi_k})$ </li>
+</ol>
+<p>$\pi<em>{k+1}(s) = \underset{\pi}{argmax} \underset{a}{\sum}\pi(a|s)\textcolor{ #FF0000}{q</em>{\pi_k}(s,a)}$</p>
+<p>关键在于计算$q_{\pi_k}(s,a)$ , 两种方法：</p>
+<ol>
+<li>需要模型：$q<em>{\pi_k}(s,a) = \underset{r}{\sum}p(r|s,a)r + \gamma \underset{s’}{\sum}p(s’|s,a)v</em>{\pi_k}(s’)$</li>
+<li>不需要模型：$q_{\pi_k}(s,a) = \mathbb{E}[G_t|S_t=s,A_t=a]$</li>
+</ol>
+<p>基于蒙特卡洛的model即通过大量采样来估计$G_t$  </p>
+<h3 id="MC-exploring-Starts"><a href="#MC-exploring-Starts" class="headerlink" title="MC exploring Starts"></a>MC exploring Starts</h3><p>遵循策略$\pi$ ，我们会得到一个episode如下：</p>
+<p>$s_1 \overset{a_2}\to s_2\overset{a_4}\to s_1\overset{a_2}\to s_2\overset{a_3}\to s_5\overset{a_1}{\to}…$</p>
+<p>定义Visit；一个episode中访问的$(state,action)$对的数量。</p>
+<p>在MC-basic方法中，使用的是Initial-visit method，即只考虑$s_1 \overset{a_2}{\to}$ 这一个(state,action)对。这导致了没有充分利用了整个episode。</p>
+<p>那么对于一个episode:</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+s_1 \overset{a_2}\to & s_2\overset{a_4}\to & s_1\overset{a_2}\to & s_2\overset{a_3}\to & s_5\overset{a_1}{\to}\dots & [original\ episode]
+\\
+&s_2\overset{a_4}\to & s_1\overset{a_2}\to &s_2\overset{a_3}\to &s_5\overset{a_1}{\to}\dots & [episode\ starting\ from (s_2,a_4)]
+\\
+&&s_1\overset{a_2}\to &s_2\overset{a_3}\to &s_5\overset{a_1}{\to} \dots & [episode\ starting\ from (s_1,a_2)]
+\\
+&&& s_2\overset{a_3}\to &s_5\overset{a_1}{\to} \dots & [episode\ starting\ from (s_2,a_3)]
+\\
+&&&&s_5\overset{a_1}{\to} \dots & [episode\ starting\ from (s_5,a_1)]
+\end{aligned}</script><p>因此我们就可以通过这一个episode来估计$(s_1,a_2),(s_2,a_4),(s_1,a_2),(s_2,a_3),(s_5,a_1),\dots$ 的action value。而不是仅仅用于$(s_1,a_2)$ 。</p>
+<ul>
+<li>first-visist : 指在遇到相同的(state,action)时，只使用第一次遇到的。</li>
+<li>every-visit：指在遇到相同的(state,action)时，每个都做考虑，最后综合起来。</li>
+</ul>
+<p>generalized policy iteration(广义策略迭代)：指并不是精确求解的代码，使用迭代来得到策略，像truncated policy iteration algorithm和 MC都属于generalized policy iteration 。</p>
+<h3 id="soft-policies"><a href="#soft-policies" class="headerlink" title="soft policies"></a>soft policies</h3><p>因为我们从一个(state,action)出发能够到达多个状态，所以我们也就没必要把所有的(state,action)都设置为出发点了。</p>
+<p>那么如何选择出发点？</p>
+<p>$\epsilon-greedy\ policies$ : $\pi(a|s)= \begin{equation}   \left{               \begin{array}{<strong>lr</strong>}   1-\frac{\epsilon}{|A(s)|}(|A(s)|-1) &amp;for\ the\ greedy\ action  \ \frac{\epsilon}{|A(s)|}  &amp; for\ the\ other\ |A(s)|-1\ actions \end{array}   \right.   \end{equation}$</p>
+<p>这里的greedy action指的就是$q_\pi(s,a^*)$ 最大的那个action。($\epsilon$通常很小)， 这样在保证greedy action被选择的概率较大的情况下，其他的action同样有一些概率被选择。</p>
+<ul>
+<li>$\epsilon-greedy\ policies$能够平衡$exploitation$和$exploration$ </li>
+</ul>
+<p>exploitation：指的是充分利用value，贪心于当前。</p>
+<p>exploration：指的是探索当前非最佳的情况，可能会找到未来更优的情况。</p>
+<p>这样选择一个(state,action)作为出发点，就可以通过exploration来得到所有的(state,action)的策略。</p>
+<h3 id="MC-epsilon-Greedy-algorithm"><a href="#MC-epsilon-Greedy-algorithm" class="headerlink" title="MC $\epsilon$-Greedy algorithm"></a>MC $\epsilon$-Greedy algorithm</h3><p>对于之前的方法，只会选择最优的action，即$a^*$ 。</p>
+<p>$\pi<em>{k+1}(s) = arg\ \underset{\textcolor{ #0000FF}{\pi \in \Pi</em>{\epsilon}}}{max}\underset{a}{\sum}\pi(a|s)q_{\pi_k}(s,a)$</p>
+<p>那么对于MC $\epsilon$-Greedy algorithm </p>
+<script type="math/tex; mode=display">
+\pi(a|s)= \begin{equation}   \left\{               \begin{array}{**lr**}   1-\frac{\epsilon}{|A(s)|}(|A(s)|-1) & a=a_k^*\\ \frac{\epsilon}{|A(s)|}  & a \not=a_k^* \end{array}   \right.   \end{equation}</script><p>便是给了其他action一个较小的$\frac{\epsilon}{|A(s)|}$</p>
+<p>$\epsilon$-Greedy algorithm 中的$\epsilon$ 较大的时候，探索性很强，但是最优性比较差。</p>
+<p>我们可以通过起初设置较大的$\epsilon$，然后逐渐减小他来平衡探索性和最优性。</p>
+<h2 id="Stochastic-Approximation-amp-Stochastic-Grandient-Descent"><a href="#Stochastic-Approximation-amp-Stochastic-Grandient-Descent" class="headerlink" title="Stochastic Approximation &amp; Stochastic Grandient Descent"></a>Stochastic Approximation &amp; Stochastic Grandient Descent</h2><p>Stochastic Approximation（随机近似理论） 和Stochastic Grandient Descent（随机梯度下降）</p>
+<h3 id="Motivating-example"><a href="#Motivating-example" class="headerlink" title="Motivating example"></a>Motivating example</h3><p>mean estimation problem：</p>
+<ol>
+<li>考虑有一个随机变量 X</li>
+<li>目标是计算期望 $\mathbb{E}[X]$</li>
+<li>假设我们有N个采样${x<em>i}</em>{i=1}^N$</li>
+<li>那么期望可以被估计为$\mathbb{E}[X] \approx \overline{x}:=\frac{1}{N}\underset{i=1}{\overset{N}{\sum}}x_i$</li>
+<li>当$N \to \infty$ ，$\overline{x} \to \mathbb{E}[X]$</li>
+</ol>
+<p>怎么计算$mean\ \overline{x}$ ?</p>
+<p>方法一： 计算所有的总和，然后除以$N$</p>
+<p>方法二（iterative mean estimation)：实时估计$\overline{x}$ ，当出现新的$x_i$时，更新$\overline{x}$</p>
+<p>我们规定$w<em>{k+1}$ 表示前$\textcolor{ #0000EE}{k}$个x的均值。即$w</em>{k+1} = \frac{1}{k}\underset{i=1}{\overset{k}{\sum}}x_i $ 。（一般设置$w_1 = x_1$)</p>
+<p>那么根据如下公式</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+w_{k+1} = \frac{1}{k}\underset{i=1}{\overset{k}{\sum}}x_i & = \frac{1}{k}(\frac{1}{k-1}\underset{i=1}{\overset{k-1}{\sum}}x_i+x_k) \\ 
+&=\frac{1}{k}((k-1)w_k + x_k) = w_k - \frac{1}{k}(w_k-x_k)
+\end{aligned}</script><p>我们就可以迭代地计算$w_{k+1}$ 了。</p>
+<p>于是我们稍作改进，把$\frac{1}{k}$ 换成$\alpha$ .于是我们就可以通过调整$\alpha$ 来改变公式的计算了。</p>
+<script type="math/tex; mode=display">
+w_{k+1} = w_k - \alpha (w_k-x_k)</script><h3 id="Robbins-Monro-algorithm"><a href="#Robbins-Monro-algorithm" class="headerlink" title="Robbins-Monro algorithm"></a>Robbins-Monro algorithm</h3><blockquote>
+<p> stochastic approximation能够做到在不知道函数具体公式的情况下求出解。</p>
+<p>RM算法是stochastic approximation中的开创性工作。</p>
+<p>而stochastic gradient descent algorithm 则是RM的一种特殊情况。</p>
+</blockquote>
+<p>问题：求解$g(w) = 0$方程， 其中$w$是未知量，$g$是函数。</p>
+<p> 于是RM算法可以求解如下问题：</p>
+<p>$w_{k+1} = w_k - a_k \tilde g(w_k,\eta _k)$ </p>
+<p>其中$\eta _k$ 是噪声， $\tilde g(w_k,\eta _k) = g(w_k) + \eta_k$ ，$\alpha$是一个正数 。</p>
+<blockquote>
+<p>函数$g(w_k)$ 是一个黑盒函数，我们无法得出它的具体公式。</p>
+</blockquote>
+<p>不断迭代这个公式，就能够收敛到$g(w) = 0$</p>
+<h3 id="RM算法-Convergence-properties"><a href="#RM算法-Convergence-properties" class="headerlink" title="RM算法-Convergence properties"></a>RM算法-Convergence properties</h3><p>RM算法的三个条件：</p>
+<ol>
+<li><p>$0 &lt; c_1 \le \nabla _wg(w) \le c_2$ ，即导数大于0，并且不会趋于无穷。</p>
+</li>
+<li><p>$\sum<em>{k=1}^{\infty}a_k = \infty$ 并且$\sum</em>{k=1}^{\infty}a_k^2 &lt; \infty$ 。</p>
+<p> $\sum_{k=1}^{\infty}a_k^2 &lt; \infty$ 保证了$a_k$一定会收敛到0。</p>
+<p> $\sum_{k=1}^{\infty}a_k = \infty$ 保证了$a_k$收敛的不会太快，否则加起来就不会是无穷了。</p>
+</li>
+<li><p>$\mathbb{E}[\eta_k] = 0$ 并且$\mathbb{E}[n_k^2|\mathcal{H}]&lt;\infty$ (这里的$\mathbb{E}[\eta_k^2|\mathcal{H}]$的意思是$\eta_k$的方差)。通常这里的噪声通过同分布(Independent and Identically Distriuted)采样得来，并且在此处$\eta_k$并没有强制要求满足高斯分布。</p>
+</li>
+</ol>
+<blockquote>
+<p>对于条件二的解释：</p>
+<p>根据上面的公式$w<em>{k+1}-w_k = a_k \tilde g(w_k,\eta_k)$ ,那么$a_k$收敛到0，才能保证$w</em>{k+1}-w_k$不断收敛到0，从而趋于稳定。</p>
+<p>而将$k = 1,2,…,\infty$  的公式相加可以得到</p>
+<p>$w_{\infty} - w_1 = \overset{\infty}{\underset{k=1}{\sum}}a_k \tilde g(w_k,\eta_k)$ .</p>
+<p>$w^<em> \approx w<em>\infty$是我们猜测的值，$w_1$ 是初始值，那么$\sum</em>{k=1}^{\infty}a_k = \infty$ 保证了不管我们选的初始值$w_1$离目标值有多远，最终都可以通过不断迭代得到$w^</em>$</p>
+</blockquote>
+<p>$a_k$取什么值是符合条件的？ $a_k= \frac{1}{k}$ 。（但一般在$k$很大的时候，不会让$a_k$一直变小，达到某个较小值后则会不再改变）</p>
+<h3 id="SGD-stochatic-gradient-descent"><a href="#SGD-stochatic-gradient-descent" class="headerlink" title="SGD(stochatic gradient descent)"></a>SGD(stochatic gradient descent)</h3><p>目标是解决如下优化问题：</p>
+<p>$\underset{w}{min} J(w) =\mathbb E[f(w,X)]$ </p>
+<p>算法一、 gradient descent(GD)梯度下降法：</p>
+<p>$w_{k+1} = w_k- \alpha_k \nabla_w \mathbb E[f(w_k,X)] = \alpha_k\mathbb E[\nabla_wf(w_k,X)]$ </p>
+<p>这里的$\alpha_k$  是步长，就是学习率。 但是一般无法得到准确的梯度的期望。</p>
+<p>算法二、batch gradient descent(BGD)批量梯度下降法：</p>
+<p>$\mathbb [\nabla_w f(w_k,X)] \approx \frac{1}{n} \underset{i=1}{\overset{n}{\sum}}\nabla_wf(w_k,x_i)$ </p>
+<p>于是得到：$w_{k+1} = w_k- \alpha_k\frac{1}{n} \underset{i=1}{\overset{n}{\sum}}\nabla_wf(w_k,x_i)$</p>
+<p>不需要求期望，用多次采样的平均值来代替期望值，但是每次都需要求n个数的平均太耗时了。（n为采样次数）</p>
+<p>算法三、stochastic gradient descent(SGD) 随机梯度下降：</p>
+<p>$w_{k+1} = w_k - \alpha_k \nabla_w f(w_k,x_k)$ </p>
+<p>和GD相比，替使用随机梯度来替换准确的期望的梯度。</p>
+<p>和BGD相比，其实就是把n设置为了1。</p>
+<h3 id="SGD-的例子和练习"><a href="#SGD-的例子和练习" class="headerlink" title="SGD 的例子和练习"></a>SGD 的例子和练习</h3><p>假设如下例子：$\underset{w}{min} \ J(w) = \mathbb E[f(w,X)] = \mathbb E[\frac{1}{2} ||w-X||^2]$ </p>
+<p>此处的$f(w,X)= ||w-X||^2/2, \nabla_wf(w,X) = w - X$</p>
+<p>三个练习：</p>
+<ol>
+<li>证明最优解$w^<em>$ 满足$w^</em> = \mathbb E [X]$ </li>
+</ol>
+<script type="math/tex; mode=display">
+\begin{aligned}
+& \nabla _w\ J(w) = 0 \\ 
+\Rightarrow & \mathbb E[\nabla _w f(w,X)] = 0 \\
+\Rightarrow & \mathbb E[w-X] = 0 \\
+\Rightarrow & w^* = \mathbb E[X]
+\end{aligned}</script><ol>
+<li>这个例子的GD算法是什么？</li>
+</ol>
+<script type="math/tex; mode=display">
+\begin{aligned}
+w_{k+1} & = w_k - \alpha_k \nabla _w J(w_k) \\
+&=w_k - \alpha_k \mathbb E[\nabla _w J(w_k)] \\ 
+&=w_k - \alpha_k \mathbb E[w_k - X]
+\end{aligned}</script><ol>
+<li>这个例子的SGD算法是什么？</li>
+</ol>
+<p>不求期望了，直接用某一个的$w_k - x_k$ 来代替$\mathbb E[w_k - X]$</p>
+<script type="math/tex; mode=display">
+w_{k+1} = w_k - \alpha_k \nabla_wf(w_k,x_k) = w_k - \alpha _k (w_k - x_k)</script><p>我们发现最后的公式和mean alogrithm算法是一样的，所以mean algorithm算法就是一种特殊的SGD算法。</p>
+<h3 id="SGD算法的收敛性-convergence"><a href="#SGD算法的收敛性-convergence" class="headerlink" title="SGD算法的收敛性(convergence)"></a>SGD算法的收敛性(convergence)</h3><ol>
+<li>首先证明SGD是一种特殊的RM算法：</li>
+</ol>
+<p>SGD的目标是最小化$J(w) = \mathbb E[f(w,X)]$ , 这个问题可以转换为寻根问题：</p>
+<p>$\nabla_w \ J(w) = \mathbb E[\nabla _w f(w,X)] = 0$</p>
+<p>设$g(w) = \nabla_w J(w) = \mathbb E[\nabla_wf(w,X)]$</p>
+<p>那么SGD的目标就是找到$g(w)= 0$的根。</p>
+<p>我们可以测量的是：</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+\tilde g(w,\eta) &= \nabla_w f(w,x) \\ 
+  &=  \mathbb E[\nabla_wf(w,X)] + (\nabla_wf(w,x) - \mathbb E[\nabla_w f(w,X)]) 
+ \end{aligned}</script><p>而与之对应的RM算法是 </p>
+<script type="math/tex; mode=display">
+w_{k+1}= w_k - \alpha _k \tilde g(w,\eta) = w_k - \alpha_k \nabla_wf(w_k,x_k)</script><ol>
+<li>接下来我们就可以应用RM算法的收敛性条件，来证明SGD是收敛的。</li>
+</ol>
+<h3 id="SGD算法的收敛模式"><a href="#SGD算法的收敛模式" class="headerlink" title="SGD算法的收敛模式"></a>SGD算法的收敛模式</h3><p>SGD收敛的过程中，是否会收敛很慢或者收敛随机？</p>
+<p>我们定义相对误差$\delta _k$</p>
+<script type="math/tex; mode=display">
+\delta _k = \frac{|\nabla_wf(w,x) - \mathbb E[\nabla_w f(w,X)]|}{|\mathbb E[\nabla_w f(w,X)]|}</script><p> 此处的$\mathbb E[\nabla_w f(w,X)]$是true gradient， 而$\nabla_wf(w,x)$ 是 stochastic gradient。</p>
+<blockquote>
+<p> 性质：当$w_k$ 离$w^<em>$ 较远时，相对误差较小， 当$w_k$ 离$w^</em>$ 很近的时候，才会有比较大的相对误差（即随机性）</p>
+</blockquote>
+<p>如何得到如上性质？</p>
+<p>使用拉格朗日中值定理$f(x_1)-f(x_2) =f’(x_3)(x_1 - x_2)$</p>
+<p>那么由$\mathbb E[\nabla _wf(w^*,X)] = 0$和中值定理 ,我们有</p>
+<script type="math/tex; mode=display">
+\delta_k = \frac{|\nabla_wf(w,x) - \mathbb E[\nabla_w f(w,X)]|}{|\mathbb E[\nabla_w f(w,X)] - \mathbb E[\nabla_wf(w^*,X)]|} = \frac{|\nabla_wf(w,x) - \mathbb E[\nabla_w f(w,X)]|}{|\mathbb E[\nabla^2_w f(\tilde w,X)(w_k-w^*)]|}</script><p>我们假设$\nabla^2_wf \ge c &gt; 0$ </p>
+<p>那么我们考虑分母项，就有</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+|\mathbb E\textcolor{ #FF0000}{[}\nabla^2_w f(\tilde w,X)(w_k-w^*)\textcolor{ #FF0000}{]}| &= |\mathbb E\textcolor{ #FF0000}{[}\nabla^2_w f(\tilde w,X) \textcolor{ #FF0000}{]}(w_k-w^*)| \\ 
+&=|\mathbb E[\nabla^2_w f(\tilde w,X)]||(w_k-w^*)| \ge c|w_k - w^*|
+\end{aligned}</script><p>于是误差$\delta_k$满足</p>
+<script type="math/tex; mode=display">
+\delta_k \le \frac{|\nabla_wf(w,x) - \mathbb E[\nabla_w f(w,X)]|}{c|w_k - w^*|}</script><p>于是当$w_k$ 距离$w^*$比较远，那么分母比较大，相对误差$\delta_k$ 的上界比较小。</p>
+<p>当$w_k$ 距离$w^*$比较近，那么分母比较小，此时相对误差$\delta_k$ 的上界才会变大一些。</p>
+<h3 id="BGD-MBGD和SGD"><a href="#BGD-MBGD和SGD" class="headerlink" title="BGD,MBGD和SGD"></a>BGD,MBGD和SGD</h3><ul>
+<li>BGD(batch gradient descent) , 用到所有的采样来平均求期望</li>
+<li>MBGD(min-batch gradient descent) ,选择一部分采样(m个采样)</li>
+<li>SGD(stocastic gradient descent) ，选择一个采样</li>
+</ul>
+<p>在MBGD中，当MBGD中的采样数量$m=1$时，等价于SGD。</p>
+<p>当采样数量$m = n$时，趋近于BGD(注意！此时不完全等于BGD，因为BGD是取出所有的n个样本，而MBGD是对样本集进行n次的采样)</p>
+<p>考虑如下优化问题：</p>
+<p>$\underset{w}{min} \ J(w) = \frac{1}{2n} \underset{i=1}{\overset{n}{\sum}} ||w - x_i || ^2$ </p>
+<p>那么三种算法的迭代公式如下：</p>
+<script type="math/tex; mode=display">
+w_{k+1} = w_k - \alpha_k \frac{1}{n} \underset{i=1}{\overset{n}{\sum}}(w_k - x_i) = w_k - \alpha_k (w_k - \overline x) & (BGD)\\
+w_{k+1} = w_k - \alpha_k \frac{1}{m} \underset{j \in I_k}{\overset{n}{\sum}}(w_k - x_j) = w_k - \alpha_k (w_k - \overline x^{(m)}) &(MBGD) \\
+w_{k+1} =  w_k - \alpha_k (w_k - x_k) &(SGD)</script><h2 id="Temporal-Difference-learning"><a href="#Temporal-Difference-learning" class="headerlink" title="Temporal-Difference learning"></a>Temporal-Difference learning</h2><p>Temporal-Difference learning （TD）时序差分算法</p>
+<p>这是一个incremental 迭代式的算法。</p>
+<h3 id="motivating-example"><a href="#motivating-example" class="headerlink" title="motivating example"></a>motivating example</h3><ol>
+<li>先考虑一个简单的问题 mean estimation ： 计算</li>
+</ol>
+<p>$w = \mathbb[X]$ , (X是一些iid(独立同分布)采样${x}$)</p>
+<p>令$g(w) = w - \mathbb E[X]$ ,则有</p>
+<p>$\tilde g(w,\eta) = w - x = (w - \mathbb E[X]) + (\mathbb E[X] - x) \approx g(w) + \eta$ </p>
+<p>然后根据RM算法，可以得到$w_{k+1} = w_k - \alpha_k \tilde g(w_k,\eta_k) = w_k - \alpha _k (w_k - x_k)$</p>
+<ol>
+<li>考虑一个复杂一些的例子：计算</li>
+</ol>
+<p>$w = \mathbb E[v(X)]$ , (X是一些iid(独立同分布)采样${x}$)</p>
+<p>令$g(w) = w - \mathbb E[v(X)]$</p>
+<p>$\tilde g(w,\eta) = w - v(x) = (w - \mathbb E[X]) + (\mathbb E[X] - v(x)) \approx g(w) + \eta$</p>
+<p>然后根据RM算法，可以得到$w_{k+1} = w_k - \alpha_k \tilde g(w_k,\eta_k) = w_k - \alpha _k (w_k - v(x_k))$</p>
+<ol>
+<li>第三个例子：计算</li>
+</ol>
+<p>$w = \mathbb [R + \gamma v(X)]$ , ($R,X$ 是随机变量，$\gamma$ 是常量，$v(\cdot)$ 是函数)</p>
+<p>令$g(w) = w - \mathbb E[R + \gamma v(X)]$ ,</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+\tilde g(w,\eta) &= w - \mathbb E[R+\gamma v(X)] \\
+& = (w - \mathbb E[R + \gamma v(X)]) + (\mathbb E[R + \gamma v(X)] - [r + \gamma v(X)]) \\
+& \approx g(w) + \eta
+\end{aligned}</script><p>然后根据RM算法，可以得到$\textcolor{ #0000FF}{w_{k+1} = w_k - \alpha_k \tilde g (w_k,\eta_k) = w_k - \alpha_k[w_k -(r_k + \gamma v(x_k))]}$</p>
+<h3 id="TD算法中的state-values"><a href="#TD算法中的state-values" class="headerlink" title="TD算法中的state values"></a>TD算法中的state values</h3><blockquote>
+<p>注意：</p>
+<ul>
+<li>TD算法通常指的是一大类的RL算法。</li>
+<li>TD算法也可以特指一种用于估计state values的算法。</li>
+</ul>
+</blockquote>
+<p> TD算法基于数据：$(s<em>0,r_1,s_1,…,s_t,r</em>{t+1},s<em>{t+1},…)$ 或者${(s_t,r</em>{t+1},s_{t+1})}_t$ ，这种数据通过给定的策略$\pi$ 来生成。</p>
+<p>TD算法则是：</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+v_{t+1}(s_t) &= v_t(s_t) - \alpha_t(s_t)[v_t(s_t) - [r_{t+1} + \gamma v_t(s_{t+1})]] & (1) \\
+v_{t+1}(s) &=v_t(s), \forall s \not=s_t&(2)
+\end{aligned}</script><p>对于公式$(2)$ 表示，如果现在的状态是$s_t$ ，那么其他状态的value是不更新的。 </p>
+<p>我们关注于第一个式子：</p>
+<p>$v<em>{t+1}(s_t) = v_t(s_t) - \alpha_t(s_t)[v_t(s_t) - [r</em>{t+1} + \gamma v<em>t(s</em>{t+1})]]$</p>
+<p>其中的$v_{t+1}(s_t)$ 是新的估计值，$v_t(s_t)$ 是现在的估计值。</p>
+<p>$v<em>t(s_t) - [r</em>{t+1} + \gamma v<em>t(s</em>{t+1})]$  是误差$\delta_t$</p>
+<p>$[r<em>{t+1} + \gamma v_t(s</em>{t+1})]$ 是目标$\overline v_t$</p>
+<blockquote>
+<p> 为什么$\overline v_t$ 是“TD目标” ？因为每次$v(s_t)$ 都会向着 $\overline v_t$ 移动。</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+& v_{t+1}(s_t) = v_t(s_t) - \alpha_t(s_t)[v_t(s_t) - \overline v_t] \\
+\Rightarrow &  v_{t+1}(s_t) \textcolor{ #0000FF}{-\overline v_t}= v_t(s_t) \textcolor{ #0000FF}{-\overline v_t} - \alpha_t(s_t)[v_t(s_t) - \overline v_t ] \\
+\Rightarrow &  v_{t+1}(s_t) \textcolor{ #0000FF}{-\overline v_t}= [1 -\alpha_t(s_t)] [v_t(s_t) \textcolor{ #0000FF}{-\overline v_t} ] 
+\end{aligned}</script><p>因为$0 &lt; 1 - \alpha_t(s_t) &lt; 1$ </p>
+<p>于是$|v<em>{t+1}(s_t) - \overline{v}_t| \le |v</em>{t}(s_t) - \overline{v}_t|$</p>
+<p>为什么 $\delta_t$是“TD error”？</p>
+<p>$\delta<em>t = v(s_t) - [r</em>{t+1} + \gamma v(s_{t+1})]$</p>
+<p>因为发生在t和t+1两个时刻 ，所以才叫时序差分，</p>
+<p>TD error 描述了$v<em>t$ 和$v</em>\pi$ 之间的误差。</p>
+<p>当$v<em>t = v</em>\pi$ 时，那么应该有$\delta _t = 0$ 。</p>
+<p>TD error是一种 innovation，这是经验$(s<em>t,r</em>{t+1},s_{t+1})$的一种新的信息。</p>
+</blockquote>
+<h3 id="TD算法的数学意义"><a href="#TD算法的数学意义" class="headerlink" title="TD算法的数学意义"></a>TD算法的数学意义</h3><p>他解决了给定$\pi$，求解贝尔曼公式。</p>
+<p>新的贝尔曼公式：</p>
+<script type="math/tex; mode=display">
+v_\pi(s) = \mathbb E[R + \gamma G |S = s], s \in S</script><p>在这之中G是下个状态的Reward，所以$\mathbb E[G|S = s] $可以表示为：</p>
+<script type="math/tex; mode=display">
+\mathbb E[G|S = s] = \underset{a}{\sum} \pi(a|s) \underset{s'}{\sum} p(s'|s,a) v_\pi(s') = \mathbb E[v_\pi(S')|S = s]</script><p>其中$S’$ 是下一个状态</p>
+<p>于是s的state value可以写为：</p>
+<script type="math/tex; mode=display">
+v_\pi(s) = \mathbb E[R + \gamma v_\pi(S')| S = s],s \in S</script><p>这个公式也被称为贝尔曼期望公式。</p>
+<p>接下来使用RM算法来求解这个贝尔曼期望公式：<br>定义$g(v(s)) = v(s) - \mathbb E[R + \gamma v_\pi(S’)| S = s] = 0$</p>
+<p>于是我们有$g(v(s)) = 0$ </p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+\tilde g(v(s)) &= v(s) - [r + \gamma v_\pi(s')] \\
+ &= (v(s) - \mathbb E[R + \gamma v_\pi(S')| s]) + (\mathbb E[R + \gamma v_pi(S')| s] - [r + \gamma v_\pi (s')]) 
+\end{aligned}</script><p>在这之中，$g(v(s)) = (v(s) - \mathbb E[R + \gamma v<em>\pi(S’)| s])  $ ,误差$\eta = E[R + \gamma v_pi(S’)| s] - [r + \gamma v</em>\pi (s’)]) $</p>
+<p>那么与之对应的RM算法是：</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+v_{k+1} (s) &= v_k(s) - \alpha_k \tilde g(v_k(s)) \\ 
+&= v_k(s) - \alpha_k (v_k(s)-[r_k+\gamma v_\pi(s'_k)]) , k =1,2,3,...
+\end{aligned}</script><p>这里的$v<em>k(s)$代表$v</em>\pi(s)$在第k步的估计，而$r_k,s’_k$ 是第k步中从$R,S’$中取出的样本。</p>
+<p>对公式做以下替换：</p>
+<ul>
+<li><p>将一组采样${(s,r,s’)}$ 替换为一组序列${s<em>t,r</em>{t+1},s_{t+1}}$， 从而做到对所有的s都进行更新。</p>
+</li>
+<li><p>将$v<em>\pi(s’)$ 换为$v_k(s’_k)$ ，即我们直接用$s’$ 在第k步的估计值来替代真实值。 虽然会有一些偏差，但是最终会收敛到$v</em>\pi$ </p>
+</li>
+</ul>
+<blockquote>
+<p>TD算法的收敛：</p>
+<p>对于所有状态$s \in S$ 。当$t \to \infty$ 时，  $v<em>t(s)$ 以概率1收敛到策略$\pi$ 下的状态值函数$v</em>\pi(s)$。</p>
+<p>如果对于所有的状态$s \in S$ ，步长参数序列$\alpha_t(s)$ 都满足$\sum_t\alpha_t = \infty$ 并且$\sum_t\alpha_t^2(s) &lt; \infty$ 那么上述收敛成立。</p>
+</blockquote>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>TD/Sarsa learning</th>
+<th>MC learning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>online：TD学习是在线的，在接收到一个奖励后可以更新state/action value</td>
+<td>Not online：MClearning是非在线的，必须等到整个episode已经完成之后，计算return值然后进行估计。</td>
+</tr>
+<tr>
+<td>continuing tasks：即能处理一直持续下去的任务，同时也能解决episodic tasks。</td>
+<td>Episodic tasks：必须是有限步的episode，才能等到他的返回值。</td>
+</tr>
+<tr>
+<td>Bootstrapping：会基于之前对状态的猜测，加上一些新的信息来形成一个新的猜测</td>
+<td>Non-boostrapping：直接根据当前的episode计算return，不涉及到之前的估计值</td>
+</tr>
+<tr>
+<td>Low estimation variance ：在算法过程中涉及到的随机变量比较少，所以方差会比较小</td>
+<td>High estimation variance：它涉及到了很多的variable，因为一次episode会涉及到很多的Reward，而只用其中一次的采样，所以就会有比较大的方差。</td>
+</tr>
+<tr>
+<td>bias：因为基于之前的经验，所以可能会因为之前的经验而产生bias，导致有偏估计，但是在不断增加经验后还是会趋于正确结果</td>
+<td>no bias：不基于之前的估计，所以不会产生bias</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h3 id="TD算法中的action-values：Sarsa"><a href="#TD算法中的action-values：Sarsa" class="headerlink" title="TD算法中的action values：Sarsa"></a>TD算法中的action values：Sarsa</h3><blockquote>
+<p> Sarsa是经验集$(s<em>t,a_t,r</em>{t+1},s<em>{t+1},a</em>{t+1})$ 的拼接。</p>
+</blockquote>
+<p>TD算法是用来估计给定策略$\pi$ 的state value，但我们需要估计的是action value。下面引入Sarsa。</p>
+<p>假设我们有如下经验${(s<em>t,a_t,r</em>{t+1},s<em>{t+1},a</em>{t+1}) }_t$  ，那么我们定义Sarsa公式如下：</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+q_{t+1}(s_t,a_t) &= q_t(s_t,a_t) - \alpha_t(s_t,a_t)[q_t(s_t,a_t) - [r_{t+1} + \gamma q_t(s_{t+1},a_{t+1})]] \\
+ q_{t+1}(s,a) &=q_t(s,a), \forall(s,a) \not= (s_t,a_t) 
+ \end{aligned}</script><p>这个式子和TD算法几乎一样，只是类似地把$v_t(s_t)$ 改成了$q_t(s_t,a_t)$这样子。</p>
+<p>Sarsa的数学意义和TD也是几乎一样的。（如贝尔曼公式，收敛性等）</p>
+<p>Sarsa所求解的贝尔曼公式：</p>
+<script type="math/tex; mode=display">
+q_\pi(s,a) = \mathbb E [R+ \gamma q_\pi(S',A')|s,a], \forall s,a</script><ol>
+<li><p>收集经验：$(s<em>t,a_t,r</em>{t+1},s<em>{t+1},a</em>{t+1})$ ,遵循$\pi<em>t(s_t)$执行$a_t$ ，得到$r</em>{t+1}$的奖励，然后走到状态$s<em>{t+1}$ 并遵循$\pi</em>{t}(s<em>{t+1})$ 来采取行动$a</em>{t+1}$ 。</p>
+</li>
+<li><p>更新q值(q value update/policy evaluaton)：$q<em>{t+1}(s_t,a_t) = q_t(s_t,a_t) - \alpha_t(s_t,a_t)[q_t(s_t,a_t) - [r</em>{t+1} + \gamma q<em>t(s</em>{t+1},a_{t+1})]]$</p>
+</li>
+<li><p>更新策略policy(policy update/policy improvement)：</p>
+<script type="math/tex; mode=display">
+ \begin{aligned}
+ \pi_{t+1}(a|s_t) &= 1 - \frac{\epsilon}{|\Alpha|}(|\Alpha-1|),&\ if \ a = arg\ max_aq_{t+1}(s_t,a) \\
+ \pi_{t+1}(a|s_t) &=\frac{\epsilon}{|\Alpha|} ,&otherwise
+ \end{aligned}</script></li>
+</ol>
+<p>注意这里的PE和PI是立刻执行的，而不是等return之后再精确计算。</p>
+<p>注意这个策略是一个$\epsilon- greedy$策略，也就是说倾向于采取qvalue最大的action，但是其他的action同样有概率取到。</p>
+<h3 id="Expected-Sarsa"><a href="#Expected-Sarsa" class="headerlink" title="Expected Sarsa"></a>Expected Sarsa</h3><p>公式如下：</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+q_{t+1}(s_t,a_t) &= q_t(s_t,a_t) - \alpha_t(s_t,a_t)[q_t(s_t,a_t)-\textcolor{ #0000FF}{(r_{i+1} + \gamma \mathbb E [q_t(s_{t+1},A)])}] 
+\\
+q_{t+1}(s,a) & = q_t(s,a) , \forall(s,a) \not=(s_t,a_t)
+\end{aligned}</script><p>此处的$\mathbb E[q<em>t(s</em>{t+1},A)] = \underset{\pi}{\sum}\pi<em>t(a| s</em>{t+1})q<em>t(s</em>{t+1},a) \approx v<em>t(s</em>{t+1})$ </p>
+<p>和普通的sarsa的区别是用$(r<em>{i+1} + \gamma \mathbb E [q_t(s</em>{t+1},A)])$ 替换了$r<em>{t+1}+\gamma q_t(s</em>{t+1},a_{t+1})$.</p>
+<p>不再需要$a_{t+1}$ 了,随机性会减小一些，但是需要更大的计算量。</p>
+<p>Expected Sarsa的数学意义也是在求解贝尔曼公式：</p>
+<p>$q<em>\pi(s,a) = \mathbb E[R</em>{t+1} + \gamma \mathbb E<em>{A</em>{t+1} \sim \pi(S<em>{t+1})}[q</em>\pi(S<em>{t+1},A</em>{t+1})]|S_t = s,A_t = a]$</p>
+<h3 id="n-step-Sarsa"><a href="#n-step-Sarsa" class="headerlink" title="n-step Sarsa"></a>n-step Sarsa</h3><p>是Sarsa的一个推广，包含了Sarsa和蒙德卡罗方法。</p>
+<p> 我们的action value如下定义：$q_\pi(s,a) = \mathbb E[G_t|S_t=a,A_t=a]$</p>
+<p>那么$G_t$ 可以被写成如下形式：</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+\text{Sarsa} \leftarrow & G_t^{(1)} = R_{t+1} + \gamma q_\pi(S_{t+1},A_{t+1}) \\
+&G_t^{(2)} = R_{t+1} + \gamma R_{t+1} + \gamma ^2 q_\pi(S_{t+2},A_{t+2}) \\
+& ... \\ 
+\text{n-step Sarsa}\leftarrow &G_t^{(n)} = R_{t+1} + \gamma R_{t+2} + ... + \gamma^n q_\pi(S_{t+n},A_{t+n}) \\
+& ... \\
+MC \leftarrow & G_t^{(\infty)} = R_{t+1} + \gamma R_{t+2} +  \gamma^2R_{t+3}...
+\end{aligned}</script><p>所以n-step Sarsa对应的贝尔曼公式是：</p>
+<script type="math/tex; mode=display">
+q_{t+1}(s_t,a_t) = q_t(s_t,a_t) - \alpha_t(s_t,a_t)[q_t(s_t,a_t) - [r_{t+1} + \gamma r_{t+2} + ... + \gamma^n q_t(s_{t+n},a_{t+n})]]</script><p>n-step Sarsa需要的数据是$(s<em>t,a_t,r</em>{t+1},s<em>{t+1},a</em>{t+1},…,r<em>{t+n},s</em>{t+n},a_{t+n})$</p>
+<p>所以他的数据需要等到$t+n$ 时刻，才能进行更新。是online和offline的结合。</p>
+<ul>
+<li>当n比较大的时候，更接近于MC，会有比较大的variance，比较小的bias。</li>
+<li>当n比较小的时候，更接近于Sarsa，会有比较小的variance，比较大的bias。</li>
+</ul>
+<h3 id="TD中最优action-value学习-Q-learning"><a href="#TD中最优action-value学习-Q-learning" class="headerlink" title="TD中最优action value学习:Q-learning"></a>TD中最优action value学习:Q-learning</h3><p>算法如下：</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+q_{t+1}(s_t,a_t) & = q_t(s_t,a_t) - \alpha_t(s_t,a_t)[q_t(s_t,a_t) - \textcolor{ #0000FF}{[r_{t+1} + \gamma \underset{\alpha \in \mathcal A}{max}\ q_t(s_{t+1},a)]}] 
+\\
+q_{t+1}(s,a) & = q_t(s,a) , \forall(s,a) \not=(s_t,a_t)
+\end{aligned}</script><p>和Sarsa相比，用$r<em>{t+1} + \gamma \underset{\alpha \in \mathcal A}{max}\ q_t(s</em>{t+1},a)$ 替换了$r<em>{t+1} + \gamma q_t(s</em>{t+1},a_{t+1})$ </p>
+<p>Q-learning求解的数学问题是（不是在求解贝尔曼方程）：</p>
+<p>求解一个贝尔曼最优方程：</p>
+<script type="math/tex; mode=display">
+q(s,a) = \mathbb E [R_{t+1}+\gamma \underset{a}{max}q(S_{t+1},a)| S_t = s,A_t = a], \forall s,a</script><h3 id="off-policy-和-on-policy"><a href="#off-policy-和-on-policy" class="headerlink" title="off-policy 和 on-policy"></a>off-policy 和 on-policy</h3><p>两种策略：</p>
+<ol>
+<li>behavior policy用来生成经验样本</li>
+<li>target policy不断地更新来将target policy更新到optimal policy。</li>
+</ol>
+<p>基于这两种策略，可以分为两类算法：</p>
+<ul>
+<li>on-policy： 其中的behavior policy和target policy是相同的，即用自己的策略来和环境交互，然后得到经验并改进自己的策略，之后再用相同的策略和环境交互。</li>
+<li>off-policy：用一个策略和环境交互得到大量经验，然后用这些经验来不断改进策略（一步到位，不再通过新的策略引入新的经验）</li>
+</ul>
+<p>on-policy的好处就是可以不断接收新的经验，实时更新策略。</p>
+<p>off-policy的好处就是可以直接使用别人已经获取过的经验。如用之前通过探索性较强的算法得到的经验。</p>
+<p>如何判断一个TD算法是on-policy还是off-policy？</p>
+<ol>
+<li>看这个TD算法是在解决什么样的数学问题</li>
+<li>看在算法的执行过程中需要什么东西才能使算法跑起来</li>
+</ol>
+<ul>
+<li>Sarsa是on-policy的：</li>
+</ul>
+<p>Sarsa在数学上就是在求解一个贝尔曼公式：</p>
+<script type="math/tex; mode=display">
+q_\pi(s,a) = \mathbb E [R+ \gamma q_\pi(S',A')|s,a], \forall s,a</script><p>此处的$R \sim p(R|s,a),S’ \sim p(S’|s,a),\textcolor{0xFF0000}{A’ \sim \pi(A’|S’)}$</p>
+<p>Sarsa在算法中：</p>
+<script type="math/tex; mode=display">
+q_{t+1}(s_t,a_t) = q_t(s_t,a_t) - \alpha_t(s_t,a_t)[q_t(s_t,a_t) - [r_{t+1} + \gamma q_t(s_{t+1},a_{t+1})]]</script><blockquote>
+<ol>
+<li><p>如果给定了$(s<em>t,a_t)$ 那么$r</em>{t+1}$和$s_{t+1}$和任何策略无关，和$p(r|s,a),p(s’|s,a)$有关。</p>
+</li>
+<li><p>$a<em>{t+1}$是由策略$\pi_t(s</em>{t+1})$ 产生。 所以$\Pi_t$ 既是behavior policy也是target policy</p>
+</li>
+</ol>
+</blockquote>
+<ul>
+<li>MC learning 是on-policy的：</li>
+</ul>
+<p>MC目的是求解如下贝尔曼方程：</p>
+<script type="math/tex; mode=display">
+q_\pi(s,a) = \mathbb E [R_{t+1} + \gamma R_{t+2} + ...| S_t =s,A_t = a]</script><p>MC的实现是</p>
+<script type="math/tex; mode=display">
+q(s,a) \approx r_{t+1} + \gamma r_{t+2} + ...</script><blockquote>
+<p>我们用策略$\Pi$ 来得到trajectory经验，然后得到return来近似估计$q_\pi$ 进而改进$\Pi$</p>
+</blockquote>
+<ul>
+<li>Q learning 是off-policy的：</li>
+</ul>
+<p>Q learning求解的数学问题是：</p>
+<p>求解贝尔曼最优公式：</p>
+<script type="math/tex; mode=display">
+q(s,a) = \mathbb E [R_{t+1}+\gamma \underset{a}{max}q(S_{t+1},a)| S_t = s,A_t = a], \forall s,a</script><p>Q learning的实现过程是：</p>
+<script type="math/tex; mode=display">
+q_{t+1}(s_t,a_t) = q_t(s_t,a_t) - \alpha_t(s_t,a_t)[q_t(s_t,a_t) - [r_{t+1} + \gamma \underset{\alpha \in \Alpha}{max}\ q_t(s_{t+1},a)]]</script><p>需要的经验是$(s<em>t,a_t,r</em>{t+1},s_{t+1})$ </p>
+<p>注意这里的经验不包含$a_{t+1}$</p>
+<blockquote>
+<p>如果$(s<em>t,a_t)$ 给定，那么$r</em>{t+1}$ 和$s_{t+1}$ 不依赖于策略。</p>
+<p>behavior policy是从$s_t$ 出发得到$a_t$</p>
+<p>target policy 是根据$q_\pi$ 来选择action</p>
+</blockquote>
+<h3 id="Q-learning-的实施"><a href="#Q-learning-的实施" class="headerlink" title="Q-learning 的实施"></a>Q-learning 的实施</h3><p>如果将Q-learning中的behavior policy 和target policy强行设置为一致的，那么它可以是on-policy的：</p>
+<ol>
+<li><p>对每个episode执行以下三步</p>
+</li>
+<li><p>收集经验$(s<em>t,a_t,r</em>{t+1},s<em>{t+1})$ ，在这一步根据$\pi_t(s_t)$ 采取行动$a_t$ 来生成$(r</em>{t+1},s_{t+1})$</p>
+</li>
+<li><p>更新q-value：$q<em>{t+1}(s_t,a_t) = q_t(s_t,a_t) - \alpha_t(s_t,a_t)[q_t(s_t,a_t) - [r</em>{t+1} + \gamma max<em>a \ q_t(s</em>{t+1},a)]]$</p>
+</li>
+<li><p>更新policy：</p>
+<script type="math/tex; mode=display">
+ \begin{aligned}
+ \pi_{t+1}(a|s_t) &= 1- \frac{\epsilon}{|\Alpha|}(|\Alpha|-1) \text{ if } a = \underset{a}{argmax}\ q_{t+1}(s_t,a) \\ 
+ \pi_{t+1}(a|s_t) &= \frac{\epsilon}{|\Alpha|} \text{ otherwise}
+ \end{aligned}</script></li>
+</ol>
+<p>也可以是off-policy的：</p>
+<ol>
+<li><p>对每个episode生成策略$\pi_b$ (这里的b代表behavior),这个策略用来生成experience</p>
+</li>
+<li><p>对episode的每一步$t = 0,1,2,…$ 执行以下两步：</p>
+</li>
+<li><p>更新q-value:$q<em>{t+1}(s_t,a_t) = q_t(s_t,a_t) - \alpha_t(s_t,a_t)[q_t(s_t,a_t) - [r</em>{t+1} + \gamma max<em>a \ q_t(s</em>{t+1},a)]]$</p>
+</li>
+<li><p>更新target policy:</p>
+<script type="math/tex; mode=display">
+ \begin{aligned}
+ \pi_{T,t+1}(a|s_t) &= 1 \text{ if } a = \underset{a}{argmax}\ q_{t+1}(s_t,a) \\ 
+ \pi_{T,t+1}(a|s_t) &= 0 \text{ otherwise}
+ \end{aligned}</script></li>
+</ol>
+<p>注意这里的第三步是greedy不是$\epsilon-greedy$ ，因为我们不需要新的策略来生成经验，所以也就不需要使用$\epsilon-greedy$ 来增加探索性，只需要保证最优性。</p>
+<p>使用off-policy的话，使用的behavior policy最好是探索度比较强的策略，否则可能得不到好的target policy。</p>
+<h3 id="TD的统一表示"><a href="#TD的统一表示" class="headerlink" title="TD的统一表示"></a>TD的统一表示</h3><p>所有的TD算法都能用如下公式表达：</p>
+<script type="math/tex; mode=display">
+q_{t+1}(s_t,a_t) = q_t(s_t,a_t) - \alpha _t(s_t,a_t)[q_t(s_t,a_t)-\textcolor{ #0000FF}{\overline{q}_t}]</script><p>这里的$\overline{q}_t$ 就是TD target。 </p>
+<p>TD算法的目标就是接近TD target ，减小TD error</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>算法</th>
+<th>$\overline q_t$ 的表示</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Sarsa</td>
+<td>$\overline q<em>t = r</em>{t+1} + \gamma q<em>t(s</em>{t+1}，a_{t+1})$</td>
+</tr>
+<tr>
+<td>n-step Sarsa</td>
+<td>$\overline q<em>t = r</em>{t+1} + \gamma r<em>{t+2} +… + \gamma ^ nq_t(s</em>{t+n}，a_{t+n})$</td>
+</tr>
+<tr>
+<td>Expected Sarsa</td>
+<td>$\overline q<em>t = r</em>{t+1} + \gamma \underset{a}{\sum}\pi_i(a</td>
+<td>s<em>{t+1})q_t(s</em>{t+1},a)$</td>
+</tr>
+<tr>
+<td>Q-learning</td>
+<td>$\overline q<em>t = r</em>{t+1} + \gamma \underset{a}{max}q<em>t(s</em>{t+1},a)$</td>
+</tr>
+<tr>
+<td>Monte Carlo</td>
+<td>$\overline q<em>t = r</em>{t+1} + \gamma r<em>{t+2} + \gamma^2r</em>{t+3} +…$</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="value-function-Approximation"><a href="#value-function-Approximation" class="headerlink" title="value function Approximation"></a>value function Approximation</h2><p>在此之前，所有的state value和action value都是用表格表示出来的，例如：</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th></th>
+<th>$a_1$</th>
+<th>$a_2$</th>
+<th>$a_3$</th>
+<th>$a_4$</th>
+<th>$a_5$</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>$s_1$</td>
+<td>$q_\pi(s_1,a_1)$</td>
+<td>$q_\pi(s_1,a_2)$</td>
+<td>$q_\pi(s_1,a_3)$</td>
+<td>$q_\pi(s_1,a_4)$</td>
+<td>$q_\pi(s_1,a_5)$</td>
+</tr>
+<tr>
+<td>…</td>
+<td>…</td>
+<td>…</td>
+<td>…</td>
+<td>…</td>
+<td>…</td>
+</tr>
+<tr>
+<td>$s_9$</td>
+<td>$q_\pi(s_9,a_1)$</td>
+<td>$q_\pi(s_9,a_2)$</td>
+<td>$q_\pi(s_9,a_3)$</td>
+<td>$q_\pi(s_9,a_4)$</td>
+<td>$q_\pi(s_9,a_5)$</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>使用表格的好处就是可以直观地分析</p>
+<p>坏处就是无法处理很大的state space 或者action space、无法处理连续的state和action。泛化能力不强。</p>
+<h3 id="Value-Function-Approximation的含义"><a href="#Value-Function-Approximation的含义" class="headerlink" title="Value Function Approximation的含义"></a>Value Function Approximation的含义</h3><p>使用直线来拟合点：</p>
+<p>$\hat v(s,w) = as + b = [s,1]\bigl[ \begin{smallmatrix}a \b \end{smallmatrix}\bigr] = \phi ^T(s)w$</p>
+<blockquote>
+<p>这里的w是parameter vector(参数向量)</p>
+<p>$\phi(s)$ 是s的feature vector(特征向量)</p>
+<p>$\hat v (s,w)$ 是w的linear(线性关系)</p>
+</blockquote>
+<p>使用函数来拟合可以节省存储空间(只需要存w的值(a,b)即可)</p>
+<p>缺点是拟合后不太精确。</p>
+<p>同样可以用二次函数来拟合：</p>
+<p>$\hat v (s,w) = as^2 + bs + c = \phi^T(s)w$</p>
+<p>(需要注意的是，这样的曲线对于w来说同样是一种线性的拟合)</p>
+<ul>
+<li>使用Value Function Approximation的优点：</li>
+</ul>
+<ol>
+<li>便于存储，只需要存储w即可，不用存储大量数据。</li>
+<li>泛化能力更强，假设s2进行了更改，在表格存储中只会更改s2对应的内容，而使用value function approximation则会改变w的值，从而影响其他的值（如s1和s3），这样会增强泛化能力</li>
+</ol>
+<h3 id="objective-funciton"><a href="#objective-funciton" class="headerlink" title="objective funciton"></a>objective funciton</h3><p>令$v_\pi(s)$ 作为真正的state value。 $\hat v(s,w)$是函数的近似值。</p>
+<p>我们目标就是找到最优的w来使得$\hat v(s,w)$ 可以很好的拟合出$v_\pi(s)$</p>
+<p>目标函数objective function如下：</p>
+<script type="math/tex; mode=display">
+J(w) = \mathbb E[(v_\pi(S) - \hat v(S,w))^2]</script><p>我们目标就是找到最好的w使得$J(w)$ 最小化。</p>
+<p>求解期望常见的两种方法：<br>uniform distribution 平均分布：<br>认为每一个状态都是同等重要的。那么每一个状态的权重就是$\frac{1}{|S|}$</p>
+<script type="math/tex; mode=display">
+J(w) = \mathbb E[(v_\pi(S) - \hat v(S,w))^2] = \frac{1}{|S|} \underset{s \in S} {\sum} (v_\pi(s) - \hat v (s,w))^2</script><p>使用均匀策略的缺点是，我们将很远处的状态和距离目标近处的状态设置权重一样。导致没有侧重点</p>
+<p>第二个概率分布：</p>
+<p>stationary distribution：</p>
+<p>这是一种Markov下的long-run behavior</p>
+<p>让${d<em>\pi(s)}</em>{s\in S}$ 作为在策略$\pi$ 下的Markov stationary distribution，通过定义$d<em>\pi(s) \ge 0 \text{ and } \underset{s \in S}{\sum}d</em>\pi(s) = 1$</p>
+<p>于是目标函数objective function可以被写为：</p>
+<script type="math/tex; mode=display">
+J(w) = \mathbb E[(v_\pi(S) - \hat v(S,w))^2] =  \underset{s \in S} {\sum} d_\pi(s)(v_\pi(s) - \hat v (s,w))^2</script><p>Stationary distribution 也被称为steady-state distribution 或者limit distribution。</p>
+<p>怎么求$d_\pi(s)$ ？给出一个很长很长的episode：</p>
+<p>我们定义$n<em>\pi(s)$ 表示s出现的次数。于是我们用频率来近似估计$d</em>\pi(s)$</p>
+<script type="math/tex; mode=display">
+d_\pi(s) \approx \frac{n_\pi(s)}{\underset{s' \in S}{\sum}n_\pi(s')}</script><p>我们没必要真正的模拟这个episode并统计次数，可以通过数学公式得到：</p>
+<p>最终趋于稳定的$d_\pi^T$ 要满足：</p>
+<script type="math/tex; mode=display">
+d^T_\pi = d^T_\pi P_\pi</script><p>这里的$P_\pi$ 是一个矩阵，代表从$s$ 到$s’$ 转移的概率$p(s’|s)$</p>
+<h3 id="optimization-algorithms"><a href="#optimization-algorithms" class="headerlink" title="optimization algorithms"></a>optimization algorithms</h3><p>目标函数的优化算法(optimization algorithms of objective function)</p>
+<p>为了最小化目标函数$J(w)$ ，我们可以使用梯度优化gradient-descent </p>
+<script type="math/tex; mode=display">
+w_{k+1} = w_k - \alpha_k \nabla_w J(w_k)</script><p>这里的true gradient是:</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+\nabla_wJ(w) &= \nabla_w \mathbb E[(v_\pi(S) - \hat v(S,w))^2] \\ 
+&= \mathbb E[\nabla_w(v_\pi(S) - \hat v(S,w))^2] \\
+&= 2 \mathbb E[(v_\pi(S) - \hat v (S,w))(-\nabla_w \hat v (S,w))] \\
+&= -2 \mathbb E [(v_\pi(S) - \hat v(S,w))\nabla _w \hat v(S,w)]
+\end{aligned}</script><p>但是求期望很麻烦，所以我们用sotcastic gradient descent来替代gradient descent</p>
+<script type="math/tex; mode=display">
+w_{t+1} = w_t + \alpha_k(v_\pi(s_t) - \hat v(s_t,wt))\nabla_w \hat v(s_t,w_t)</script><p>但是在现实中，我们是无法得知$v_\pi(s_t)$ 的。</p>
+<p>有如下方法：</p>
+<ol>
+<li><p>Monte Carlo learning 和 value function approximation结合</p>
+<p> 让$g_t$ 表示从$s_t$ 开始的episode的return。那么</p>
+<p> $w_{t+1} = w_t + \alpha_t(g_t-\hat v(s_t,w_t)) \nabla_w \hat v (s_t,w_t)$</p>
+</li>
+<li><p>TD learning 和value function approximation结合</p>
+<p> 在TD算法中可以用$r<em>{t+1}+\gamma \hat v (s</em>{t+1},w<em>t)$ 来作为$v</em>\pi(s_t)$ 的一个估计值。于是有</p>
+<p> $w<em>{t+1} = w_t + \alpha_t[r</em>{t+1}+\gamma \hat v (s_{t+1},w_t) - \hat v(s_t,w_t)] \nabla_w \hat v(s_t,w_t)$</p>
+</li>
+</ol>
+<p>目前只能用来估计给定策略的state values。</p>
+<h3 id="selection-of-function-approximators"><a href="#selection-of-function-approximators" class="headerlink" title="selection of function approximators"></a>selection of function approximators</h3><p>函数的选取方法</p>
+<ol>
+<li><p>选择线性函数（之前广为使用）：</p>
+<script type="math/tex; mode=display">
+ \hat v (s,w) = \phi^T(s)w</script><p> 此处的$\phi(s)$ 是特征向量，他是基于多项式的(polynomial basis),基于傅里叶的(Fourier basis),…</p>
+</li>
+<li><p>选择神经网络（现在广为使用）：</p>
+<p> 网络的参数是w，神经网络的输入是state，输出是估计值$\hat v (x,w)$</p>
+</li>
+</ol>
+<p>考虑线性函数：$\hat v (s,w) = \phi^T(s)w$ ,我们有</p>
+<script type="math/tex; mode=display">
+\nabla _w \hat v(s,w) = \phi(s)</script><p>代入TD算法可以得到TD-Linear：</p>
+<script type="math/tex; mode=display">
+w_{t+1} = w_t +\alpha_t[r_{t+1} + \gamma \phi^T(s_{t+1})w_t - \phi^T(s_t)w_t]\phi(s_t)</script><blockquote>
+<p>Linear function approximation的劣势：、</p>
+<ul>
+<li>很难去选择一个合适的feature vectors</li>
+</ul>
+<p>Linear function approximation的优势：</p>
+<ul>
+<li>数学原理清晰，能够可以帮助我们更透彻地研究。</li>
+<li>表征能力还算可以。表格形式tabular representation是Linear function approximation 的特殊形式。</li>
+</ul>
+</blockquote>
+<p>Tabular representation 是Linear funciton的一种特殊情况：</p>
+<p>首先考虑如下的特征向量：</p>
+<script type="math/tex; mode=display">
+\phi(s) = e_s \in \mathbb R ^{|S|}</script><p>这里的$e_s$ 是一个只有一个1，其他都是0的向量。</p>
+<p>那么这样的话$\hat v(s,w) = e_s^T w = w(s)$ , 这样$w(s)$ 就是w的第s个元素了。也就是tabular representation。</p>
+<p>然后我们把$\phi(s_t) = e_s$ 带入到TD-Linear中。</p>
+<script type="math/tex; mode=display">
+w_{t+1} = w_t + \alpha(r_{t+1} + \gamma w_t(s_{t+1})-w_t(s_t))e_{S_t}</script><p> 因为$e_{s_t}$ 只有在$w_t$ 的位置是1，其他位置是0，所以在$w_t$ 中只有$S_t$的位置被更新了。</p>
+<script type="math/tex; mode=display">
+w_{t+1}(s_t) = w_t(s_t) + \alpha_t(r_{t+1}+\gamma w_t(s_{t+1})-w_t(s_t))</script><p>于是我们发现这个式子和之前tabular的TD算法是一样的。</p>
+<h3 id="Sarsa"><a href="#Sarsa" class="headerlink" title="Sarsa"></a>Sarsa</h3><p>Sarsa和value function estimation结合：</p>
+<script type="math/tex; mode=display">
+\textcolor{ #0000FF}{w_{t+1}} = \textcolor{ #0000FF}{w_t} + \alpha_t[r_{t+1} + \gamma \hat q(s_{t+1},a_{t+1},w_t) - \textcolor{ #0000FF}{\hat  q }(s_t,a_t,w_t)] \textcolor{ #0000FF}{\nabla _w \hat q(s_t,a_t,w_t)}</script><p>除了标蓝的地方略有差别，其他和tabular是一样的。</p>
+<blockquote>
+<ol>
+<li>因为我们描述的参数从state变为了parameter, 所以更新的内容从$q(s,a)$变为了$w$</li>
+<li>使用估计值来估计一个点的state，所以原先的$q(s,a)$ 变为了由函数估计产生的$\hat q(s,a,w)$</li>
+<li>最后乘上$\hat q$ 的梯度来使得向零点移动。</li>
+</ol>
+</blockquote>
+<p>步骤如下：</p>
+<ol>
+<li><p>对每个episode 执行如下操作：</p>
+</li>
+<li><p>遵循$\pi<em>t(s_t)$ 执行动作$a_t$ ，然后生成$r</em>{t+1},s<em>{t+1}$ ，然后遵循$\pi_t(s</em>{t+1})$执行$a_{t+1}$ . </p>
+</li>
+<li><p>更新值（parameter update）：</p>
+<script type="math/tex; mode=display">
+ \textcolor{ #0000FF}{w_{t+1}} = \textcolor{ #0000FF}{w_t} + \alpha_t[r_{t+1} + \gamma \hat q(s_{t+1},a_{t+1},w_t) - \textcolor{ #0000FF}{\hat  q }(s_t,a_t,w_t)] \textcolor{ #0000FF}{\nabla _w \hat q(s_t,a_t,w_t)}</script></li>
+<li><p>更新策略(policy update):</p>
+</li>
+</ol>
+<script type="math/tex; mode=display">
+\begin{aligned}
+\pi_{t+1}(a|s_t) &= 1 - \frac{\epsilon}{|\Alpha(s)|}(|\Alpha(s)|-1) & if a = arg\ max_{a \in \Alpha(s_t)}\textcolor{ #0000FF}{ \hat q(s_t,a,w_{t+1})} \\
+\pi_{t+1}(a|s_t) &= \frac{\epsilon}{|\Alpha(s)|} & otherwise
+\end{aligned}</script><h3 id="Q-learning"><a href="#Q-learning" class="headerlink" title="Q-learning"></a>Q-learning</h3><p>Q-learning 和value function estimation 结合：</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+\textcolor{ #0000FF}{w_{t+1}} = \textcolor{ #0000FF}{w_{t}} + \alpha_t[r_{t+1} + \gamma \underset{\alpha \in \Alpha(s_{t+1})}{max}\ \textcolor{ #0000FF}{\hat q}(s_{t+1},a,\textcolor{ #0000FF}{w_t}) - \textcolor{ #0000FF}{\hat q}(s_{t},a,\textcolor{ #0000FF}{w_t})]\textcolor{ #0000FF}{\nabla_w \hat q (s_t,a_t,w_t)}
+\end{aligned}</script><p>蓝色部分为value function estimation 版本的Q-learning和tabular 版本之间的区别。</p>
+<p>步骤如下（on-policy）：</p>
+<ol>
+<li><p>对每个episode 执行如下操作：</p>
+</li>
+<li><p>遵循$\pi<em>t(s_t)$ 执行动作$a_t$ ，然后生成$r</em>{t+1},s_{t+1}$ </p>
+</li>
+<li><p>更新值（parameter update）：</p>
+<script type="math/tex; mode=display">
+ \begin{aligned}
+ \textcolor{ #0000FF}{w_{t+1}} = \textcolor{ #0000FF}{w_{t}} + \alpha_t[r_{t+1} + \gamma \underset{\alpha \in \Alpha(s_t+1)}{max}\ \textcolor{ #0000FF}{\hat q}(s_{t+1},a,\textcolor{ #0000FF}{w_t}) - \textcolor{ #0000FF}{\hat q}(s_{t},a,\textcolor{ #0000FF}{w_t})]\textcolor{ #0000FF}{\nabla_w \hat q (s_t,a_t,w_t)}
+ \end{aligned}</script></li>
+<li><p>更新策略(policy update)：</p>
+<script type="math/tex; mode=display">
+ \begin{aligned}
+ \pi_{t+1}(a|s_t) &= 1 - \frac{\epsilon}{|\Alpha(s)|}(|\Alpha(s)|-1) & if a = arg\ max_{a \in \Alpha(s_t)}\textcolor{ #0000FF}{ \hat q(s_t,a,w_{t+1})} \\
+ \pi_{t+1}(a|s_t) &= \frac{\epsilon}{|\Alpha(s)|} & otherwise
+ \end{aligned}</script></li>
+</ol>
+<h3 id="Deep-Q-learning-deep-Q-network"><a href="#Deep-Q-learning-deep-Q-network" class="headerlink" title="Deep Q-learning(deep Q-network)"></a>Deep Q-learning(deep Q-network)</h3><p>首先定义损失函数：objective function/loss function:</p>
+<script type="math/tex; mode=display">
+J(w) = \mathbb E [(R+ \gamma \underset{\alpha \in \Alpha(S')}{max} \hat q(S',a,w) - \hat q(S,A,w))^2]</script><p>这是一个贝尔曼最优误差，下式为Q-learning的Bellman optimality error：</p>
+<script type="math/tex; mode=display">
+q(s,a) = \mathbb E[R_{t+1} + \gamma \underset{\alpha \in \Alpha(S-{t+1})}{max} q(S_{t+1},a) | S_t = s,A_t = a], \forall s,a</script><p>因此$R+ \gamma \underset{\alpha \in \mathcal A(S’)}{max} \hat q(S’,a,w) - \hat q(S,A,w)$ 的期望应该是0.</p>
+<p>如何最小化这个损失函数？ 使用梯度下降法 Grradient-descent：</p>
+<p>求$J(w)$ 关于w的梯度，难点在于表达式中由两个地方出现了$w$ ，于是基本思想为我们把前半部分当作一个常数y：</p>
+<script type="math/tex; mode=display">
+y = R+ \gamma \underset{\alpha \in \Alpha(S')}{max} \hat q(S',a,w)</script><p>这样就只有$\hat q(S,A,w)$ 项包含w了，就可以比较简单地求解梯度。</p>
+<p>求解方法：</p>
+<p>引入两个网络</p>
+<ul>
+<li>main network 表示$\hat q(s,a,w)$  </li>
+<li>target network $\hat q(s,a,w_T)$</li>
+</ul>
+<p>将损失函数改写为：</p>
+<script type="math/tex; mode=display">
+J(w) = \mathbb E [(R+ \gamma \underset{\alpha \in \Alpha(S')}{max} \textcolor{ #FF0000}{\hat q(S',a,w_T)} - \textcolor{ #0000FF}{\hat q(S,A,w)})^2]</script><p>即我们保持target network一段时间不动，因此就能将前半部分作为常数，然后来更新main network。 之后再更新target network。这样也能保证两个网络最后都收敛。</p>
+<h3 id="DQN-Experience-replay"><a href="#DQN-Experience-replay" class="headerlink" title="DQN-Experience replay"></a>DQN-Experience replay</h3><p>Experience replay经验回放 ，具体为：</p>
+<ul>
+<li>我们在收集完数据后，并不根据他们被收集的顺序来使用他们。</li>
+<li>而是我们把他们存储到一个集合replay buffer 中， $\mathcal B = { (s,a,r,s’) }$</li>
+<li>每次训练神经网络的时候， 把他们混到一起，然后取出一些样本(mini-batch)来进行训练。</li>
+<li>在取出样本的时候一定要服从均匀分布(uniform distribution)</li>
+</ul>
+<p>为什么需要经验回放？为什么必须服从均匀分布？</p>
+<p>我们观察损失函数：</p>
+<script type="math/tex; mode=display">
+J(w) = \mathbb E [(R+ \gamma \underset{\alpha \in \Alpha(S')}{max} \hat q(S',a,w) - \hat q(S,A,w))^2]</script><ul>
+<li>$(S,A) \sim d$ 我们根据索引(S,A) 就能够找到一个唯一的随机变量d</li>
+<li>$R \sim p(R|S,A) ,S’ \sim p(S’|S,A)$ ， R和S’ 由给定的模型决定。</li>
+<li>在数据采集的时候，我们可能并不是按照均匀分布采样的。因为他们被确定的策略产生。</li>
+<li>为了打破连续样本之间的相关性(通常他们有很强的时间相关性)，我们可以从replay buffer中进行随机均匀采样。</li>
+<li>这就是为什么经验回放是必须的，并且是必须均匀分布采样的。</li>
+</ul>
+<h3 id="Deep-Q-learning"><a href="#Deep-Q-learning" class="headerlink" title="Deep Q-learning"></a>Deep Q-learning</h3><p>off-policy version:<br>目标是从通过 behavior policy $\pi_b$ 生成的一些经验中学习一个优化的target network来逼近最优action values 。</p>
+<p>步骤如下：</p>
+<ol>
+<li>存储由behavior policy 生成的经验，存放到replay buffer中 $\mathcal B = {(s,a,r,s’)}$</li>
+<li>对每一次迭代重复如下动作：</li>
+<li>从$\mathcal B$ 中均匀提取一些样本(mini-batch)</li>
+<li>对于每个样本$(s,a,r,s’)$ ,计算target value $y<em>T = r+ \gamma\ max</em>{\alpha \in \mathcal A(s’)}(\hat q ,a,w_T)$ , 在这之中$w_T$ 是target network(两个网络之一) </li>
+<li>使用mini-batch${(s,a,y_T)}$ 更新main network 来最小化$(y_T - \hat q (s,a,w))^2$ </li>
+<li>每进行C次迭代，更新target network：$w_T = w$</li>
+</ol>
+<h2 id="Policy-Function-Approximation"><a href="#Policy-Function-Approximation" class="headerlink" title="Policy Function Approximation"></a>Policy Function Approximation</h2><p>policy function approximation 也叫policy gradient</p>
+<p>之前的方法都是value based ，本次的算法是policy based</p>
+<p>在这之前的策略都是用表格来表达的： 即给定$(s_i,a_j)$ ，会得到一个策略$\pi(a_i|s_j)$ 。</p>
+<p>我们将他写成函数</p>
+<script type="math/tex; mode=display">
+\pi(a|s,\theta)</script><p>这里的$\theta$ 是一个向量，表示参数。</p>
+<blockquote>
+<p>用函数代替表格的好处：</p>
+<ul>
+<li>如果state有很多很多个，那么在存储上会很费力，</li>
+<li>难以进行泛化，在表格中，如果要更改$\pi(a|s)$，那么一定要访问$\pi(a|s)$ ，而如果用表达式来表达的话，则可以通过更改参数来更改一系列的$\pi$  </li>
+</ul>
+</blockquote>
+<p>tabular 和function representations的区别：</p>
+<ol>
+<li><p>定义最优的策略：</p>
+<p> 在表格情况下，策略$\pi$ 当在每一个state value上都最大的时候是最优的。</p>
+<p> 在函数表示中，策略$\pi$ 当能够最大化scalar metrics的时候是最优的</p>
+</li>
+<li><p>怎么获取一个action的probability？</p>
+<p> 在表格中，使用索引来得到一个action的probability。</p>
+<p> 在函数中，需要放入神经网络中进行计算得出。</p>
+</li>
+<li><p>如何更新policies？</p>
+<p> 在表格中：直接改变表格中的$\pi(a|s)$ 的值</p>
+<p> 在函数中，通过更改$\theta$ 间接修改策略。</p>
+</li>
+</ol>
+<p>policy gradient的目标函数(metric)是：最大化 $J(\theta)$</p>
+<script type="math/tex; mode=display">
+\theta_{t+1} = \theta_t + \alpha \nabla _\theta J(\theta_t)</script><h3 id="policy-gradient的两个metrics"><a href="#policy-gradient的两个metrics" class="headerlink" title="policy gradient的两个metrics"></a>policy gradient的两个metrics</h3><p>metric（度量）</p>
+<ol>
+<li>第一个metric是state value的加权平均。</li>
+</ol>
+<script type="math/tex; mode=display">
+\overline v_\pi = \underset{s \in S} {\sum} d(s) v_\pi(s) = d^Tv_\pi</script><p>在这里$\sum<em>{s \in S} d(s) = 1$ ，既可以代表权重，可以代表选择$v</em>\pi(s)$ 的概率。</p>
+<p>如何选择d(s)？</p>
+<p>第一种情况是d和$\pi$ 无关。</p>
+<ul>
+<li><p>那么求$\overline v_\pi$ 的梯度不需要得到d对$\pi$ 的梯度。</p>
+</li>
+<li><p>例如令$d_0(s) = \frac{1}{|S|}$ ,得到均匀分布。</p>
+</li>
+<li>或者我们对其中的某些状态很关心$d<em>0(s_0) = 1,d_0(s \not = s_0) = 0$ ，这时候$\overline v</em>\pi = v_\pi(s_0)$</li>
+</ul>
+<p>第二种情况是d和$\pi$有关,即d依赖于$\pi$ </p>
+<ul>
+<li>一种基本的情况是$d<em>\pi $满足$d^T</em>\pi P<em>\pi = d^T</em>\pi$ </li>
+<li>那么会有些状态访问的次数较多，有些状态访问的次数较少。</li>
+</ul>
+<ol>
+<li>第二个metric是average one-step reward</li>
+</ol>
+<script type="math/tex; mode=display">
+r_\pi \approx \underset{s \in S }{\sum}d_\pi(s)r_\pi(s) = \mathbb [r_\pi(S)]</script><p>在这里$S \sim d_\pi$  ,有如下公式：</p>
+<script type="math/tex; mode=display">
+r_\pi(s) \approx \underset{a \in \mathcal A}{\sum} \pi(a|s)r(s,a)</script><p>代表在一个状态得到的reward的加权平均。</p>
+<script type="math/tex; mode=display">
+r(s,a) = \mathbb E(R|s,a) = \underset{r} \sum rp(r|s,a)</script><p>下面给出average one-step reward的第二种形式：</p>
+<p>假设根据一个给定的策略生成了一个trajectory，并有着$(R<em>{t+1},R</em>{t+2},R_{t+3},…)$ 的reward。</p>
+<p>那么在这个trajectory中，平均的single-step reward是</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+& \underset{n \to \infty} {lim} \frac{1}{n} \mathbb E[R_{t+1}+R_{t+2}+...+R_{t+n}|S_t = s_0] \\
+= &\underset{n \to \infty} {lim} \frac{1}{n} \mathbb E[\underset{k=1}{\overset{n}{\sum}}R_{t+k}|S_t = s_0] = \underset{n \to \infty} {lim} \frac{1}{n} \mathbb E[\underset{k=1}{\overset{n}{\sum}}R_{t+k}]
+\end{aligned}</script><p>注意到最后当$n \to \infty$ 时，可以将$S_t=s_0$ 省去，因为当走了无穷步的时候，从哪一步开始就已经无所谓了。</p>
+<p>注意点1：<br>所有这些的metrics都是$\pi$ 的函数。因为$\pi$ 是由参数$\theta$ 决定，这些metrics也是关于$\theta$ 的函数，也就是说不同的$\theta$ 会产生不同的metric values. 我们就可以找到最优的$\theta$ 来使得这些metrics最优。</p>
+<p>注意点2：</p>
+<p>这些metrics可以被定义为有折旧的情况(discounted case)，即$\gamma \in [0,1)$ ，也可以是undiscounted case的，即$\gamma = 1$ </p>
+<p>注意点3：</p>
+<p>在直观上，$\overline r<em>\pi$和 $\overline v</em>\pi$ 相比，似乎更加”近视“，因为他更多地考虑立即的reward，而$\overline v_\pi$ 考虑整个过程的reward。 </p>
+<p>实则不然，两个metrics实际上是相互等价的。当$\gamma &lt; 1$ ，有如下公式：</p>
+<script type="math/tex; mode=display">
+\overline r_\pi = ( 1- \gamma) (\overline v_\pi)</script><p>metric还有一种常见的表示形式如下：</p>
+<script type="math/tex; mode=display">
+J(\theta) = \mathbb E[\underset{i = 0}{\overset{\infty}{\sum}}\gamma ^t R_{t+1}]</script><p>它实际上和$\overline v_\pi$ 是相同的，下面给出推导过程：</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+J(\theta) &= \mathbb E[\underset{i = 0}{\overset{\infty}{\sum}}(\gamma ^t R_{t+1})] \\
+&=\mathbb E[\underset{i = 0}{\overset{\infty}{\sum}}(\gamma ^t \underset{s \in S}{\sum}d(s)R_{t+1,s})] \\
+& = \underset{s \in S}{\sum} (d(s) \mathbb E[\underset{t = 0}{\overset{\infty}{\sum}}\gamma ^t R_{t+1}|S_0 = s] )\\
+& = \underset{s \in S}{\sum} d(s) v_\pi(s) =\overline v_\pi
+\end{aligned}</script><h3 id="目标函数的梯度计算"><a href="#目标函数的梯度计算" class="headerlink" title="目标函数的梯度计算"></a>目标函数的梯度计算</h3><p>梯度如下：</p>
+<script type="math/tex; mode=display">
+\nabla _\theta J(\theta) = \underset{s \in S } {\sum } \eta(s)\underset{a \in \mathcal A} \sum \nabla _\theta \pi(a|s,\theta) q_\pi(s,a)</script><p>又可以写作</p>
+<script type="math/tex; mode=display">
+\nabla _\theta J(\theta) =  \mathbb E[\nabla_\theta ln\ \pi(A|S,\theta)q_\pi(S,A)]</script><p>写成期望的形式便于我们用采样来模拟期望。</p>
+<p>下面是推导期望公式的过程：</p>
+<p>由链式法则得：</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+\nabla_\theta ln \pi(a|s,\theta) &= \frac{\nabla_\theta \pi(a|s,\theta)}{\pi(a|s,\theta)} \\
+\nabla _\theta \pi (a|s,\theta) &= \pi(a|s,\theta) \nabla_\theta ln\pi(a|s,\theta)
+\end{aligned}</script><p>把式子带入梯度表达式中：</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+\nabla _\theta J(\theta) &= \underset{s } {\sum } d(s)\underset{a} \sum \textcolor{ #0000FF}{\nabla _\theta \pi(a|s,\theta)} q_\pi(s,a) \\
+& = \underset{s}{\sum} d(s) \underset{a}\sum \textcolor{ #000FFF}{\pi(a|s,\theta) \nabla_\theta ln \pi(a|s,\theta)} q_\pi(s,a) \\
+& = \mathbb E _{\textcolor{ #000FFF}{S\sim d}} [\underset{a}{\sum}\pi(a|S,\theta)q_\pi(S,A)] \\ 
+& = \mathbb E_{S \sim d,\textcolor{ #000FFF}{A \sim \pi}}[\nabla_\theta ln \pi(A|S,\theta) q_\pi(S,A)] \\
+&= \mathbb E[\nabla_\theta ln \pi(A|S,\theta) q_\pi(S,A)] 
+\end{aligned}</script><p>因为我们求了$ln(\pi(a|s,\theta))$ 所以我们的$\pi$必须满足$\pi(a|s,\theta) &gt; 0$  ,可以用softmax方式来将$(-\infty ,\infty)$ 的值域归一化到$(0,1)$</p>
+<script type="math/tex; mode=display">
+z_i = \frac{e^{x_i}}{\sum^b_{j=1}e^{x_j}}</script><p>同时还满足$\sum_{i=1}^b z_i = 1$</p>
+<h3 id="REINFORCE"><a href="#REINFORCE" class="headerlink" title="REINFORCE"></a>REINFORCE</h3><p>reinforce是一种 policy gradient algorithm</p>
+<p>根据上一节的目标函数，我们可以得到迭代方程：</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+\theta_{t+1} &= \theta_t +\alpha_\theta J(\theta) \\
+ &= \theta_t +\alpha_\theta \mathbb E[\nabla_\theta ln \pi(A|S,\theta) q_\pi(S,A)] \\
+\end{aligned}</script><p>但我们知道，期望是很难算的， 我们要用stochastic方式来代替真实的期望。</p>
+<script type="math/tex; mode=display">
+\theta_{t+1} = \theta_t +\alpha_\theta \mathbb \nabla_\theta ln \pi(a_t|s_t,\theta_t) q_\pi(s_t,a_t)</script><p>但我们的$q<em>\pi$ 是不知道的，于是我们可以用$q_t$ 来代替$q</em>\pi$</p>
+<script type="math/tex; mode=display">
+\theta_{t+1} = \theta_t + \alpha \nabla_\theta ln \pi(a_t | s_t,\theta_t)\textcolor{ #0000FF}{q_t(s_t,a_t)}</script><p>如何对$q_t$进行采样？</p>
+<ol>
+<li><p>基于蒙德卡罗的方法，即本节的REINFORCE</p>
+</li>
+<li><p>其他方法</p>
+</li>
+</ol>
+<p>注意一：</p>
+<p>如何做采样？</p>
+<ol>
+<li>如何对S做采样？$S \sim d$ ，经过$\pi$ 下不断迭代得到$d$ ,然后采样得到S。但实际中我们没时间等d趋于平稳再采样。</li>
+<li>如何对A做采样？ $A \sim \pi(A|S,\theta)$ , 根据 在$s_t$ 处的策略$\pi(\theta_t)$ 来对A进行采样。</li>
+</ol>
+<p>因此，这个policy gradient 方法是on-policy的。</p>
+<p>注意二：<br>如何理解算法？</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+\theta_{t+1} &= \theta_t \alpha \nabla_\theta ln \pi(a_t|s_t,\theta_t) q_t(s_t,a_t) \\ 
+&= \theta_t + \alpha(\frac{q_t(s_t,a_t)}{\pi(a_t|s_t,\theta_t)}) \nabla _\theta \pi(a_t|s_t,\theta_t)
+\end{aligned}</script><p>我们设定$\beta_t = \frac{q_t(s_t,a_t)}{\pi(a_t|s_t,\theta_t)}$ </p>
+<p>于是原式变为如下：</p>
+<script type="math/tex; mode=display">
+\theta_{t+1} = \theta_t + \alpha \beta_t \nabla _\theta \pi(a_t|s_t,\theta_t)</script><p>于是我们就可以发现，我们是通过改变$\theta$ ，来优化$\pi(a_t|s_t,\theta)$ 的值。</p>
+<p>所以我们步长$\alpha \beta_t$ 要足够小才能收敛。</p>
+<ul>
+<li>当$\beta<em>t &gt; 0$ , 那么选择$(s_t,a_t) $ 的可能更大，于是有$\pi(a_t |s_t,\theta</em>{t+1}) &gt; \pi(a_t|s_t,\theta_t)$</li>
+<li>当$\beta<em>t &lt; 0$ ，那么$\pi(a_t|s_t,\theta</em>{t+1}) &lt; \pi(a_t|s_t,\theta_t)$ </li>
+</ul>
+<p>数学推导如下：</p>
+<p>当$\theta_{t+1} - \theta_t$ 足够小时，有</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+\pi(a_t|s_t ,\theta_{t+1}) &\approx \pi(a_t|s_t,\theta_t) + (\nabla_\theta \pi(a_t|s_t ,\theta_t))^T(\theta_{t+1} - \theta_t) \\
+ &= \pi(a_t|s_t,\theta_t) + \alpha \beta_t (\nabla_\theta \pi(a_t|s_t,\theta_t))^T(\nabla_\theta \pi(a_t|s_t,\theta_t))\\
+ &= \pi(a_t|s_t,\theta_t) + \alpha \beta_t ||\nabla_\theta \pi(a_t|s_t,\theta_t)||^2
+\end{aligned}</script><p>系数$\beta_t$ 能够很好地平衡$exploration$ 和$exploitation$</p>
+<p>首先$\beta_t$ 与$q_t(s_t,a_t)$ 成正比。</p>
+<ul>
+<li>如果$q_t(s_t,a_t)$ 比较大，那么$\beta_t$ 也比较大。</li>
+<li>因此此时算法倾向于使用更大的值来增强$q_t$ ,也就是exploitation</li>
+</ul>
+<p>其次：$\beta_t$ 与$\pi(a_t|s_t,\theta_t)$ 成反比。</p>
+<ul>
+<li><p>如果$\pi(a<em>t|s_t,\theta_t)$ 很小，那么$\beta_t$ 很大。下次的$pi(a_t|s_t,\theta</em>{t+1})$更大，就会给出更大的选择概率。</p>
+</li>
+<li><p>因此算法倾向于概率较低的探索操作。即exploration</p>
+</li>
+</ul>
+<p>REINFORCE算法实现如下；</p>
+<p>初始化参数$\pi(a|s,\theta), \gamma \in (0,1) ,\alpha &gt; 0$</p>
+<p>目标是最大化$J(\theta)$</p>
+<p>对于第k次迭代：</p>
+<ol>
+<li>选择一个$s<em>0$ ，遵循$\pi(\theta_k)$生成episode ，假设episode是${s_0,a_0,r_1,…,s</em>{T-1},a<em>{T-1},r</em>{T}}$</li>
+<li>对于每个$t = 0,1,2,.,,,T-1$ 执行3和4：</li>
+<li>value update：$q<em>t(s_t,a_t) = \sum</em>{k=t+1}^T \gamma^{k-t-1}r_k$</li>
+<li>policy update:$\theta<em>{t+1} = \theta_t + \alpha \nabla</em>\theta ln \pi(a_t|s_t,\theta_t)q_t(s_t,a_t)$</li>
+</ol>
+<h2 id="actor-critic-方法"><a href="#actor-critic-方法" class="headerlink" title="actor-critic 方法"></a>actor-critic 方法</h2><p>actor-critic本身就是policy gradient</p>
+<h3 id="The-simplest-actor-critic"><a href="#The-simplest-actor-critic" class="headerlink" title="The simplest actor-critic"></a>The simplest actor-critic</h3><p>也称QAC（这里的Q是公式中的q，也就是action value）</p>
+<p>policy gradient算法：</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+\theta_{t + 1} &= \theta  + \alpha \nabla_\theta J(\theta_t) \\
+&= \theta _t + \alpha \mathbb E_{S \sim \eta,A \sim \pi}[\nabla _\theta ln \pi(A|S,\theta_t)q_\pi(S,A)] \\
+\theta_{t+1} &= \theta_t + \alpha \nabla_\theta ln \pi(a_t|s_t,\theta_t) q_t(s_t,a_t)
+\end{aligned}</script><p>这个更新策略的算法就是actor， critic则用来估计$q_t(s_t,a_t)$</p>
+<p>如何得到$q_t(s_t,a_t)$ ？ </p>
+<p>两种方法：</p>
+<ol>
+<li>MC learning：这样结合就得到了REINFORCE算法。</li>
+<li>Temporal-difference learning： actor-critic算法。</li>
+</ol>
+<p>优化目标函数$J(\theta)$ ，使其最大化。</p>
+<p>对于每个episode的第t步，执行如下：</p>
+<ol>
+<li><p>遵循$\pi(a|s<em>t,\theta_t)$ 生成$a_t$ ，得到($r</em>{t+1},s<em>{t+1}$) ,然后遵循$\pi (a|s</em>{t+1},\theta<em>t)$ 生成$a</em>{t+1}$</p>
+</li>
+<li><p>Critic（value update）：</p>
+<script type="math/tex; mode=display">
+ w_{t+1} = w_t + \alpha_w [r_{t+1} + \gamma q(s_{t+1},a_{t+1}),w_t] - q(s_t,a_t,w_t) \nabla_w q(s_t,a_t,w_t)</script><p> Actor (policy update):</p>
+<script type="math/tex; mode=display">
+ \theta_{t+1} = \theta_t + \alpha_\theta \nabla_{\theta} ln \pi (a_t|s_t,\theta_t) q(s_t,a_t,w_{t+1})</script></li>
+</ol>
+<p>这个算法是on-policy 的。</p>
+<p>The simplest actor-critic实际上就是 SARSA + value function approximation</p>
+<h3 id="advantage-actor-critic"><a href="#advantage-actor-critic" class="headerlink" title="advantage actor-critic"></a>advantage actor-critic</h3><p>也叫AAC ，A2C</p>
+<p>首先我们为policy gradient 引入一个新的baseline（b函数）</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+\nabla _\theta J(\theta) &= \mathbb E_{S \sim \eta ,A \sim \pi } [\nabla_\theta \ln \pi (A|S,\theta_t) q_\pi(S,A)] \\
+&= \mathbb E_{S \sim \eta ,A \sim \pi } [\nabla_\theta \ln \pi (A|S,\theta_t) (q_\pi(S,A) - \textcolor{ #0000FF}{b(S)})] 
+\end{aligned}</script><p>为什么引入新的b 函数，等式依然成立？</p>
+<p>因为如下公式成立：</p>
+<script type="math/tex; mode=display">
+\mathbb E_{S \sim \eta ,A \sim \pi } [\nabla_\theta \ln \pi (A|S,\theta_t)b(S)] = 0</script><p>详细地说:</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+\mathbb E_{S \sim \eta ,A \sim \pi } [\nabla_\theta \ln \pi (A|S,\theta_t)b(S)] &= \underset{s \in S}{\sum} \eta(s) \underset{a \in \mathcal A}{\sum} \pi(a|s,\theta_t) \nabla_\theta \ln\pi(a|s,\theta_t) b(s) \\ 
+ &= \underset{s \in S}{\sum} \eta(s) \underset{a \in \mathcal A}{\sum} \nabla_\theta \pi (a|s,\theta_t) b(s) \\
+ &= \underset{s \in S}{\sum} \eta(s)  b(s) \underset{a \in \mathcal A}{\sum} \nabla_\theta \pi(a|s,\theta_t) \\
+ &=\underset{s \in S}{\sum} \eta(s)  b(s) \nabla_\theta \underset{a \in \mathcal A}{\sum}  \pi(a|s,\theta_t) \\
+ &= \underset{s \in S}{\sum} \eta(s)  b(s) \nabla_\theta 1 =0
+ \end{aligned}</script><p>引入这个b函数有什么用？</p>
+<p>我们说$\nabla_\theta J(\theta) = \mathbb E[X]$</p>
+<p>那么我们知道</p>
+<ul>
+<li>$\mathbb E[X]$ 和b(S) 无关。</li>
+<li>X的方差和b有关。</li>
+</ul>
+<p>所以我们可以通过设置b函数来减小方差。</p>
+<p>设置b函数为如下值时，能使得方差最小：</p>
+<script type="math/tex; mode=display">
+b^* (s) = \frac{\mathbb E_{A\sim \pi }[||\nabla_\theta \ln \pi (A|s,\theta_t)||^2 q(s,A)||]}{\mathbb E_{A\sim \pi }[||\nabla_\theta \ln \pi (A|s,\theta_t)||^2||]}</script><p>其中$||\nabla_\theta \ln \pi (A|s,\theta_t)||^2$ 可以被认为是一个权重。</p>
+<p>但是这个公式太复杂了。我们一般直接用</p>
+<p>$b(s) = \mathbb E<em>{A \sim \pi}[q(s,A)] = v</em>\pi(s)$</p>
+<p>把上式带入公式中，我们可以得到gradient-ascent算法：</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+\theta_{t+1} &= \theta_t + \alpha \mathbb E[\nabla_\theta \ln \pi (A|S,\theta_t) ( \textcolor{ #0000FF}{q_\pi(S,A) - v_\pi(S)})] \\ 
+&= \theta_t + \alpha \mathbb E[\nabla_\theta \ln \pi (A|S,\theta_t) ( \textcolor{ #0000FF}{\delta_\pi(S,A)})]
+\end{aligned}</script><p>我们叫$\delta<em>\pi(S,A) = q</em>\pi(S,A) - v_\pi(S)$ 为advantage funciton（优势函数）</p>
+<p>$v<em>\pi(S)$ 是某个状态下的action的平均值， 所以$\delta</em>\pi(S,A)$ 描述了当前的action和同状态的其他action相比的优劣。</p>
+<p>公式还可以写成下面：</p>
+<script type="math/tex; mode=display">
+\theta_{t+1} = \theta _t + \alpha \nabla_\theta \ln \pi (a_t|s_t,\theta_t) \delta_t(s_t,a_t) \\ 
+ = \theta _t + \alpha  \frac{\nabla_\theta\pi (a_t|s_t,\theta_t)}{\pi(a_t|s_t,\theta_t)} \delta_t(s_t,a_t) \\
+ = \theta _t + \alpha  \frac{\delta_t(s_t,a_t) }{\pi(a_t|s_t,\theta_t)} \nabla_\theta\pi (a_t|s_t,\theta_t)</script><p>于是我们公式中的$\frac{\delta_t(s_t,a_t) }{\pi(a_t|s_t,\theta_t)}$  决定了step-size（和第9讲REINFORCE中的$\beta_t$ 一样能够很好地平衡$exploration$ 和$exploitation$</p>
+<p>A2C ，或者TD actor-critic  的过程：</p>
+<p>目标是寻找最大的$J(\theta)$</p>
+<p>在每个episode的第t时刻，我们执行如下：</p>
+<ol>
+<li><p>遵循$\pi(a|s<em>t,\theta_t)$生成$a_t$ 然后得到$r</em>{t+1},s_{t+1}$ </p>
+</li>
+<li><p>TD error(advantage function):</p>
+<p> $\delta<em>t = r</em>{t+1} + \gamma v(s_{t+1},w_t) - v(s_t,w_t)$</p>
+</li>
+<li><p>Critic (value update):</p>
+<p> $w_{t+1} = w_t + \alpha_w \delta_t \nabla_w v(s_t,w_t)$</p>
+</li>
+<li><p>Actor(plicy update):</p>
+<p> $\theta<em>{t+1} = \theta_t + \alpha</em>\theta \delta<em>t \nabla</em>\theta \ln \pi (a_t|s_t,\theta_t)$</p>
+</li>
+</ol>
+<p>这是一个on-policy 的。</p>
+<h3 id="off-policy-actor-critic"><a href="#off-policy-actor-critic" class="headerlink" title="off-policy actor-critic"></a>off-policy actor-critic</h3><p>Policy gradient是on-policy的原因是梯度必须服从$\pi$ 策略，这里的$\pi$ 既是behavior policy ，同时这个$\pi$ 也是我们要更新的target policy。</p>
+<p>可以使用importance sampling 来把on-policy转为off-policy。</p>
+<script type="math/tex; mode=display">
+\mathbb E_{X \sim p_0} [X] = \underset{x}{\sum}p_0(x)x = \underset{x}{\sum} p_1(x) \frac{p_0(x)}{p_1(x)}x = \mathbb E_{X\sim p_1} [f(X)]</script><p>于是我们就可以通过$p<em>1$ 进行采样，然后估计$p_0$ 采样下的均值。 那么热和计算$ \mathbb E</em>{X\sim p_1} [f(X)]$ ?</p>
+<p>令f为如下函数：</p>
+<script type="math/tex; mode=display">
+f = \frac{1}{n} \underset{i = 1}{\overset{n}{\sum}} f(x_i) , \text{where } x_i \sim p_i</script><p>那么就有</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+\mathbb E_{X \sim p_1}[\overline f] &= \mathbb E _{X \sim p_1} [f(X)] \\
+var_{X \sim p _ 1} [\overline f] &= \frac{1}{n} var_{X \sim p _1}[f(X)]
+\end{aligned}</script><p>所以$\overline f$ （f的平均数）就可以用来估计$\mathbb E<em>{X \sim p_1}[\overline f] = \mathbb E </em>{X \sim p_0} [X] $</p>
+<script type="math/tex; mode=display">
+\mathbb E_{X \sim p_0} [X] \approx \overline f = \frac{1}{n}\underset{i = 1}{\overset{n}{\sum}} f(x_i) = \frac{1}{n} \underset{i = 1}{\overset{n}{\sum}}\frac{p_0(x_i)}{p_1(x_i) }x_i</script><p>这里的$\frac{p_0(x_i)}{p_1(x_i) }$ 可以被认为是权重，那么直观地看就是对于$p_0$ 相对难取的样本，赋予更高的权重。</p>
+<p>这个权重叫做 importance权重。</p>
+<p>就是因为我们只能知道$p<em>0(x)$ ，但求不出$\mathbb E</em>{X \sim o_0}[X]$ , 所以才需要importance sampling。</p>
+<p> 假设$\beta$ 是behavior policy生成的经验采样。</p>
+<p>我们的目标是更新target policy $\pi$ 来最大化$J(\theta)$</p>
+<script type="math/tex; mode=display">
+J(\theta) = \underset{s \in S}{\sum} d_\beta(s) v_\pi(s) = \mathbb E _{S \sim d_\beta} [v_\pi (S)]</script><p>他的梯度如下：</p>
+<script type="math/tex; mode=display">
+\nabla _\theta J(\theta) = \mathbb E_{S \sim \rho,A \sim \beta} [\frac{\pi(A|S,\theta)}{\beta(A|S)} \nabla_\theta \ln \pi(A|S,\theta)q_\pi(S,A)]</script><p>这里的$\beta$ 是behavior policy ，$\rho$ 是state distribution。</p>
+<p>优化：</p>
+<p>我们仍然可以通过加上baseline来进行优化：$\delta <em>\pi(S,A) = q</em>\pi(S,A) - v_\pi(S) $ 。</p>
+<script type="math/tex; mode=display">
+\theta_{t+1} = \theta_t + \alpha_\theta \frac{\pi(a_t|s_t,\theta_t)}{\beta(a_t|s_t)} \nabla_\theta \ln \pi(a_t|s_t,\theta_t) (q_t(s_t,a_t) - v_t (s_t))</script><p>在这之中</p>
+<script type="math/tex; mode=display">
+q_t (s_t,a_t) - v_t(s_t) \approx r_{t+1} + \gamma v_t(s_{t+1}) - v_t(s_t) = \delta_t(s_t,a_t)</script><p>于是最终的算法就是</p>
+<script type="math/tex; mode=display">
+\theta_{t+1} = \theta_t + \alpha_\theta \frac{\delta_t (s_t,a_t)}{\beta(a_t|s_t)} \nabla_\theta \ln \pi(a_t|s_t,\theta_t) \pi(a_t|s_t,\theta_t)</script><h3 id="Deterministic-actor-critic"><a href="#Deterministic-actor-critic" class="headerlink" title="Deterministic actor-critic"></a>Deterministic actor-critic</h3><p>DPG和之前的（QAC，A2C、off-policy的actor-critic）相比的一大特点就是他的策略$\pi(a|s,\theta)$  可以是负数。</p>
+<p>于是我们用deterministic policies来解决continuous action（无限个的、连续的action）</p>
+<p>之前我们是通过策略 $\pi(a|s,\theta) \in [0,1]$ 来决定要采取哪个动作a。</p>
+<p>而现在我们改成下面这样：</p>
+<script type="math/tex; mode=display">
+a = \mu (s,\theta)</script><p> 意味着我们直接通过s得到a的值，而不是借助每一个action的概率来决定选择哪个a。</p>
+<script type="math/tex; mode=display">
+J(\theta) = \mathbb E [v_\mu (s)] = \underset{s \in S}{\sum} d_0 (s)v_\mu (s)</script><p>$d_0$ 的选择和$\mu$ 无关。</p>
+<p>选择$d_0$的两种特殊的情况：</p>
+<ol>
+<li>$d_0(s_0) - 1$ ,$d_0(s \not = s_0) = 0$ . 在这里$s_0$ 是一个特殊的开始状态。</li>
+<li>$d_0$  取决于behavior policy 在$\mu$ 上的内容。</li>
+</ol>
+<script type="math/tex; mode=display">
+\begin{aligned}
+\nabla_\theta J(\theta) &= \underset{s \in S}{\rho_\mu(s) \nabla_\theta \mu(s)(\nabla_a q_\mu(s,a))|_{a = \mu(s)}} \\
+&= \mathbb E_{S \sim \rho_\mu} [\nabla_\theta \mu(s)(\nabla_a q_\mu(s,a))|_{a = \mu(s)}]
+\end{aligned}</script><p>这里面的梯度没有action A。</p>
+<p>所以这个deterministic policy gradient 是一个off-policy的方法。（因为我们不需要关心这个a是通过哪个策略得到的）</p>
+<p>梯度上升：</p>
+<script type="math/tex; mode=display">
+\theta_{t+1} = \theta_t + \alpha_\theta \mathbb E_{S \sim \rho_\mu} [\nabla_\theta \mu(s)(\nabla_a q_\mu(s,a))|_{a = \mu(s)}] \\
+\theta_{t+1} = \theta_t + \alpha_\theta \nabla_\theta \mu(s_t) (\nabla _a q_\mu (s_t,a))|_{a = \mu(s)}</script><p>注意：</p>
+<ul>
+<li><p>$\beta$ 和$\mu$ 是不同的。</p>
+</li>
+<li><p>$\beta$ 也可以设置为$\mu + noise$. </p>
+</li>
+</ul>
+<p>如何选取$q(s,a,w)$ ?</p>
+<ol>
+<li>线性函数： $q(s,a,w) = \phi^T(s,a)w$ </li>
+<li>神经网络：DDPG</li>
+</ol>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>Author: </span><span class="post-copyright-info"><a href="lsk404.github.io">Little_sk</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>Link: </span><span class="post-copyright-info"><a href="https://lsk404.github.io/2025/04/16/887930e5b441/">https://lsk404.github.io/2025/04/16/887930e5b441/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>Copyright Notice: </span><span class="post-copyright-info">All articles on this blog are licensed under <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> unless otherwise stated.</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E7%AC%94%E8%AE%B0/">笔记</a><a class="post-meta__tags" href="/tags/%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0/">强化学习</a><a class="post-meta__tags" href="/tags/%E6%95%B0%E5%AD%A6/">数学</a></div><div class="post-share"><div class="social-share" data-image="/img/avator.jpg" data-sites="wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related full-width" href="/2025/04/12/d49b5a7aa584/" title="2025蓝桥杯PythonA组省赛题解"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info"><div class="info-1"><div class="info-item-1">Previous</div><div class="info-item-2">2025蓝桥杯PythonA组省赛题解</div></div><div class="info-2"><div class="info-item-1">2025蓝桥杯PythonA组省赛题解 一定注意，由于在编写本题解时还没有在线题目。所以： 本题解仅供参考，在题意、思路、code上都可能发生错误！  A. RGB三色题意我们可以用三个0~255之间的数(r,g,b)来表示一个颜色，如(0,0,255) 表示蓝色。 那么请问所有的颜色中，有多少种颜色是“偏蓝色” 我们定义当且仅当$b &gt; r $ 并且$b &gt; g$ ，$(r,g,b)$ 是偏蓝色的。 思路 &amp; 代码直接暴力枚举！ 复杂度$256^3 = 16777216$ 。 1234567ans = 0for r in range(256):    for g in range(256):        for b in range(256):            if(b &gt; g and b &gt; r):                ans += 1print(ans) # 5559680 方法二： 使用公式计算： 如果我们给定b，那么r和g可以取$[0,b-1]$ 中的任何一个值，有$b^2$ 种可能。于是我们就有如下公式：  ans...</div></div></div></a></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>Related Articles</span></div><div class="relatedPosts-list"><a class="pagination-related" href="/2023/09/17/10a9231f6b6b/" title="ACM笔记"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2023-09-17</div><div class="info-item-2">ACM笔记</div></div><div class="info-2"><div class="info-item-1">数论博弈论：sg函数定义NIM博弈： 给定n堆物品，第$i$堆物品有$A_i$ 个，两名玩家轮流行动，每次任选一堆，取出任意多个物品，取走最后一件物品者胜利。 当且仅当 $A_1 xorA_2xor…xorA_n$时，NIM博弈先手必胜。 公平组合游戏ICG：（NIM就是经典的公平组合游戏） 1.由两名玩家交替行动2.在游戏进程的任意时刻，可以执行的合法行动与轮到哪名玩家无关3.不能行动的玩家判负 有向图游戏： 给定一个有向无环图，途中有唯一的起点，在起点放一枚棋子。两名玩家交替把这个棋子沿边移动，无法移动者判负。 公平组合游戏都可以转化为有向图游戏。 SG函数： 在有向图游戏中，对于节点x，设从节点x出发分别到达了$y_1,y_2,…,y_k$ ，定义$sg(x)$: $sg(x) = mex({ sg(y_1),sg(y_2),…,sg(y_k)})$ 。（mex(s)表示不属于集合s的最小非负整数） 对于整个有向图G，$sg(G) = sg(s)$ 对于多个有向图游戏$G_1,G_2,…,G_m$的和G$SG(G) =...</div></div></div></a><a class="pagination-related" href="/2024/03/24/887d60201e7d/" title="markdown基础语法"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2024-03-24</div><div class="info-item-2">markdown基础语法</div></div><div class="info-2"><div class="info-item-1">Markdown语法安装离线编辑软件TyporaTypora下载。官网下载后去github上下载破解器https://github.com/WittonBell/typoraCracker 在线协同编辑器CodiMD在线协同编辑markdown http://120.26.48.253:3000/( 搭建在我的服务器上，所以一年后(2025/3/20)就寄了) 常用语法 中间空出一行(相当于按了两次回车)则新起一段  使用#加一个空格来表示标题   1234# 一号标题## 二号标题### ...###### 六号标题  代码块，使用反引号(在键盘左上角)  一个反引号是段内代码段内代码 ，常用作关键字标记。 或者用来阻止解析公式abc 代码块:每边三个反引号(在键盘的左上角，tab的上面)，中间包裹住的行就是代码块的部分。 123这是一个代码块代码块可以偶很多行代码块还可以选择代码语言来标记高亮 在代码块(并非段内代码)的第一个三反引号的后面跟上代码语言，可以实现对应的高亮 12345#include&lt;iostream&gt;using namespace...</div></div></div></a><a class="pagination-related" href="/2023/06/27/0a85d83dfe8a/" title="cpp知识点总结"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2023-06-27</div><div class="info-item-2">cpp知识点总结</div></div><div class="info-2"><div class="info-item-1">0. 杂类cin/cout提速使用ios::sync_with_stdio(false);加速输入输出速度 &lt;&lt;的优先级运算符&lt;&lt;和&gt;&gt; 的优先级比表达式中有的运算符要高，有时候要加上括号 1cout&lt;&lt;(a&lt;b)&lt;&lt;endl; 字符函数库cctype判断一个字符ch是什么类型的： 1234isalpha(ch);//字母isdight(ch);//数字isspace(ch);//空白（不止是空格）ispunct(ch);//标点 比直接判断ASCII码更加容易使用（有的字符格式没有用ASCII码存就只能这么判断） 文件输入输出IO包含库文件fstream后可以进行文件的读写 创建ofstream对象和ifstream对象来分别对文件进行写和读用法和cout...</div></div></div></a><a class="pagination-related" href="/2024/06/29/a726c975d078/" title="mysql远程连接"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2024-06-29</div><div class="info-item-2">mysql远程连接</div></div><div class="info-2"><div class="info-item-1">搞了一天的mysql远程连接， 也算是踩过坑了，这里记录一下 如果你的mysql无法被远程连接，那么请依次检查如下条件： 1. 服务器的防火墙（安全组）放行端口如果mysql服务在云服务器上运行， 那么请检查云服务器是否将端口3306开放。 如果没有开放请设置为通行状态。。这里不同的云服务器厂商的截图不同，我这里给出华为云的安全组设置 华为云： 2. 启动mysql的远程连接服务在命令台中使用mysql -uroot 进入你的mysql数据库。1mysql -uroot 选择mysql库1use mysql检查user表中的host和User信息。1select host,User from user;如果你的root字段对应的host是localhost，那么代表root账户只能本地登录。123456789+-----------+------------------+| host      | User             |+-----------+------------------+| localhost | root             ||...</div></div></div></a><a class="pagination-related" href="/2024/08/27/b4bdaa4b4566/" title="python配置cuda"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2024-08-27</div><div class="info-item-2">python配置cuda</div></div><div class="info-2"><div class="info-item-1">使用pytorch进行深度学习的时候，往往想用GPU进行运算来提高速度。于是搜索便知道了CUDA。 下面给出一个自检的建议：  检查cuda的版本是否适配自己的GPU。  打开NVDIA控制面板，点击左下角“系统信息”，然后就可以看到NVDIA GPU的详细信息，其中就包含了CUDA的版本。在官网安装合适版本的cuda-toolkit。   安装了cuda，但是命令行输入nvcc -V 报错显示没有nvcc   这时候可能没有将CUDA添加到环境变量。检查系统变量中是否包含了CUDA_PATH ,以及CUDA_PATH_Vx.x  , 以及PATH中是否包含了cuda的bin目录。   在命令行输入nvcc -V 可以正常运行，但是在python中使用print(torch.cuda.is_available()) 显示的是False。 这时候考虑torch安装错误。  （直接使用pip install torch 会安装cpu版本的torch，导致无法使用cuda） 卸载原先的torch，pip uninstall...</div></div></div></a></div></div><hr class="custom-hr"/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> Comments</span></div></div><div class="comment-wrap"><div><div class="vcomment" id="vcomment"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/avator.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">Little_sk</div><div class="author-info-description"></div><div class="site-data"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">50</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">18</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">6</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/lsk404/"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>Announcement</span></div><div class="announcement_content">加我友链！</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>Contents</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0%E6%95%B0%E5%AD%A6%E5%8E%9F%E7%90%86"><span class="toc-number">1.</span> <span class="toc-text">强化学习数学原理</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC%E4%B8%80%E7%AB%A0%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5"><span class="toc-number">1.1.</span> <span class="toc-text">第一章基本概念</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Markov-decision-process%EF%BC%88MDP%EF%BC%89"><span class="toc-number">1.1.1.</span> <span class="toc-text">Markov decision process（MDP）</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC%E4%BA%8C%E7%AB%A0-%E8%B4%9D%E5%B0%94%E6%9B%BC%E5%85%AC%E5%BC%8F"><span class="toc-number">1.2.</span> <span class="toc-text">第二章 贝尔曼公式</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#return"><span class="toc-number">1.2.1.</span> <span class="toc-text">return</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#state-value"><span class="toc-number">1.2.2.</span> <span class="toc-text">state value</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%B4%9D%E5%B0%94%E6%9B%BC%E5%85%AC%E5%BC%8F%E7%9A%84%E7%9F%A9%E9%98%B5-%E5%90%91%E9%87%8F%E5%BD%A2%E5%BC%8F"><span class="toc-number">1.2.3.</span> <span class="toc-text">贝尔曼公式的矩阵&#x2F;向量形式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#action-value"><span class="toc-number">1.2.4.</span> <span class="toc-text">action value</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC%E4%B8%89%E7%AB%A0-%E8%B4%9D%E5%B0%94%E6%9B%BC%E6%9C%80%E4%BC%98%E5%85%AC%E5%BC%8F"><span class="toc-number">1.3.</span> <span class="toc-text">第三章 贝尔曼最优公式</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%B4%9D%E5%B0%94%E6%9B%BC%E6%9C%80%E4%BC%98%E5%85%AC%E5%BC%8F"><span class="toc-number">1.3.1.</span> <span class="toc-text">贝尔曼最优公式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%80%E4%BA%9B%E6%A6%82%E5%BF%B5"><span class="toc-number">1.3.2.</span> <span class="toc-text">一些概念</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#contraction-Theorem"><span class="toc-number">1.3.3.</span> <span class="toc-text">contraction Theorem</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B1%82%E8%A7%A3%E8%B4%9D%E5%B0%94%E6%9B%BC%E6%9C%80%E4%BC%98%E5%85%AC%E5%BC%8F"><span class="toc-number">1.3.4.</span> <span class="toc-text">求解贝尔曼最优公式</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Value-iteration-amp-Policy-iteration"><span class="toc-number">1.4.</span> <span class="toc-text">Value iteration &amp; Policy iteration</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Value-iteration-algorithm-%E5%80%BC%E8%BF%AD%E4%BB%A3%E7%AE%97%E6%B3%95"><span class="toc-number">1.4.1.</span> <span class="toc-text">Value iteration algorithm(值迭代算法)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Policy-iteration-algorithm-%E7%AD%96%E7%95%A5%E8%BF%AD%E4%BB%A3%E7%AE%97%E6%B3%95"><span class="toc-number">1.4.2.</span> <span class="toc-text">Policy iteration algorithm(策略迭代算法)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#truncated-policy-iteration-algorithm"><span class="toc-number">1.4.3.</span> <span class="toc-text">truncated policy iteration algorithm</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#MonteCarlo-learning"><span class="toc-number">1.5.</span> <span class="toc-text">MonteCarlo learning</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8A%9B%E7%A1%AC%E5%B8%81%E4%BE%8B%E5%AD%90"><span class="toc-number">1.5.1.</span> <span class="toc-text">抛硬币例子</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84MC-based-RL%E7%AE%97%E6%B3%95"><span class="toc-number">1.5.2.</span> <span class="toc-text">一个简单的MC-based RL算法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#MC-exploring-Starts"><span class="toc-number">1.5.3.</span> <span class="toc-text">MC exploring Starts</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#soft-policies"><span class="toc-number">1.5.4.</span> <span class="toc-text">soft policies</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#MC-epsilon-Greedy-algorithm"><span class="toc-number">1.5.5.</span> <span class="toc-text">MC $\epsilon$-Greedy algorithm</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Stochastic-Approximation-amp-Stochastic-Grandient-Descent"><span class="toc-number">1.6.</span> <span class="toc-text">Stochastic Approximation &amp; Stochastic Grandient Descent</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Motivating-example"><span class="toc-number">1.6.1.</span> <span class="toc-text">Motivating example</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Robbins-Monro-algorithm"><span class="toc-number">1.6.2.</span> <span class="toc-text">Robbins-Monro algorithm</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#RM%E7%AE%97%E6%B3%95-Convergence-properties"><span class="toc-number">1.6.3.</span> <span class="toc-text">RM算法-Convergence properties</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#SGD-stochatic-gradient-descent"><span class="toc-number">1.6.4.</span> <span class="toc-text">SGD(stochatic gradient descent)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#SGD-%E7%9A%84%E4%BE%8B%E5%AD%90%E5%92%8C%E7%BB%83%E4%B9%A0"><span class="toc-number">1.6.5.</span> <span class="toc-text">SGD 的例子和练习</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#SGD%E7%AE%97%E6%B3%95%E7%9A%84%E6%94%B6%E6%95%9B%E6%80%A7-convergence"><span class="toc-number">1.6.6.</span> <span class="toc-text">SGD算法的收敛性(convergence)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#SGD%E7%AE%97%E6%B3%95%E7%9A%84%E6%94%B6%E6%95%9B%E6%A8%A1%E5%BC%8F"><span class="toc-number">1.6.7.</span> <span class="toc-text">SGD算法的收敛模式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#BGD-MBGD%E5%92%8CSGD"><span class="toc-number">1.6.8.</span> <span class="toc-text">BGD,MBGD和SGD</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Temporal-Difference-learning"><span class="toc-number">1.7.</span> <span class="toc-text">Temporal-Difference learning</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#motivating-example"><span class="toc-number">1.7.1.</span> <span class="toc-text">motivating example</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#TD%E7%AE%97%E6%B3%95%E4%B8%AD%E7%9A%84state-values"><span class="toc-number">1.7.2.</span> <span class="toc-text">TD算法中的state values</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#TD%E7%AE%97%E6%B3%95%E7%9A%84%E6%95%B0%E5%AD%A6%E6%84%8F%E4%B9%89"><span class="toc-number">1.7.3.</span> <span class="toc-text">TD算法的数学意义</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#TD%E7%AE%97%E6%B3%95%E4%B8%AD%E7%9A%84action-values%EF%BC%9ASarsa"><span class="toc-number">1.7.4.</span> <span class="toc-text">TD算法中的action values：Sarsa</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Expected-Sarsa"><span class="toc-number">1.7.5.</span> <span class="toc-text">Expected Sarsa</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#n-step-Sarsa"><span class="toc-number">1.7.6.</span> <span class="toc-text">n-step Sarsa</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#TD%E4%B8%AD%E6%9C%80%E4%BC%98action-value%E5%AD%A6%E4%B9%A0-Q-learning"><span class="toc-number">1.7.7.</span> <span class="toc-text">TD中最优action value学习:Q-learning</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#off-policy-%E5%92%8C-on-policy"><span class="toc-number">1.7.8.</span> <span class="toc-text">off-policy 和 on-policy</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Q-learning-%E7%9A%84%E5%AE%9E%E6%96%BD"><span class="toc-number">1.7.9.</span> <span class="toc-text">Q-learning 的实施</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#TD%E7%9A%84%E7%BB%9F%E4%B8%80%E8%A1%A8%E7%A4%BA"><span class="toc-number">1.7.10.</span> <span class="toc-text">TD的统一表示</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#value-function-Approximation"><span class="toc-number">1.8.</span> <span class="toc-text">value function Approximation</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Value-Function-Approximation%E7%9A%84%E5%90%AB%E4%B9%89"><span class="toc-number">1.8.1.</span> <span class="toc-text">Value Function Approximation的含义</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#objective-funciton"><span class="toc-number">1.8.2.</span> <span class="toc-text">objective funciton</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#optimization-algorithms"><span class="toc-number">1.8.3.</span> <span class="toc-text">optimization algorithms</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#selection-of-function-approximators"><span class="toc-number">1.8.4.</span> <span class="toc-text">selection of function approximators</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Sarsa"><span class="toc-number">1.8.5.</span> <span class="toc-text">Sarsa</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Q-learning"><span class="toc-number">1.8.6.</span> <span class="toc-text">Q-learning</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Deep-Q-learning-deep-Q-network"><span class="toc-number">1.8.7.</span> <span class="toc-text">Deep Q-learning(deep Q-network)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#DQN-Experience-replay"><span class="toc-number">1.8.8.</span> <span class="toc-text">DQN-Experience replay</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Deep-Q-learning"><span class="toc-number">1.8.9.</span> <span class="toc-text">Deep Q-learning</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Policy-Function-Approximation"><span class="toc-number">1.9.</span> <span class="toc-text">Policy Function Approximation</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#policy-gradient%E7%9A%84%E4%B8%A4%E4%B8%AAmetrics"><span class="toc-number">1.9.1.</span> <span class="toc-text">policy gradient的两个metrics</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%9B%AE%E6%A0%87%E5%87%BD%E6%95%B0%E7%9A%84%E6%A2%AF%E5%BA%A6%E8%AE%A1%E7%AE%97"><span class="toc-number">1.9.2.</span> <span class="toc-text">目标函数的梯度计算</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#REINFORCE"><span class="toc-number">1.9.3.</span> <span class="toc-text">REINFORCE</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#actor-critic-%E6%96%B9%E6%B3%95"><span class="toc-number">1.10.</span> <span class="toc-text">actor-critic 方法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#The-simplest-actor-critic"><span class="toc-number">1.10.1.</span> <span class="toc-text">The simplest actor-critic</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#advantage-actor-critic"><span class="toc-number">1.10.2.</span> <span class="toc-text">advantage actor-critic</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#off-policy-actor-critic"><span class="toc-number">1.10.3.</span> <span class="toc-text">off-policy actor-critic</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Deterministic-actor-critic"><span class="toc-number">1.10.4.</span> <span class="toc-text">Deterministic actor-critic</span></a></li></ol></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>Recent Posts</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/04/16/887930e5b441/" title="强化学习数学原理笔记">强化学习数学原理笔记</a><time datetime="2025-04-16T09:53:00.000Z" title="Created 2025-04-16 17:53:00">2025-04-16</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/04/12/d49b5a7aa584/" title="2025蓝桥杯PythonA组省赛题解">2025蓝桥杯PythonA组省赛题解</a><time datetime="2025-04-12T12:28:00.000Z" title="Created 2025-04-12 20:28:00">2025-04-12</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/03/09/0ed69ce9ed7c/" title="电子扫盲">电子扫盲</a><time datetime="2025-03-09T04:00:00.000Z" title="Created 2025-03-09 12:00:00">2025-03-09</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/02/12/27d697c28fe4/" title="十六届蓝桥杯模拟赛3题解">十六届蓝桥杯模拟赛3题解</a><time datetime="2025-02-12T04:00:00.000Z" title="Created 2025-02-12 12:00:00">2025-02-12</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/12/02/c836153aa73d/" title="十六届蓝桥杯模拟赛1题解">十六届蓝桥杯模拟赛1题解</a><time datetime="2024-12-02T04:00:00.000Z" title="Created 2024-12-02 12:00:00">2024-12-02</time></div></div></div></div></div></div></main><footer id="footer" style="background-image: url(img/bg3.png);"><div id="footer-wrap"><div class="framework-info"><span>Framework </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo 7.3.0</a><span class="footer-separator">|</span><span>Theme </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly 5.3.5</a></div><div class="footer_custom_text"><a href="https://icp.gov.moe/?keyword=20250258" target="_blank">萌ICP备20250258号</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="Reading Mode"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="Toggle Between Light and Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle Between Single-column and Double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="Settings"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="Table of Contents"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="Scroll to Comments"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="Back to Top"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload/dist/lazyload.iife.min.js"></script><div class="js-pjax"><script>(() => {
+  const loadMathjax = () => {
+    if (!window.MathJax) {
+      window.MathJax = {
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']],
+          tags: 'none',
+        },
+        chtml: {
+          scale: 1.1
+        },
+        options: {
+          enableMenu: true,
+          renderActions: {
+            findScript: [10, doc => {
+              for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+                const display = !!node.type.match(/; *mode=display/)
+                const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display)
+                const text = document.createTextNode('')
+                node.parentNode.replaceChild(text, node)
+                math.start = {node: text, delim: '', n: 0}
+                math.end = {node: text, delim: '', n: 0}
+                doc.math.push(math)
+              }
+            }, '']
+          }
+        }
+      }
+
+      const script = document.createElement('script')
+      script.src = 'https://cdn.jsdelivr.net/npm/mathjax/es5/tex-mml-chtml.min.js'
+      script.id = 'MathJax-script'
+      script.async = true
+      document.head.appendChild(script)
+    } else {
+      MathJax.startup.document.state(0)
+      MathJax.texReset()
+      MathJax.typesetPromise()
+    }
+  }
+
+  btf.addGlobalFn('encrypt', loadMathjax, 'mathjax')
+  window.pjax ? loadMathjax() : window.addEventListener('load', loadMathjax)
+})()</script><script>(() => {
+  const runMermaid = ele => {
+    window.loadMermaid = true
+    const theme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'default'
+
+    ele.forEach((item, index) => {
+      const mermaidSrc = item.firstElementChild
+      const mermaidThemeConfig = `%%{init:{ 'theme':'${theme}'}}%%\n`
+      const mermaidID = `mermaid-${index}`
+      const mermaidDefinition = mermaidThemeConfig + mermaidSrc.textContent
+
+      const renderFn = mermaid.render(mermaidID, mermaidDefinition)
+      const renderMermaid = svg => {
+        mermaidSrc.insertAdjacentHTML('afterend', svg)
+      }
+
+      // mermaid v9 and v10 compatibility
+      typeof renderFn === 'string' ? renderMermaid(renderFn) : renderFn.then(({ svg }) => renderMermaid(svg))
+    })
+  }
+
+  const codeToMermaid = () => {
+    const codeMermaidEle = document.querySelectorAll('pre > code.mermaid')
+    if (codeMermaidEle.length === 0) return
+
+    codeMermaidEle.forEach(ele => {
+      const preEle = document.createElement('pre')
+      preEle.className = 'mermaid-src'
+      preEle.hidden = true
+      preEle.textContent = ele.textContent
+      const newEle = document.createElement('div')
+      newEle.className = 'mermaid-wrap'
+      newEle.appendChild(preEle)
+      ele.parentNode.replaceWith(newEle)
+    })
+  }
+
+  const loadMermaid = () => {
+    if (false) codeToMermaid()
+    const $mermaid = document.querySelectorAll('#article-container .mermaid-wrap')
+    if ($mermaid.length === 0) return
+
+    const runMermaidFn = () => runMermaid($mermaid)
+    btf.addGlobalFn('themeChange', runMermaidFn, 'mermaid')
+    window.loadMermaid ? runMermaidFn() : btf.getScript('https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js').then(runMermaidFn)
+  }
+
+  btf.addGlobalFn('encrypt', loadMermaid, 'mermaid')
+  window.pjax ? loadMermaid() : document.addEventListener('DOMContentLoaded', loadMermaid)
+})()</script><script>(() => {
+  const isShuoshuo = GLOBAL_CONFIG_SITE.pageType === 'shuoshuo'
+  const option = null
+
+  const initValine = (el, path) => {
+    if (isShuoshuo) {
+      window.shuoshuoComment.destroyValine = () => {
+        if (el.children.length) {
+          el.innerHTML = ''
+          el.classList.add('no-comment')
+        }
+      }
+    }
+
+    const valineConfig = {
+      el: '#vcomment',
+      appId: 'jY5tnMLwMUhZNOv61yXvepci-gzGzoHsz',
+      appKey: 'gZbn0Lr7joLZ83iUlbqPfk4J',
+      avatar: 'monsterid',
+      serverURLs: '',
+      emojiMaps: "",
+      visitor: false,
+      ...option,
+      path: isShuoshuo ? path : (option && option.path) || window.location.pathname
+    }
+
+    new Valine(valineConfig)
+  }
+
+  const loadValine = async (el, path) => {
+    if (typeof Valine === 'function') {
+      initValine(el, path)
+    } else {
+      await btf.getScript('https://cdn.jsdelivr.net/npm/valine/dist/Valine.min.js')
+      initValine(el, path)
+    }
+  }
+
+  if (isShuoshuo) {
+    'Valine' === 'Valine'
+      ? window.shuoshuoComment = { loadComment: loadValine }
+      : window.loadOtherComment = loadValine
+    return
+  }
+
+  if ('Valine' === 'Valine' || !true) {
+    if (true) btf.loadComment(document.getElementById('vcomment'),loadValine)
+    else setTimeout(loadValine, 0)
+  } else {
+    window.loadOtherComment = loadValine
+  }
+})()</script></div><script id="click-heart" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/click-heart.min.js" async="async" mobile="false"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div class="docsearch-wrap"><div id="docsearch" style="display:none"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@docsearch/css/dist/style.min.css"/><script src="https://cdn.jsdelivr.net/npm/@docsearch/js/dist/umd/index.min.js"></script><script>(() => {
+  docsearch(Object.assign({
+    appId: '01FHVVY2XK',
+    apiKey: '758762af2109005ec9cba47e50ae0bfa',
+    indexName: 'lsk404io_articles',
+    container: '#docsearch',
+    placeholder: 'Search what you want to search',
+  }, null))
+
+  const handleClick = () => {
+    document.querySelector('.DocSearch-Button').click()
+  }
+
+  const searchClickFn = () => {
+    btf.addEventListenerPjax(document.querySelector('#search-button > .search'), 'click', handleClick)
+  }
+
+  searchClickFn()
+  window.addEventListener('pjax:complete', searchClickFn)
+})()</script></div></div></body></html>
