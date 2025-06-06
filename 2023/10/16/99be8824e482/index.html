@@ -1,0 +1,502 @@
+<!DOCTYPE html><html lang="en" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>期末总结 | Little_sk</title><meta name="author" content="Little_sk"><meta name="copyright" content="Little_sk"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="本文知识点均为从网络或其他地方搜集整理而来，提到的习题均无答案，完全不具备权威性质，作者不对看本文造成的后果负责，请合理参考。本人为郑州大学2022级网络空间安全学院物联网工程专业学生，以下是我对实际考试的考后记录，仅供复习参考。不保证提供的信息完全正确！！！ 用爱发电，欢迎纠正和补充，分享时请注明来源 不要过度宣传，我不想被抓到小黑屋哇QAQ 2023大二上期末回顾计算机组成原理任课老师：王银玲">
+<meta property="og:type" content="article">
+<meta property="og:title" content="期末总结">
+<meta property="og:url" content="https://lsk404.github.io/2023/10/16/99be8824e482/index.html">
+<meta property="og:site_name" content="Little_sk">
+<meta property="og:description" content="本文知识点均为从网络或其他地方搜集整理而来，提到的习题均无答案，完全不具备权威性质，作者不对看本文造成的后果负责，请合理参考。本人为郑州大学2022级网络空间安全学院物联网工程专业学生，以下是我对实际考试的考后记录，仅供复习参考。不保证提供的信息完全正确！！！ 用爱发电，欢迎纠正和补充，分享时请注明来源 不要过度宣传，我不想被抓到小黑屋哇QAQ 2023大二上期末回顾计算机组成原理任课老师：王银玲">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://lsk404.github.io/img/avator.jpg">
+<meta property="article:published_time" content="2023-10-16T04:00:00.000Z">
+<meta property="article:modified_time" content="2025-06-06T12:31:20.038Z">
+<meta property="article:author" content="Little_sk">
+<meta property="article:tag" content="期末复习">
+<meta property="article:tag" content="ZZU">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://lsk404.github.io/img/avator.jpg"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "期末总结",
+  "url": "https://lsk404.github.io/2023/10/16/99be8824e482/",
+  "image": "https://lsk404.github.io/img/avator.jpg",
+  "datePublished": "2023-10-16T04:00:00.000Z",
+  "dateModified": "2025-06-06T12:31:20.038Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "Little_sk",
+      "url": "https://lsk404.github.io/lsk404.github.io"
+    }
+  ]
+}</script><link rel="shortcut icon" href="/img/favicon.ico"><link rel="canonical" href="https://lsk404.github.io/2023/10/16/99be8824e482/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//www.google-analytics.com" crossorigin=""/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script async="async" src="https://www.googletagmanager.com/gtag/js?id=G-745T2DDK98"></script><script>window.dataLayer = window.dataLayer || []
+function gtag(){dataLayer.push(arguments)}
+gtag('js', new Date())
+gtag('config', 'G-745T2DDK98')
+btf.addGlobalFn('pjaxComplete', () => {
+  gtag('config', 'G-745T2DDK98', {'page_path': window.location.pathname})
+}, 'google_analytics')
+</script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: 'Copy Successful',
+    error: 'Copy Failed',
+    noSupport: 'Browser Not Supported'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: 'days',
+  dateSuffix: {
+    just: 'Just now',
+    min: 'minutes ago',
+    hour: 'hours ago',
+    day: 'days ago',
+    month: 'months ago'
+  },
+  copyright: {"limitCount":150,"languages":{"author":"Author: Little_sk","link":"Link: ","source":"Source: Little_sk","info":"Copyright belongs to the author. For commercial use, please contact the author for authorization. For non-commercial use, please indicate the source."}},
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: 'Load More'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: true,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: true,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '期末总结',
+  isHighlightShrink: false,
+  isToc: true,
+  pageType: 'post'
+}</script><meta name="generator" content="Hexo 7.3.0"></head><body><div id="web_bg" style="background-image: url(img/bg3.png);"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/avator.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">51</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">20</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">7</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-clock"></i><span> 时间线</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg fixed" id="page-header" style="background-image: url(/img/bg.png);"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><img class="site-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/favicon.ico" alt="Logo"></a><a class="nav-page-title" href="/"><span class="site-name">期末总结</span></a></span><div id="menus"><div id="search-button"><span class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> Search</span></span></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-clock"></i><span> 时间线</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="post-info"><h1 class="post-title">期末总结</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">Created</span><time class="post-meta-date-created" datetime="2023-10-16T04:00:00.000Z" title="Created 2023-10-16 12:00:00">2023-10-16</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">Updated</span><time class="post-meta-date-updated" datetime="2025-06-06T12:31:20.038Z" title="Updated 2025-06-06 20:31:20">2025-06-06</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E5%A4%8D%E4%B9%A0/">复习</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">Word Count:</span><span class="word-count">3.3k</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">Post Views:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><p>本文知识点均为从网络或其他地方搜集整理而来，提到的习题均无答案，完全不具备权威性质，作者不对看本文造成的后果负责，请合理参考。<br><code>本人为郑州大学2022级网络空间安全学院物联网工程专业学生，以下是我对实际考试的考后记录，仅供复习参考。</code><br><code>不保证提供的信息完全正确！！！</code></p>
+<p>用爱发电，欢迎纠正和补充，分享时请注明来源</p>
+<p><em>不要过度宣传，我不想被抓到小黑屋哇QAQ</em></p>
+<h1 id="2023大二上期末回顾"><a href="#2023大二上期末回顾" class="headerlink" title="2023大二上期末回顾"></a>2023大二上期末回顾</h1><h2 id="计算机组成原理"><a href="#计算机组成原理" class="headerlink" title="计算机组成原理"></a>计算机组成原理</h2><p>任课老师：王银玲老师 ，林楠老师<br><strong>题型</strong><br>40选择<br>10判断<br>5计算 （25分）<br>3综合（共25分）</p>
+<p>其中选择题主要考察第2-6章（其他章节也略微出现一些题目）<br>主要（占比较大的部分）为各种码的表示范围（补码，浮点数等），加减溢出判断，cache相关概念以及运算，地址偏移（注意pc+1中的1的含义），以及一些基础琐碎知识。<br>判断题与选择类似，主要为一些小知识点。<br>计算题：</p>
+<ul>
+<li>整数的运算（给出x和y的补码，求z=2x+y/2的机器码，判断是否溢出）</li>
+<li>浮点数的表示（1.01001x2^3）</li>
+<li>带宽计算</li>
+<li>给出指令长度16地址长度5，二地址指令60个一地址指令125个问零地址指令多少个</li>
+<li>cpu处理设备，中断处理cpu占用率</li>
+</ul>
+<p>综合题：</p>
+<ul>
+<li>给出中断屏蔽字表，写出中断源的优先级</li>
+<li>mips指令格式等（r型i型j型）</li>
+<li>cache与虚拟内存的相关计算。（cache，主存，虚拟内存的字段划分）</li>
+</ul>
+<p>历年考研原题占比相当大<br>如果使用的课本同样是南京大学袁春风老师主编，可以借助如下链接学习/复习:<br><a target="_blank" rel="noopener" href="http://media.njude.com.cn/course/jsjzcyl/index.htm">南京大学计算机组织与系统结构</a></p>
+<h2 id="数字电路与数字系统"><a href="#数字电路与数字系统" class="headerlink" title="数字电路与数字系统"></a>数字电路与数字系统</h2><p>任课老师 ： 杨晓东老师，王瑞娟老师</p>
+<p><code>基本都是课后题原题！！！一定要看一遍课后题！（如果时间充裕，最好把所有的课后题都看一下，时间不充裕就再看看老师布置的作业）</code></p>
+<p>只考到触发器，没有考时序逻辑电路</p>
+<p><strong>题型：</strong></p>
+<ul>
+<li>10填空</li>
+<li>8选择（2 * 8 = 16）</li>
+<li>9判断</li>
+<li>3看图写逻辑表达式（3*5 = 15）</li>
+<li>3逻辑表达式的转换（3*5=15）</li>
+<li>2应用大题（8+12）</li>
+<li>2画波形图</li>
+</ul>
+<p><strong>填空</strong></p>
+<p>一些概念</p>
+<p>余三码，二进制，十进制，十六进制的转化</p>
+<p>2012个1的异或</p>
+<p>看图写逻辑表达式</p>
+<p>根据电路是否有记忆功能将电路分为组合逻辑电路和__</p>
+<p><strong>选择</strong></p>
+<p>根据ttl门电路，cmos门电路以及输入值，判断输出值</p>
+<p>根据组合逻辑电路写逻辑表达式</p>
+<p>选出oc门电路的对应符号</p>
+<p><strong>判断</strong></p>
+<p>基本都是概念</p>
+<p>格雷码中相邻的数只有一位不同。</p>
+<p>基本jk，主从jk，边沿jk的逻辑功能完全相同</p>
+<p><strong>看图写逻辑表达式</strong></p>
+<p>看的三个图（都是课本原题）分别为：</p>
+<ul>
+<li>集成原件（四路选择器）</li>
+<li>CMOS （中间有X，最终答案是A xor B的那道）</li>
+<li>TTL （ A+B的非）</li>
+</ul>
+<p><strong>逻辑表达式的转换</strong></p>
+<ul>
+<li>化简为与非-与非式</li>
+<li>画出卡诺图</li>
+<li>画出卡诺图并化简</li>
+</ul>
+<p><strong>应用题</strong></p>
+<p>（都是课本原题）</p>
+<ul>
+<li>1根据组合逻辑电路图求逻辑表达式，并画真值表，说出功能。<code>逻辑表达式为AB+AC+BC</code></li>
+</ul>
+<p>三个用电器ABC，两个发电机V1，V2。只有一个用电器时V1工作，恰有两个时V2工作，三个用电器时V1和V2都工作）</p>
+<p><strong>画波形图</strong></p>
+<ul>
+<li>基本RS-FF触发器</li>
+<li>带异步Rd ,Sd 功能的主从JK触发器</li>
+</ul>
+<h2 id="毛概"><a href="#毛概" class="headerlink" title="毛概"></a>毛概</h2><p><strong>材料：</strong></p>
+<p>（1）如何理解过渡时期的总路线？ （20分）</p>
+<p>（2）如何把握毛泽东思想的主要内容？（20分）</p>
+<p><strong>论述：</strong></p>
+<ol>
+<li><p>新民主主义革命的基本纲领是什么，以及新民主主义革命的意义（30分）</p>
+</li>
+<li><p>社会主义初步探索过程中产生了哪些的关键理论。社会主义初步探索的经验总结。（30分）</p>
+</li>
+</ol>
+<h2 id="Linux"><a href="#Linux" class="headerlink" title="Linux"></a>Linux</h2><p><strong>题型：</strong></p>
+<ul>
+<li>30单项选择30分</li>
+<li>10判断 10分</li>
+<li>20填空 20分</li>
+<li>4简答 20分</li>
+<li>2综合 20分</li>
+</ul>
+<p>选择判断不难，都是基础的指令<br>填空考了一些概念，以及一堆关于用户和组的指令（比如新建删除修改用户和组，冻结解冻用户密码，相关内容一共九个空）<br>综合也有一道指令题，考察分区fdisk，格式化mkfs.xfs，挂载mount的过程。<br>综合题<br>（1）提示输入一个目录<br>（2）如果没有输入，则提示“请输入一个目录”<br>（3）如果输入的不是目录，则提示“输入的不是目录”<br>（4）如果输入的是目录，则遍历目录下的所有文件，如果文件是普通文件就复制到/tmp下，否则删除该文件</p>
+<h2 id="近代史"><a href="#近代史" class="headerlink" title="近代史"></a>近代史</h2><p><strong>简答题</strong></p>
+<ul>
+<li>简述中国近代反侵略战争失败的原因和教训</li>
+<li>简述辛亥革命胜利的意义</li>
+<li>中国式现代化的鲜明特征</li>
+</ul>
+<p><strong>材料题</strong></p>
+<ul>
+<li>建党精神的内涵</li>
+<li>如何弘扬抗战精神</li>
+<li>如何理解长征永远在路上</li>
+<li>为什么说毛泽东将进入北平称作进京赶考</li>
+</ul>
+<p><strong>论述题</strong></p>
+<ul>
+<li>如何探索和中国革命新道路，并谈谈是怎样持续发展的</li>
+</ul>
+<h2 id="数据结构"><a href="#数据结构" class="headerlink" title="数据结构"></a>数据结构</h2><p>考的内容特别多，基本上考纲上有的都考到了。</p>
+<p>选择判断填空都不难，都是基础知识。</p>
+<p><strong>综合题：</strong></p>
+<ol>
+<li><p>根据中序序列和后序序列画二叉树</p>
+</li>
+<li><p>给出0-14的表，哈希映射模13，以及12个数，求他们用平方探测法都放在了哪些位置，以及等概率下成功查找的平均查找长度</p>
+</li>
+<li><p>哈夫曼编码，给出abcdefgh的出现频率，让你画哈夫曼树，并求出平均长度</p>
+</li>
+<li>给出一个6x6的有向图</li>
+</ol>
+<ul>
+<li>画图</li>
+<li>求dijsktra后的1号定点到其他定点的最短路径的长度，并写出经过的定点</li>
+<li>写出他的邻接表表示图 </li>
+<li>求无向图的最小生成树，若有a-b和b-a取较小</li>
+</ul>
+<ol>
+<li>15个数的shell排序写出每一趟的结果</li>
+</ol>
+<p><strong>编程题：</strong></p>
+<p>给出有序单链表，对他去重。（即将<code>1 2 3 3 4 4 4 5 9</code>， 变为 <code>1 2 3 4 5 9</code>)</p>
+<h1 id="2023大二下期末回顾"><a href="#2023大二下期末回顾" class="headerlink" title="2023大二下期末回顾"></a>2023大二下期末回顾</h1><h2 id="英语"><a href="#英语" class="headerlink" title="英语"></a>英语</h2><p>没有阅读题所以时间比较充足<br>连线题和正误题都是书中原文改编，注意看课后题。尤其是课后题中的选择题和短句子填空等。<br>翻译考察了茶文化。<br>作文考察 “the inportance of Chinese myths and legends in modern life”。中国神话传说对于现代生活的影响。要求列举几个神话并介绍他对于中国人的道德观价值观等的影响，以及如何传承发展中国神话传说。</p>
+<h2 id="操作系统"><a href="#操作系统" class="headerlink" title="操作系统"></a>操作系统</h2><p>选择 30<br>填空 20<br>判断 20<br>大题x3 30<br>考的很杂，很多概念<br>io的五层，spooling技术的各个区。等等<br>但是选择题有很多原题，一定要看历年考题和考研题(尤其是老师发的习题资料)<br>大题<br>1.给出作业进入顺序，问抢占式情况下，每个作业进入内存的时间，完成时间，和平均周转时间<br>2.给出页面调用顺序，求FIFO和LRU分别的缺页次数和缺页率<br>3.有一个景点，最多容纳1000人，一个入口一个出口，写同步互斥代码。</p>
+<h2 id="习概"><a href="#习概" class="headerlink" title="习概"></a>习概</h2><p>一大题<br>1.为什么说中国特色社会主义进入新时代<br>2.如何铸就中国文化<br>二大题<br>1.中国式现代化需要把握的重大关系<br>2.新时代下如何建设美丽中国</p>
+<h2 id="物联网工程导论"><a href="#物联网工程导论" class="headerlink" title="物联网工程导论"></a>物联网工程导论</h2><p>20填空(20x1)<br>5多选(5x2)<br>5简答(5x10)<br>1设计题(20)<br>大部分都是白皮书原题，尤其是简单题基本都是白皮书原题。<br>简答题：<br>1.物联网和互联网的区别<br>2.物联网的三层模型<br>3.RFID的组成部分和各个功能，无源RFID标签怎么工作的<br>4.ipv6的特点以及为什么物联网时代将成为最重要重要的协议之一<br>5.GNSS是什么，以及阐述GPS的三个部分<br>设计题<br>设计一个联网的物联系统，要求写出功能介绍，硬件配置，逻辑关系，并介绍用到的物联网技术</p>
+<h2 id="马原"><a href="#马原" class="headerlink" title="马原"></a>马原</h2><p>选择30<br>多选10x2(少选不给分)<br>材料(10x3)<br>论述</p>
+<p>主要考前五章，重点前三章。<br>材料题<br>实践和认知的关系<br>物质和意识的关系<br>矛盾的辨证统一关系(发展和生态保护的矛盾)<br>论述题<br>结合对立统一原理阐述为什么说我国的现代化发展中“既有成就，也有问题”。</p>
+<h2 id="计网"><a href="#计网" class="headerlink" title="计网"></a>计网</h2><p>40选择<br>10判断<br>10填空<br>3x10大题</p>
+<p>各种知识都考察到了，注意会有很多考研原题，一定要看老师发的资料。<br>大题<br>一 阐述dns协议的作用，以及客户端浏览器寻找一个域名，dns提供的服务过程。<br>二考察网络结构图<br>1.为路由器加上某个网络的跳转地址<br>2.两个主机之间相互通信，依次经过了交换机，路由器，集线器。起初arp和交换表都是空，问两次交换数据哪些主机收到了。<br>3.考察nat协议转发前后的，源地址和目的地址。<br>三，给一个c类网络地址，将该地址分为五个子网。每个子网至少20-30个主机。</p>
+<h2 id="单片机"><a href="#单片机" class="headerlink" title="单片机"></a>单片机</h2><p>15选择<br>15判断<br>4简答(7 8 8 9)<br>5程序填空(共40分)<br>绝大部分题都是课后题原题</p>
+<p>简答<br>1.简述51单片机的组成<br>2.简述单片机最小系统有哪些部分，以及各部分的作用<br>3.简述定时器工作方式1和2的特点<br>4.串行口的四种工作方式<br>程序<br>1 2 3 根据程序代码写出运行结果</p>
+<ol>
+<li>第一问：求出时钟频率6MHz，定时器工作方式1的情况下，定时1ms的定时器初值X<br>第二问：程序填空，考察中断入口，以及填入初值<br>5.多机通信<br>第一问：画多机通信图<br>第二问：六选四型程序填空</li>
+</ol>
+<h1 id="2023大三上期末回顾"><a href="#2023大三上期末回顾" class="headerlink" title="2023大三上期末回顾"></a>2023大三上期末回顾</h1><h2 id="数据库"><a href="#数据库" class="headerlink" title="数据库"></a>数据库</h2><p>填空<br>amstrong 公理系统<br>数据模式 三要素<br>索引选择策略<br>去重关键词<br>定义表时的唯一性<br>范式的定义<br>…<br>大题简答：<br>连接操作算法有哪些，在连接两个表(10行和1000行)时各需要扫描表几次<br>并发导致的几种问题是什么，以及哪些方法防止了哪个问题<br>计算：<br>一、sql语法：<br>选择语句(考到了三重select 加 in 加 not exists)，插入语句，创建视图<br>二、ER图<br>给出一个系统，画出er图</p>
+<ol>
+<li>写出该er图的关系模式<br>3.指出关系模式中的主码和外码<br>三、函数依赖集</li>
+<li>求最小依赖集</li>
+<li>分解关系，使得满足第三范式</li>
+</ol>
+<h2 id="传感器"><a href="#传感器" class="headerlink" title="传感器"></a>传感器</h2><p>考的非常基础<br>选择多选：和白皮书最近一套重合度很高。很基础。<br>填空：比较难的有：<br>微波的三类<br>动态特性概念：时域，频域<br>判断：冷门的有生物化学传感器(测血糖用的是酶传感器吗？)，但是前面选择给提示了。<br>大题六道：</p>
+<ol>
+<li>举出五个智能驾驶用到的传感器</li>
+<li>一阶函数的响应曲线计算(原题)</li>
+<li>平板电容器的电容变化量和位移灵敏度(原题)</li>
+<li>变气隙式厚度电感式求灵敏度</li>
+<li>求最大相对误差，给出两个温度计(精度等级0.5的0-300)和(精度等级1的0-100)问哪个好</li>
+<li>写出传感器的五个发展趋势</li>
+</ol>
+<h2 id="嵌入式"><a href="#嵌入式" class="headerlink" title="嵌入式"></a>嵌入式</h2><p>简答</p>
+<ol>
+<li>嵌入式系统的定义，与通用计算机的区别</li>
+<li>时钟系统有哪些</li>
+<li>总线有哪些</li>
+<li>NVIC配置</li>
+<li>GPIO配置</li>
+<li>ADC转换时间计算</li>
+<li>uart传输时间计算</li>
+<li>比较uart，i2c，spi<br>9.嵌入式系统的开发过程<br>程序填空有GPIO，ADC，DMA，TIM和NVIC的<br>填空题有五题，每题两空</li>
+<li>DMA传输四要素</li>
+</ol>
+<h2 id="人工智能"><a href="#人工智能" class="headerlink" title="人工智能"></a>人工智能</h2><p>简答：<br>1.人工智能的定义，近期目标和远期目标<br>2.状态空间法的定义和步骤<br>3.消解原理的过程<br>4.AI BI CI 的关系和区别<br>5.人工神经网络的三要素和含义<br>计算：<br>消解原理(书上原题找罪犯)<br>主观贝叶斯(课后作业原题)<br>决策树(贼简单，一步成)</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>Author: </span><span class="post-copyright-info"><a href="lsk404.github.io">Little_sk</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>Link: </span><span class="post-copyright-info"><a href="https://lsk404.github.io/2023/10/16/99be8824e482/">https://lsk404.github.io/2023/10/16/99be8824e482/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>Copyright Notice: </span><span class="post-copyright-info">All articles on this blog are licensed under <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> unless otherwise stated.</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0/">期末复习</a><a class="post-meta__tags" href="/tags/ZZU/">ZZU</a></div><div class="post-share"><div class="social-share" data-image="/img/avator.jpg" data-sites="wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related" href="/2023/10/16/c065df36a63a/" title="招新赛题解"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info"><div class="info-1"><div class="info-item-1">Previous</div><div class="info-item-2">招新赛题解</div></div><div class="info-2"><div class="info-item-1">注意事项请注意！：  题解仅代表个人看法，不代表最优解  每道题都会附上ac代码，但是仅作参考，要看懂后再了解代码。补题不要直接抄代码！禁止自欺欺人！  只提供题解，不提供题目信息 ac代码为C++版本，如果遇到不懂的语法请自行百度 ac代码中的循环经常用到了for(int i = 1;i&lt;=n;i++) ，这种在for的括号中int i的操作只有大于等于C++11标准才可以使用，编译错误时请检查自己编译使用的标准。  A.数位分解对于一个数x，   使用  x % 10 (% 是取余数) ，就可以得到他的最后一位 使用 x /= 10  (除以十并取整数)，就可以舍掉他的最后一位  使用while(x) 来进行循环 1234567891011#include&lt;iostream&gt;using namespace std;int main()&#123;	int x;	cin&gt;&gt;x;	while(x)&#123;		cout&lt;&lt; x % 10 &lt;&lt;&quot; &quot;;		x = x / 10;	&#125;	return...</div></div></div></a><a class="pagination-related" href="/2023/10/27/b104fde463a2/" title="Codeforces Round 904 (Div. 2)"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-right"><div class="info-1"><div class="info-item-1">Next</div><div class="info-item-2">Codeforces Round 904 (Div. 2)</div></div><div class="info-2"><div class="info-item-1">Dashboard - Codeforces Round 904 (Div. 2) - Codeforces C. Medium Design题意给长度为m的数组a，初始均为0。$1\le m \le 10^9$ 给出一些区间，请你选出其中某些区间。每选择一个区间，就令区间中的数都加一，问 数组中最大值$max(a)$ ,和最小值$ min(a)$ 的差，最大为多少。 思路考虑以下贪心策略：如果我们确定了最终第$i$个数是最大的那个数，即$ a[i] = max(a)$ , 那么我们就可以选择所有的包含$i$的区间。然后摒弃所有不包含$i$的区间。（选上包含$i$的区间一定会令$max(a)++$) , 这样我们可以遍历所有的数组下标$i$。 计算假使$i$为最大数时的$ans$，最终选择最大的$ans$即可。 我们可以先对区间进行排序。 然后根据右端点从小到大维护优先队列$pq$。这样按顺序遍历区间数组，就可以引入所有左端点小于等于$ i $的区间。然后通过剔除优先队列中的右端点小于i的区间。 这样优先队列中就保存了所有的包含$i$的区间。  因此有 $max(a) =...</div></div></div></a></nav><hr class="custom-hr"/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> Comments</span></div></div><div class="comment-wrap"><div><div class="vcomment" id="vcomment"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/avator.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">Little_sk</div><div class="author-info-description"></div><div class="site-data"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">51</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">20</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">7</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/lsk404/"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>Announcement</span></div><div class="announcement_content">加我友链！</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>Contents</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#2023%E5%A4%A7%E4%BA%8C%E4%B8%8A%E6%9C%9F%E6%9C%AB%E5%9B%9E%E9%A1%BE"><span class="toc-number">1.</span> <span class="toc-text">2023大二上期末回顾</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86"><span class="toc-number">1.1.</span> <span class="toc-text">计算机组成原理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B0%E5%AD%97%E7%94%B5%E8%B7%AF%E4%B8%8E%E6%95%B0%E5%AD%97%E7%B3%BB%E7%BB%9F"><span class="toc-number">1.2.</span> <span class="toc-text">数字电路与数字系统</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%AF%9B%E6%A6%82"><span class="toc-number">1.3.</span> <span class="toc-text">毛概</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Linux"><span class="toc-number">1.4.</span> <span class="toc-text">Linux</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BF%91%E4%BB%A3%E5%8F%B2"><span class="toc-number">1.5.</span> <span class="toc-text">近代史</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84"><span class="toc-number">1.6.</span> <span class="toc-text">数据结构</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2023%E5%A4%A7%E4%BA%8C%E4%B8%8B%E6%9C%9F%E6%9C%AB%E5%9B%9E%E9%A1%BE"><span class="toc-number">2.</span> <span class="toc-text">2023大二下期末回顾</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%8B%B1%E8%AF%AD"><span class="toc-number">2.1.</span> <span class="toc-text">英语</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F"><span class="toc-number">2.2.</span> <span class="toc-text">操作系统</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B9%A0%E6%A6%82"><span class="toc-number">2.3.</span> <span class="toc-text">习概</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%89%A9%E8%81%94%E7%BD%91%E5%B7%A5%E7%A8%8B%E5%AF%BC%E8%AE%BA"><span class="toc-number">2.4.</span> <span class="toc-text">物联网工程导论</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%A9%AC%E5%8E%9F"><span class="toc-number">2.5.</span> <span class="toc-text">马原</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%AE%A1%E7%BD%91"><span class="toc-number">2.6.</span> <span class="toc-text">计网</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8D%95%E7%89%87%E6%9C%BA"><span class="toc-number">2.7.</span> <span class="toc-text">单片机</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2023%E5%A4%A7%E4%B8%89%E4%B8%8A%E6%9C%9F%E6%9C%AB%E5%9B%9E%E9%A1%BE"><span class="toc-number">3.</span> <span class="toc-text">2023大三上期末回顾</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E5%BA%93"><span class="toc-number">3.1.</span> <span class="toc-text">数据库</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BC%A0%E6%84%9F%E5%99%A8"><span class="toc-number">3.2.</span> <span class="toc-text">传感器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B5%8C%E5%85%A5%E5%BC%8F"><span class="toc-number">3.3.</span> <span class="toc-text">嵌入式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD"><span class="toc-number">3.4.</span> <span class="toc-text">人工智能</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>Recent Posts</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/04/16/887930e5b441/" title="强化学习数学原理笔记">强化学习数学原理笔记</a><time datetime="2025-04-16T09:53:00.000Z" title="Created 2025-04-16 17:53:00">2025-04-16</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/04/12/d49b5a7aa584/" title="2025蓝桥杯PythonA组省赛题解">2025蓝桥杯PythonA组省赛题解</a><time datetime="2025-04-12T12:28:00.000Z" title="Created 2025-04-12 20:28:00">2025-04-12</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/03/09/0ed69ce9ed7c/" title="电子扫盲">电子扫盲</a><time datetime="2025-03-09T04:00:00.000Z" title="Created 2025-03-09 12:00:00">2025-03-09</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/02/12/27d697c28fe4/" title="十六届蓝桥杯模拟赛3题解">十六届蓝桥杯模拟赛3题解</a><time datetime="2025-02-12T04:00:00.000Z" title="Created 2025-02-12 12:00:00">2025-02-12</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/12/02/c836153aa73d/" title="十六届蓝桥杯模拟赛1题解">十六届蓝桥杯模拟赛1题解</a><time datetime="2024-12-02T04:00:00.000Z" title="Created 2024-12-02 12:00:00">2024-12-02</time></div></div></div></div></div></div></main><footer id="footer" style="background-image: url(img/bg3.png);"><div id="footer-wrap"><div class="framework-info"><span>Framework </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo 7.3.0</a><span class="footer-separator">|</span><span>Theme </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly 5.3.5</a></div><div class="footer_custom_text"><a href="https://icp.gov.moe/?keyword=20250258" target="_blank">萌ICP备20250258号</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="Reading Mode"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="Toggle Between Light and Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle Between Single-column and Double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="Settings"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="Table of Contents"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="Scroll to Comments"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="Back to Top"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload/dist/lazyload.iife.min.js"></script><div class="js-pjax"><script>(() => {
+  const loadMathjax = () => {
+    if (!window.MathJax) {
+      window.MathJax = {
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']],
+          tags: 'none',
+        },
+        chtml: {
+          scale: 1.1
+        },
+        options: {
+          enableMenu: true,
+          renderActions: {
+            findScript: [10, doc => {
+              for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+                const display = !!node.type.match(/; *mode=display/)
+                const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display)
+                const text = document.createTextNode('')
+                node.parentNode.replaceChild(text, node)
+                math.start = {node: text, delim: '', n: 0}
+                math.end = {node: text, delim: '', n: 0}
+                doc.math.push(math)
+              }
+            }, '']
+          }
+        }
+      }
+
+      const script = document.createElement('script')
+      script.src = 'https://cdn.jsdelivr.net/npm/mathjax/es5/tex-mml-chtml.min.js'
+      script.id = 'MathJax-script'
+      script.async = true
+      document.head.appendChild(script)
+    } else {
+      MathJax.startup.document.state(0)
+      MathJax.texReset()
+      MathJax.typesetPromise()
+    }
+  }
+
+  btf.addGlobalFn('encrypt', loadMathjax, 'mathjax')
+  window.pjax ? loadMathjax() : window.addEventListener('load', loadMathjax)
+})()</script><script>(() => {
+  const runMermaid = ele => {
+    window.loadMermaid = true
+    const theme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'default'
+
+    ele.forEach((item, index) => {
+      const mermaidSrc = item.firstElementChild
+      const mermaidThemeConfig = `%%{init:{ 'theme':'${theme}'}}%%\n`
+      const mermaidID = `mermaid-${index}`
+      const mermaidDefinition = mermaidThemeConfig + mermaidSrc.textContent
+
+      const renderFn = mermaid.render(mermaidID, mermaidDefinition)
+      const renderMermaid = svg => {
+        mermaidSrc.insertAdjacentHTML('afterend', svg)
+      }
+
+      // mermaid v9 and v10 compatibility
+      typeof renderFn === 'string' ? renderMermaid(renderFn) : renderFn.then(({ svg }) => renderMermaid(svg))
+    })
+  }
+
+  const codeToMermaid = () => {
+    const codeMermaidEle = document.querySelectorAll('pre > code.mermaid')
+    if (codeMermaidEle.length === 0) return
+
+    codeMermaidEle.forEach(ele => {
+      const preEle = document.createElement('pre')
+      preEle.className = 'mermaid-src'
+      preEle.hidden = true
+      preEle.textContent = ele.textContent
+      const newEle = document.createElement('div')
+      newEle.className = 'mermaid-wrap'
+      newEle.appendChild(preEle)
+      ele.parentNode.replaceWith(newEle)
+    })
+  }
+
+  const loadMermaid = () => {
+    if (false) codeToMermaid()
+    const $mermaid = document.querySelectorAll('#article-container .mermaid-wrap')
+    if ($mermaid.length === 0) return
+
+    const runMermaidFn = () => runMermaid($mermaid)
+    btf.addGlobalFn('themeChange', runMermaidFn, 'mermaid')
+    window.loadMermaid ? runMermaidFn() : btf.getScript('https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js').then(runMermaidFn)
+  }
+
+  btf.addGlobalFn('encrypt', loadMermaid, 'mermaid')
+  window.pjax ? loadMermaid() : document.addEventListener('DOMContentLoaded', loadMermaid)
+})()</script><script>(() => {
+  const isShuoshuo = GLOBAL_CONFIG_SITE.pageType === 'shuoshuo'
+  const option = null
+
+  const initValine = (el, path) => {
+    if (isShuoshuo) {
+      window.shuoshuoComment.destroyValine = () => {
+        if (el.children.length) {
+          el.innerHTML = ''
+          el.classList.add('no-comment')
+        }
+      }
+    }
+
+    const valineConfig = {
+      el: '#vcomment',
+      appId: 'jY5tnMLwMUhZNOv61yXvepci-gzGzoHsz',
+      appKey: 'gZbn0Lr7joLZ83iUlbqPfk4J',
+      avatar: 'monsterid',
+      serverURLs: '',
+      emojiMaps: "",
+      visitor: false,
+      ...option,
+      path: isShuoshuo ? path : (option && option.path) || window.location.pathname
+    }
+
+    new Valine(valineConfig)
+  }
+
+  const loadValine = async (el, path) => {
+    if (typeof Valine === 'function') {
+      initValine(el, path)
+    } else {
+      await btf.getScript('https://cdn.jsdelivr.net/npm/valine/dist/Valine.min.js')
+      initValine(el, path)
+    }
+  }
+
+  if (isShuoshuo) {
+    'Valine' === 'Valine'
+      ? window.shuoshuoComment = { loadComment: loadValine }
+      : window.loadOtherComment = loadValine
+    return
+  }
+
+  if ('Valine' === 'Valine' || !true) {
+    if (true) btf.loadComment(document.getElementById('vcomment'),loadValine)
+    else setTimeout(loadValine, 0)
+  } else {
+    window.loadOtherComment = loadValine
+  }
+})()</script></div><script id="click-heart" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/click-heart.min.js" async="async" mobile="false"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div class="docsearch-wrap"><div id="docsearch" style="display:none"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@docsearch/css/dist/style.min.css"/><script src="https://cdn.jsdelivr.net/npm/@docsearch/js/dist/umd/index.min.js"></script><script>(() => {
+  docsearch(Object.assign({
+    appId: '01FHVVY2XK',
+    apiKey: '758762af2109005ec9cba47e50ae0bfa',
+    indexName: 'lsk404io_articles',
+    container: '#docsearch',
+    placeholder: 'Search what you want to search',
+  }, null))
+
+  const handleClick = () => {
+    document.querySelector('.DocSearch-Button').click()
+  }
+
+  const searchClickFn = () => {
+    btf.addEventListenerPjax(document.querySelector('#search-button > .search'), 'click', handleClick)
+  }
+
+  searchClickFn()
+  window.addEventListener('pjax:complete', searchClickFn)
+})()</script></div></div></body></html>
