@@ -1,0 +1,323 @@
+<!DOCTYPE html><html lang="en" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>mysql远程连接 | Little_sk</title><meta name="author" content="Little_sk"><meta name="copyright" content="Little_sk"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="搞了一天的mysql远程连接， 也算是踩过坑了，这里记录一下 如果你的mysql无法被远程连接，那么请依次检查如下条件： 1. 服务器的防火墙（安全组）放行端口如果mysql服务在云服务器上运行， 那么请检查云服务器是否将端口3306开放。 如果没有开放请设置为通行状态。。这里不同的云服务器厂商的截图不同，我这里给出华为云的安全组设置 华为云： 2. 启动mysql的远程连接服务在命令台中使用my">
+<meta property="og:type" content="article">
+<meta property="og:title" content="mysql远程连接">
+<meta property="og:url" content="https://lsk404.github.io/a726c975d078/index.html">
+<meta property="og:site_name" content="Little_sk">
+<meta property="og:description" content="搞了一天的mysql远程连接， 也算是踩过坑了，这里记录一下 如果你的mysql无法被远程连接，那么请依次检查如下条件： 1. 服务器的防火墙（安全组）放行端口如果mysql服务在云服务器上运行， 那么请检查云服务器是否将端口3306开放。 如果没有开放请设置为通行状态。。这里不同的云服务器厂商的截图不同，我这里给出华为云的安全组设置 华为云： 2. 启动mysql的远程连接服务在命令台中使用my">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://lsk404.github.io/img/avator.jpg">
+<meta property="article:published_time" content="2024-06-29T04:00:00.000Z">
+<meta property="article:modified_time" content="2025-03-20T14:36:20.934Z">
+<meta property="article:author" content="Little_sk">
+<meta property="article:tag" content="笔记">
+<meta property="article:tag" content="mysql">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://lsk404.github.io/img/avator.jpg"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "mysql远程连接",
+  "url": "https://lsk404.github.io/a726c975d078/",
+  "image": "https://lsk404.github.io/img/avator.jpg",
+  "datePublished": "2024-06-29T04:00:00.000Z",
+  "dateModified": "2025-03-20T14:36:20.934Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "Little_sk",
+      "url": "https://lsk404.github.io/lsk404.github.io"
+    }
+  ]
+}</script><link rel="shortcut icon" href="/img/favicon.ico"><link rel="canonical" href="https://lsk404.github.io/a726c975d078/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//www.google-analytics.com" crossorigin=""/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script async="async" src="https://www.googletagmanager.com/gtag/js?id=G-745T2DDK98"></script><script>window.dataLayer = window.dataLayer || []
+function gtag(){dataLayer.push(arguments)}
+gtag('js', new Date())
+gtag('config', 'G-745T2DDK98')
+btf.addGlobalFn('pjaxComplete', () => {
+  gtag('config', 'G-745T2DDK98', {'page_path': window.location.pathname})
+}, 'google_analytics')
+</script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: 'Copy Successful',
+    error: 'Copy Failed',
+    noSupport: 'Browser Not Supported'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: 'days',
+  dateSuffix: {
+    just: 'Just now',
+    min: 'minutes ago',
+    hour: 'hours ago',
+    day: 'days ago',
+    month: 'months ago'
+  },
+  copyright: {"limitCount":150,"languages":{"author":"Author: Little_sk","link":"Link: ","source":"Source: Little_sk","info":"Copyright belongs to the author. For commercial use, please contact the author for authorization. For non-commercial use, please indicate the source."}},
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: 'Load More'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: true,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: true,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'mysql远程连接',
+  isHighlightShrink: false,
+  isToc: true,
+  pageType: 'post'
+}</script><meta name="generator" content="Hexo 7.3.0"></head><body><div id="web_bg" style="background-image: url(img/bg3.png);"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/avator.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">51</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">21</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">7</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-clock"></i><span> 时间线</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg fixed" id="page-header" style="background-image: url(/img/bg.png);"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><img class="site-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/favicon.ico" alt="Logo"></a><a class="nav-page-title" href="/"><span class="site-name">mysql远程连接</span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-clock"></i><span> 时间线</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="post-info"><h1 class="post-title">mysql远程连接</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">Created</span><time class="post-meta-date-created" datetime="2024-06-29T04:00:00.000Z" title="Created 2024-06-29 12:00:00">2024-06-29</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">Updated</span><time class="post-meta-date-updated" datetime="2025-03-20T14:36:20.934Z" title="Updated 2025-03-20 22:36:20">2025-03-20</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E7%AC%94%E8%AE%B0/">笔记</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">Word Count:</span><span class="word-count">380</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">Post Views:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><p>搞了一天的mysql远程连接， 也算是踩过坑了，这里记录一下</p>
+<p>如果你的mysql无法被远程连接，那么请依次检查如下条件：</p>
+<h1 id="1-服务器的防火墙（安全组）放行端口"><a href="#1-服务器的防火墙（安全组）放行端口" class="headerlink" title="1. 服务器的防火墙（安全组）放行端口"></a>1. 服务器的防火墙（安全组）放行端口</h1><p>如果mysql服务在云服务器上运行， 那么请检查云服务器是否将端口3306开放。 如果没有开放请设置为通行状态。。<br>这里不同的云服务器厂商的截图不同，我这里给出华为云的安全组设置</p>
+<p>华为云：<br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img-blog.csdnimg.cn/direct/e44f593c14434d7e87359c45016de270.png#pic_center" alt="在这里插入图片描述"></p>
+<h1 id="2-启动mysql的远程连接服务"><a href="#2-启动mysql的远程连接服务" class="headerlink" title="2. 启动mysql的远程连接服务"></a>2. 启动mysql的远程连接服务</h1><p>在命令台中使用mysql -uroot 进入你的mysql数据库。<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql -uroot </span><br></pre></td></tr></table></figure><br>选择mysql库<br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">use mysql</span><br></pre></td></tr></table></figure><br>检查user表中的host和User信息。<br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select host,User from user;</span><br></pre></td></tr></table></figure><br>如果你的root字段对应的host是localhost，那么代表root账户只能本地登录。<br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">+-----------+------------------+</span><br><span class="line">| host      | User             |</span><br><span class="line">+-----------+------------------+</span><br><span class="line">| localhost | root             |</span><br><span class="line">| localhost | debian-sys-maint |</span><br><span class="line">| localhost | mysql.infoschema |</span><br><span class="line">| localhost | mysql.session    |</span><br><span class="line">| localhost | mysql.sys        |</span><br><span class="line">+-----------+------------------+</span><br></pre></td></tr></table></figure></p>
+<p>可以将host字段更改为%表示允许所有ip登录root账号。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">update user  set host = &#x27;%&#x27; where user = &#x27;root&#x27;;   </span><br></pre></td></tr></table></figure>
+<p>更改后使用查表命令检查一下<br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select host,User from user;</span><br></pre></td></tr></table></figure><br>更改后应该为如下：<br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">+-----------+------------------+</span><br><span class="line">| host      | User             |</span><br><span class="line">+-----------+------------------+</span><br><span class="line">| %         | root             |</span><br><span class="line">| localhost | debian-sys-maint |</span><br><span class="line">| localhost | mysql.infoschema |</span><br><span class="line">| localhost | mysql.session    |</span><br><span class="line">| localhost | mysql.sys        |</span><br><span class="line">+-----------+------------------+</span><br></pre></td></tr></table></figure></p>
+<h1 id="3-更改密码验证方式"><a href="#3-更改密码验证方式" class="headerlink" title="3. 更改密码验证方式"></a>3. 更改密码验证方式</h1><p>如果mysql版本是5.7或更低，无需考虑本条。</p>
+<p>在mysql版本8.0版本后， 使用sha2方式来验证密码。 就导致我们不能正确连接。需要设置为允许密码连接。<br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ALTER USER &#x27;root&#x27;@&#x27;%&#x27; IDENTIFIED WITH mysql_native_password BY &#x27;password&#x27;;</span><br></pre></td></tr></table></figure></p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>Author: </span><span class="post-copyright-info"><a href="lsk404.github.io">Little_sk</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>Link: </span><span class="post-copyright-info"><a href="https://lsk404.github.io/a726c975d078/">https://lsk404.github.io/a726c975d078/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>Copyright Notice: </span><span class="post-copyright-info">All articles on this blog are licensed under <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> unless otherwise stated.</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E7%AC%94%E8%AE%B0/">笔记</a><a class="post-meta__tags" href="/tags/mysql/">mysql</a></div><div class="post-share"><div class="social-share" data-image="/img/avator.jpg" data-sites="wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related" href="/1991cceefb9e/" title="Codeforces Round 941 (Div. 2)"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info"><div class="info-1"><div class="info-item-1">Previous</div><div class="info-item-2">Codeforces Round 941 (Div. 2)</div></div><div class="info-2"><div class="info-item-1">题目链接 A. Card Exchange题意给你n个牌，每个牌都有一个数字。 每次你可以选择恰好k个相同数字的牌， 然后将他们替换为任意的k-1张牌。（这k-1张牌的上的数字任意） 问在经过一些操作后，最终能剩下的牌的数量最少是多少。 思路最终剩下牌的数量 = n - 最多执行的操作次数。 所以我们很明显地发现，如果起初不存在相同的k个数，那么就无法进行操作，直接输出n即可。 给出结论，如果可以进行第一次操作，那么就可以使得最终牌的数量变为k - 1。 下面是证明： 我们设当前有n张牌 ， 在满足”存在相同的k张牌“的前提下， 有如下两种情况：  只有k张牌，且全部相同。那么再进行一次操作就可以实现最终剩下k-1张牌。 除了这k张牌之外，还有其他的牌（设他的值为num），那么我们就可以选择k-1张num来替换起初的k张相同牌，...</div></div></div></a><a class="pagination-related" href="/378335218210/" title="搭建qqbot经历"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-right"><div class="info-1"><div class="info-item-1">Next</div><div class="info-item-2">搭建qqbot经历</div></div><div class="info-2"><div class="info-item-1">2024-7-4 虽然最终没有成功配置好qqbot，但是感觉这个过程还是值得记录的，所以写出了下文 最终因为登陆qq时的code45问题导致没有成功登录，据说更换qq号或者配置签名服务器是有可能可行的。 安装环境安装mcl（mirai的控制台）创建一个文件夹mcl 并进入文件夹 1mkdir mcl &amp;&amp; cd mcl 寻找适合你的操作系统的的mcl安装包 (下载链接)，将安装包下载到刚刚创建的文件夹中 下面shell指令以mcl-installer-1.0.7-linux-amd64为例 1wget https://github.com/iTXTech/mcl-installer/releases/download/v1.0.7/mcl-installer-1.0.7-linux-amd64 赋予可运行权限，运行 1chmod +x...</div></div></div></a></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>Related Articles</span></div><div class="relatedPosts-list"><a class="pagination-related" href="/10a9231f6b6b/" title="ACM笔记"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2023-09-17</div><div class="info-item-2">ACM笔记</div></div><div class="info-2"><div class="info-item-1">数论博弈论：sg函数定义NIM博弈： 给定n堆物品，第$i$堆物品有$A_i$ 个，两名玩家轮流行动，每次任选一堆，取出任意多个物品，取走最后一件物品者胜利。 当且仅当 $A_1 xorA_2xor…xorA_n$时，NIM博弈先手必胜。 公平组合游戏ICG：（NIM就是经典的公平组合游戏） 1.由两名玩家交替行动2.在游戏进程的任意时刻，可以执行的合法行动与轮到哪名玩家无关3.不能行动的玩家判负 有向图游戏： 给定一个有向无环图，途中有唯一的起点，在起点放一枚棋子。两名玩家交替把这个棋子沿边移动，无法移动者判负。 公平组合游戏都可以转化为有向图游戏。 SG函数： 在有向图游戏中，对于节点x，设从节点x出发分别到达了$y_1,y_2,…,y_k$ ，定义$sg(x)$: $sg(x) = mex({ sg(y_1),sg(y_2),…,sg(y_k)})$ 。（mex(s)表示不属于集合s的最小非负整数） 对于整个有向图G，$sg(G) = sg(s)$ 对于多个有向图游戏$G_1,G_2,…,G_m$的和G$SG(G) =...</div></div></div></a><a class="pagination-related" href="/887930e5b441/" title="强化学习数学原理笔记"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-04-16</div><div class="info-item-2">强化学习数学原理笔记</div></div><div class="info-2"><div class="info-item-1">可能会出现公式加载错误的情况，可以直接下载pdf版本。 强化学习数学原理第一章基本概念 grid-world example ： 一个机器人走网格的经典例子，机器人尽量避免进入forbidden grid、尽量减少拐弯、不要走出边界、……  state: 状态，表示为一个节点，在grid-world中可以表示为一个格子（也可以添加其他信息到状态，如速度等）  state space：状态空间，所有状态的集合。  action：行动，能够使得状态变化的动作。（如向上/下/左/右移动，等）  action space：行动的集合，通常依赖于当前的状态。  state transition：状态转移，从一个状态移动到另一个状态。   $s_5 \overset{a_1}{\rightarrow} s_6$ 表示从状态$s_5$ 经过动作$a_1$ 到达状态 $a_6$  state transition probability: 状态转移的条件概率。（例如：$p(s_2|s_1,a_2) = 0.8$ 代表在状态$s_1$，行动$a_2$...</div></div></div></a><a class="pagination-related" href="/887d60201e7d/" title="markdown基础语法"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2024-03-24</div><div class="info-item-2">markdown基础语法</div></div><div class="info-2"><div class="info-item-1">Markdown语法安装离线编辑软件TyporaTypora下载。官网下载后去github上下载破解器https://github.com/WittonBell/typoraCracker 在线协同编辑器CodiMD在线协同编辑markdown http://120.26.48.253:3000/( 搭建在我的服务器上，所以一年后(2025/3/20)就寄了) 常用语法 中间空出一行(相当于按了两次回车)则新起一段  使用#加一个空格来表示标题   1234# 一号标题## 二号标题### ...###### 六号标题  代码块，使用反引号(在键盘左上角)  一个反引号是段内代码段内代码 ，常用作关键字标记。 或者用来阻止解析公式abc 代码块:每边三个反引号(在键盘的左上角，tab的上面)，中间包裹住的行就是代码块的部分。 123这是一个代码块代码块可以偶很多行代码块还可以选择代码语言来标记高亮 在代码块(并非段内代码)的第一个三反引号的后面跟上代码语言，可以实现对应的高亮 12345#include&lt;iostream&gt;using namespace...</div></div></div></a><a class="pagination-related" href="/b4bdaa4b4566/" title="python配置cuda"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2024-08-27</div><div class="info-item-2">python配置cuda</div></div><div class="info-2"><div class="info-item-1">使用pytorch进行深度学习的时候，往往想用GPU进行运算来提高速度。于是搜索便知道了CUDA。 下面给出一个自检的建议：  检查cuda的版本是否适配自己的GPU。  打开NVDIA控制面板，点击左下角“系统信息”，然后就可以看到NVDIA GPU的详细信息，其中就包含了CUDA的版本。在官网安装合适版本的cuda-toolkit。   安装了cuda，但是命令行输入nvcc -V 报错显示没有nvcc   这时候可能没有将CUDA添加到环境变量。检查系统变量中是否包含了CUDA_PATH ,以及CUDA_PATH_Vx.x  , 以及PATH中是否包含了cuda的bin目录。   在命令行输入nvcc -V 可以正常运行，但是在python中使用print(torch.cuda.is_available()) 显示的是False。 这时候考虑torch安装错误。  （直接使用pip install torch 会安装cpu版本的torch，导致无法使用cuda） 卸载原先的torch，pip uninstall...</div></div></div></a><a class="pagination-related" href="/0a85d83dfe8a/" title="cpp知识点总结"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2023-06-27</div><div class="info-item-2">cpp知识点总结</div></div><div class="info-2"><div class="info-item-1">0. 杂类cin/cout提速使用ios::sync_with_stdio(false);加速输入输出速度 &lt;&lt;的优先级运算符&lt;&lt;和&gt;&gt; 的优先级比表达式中有的运算符要高，有时候要加上括号 1cout&lt;&lt;(a&lt;b)&lt;&lt;endl; 字符函数库cctype判断一个字符ch是什么类型的： 1234isalpha(ch);//字母isdight(ch);//数字isspace(ch);//空白（不止是空格）ispunct(ch);//标点 比直接判断ASCII码更加容易使用（有的字符格式没有用ASCII码存就只能这么判断） 文件输入输出IO包含库文件fstream后可以进行文件的读写 创建ofstream对象和ifstream对象来分别对文件进行写和读用法和cout...</div></div></div></a></div></div><hr class="custom-hr"/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> Comments</span></div></div><div class="comment-wrap"><div><div class="vcomment" id="vcomment"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/avator.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">Little_sk</div><div class="author-info-description"></div><div class="site-data"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">51</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">21</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">7</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/lsk404/"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>Announcement</span></div><div class="announcement_content">加我友链！</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>Contents</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%9A%84%E9%98%B2%E7%81%AB%E5%A2%99%EF%BC%88%E5%AE%89%E5%85%A8%E7%BB%84%EF%BC%89%E6%94%BE%E8%A1%8C%E7%AB%AF%E5%8F%A3"><span class="toc-number">1.</span> <span class="toc-text">1. 服务器的防火墙（安全组）放行端口</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-%E5%90%AF%E5%8A%A8mysql%E7%9A%84%E8%BF%9C%E7%A8%8B%E8%BF%9E%E6%8E%A5%E6%9C%8D%E5%8A%A1"><span class="toc-number">2.</span> <span class="toc-text">2. 启动mysql的远程连接服务</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-%E6%9B%B4%E6%94%B9%E5%AF%86%E7%A0%81%E9%AA%8C%E8%AF%81%E6%96%B9%E5%BC%8F"><span class="toc-number">3.</span> <span class="toc-text">3. 更改密码验证方式</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>Recent Posts</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/555324d54baf/" title="期末回顾">期末回顾</a><time datetime="2025-06-06T04:00:00.000Z" title="Created 2025-06-06 12:00:00">2025-06-06</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/887930e5b441/" title="强化学习数学原理笔记">强化学习数学原理笔记</a><time datetime="2025-04-16T09:53:00.000Z" title="Created 2025-04-16 17:53:00">2025-04-16</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/d49b5a7aa584/" title="2025蓝桥杯PythonA组省赛题解">2025蓝桥杯PythonA组省赛题解</a><time datetime="2025-04-12T12:28:00.000Z" title="Created 2025-04-12 20:28:00">2025-04-12</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/0ed69ce9ed7c/" title="电子扫盲">电子扫盲</a><time datetime="2025-03-09T04:00:00.000Z" title="Created 2025-03-09 12:00:00">2025-03-09</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/27d697c28fe4/" title="十六届蓝桥杯模拟赛3题解">十六届蓝桥杯模拟赛3题解</a><time datetime="2025-02-12T04:00:00.000Z" title="Created 2025-02-12 12:00:00">2025-02-12</time></div></div></div></div></div></div></main><footer id="footer" style="background-image: url(img/bg3.png);"><div id="footer-wrap"><div class="framework-info"><span>Framework </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo 7.3.0</a><span class="footer-separator">|</span><span>Theme </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly 5.3.5</a></div><div class="footer_custom_text"><a href="https://icp.gov.moe/?keyword=20250258" target="_blank">萌ICP备20250258号</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="Reading Mode"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="Toggle Between Light and Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle Between Single-column and Double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="Settings"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="Table of Contents"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="Scroll to Comments"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="Back to Top"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload/dist/lazyload.iife.min.js"></script><div class="js-pjax"><script>(() => {
+  const loadMathjax = () => {
+    if (!window.MathJax) {
+      window.MathJax = {
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']],
+          tags: 'none',
+        },
+        chtml: {
+          scale: 1.1
+        },
+        options: {
+          enableMenu: true,
+          renderActions: {
+            findScript: [10, doc => {
+              for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+                const display = !!node.type.match(/; *mode=display/)
+                const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display)
+                const text = document.createTextNode('')
+                node.parentNode.replaceChild(text, node)
+                math.start = {node: text, delim: '', n: 0}
+                math.end = {node: text, delim: '', n: 0}
+                doc.math.push(math)
+              }
+            }, '']
+          }
+        }
+      }
+
+      const script = document.createElement('script')
+      script.src = 'https://cdn.jsdelivr.net/npm/mathjax/es5/tex-mml-chtml.min.js'
+      script.id = 'MathJax-script'
+      script.async = true
+      document.head.appendChild(script)
+    } else {
+      MathJax.startup.document.state(0)
+      MathJax.texReset()
+      MathJax.typesetPromise()
+    }
+  }
+
+  btf.addGlobalFn('encrypt', loadMathjax, 'mathjax')
+  window.pjax ? loadMathjax() : window.addEventListener('load', loadMathjax)
+})()</script><script>(() => {
+  const runMermaid = ele => {
+    window.loadMermaid = true
+    const theme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'default'
+
+    ele.forEach((item, index) => {
+      const mermaidSrc = item.firstElementChild
+      const mermaidThemeConfig = `%%{init:{ 'theme':'${theme}'}}%%\n`
+      const mermaidID = `mermaid-${index}`
+      const mermaidDefinition = mermaidThemeConfig + mermaidSrc.textContent
+
+      const renderFn = mermaid.render(mermaidID, mermaidDefinition)
+      const renderMermaid = svg => {
+        mermaidSrc.insertAdjacentHTML('afterend', svg)
+      }
+
+      // mermaid v9 and v10 compatibility
+      typeof renderFn === 'string' ? renderMermaid(renderFn) : renderFn.then(({ svg }) => renderMermaid(svg))
+    })
+  }
+
+  const codeToMermaid = () => {
+    const codeMermaidEle = document.querySelectorAll('pre > code.mermaid')
+    if (codeMermaidEle.length === 0) return
+
+    codeMermaidEle.forEach(ele => {
+      const preEle = document.createElement('pre')
+      preEle.className = 'mermaid-src'
+      preEle.hidden = true
+      preEle.textContent = ele.textContent
+      const newEle = document.createElement('div')
+      newEle.className = 'mermaid-wrap'
+      newEle.appendChild(preEle)
+      ele.parentNode.replaceWith(newEle)
+    })
+  }
+
+  const loadMermaid = () => {
+    if (false) codeToMermaid()
+    const $mermaid = document.querySelectorAll('#article-container .mermaid-wrap')
+    if ($mermaid.length === 0) return
+
+    const runMermaidFn = () => runMermaid($mermaid)
+    btf.addGlobalFn('themeChange', runMermaidFn, 'mermaid')
+    window.loadMermaid ? runMermaidFn() : btf.getScript('https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js').then(runMermaidFn)
+  }
+
+  btf.addGlobalFn('encrypt', loadMermaid, 'mermaid')
+  window.pjax ? loadMermaid() : document.addEventListener('DOMContentLoaded', loadMermaid)
+})()</script><script>(() => {
+  const isShuoshuo = GLOBAL_CONFIG_SITE.pageType === 'shuoshuo'
+  const option = null
+
+  const initValine = (el, path) => {
+    if (isShuoshuo) {
+      window.shuoshuoComment.destroyValine = () => {
+        if (el.children.length) {
+          el.innerHTML = ''
+          el.classList.add('no-comment')
+        }
+      }
+    }
+
+    const valineConfig = {
+      el: '#vcomment',
+      appId: 'jY5tnMLwMUhZNOv61yXvepci-gzGzoHsz',
+      appKey: 'gZbn0Lr7joLZ83iUlbqPfk4J',
+      avatar: 'monsterid',
+      serverURLs: '',
+      emojiMaps: "",
+      visitor: false,
+      ...option,
+      path: isShuoshuo ? path : (option && option.path) || window.location.pathname
+    }
+
+    new Valine(valineConfig)
+  }
+
+  const loadValine = async (el, path) => {
+    if (typeof Valine === 'function') {
+      initValine(el, path)
+    } else {
+      await btf.getScript('https://cdn.jsdelivr.net/npm/valine/dist/Valine.min.js')
+      initValine(el, path)
+    }
+  }
+
+  if (isShuoshuo) {
+    'Valine' === 'Valine'
+      ? window.shuoshuoComment = { loadComment: loadValine }
+      : window.loadOtherComment = loadValine
+    return
+  }
+
+  if ('Valine' === 'Valine' || !true) {
+    if (true) btf.loadComment(document.getElementById('vcomment'),loadValine)
+    else setTimeout(loadValine, 0)
+  } else {
+    window.loadOtherComment = loadValine
+  }
+})()</script></div><script id="click-heart" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/click-heart.min.js" async="async" mobile="false"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>

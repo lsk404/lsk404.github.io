@@ -525,6 +525,13 @@
   </url>
   
   <url>
+    <loc>https://lsk404.github.io/tags/Python/</loc>
+    <lastmod>2025-06-06</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
     <loc>https://lsk404.github.io/tags/%E6%A8%A1%E6%9D%BF/</loc>
     <lastmod>2025-06-06</lastmod>
     <changefreq>weekly</changefreq>
@@ -533,13 +540,6 @@
   
   <url>
     <loc>https://lsk404.github.io/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/</loc>
-    <lastmod>2025-06-06</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://lsk404.github.io/tags/Python/</loc>
     <lastmod>2025-06-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -609,6 +609,20 @@
   </url>
   
   <url>
+    <loc>https://lsk404.github.io/tags/%E7%94%B5%E5%AD%90%E6%89%AB%E7%9B%B2/</loc>
+    <lastmod>2025-06-06</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://lsk404.github.io/tags/%E8%AE%B2%E5%BA%A7/</loc>
+    <lastmod>2025-06-06</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
     <loc>https://lsk404.github.io/tags/%E6%9C%9F%E6%9C%AB/</loc>
     <lastmod>2025-06-06</lastmod>
     <changefreq>weekly</changefreq>
@@ -624,20 +638,6 @@
   
   <url>
     <loc>https://lsk404.github.io/tags/%E9%83%91%E5%B7%9E%E5%A4%A7%E5%AD%A6/</loc>
-    <lastmod>2025-06-06</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://lsk404.github.io/tags/%E7%94%B5%E5%AD%90%E6%89%AB%E7%9B%B2/</loc>
-    <lastmod>2025-06-06</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://lsk404.github.io/tags/%E8%AE%B2%E5%BA%A7/</loc>
     <lastmod>2025-06-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -681,14 +681,14 @@
   </url>
   
   <url>
-    <loc>https://lsk404.github.io/categories/%E5%AD%A6%E4%B9%A0/</loc>
+    <loc>https://lsk404.github.io/categories/%E8%AE%B2%E5%BA%A7/</loc>
     <lastmod>2025-06-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://lsk404.github.io/categories/%E8%AE%B2%E5%BA%A7/</loc>
+    <loc>https://lsk404.github.io/categories/%E5%AD%A6%E4%B9%A0/</loc>
     <lastmod>2025-06-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
