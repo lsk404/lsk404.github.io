@@ -45,6 +45,25 @@ G Spanning Tree题意起初树只有n个节点，没有边，按照如下操作�
       </tags>
   </entry>
   <entry>
+    <title>2023ICPC网络赛第二场</title>
+    <url>/026c0040b952/</url>
+    <content><![CDATA[[The 2023 ICPC Asia Regionals Online Contest (2) (pintia.cn)](https://pintia.cn/market/item/1705511462254264320)
+**K Super-knight**题意有一个士兵，起初在n*n的棋盘的左下角，每次向右移动a格，向上移动b格，当越过地图边界时，则到地图的另一边（类似于没有边界墙的贪吃蛇），对这个士兵能到达的格子做标记，所有被标记的格子中，离左下角格子最近的距离是多少。（假设最近的格子为undefinedx, y)，就输出(x - 1)^2+(y - 1)^2$ )
+（ 2 \le n \le 10^{18}, 1 \le a,b \le 200)
+思路可以得出，在经过n次移动后，一定回回到起始点，所以最终的路径一定是循环的。
+但n太大，无法通过这样判断所有的被标记的点。
+可以发现，在移动了若干次后，除非穿过地图边界，否则只会增加 与原点的距离。因此我们只需要考虑**刚穿过地图边界的点** 即可。这样可以省下很多时间：（每次直接刚好跨出地图边界，设从undefinednowx,nowy)点开始跨，那么一大步就跨了大约min(\frac{n}{a},\frac{n}{b})$步，而一共进行n小步就可以回到初始点完成一次循环，因此总共需要的大跨步的次数仅仅是 a ，b的数量级，于是我们就可以在规定的时间内完成计算）
+代码#include&lt;iostream&gt;using namespace std;#define int long long int a,b,n;inline int dis(int x,int y)&#123;	return (x * x  + y * y ); &#125;int cnt = 0;signed main()&#123;	int t;	cin&gt;&gt;t;	while(t--)&#123;		cin&gt;&gt;a&gt;&gt;b&gt;&gt;n;		a = a % n;		b = b % n;		int nowa = a % n;		int nowb = b % n;		int minn = a * a + b * b;		while(nowa !=0 || nowb != 0)&#123;			cnt ++;			if(nowa &lt;=300 &amp;&amp; nowb &lt;=300) 				minn = min(minn,dis(nowa,nowb));			int k = min((n - nowa - 1) / a,(n - nowb - 1) / b) + 1;			nowa = (nowa + a * k % n) % n;			nowb = (nowb + b * k % n) % n;					&#125;		cout&lt;&lt;&quot;**&quot;&lt;&lt;cnt&lt;&lt;endl;		cout&lt;&lt;minn&lt;&lt;endl;	&#125;	return 0;&#125;
+L]]></content>
+      <categories>
+        <category>题解</category>
+      </categories>
+      <tags>
+        <tag>题解</tag>
+        <tag>C++</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>2023年10月ZZUACM实验室招新赛题解</title>
     <url>/c6413222be25/</url>
     <content><![CDATA[注意事项请注意！：
@@ -153,25 +172,6 @@ LCS（最长公共子序列）int f[N][N];int n,m;cin&gt;&gt;n&gt;&gt;m;string A
       <tags>
         <tag>模板</tag>
         <tag>数据结构</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>2023ICPC网络赛第二场</title>
-    <url>/026c0040b952/</url>
-    <content><![CDATA[[The 2023 ICPC Asia Regionals Online Contest (2) (pintia.cn)](https://pintia.cn/market/item/1705511462254264320)
-**K Super-knight**题意有一个士兵，起初在n*n的棋盘的左下角，每次向右移动a格，向上移动b格，当越过地图边界时，则到地图的另一边（类似于没有边界墙的贪吃蛇），对这个士兵能到达的格子做标记，所有被标记的格子中，离左下角格子最近的距离是多少。（假设最近的格子为undefinedx, y)，就输出(x - 1)^2+(y - 1)^2$ )
-（ 2 \le n \le 10^{18}, 1 \le a,b \le 200)
-思路可以得出，在经过n次移动后，一定回回到起始点，所以最终的路径一定是循环的。
-但n太大，无法通过这样判断所有的被标记的点。
-可以发现，在移动了若干次后，除非穿过地图边界，否则只会增加 与原点的距离。因此我们只需要考虑**刚穿过地图边界的点** 即可。这样可以省下很多时间：（每次直接刚好跨出地图边界，设从undefinednowx,nowy)点开始跨，那么一大步就跨了大约min(\frac{n}{a},\frac{n}{b})$步，而一共进行n小步就可以回到初始点完成一次循环，因此总共需要的大跨步的次数仅仅是 a ，b的数量级，于是我们就可以在规定的时间内完成计算）
-代码#include&lt;iostream&gt;using namespace std;#define int long long int a,b,n;inline int dis(int x,int y)&#123;	return (x * x  + y * y ); &#125;int cnt = 0;signed main()&#123;	int t;	cin&gt;&gt;t;	while(t--)&#123;		cin&gt;&gt;a&gt;&gt;b&gt;&gt;n;		a = a % n;		b = b % n;		int nowa = a % n;		int nowb = b % n;		int minn = a * a + b * b;		while(nowa !=0 || nowb != 0)&#123;			cnt ++;			if(nowa &lt;=300 &amp;&amp; nowb &lt;=300) 				minn = min(minn,dis(nowa,nowb));			int k = min((n - nowa - 1) / a,(n - nowb - 1) / b) + 1;			nowa = (nowa + a * k % n) % n;			nowb = (nowb + b * k % n) % n;					&#125;		cout&lt;&lt;&quot;**&quot;&lt;&lt;cnt&lt;&lt;endl;		cout&lt;&lt;minn&lt;&lt;endl;	&#125;	return 0;&#125;
-L]]></content>
-      <categories>
-        <category>题解</category>
-      </categories>
-      <tags>
-        <tag>题解</tag>
-        <tag>C++</tag>
       </tags>
   </entry>
   <entry>
@@ -470,22 +470,6 @@ f(&quot;abc&quot;,2) = abcabc。g(&quot;abc&quot;,2) = aabbcc
       </tags>
   </entry>
   <entry>
-    <title>Codeforces Round 897 (Div. 2)</title>
-    <url>/1f41d16e4fe3/</url>
-    <content><![CDATA[[Dashboard - Codeforces Round 897 (Div. 2) - Codeforces](https://codeforces.com/contest/1867)
-A - green_gold_dog, array and permutation题意有一个长度为n的数组a，请你找出一个长度为n的排列b。 根据数组a和b来构造出数组c。c[i] = a[i] - b[i] ，尽可能地使c数组中的 互不相同的数的数量。
-思路好妙的思路！ 让最小的a[i] 减去n,次小的减去n-1 ,这样每个c[i] 都不一样。
-代码#include&lt;iostream&gt;#include&lt;set&gt;#include&lt;vector&gt;#include&lt;algorithm&gt;using namespace std;const int N = 4e4 + 5;pair&lt;int,int&gt; a[N];pair&lt;int,int&gt; b[N];int main()&#123;	int t;	cin&gt;&gt;t;	while (t--)&#123;		int n;		cin&gt;&gt;n;		int num;		for(int i = 1;i&lt;=n;i++)&#123;			cin&gt;&gt;num;			a[i].first = num;			a[i].second = i;		&#125;		sort(a+1,a+1+n);		for(int i = 1;i&lt;=n;i++)&#123;			b[i].first = a[i].second;			b[i].second = n+1-i;		&#125;		sort(b+1,b+1+n);		for(int i = 1;i&lt;=n;i++)&#123;			cout&lt;&lt;b[i].second &lt;&lt;&quot; &quot;;		&#125;		puts(&quot;&quot;);	&#125;		return 0;&#125;
- ]]></content>
-      <categories>
-        <category>题解</category>
-      </categories>
-      <tags>
-        <tag>题解</tag>
-        <tag>C++</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Codeforces Round 806 (Div. 4)</title>
     <url>/f6c0852c19b0/</url>
     <content><![CDATA[刚学python，还是免不了C++的代码风格。
@@ -503,6 +487,22 @@ A - green_gold_dog, array and permutation题意有一个长度为n的数组a，�
       <tags>
         <tag>题解</tag>
         <tag>python</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Codeforces Round 897 (Div. 2)</title>
+    <url>/1f41d16e4fe3/</url>
+    <content><![CDATA[[Dashboard - Codeforces Round 897 (Div. 2) - Codeforces](https://codeforces.com/contest/1867)
+A - green_gold_dog, array and permutation题意有一个长度为n的数组a，请你找出一个长度为n的排列b。 根据数组a和b来构造出数组c。c[i] = a[i] - b[i] ，尽可能地使c数组中的 互不相同的数的数量。
+思路好妙的思路！ 让最小的a[i] 减去n,次小的减去n-1 ,这样每个c[i] 都不一样。
+代码#include&lt;iostream&gt;#include&lt;set&gt;#include&lt;vector&gt;#include&lt;algorithm&gt;using namespace std;const int N = 4e4 + 5;pair&lt;int,int&gt; a[N];pair&lt;int,int&gt; b[N];int main()&#123;	int t;	cin&gt;&gt;t;	while (t--)&#123;		int n;		cin&gt;&gt;n;		int num;		for(int i = 1;i&lt;=n;i++)&#123;			cin&gt;&gt;num;			a[i].first = num;			a[i].second = i;		&#125;		sort(a+1,a+1+n);		for(int i = 1;i&lt;=n;i++)&#123;			b[i].first = a[i].second;			b[i].second = n+1-i;		&#125;		sort(b+1,b+1+n);		for(int i = 1;i&lt;=n;i++)&#123;			cout&lt;&lt;b[i].second &lt;&lt;&quot; &quot;;		&#125;		puts(&quot;&quot;);	&#125;		return 0;&#125;
+ ]]></content>
+      <categories>
+        <category>题解</category>
+      </categories>
+      <tags>
+        <tag>题解</tag>
+        <tag>C++</tag>
       </tags>
   </entry>
   <entry>
@@ -545,6 +545,33 @@ D. Counting Rhyme题意给出有n个数的数组a，问有多少个undefinedi,j)
 （1 \le n \le 10^6, 1 \le a_i \le n）
 思路dp，设dp[i] 为以i为最大公因子的对有多少个。我们可以统计 有多少个数有i这个因子 ， 假设有cc个数，那么就会有undefinedfrac{cc * (cc - 1)}{2}个以i为**公因子**（不是最大公因子）的对。 我们要求最大公因子，就还需要令 dp[i] = dp[i] - \sum _{t = 2} ^{i * t &lt;= n} {dp[t * i]}。（即减去以i$的倍数为最大公因子的对的数量）。
 所以最终的dp状态转移方程为dp[i] = \frac{cc * (cc - 1)}{2}- \sum _{t = 2} ^{i * t ]]></content>
+      <categories>
+        <category>题解</category>
+      </categories>
+      <tags>
+        <tag>题解</tag>
+        <tag>C++</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Codeforces Round 906 (Div. 2)</title>
+    <url>/c8f7ca88a8b7/</url>
+    <content><![CDATA[[Dashboard - Codeforces Round 906 (Div. 2) - Codeforces](https://codeforces.com/contest/1890)
+C. Qingshan Loves Strings 2题意给出一个n长的01串（1 \le n \le 100），每次操作向串中插入一个”01“（最多可以插入300次），问如何插入能够使得最终的串满足：对于任何0\le i < len 都有str[i] \not= str[len-1-i] 。 如果有合理的方案，则输出方案，否则输出-1。
+思路首先考虑特判，每次插入”01“ 不会改变0和1的数量关系， 而最终的串要求0和1的数量一样多。所以最初的0和1的数量也需要一样多。
+然后考虑如下插入策略：由两边向中间靠拢，逐个检查每个字符。为了方便起见，我们使用l和r来代表待检查的左右字符的下标，
+
+如果str[l] \not= str[r] 则令 l++,r—,
+
+如果str[l] = str[r] ,则代表我们需要插入”01“串来干预。如果str[l] = str[r] = '0' 那么就在第r+1位置插入”01“ ，这样新的r就是r+2，一定是1，满足str[l] \not = str[r] ,  相反，如果str[l] = str[r] = '1',则在第l个位置前插入01。
+
+
+代码#include&lt;bits/stdc++.h&gt;using namespace std;#define int long long#define OI ios::sync_with_stdio(false);cin.tie(0);cout.tie(0);void solve() &#123;     int n;    cin&gt;&gt; n;    string str;    cin&gt;&gt;str;    if(n&amp;1 || count(str.begin(),str.end(),&#x27;0&#x27;) != count(str.begin(),str.end(),&#x27;1&#x27;)) &#123;cout&lt;&lt;-1&lt;&lt;endl;return ;&#125;     int l = 0;    int r = n - 1;    vector&lt;int&gt; ans;    while(l &lt;= r)&#123;        while(str[l] != str[r]) &#123;l++;r--;&#125;        if(str[l] == &#x27;0&#x27;)&#123;            str.insert(r+1,&quot;01&quot;);            ans.push_back(r + 1);            r += 2;        &#125;        if(str[l] == &#x27;1&#x27;)&#123;            str.insert(l,&quot;01&quot;);            r += 2;            ans.push_back(l);        &#125;        l++;r--;    &#125;    cout&lt;&lt;ans.size()&lt;&lt;endl;    for(auto p : ans) cout&lt;&lt;p&lt;&lt;&quot; &quot;;    cout &lt;&lt; endl;    return ;&#125;signed main()&#123;    int T;    cin&gt;&gt;T;    while(T--)&#123;        solve();    &#125;    return 0;&#125;
+D. Doremy’s Connecting Plan题意给出n个节点，需要你连接一些边使得整张图中任意两点之间是可达的。 当两个节点undefinedi,j)满足如下条件时，这两个节点之间可以连边 ：\sum_{k \in S} a_k \ge c * i * j。  其中S表示为此时从i或j$ 可到达的节点集合。
+如果可以通过某种连边顺序得到连通图就输出YES，否则输出NO
+思路贪心思想： 每次连边都令i = 1，这样我们只需要关注j的顺序就好 。 此时连边的条件变为undefined\sum _{k \in S}a_k) + a_j \ge c * j,其中S为已经和i相连的节点。可以发现，我们何时将1与j相连，不等式右边不变，而左边则越晚相连越大。 因此我们将2~n号节点按照c * j - a_j$ 从小到大排序，然后按顺序与1号节点相连，即为最优解法。最终只需要判断通过该解法能否全部相连即可。
+代码#include&lt;bits/stdc++.h&gt;using namespace std;#define int long long#define OI ios::sync_with_stdio(false);cin.tie(0);cout.tie(0);typedef pair&lt;int,int&gt; PII;int n,c;bool cmp(PII p1,PII p2)&#123;    return p1.first - p1.second * c &gt; p2.first - p2.second * c;&#125;void solve() &#123;     cin&gt;&gt;n&gt;&gt; c;    vector&lt; pair&lt;int,int&gt; &gt; vec(n+5);    for(int i = 1;i&lt;=n;i++)&#123;        cin&gt;&gt;vec[i].first;        vec[i].second = i;    &#125;    sort(vec.begin()+2,vec.begin()+1+n,cmp);//按照cmp排序    int sum = vec[1].first;    for(int i = 2;i&lt;=n;i++)&#123;        if(sum + vec[i].first &lt; vec[i].second * c)&#123;            cout&lt;&lt;&quot;No\n&quot;;            return;        &#125;        sum += vec[i].first;    &#125;    cout&lt;&lt;&quot;Yes\n&quot;;    return ;&#125;signed main()&#123;    int T;    cin&gt;&gt;T;    while(T--)&#123;        solve();    &#125;    return 0;&#125;
+]]></content>
       <categories>
         <category>题解</category>
       </categories>
@@ -619,33 +646,6 @@ F - Turtle Mission: Robot and the Earthquake题意在一个n*m的地图中， �
 考虑循在同一列循环的情况， 可能发生如下情况：现在位于undefined3,1)，下一步是(3,3)，并且在上一次循环时已经走过了(3,2)。那么此时vis[3][2]等于1 ，并且可以到达。  
 而vis[3][2]=1还有一种可能是(3,2)处有一个石头，那么反而又不能到达。因此我们的vis[3][2]=1$ 出现了两种不同的结果，这是不被允许的。
 int mp[1005][1005];int vis[1005][1005];struct Node&#123;    int x,y;    int step;&#125;;void solve()&#123;    int n,m;    cin&gt;&gt;n&gt;&gt;m;    rep(i,0,n) rep(j,0,m)&#123;mp[i][j] = vis[i][j]=0;&#125;    queue&lt;Node&gt; q;    rep(i,0,n-1) rep(j,0,m-1) cin&gt;&gt;mp[i][j];    q.push(&#123;0,0,0&#125;);    vis[0][0] = 1;    while(q.size())&#123;        int x = q.front().x;        int y = q.front().y;        int step = q.front().step;        if(y == m-1) break;        q.pop();        int xx = (x+1)%n,yy = y + 1; //xx表示向下移动一格时的坐标，yy则是向右移动一格        if(mp[xx][yy]==0) &#123;            if(vis[xx][yy]==0)&#123;                q.push(&#123;xx,yy,step+1&#125;);                vis[xx][yy] = 1;            &#125;        &#125;        int xx2 = (x+2)%n;//xx2表示向下移动两格时的坐标        if(mp[xx][y]==0&amp;&amp;mp[xx2][y]==0)&#123;            if(vis[xx2][y]==0)&#123;                q.push(&#123;xx2,y,step+1&#125;);                vis[xx2][y] = 1;            &#125;                        &#125;    &#125;    if(q.empty()) &#123;cout&lt;&lt;-1&lt;&lt;&#x27;\n&#x27;;return ;&#125;    int step = q.front().step;    int x = q.front().x;    int pos = (n-1+step)%n;    int ans = step + min(abs(pos-x),n-abs(pos-x));    cout&lt;&lt;ans&lt;&lt;&#x27;\n&#x27;;&#125;
-]]></content>
-      <categories>
-        <category>题解</category>
-      </categories>
-      <tags>
-        <tag>题解</tag>
-        <tag>C++</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Codeforces Round 906 (Div. 2)</title>
-    <url>/c8f7ca88a8b7/</url>
-    <content><![CDATA[[Dashboard - Codeforces Round 906 (Div. 2) - Codeforces](https://codeforces.com/contest/1890)
-C. Qingshan Loves Strings 2题意给出一个n长的01串（1 \le n \le 100），每次操作向串中插入一个”01“（最多可以插入300次），问如何插入能够使得最终的串满足：对于任何0\le i < len 都有str[i] \not= str[len-1-i] 。 如果有合理的方案，则输出方案，否则输出-1。
-思路首先考虑特判，每次插入”01“ 不会改变0和1的数量关系， 而最终的串要求0和1的数量一样多。所以最初的0和1的数量也需要一样多。
-然后考虑如下插入策略：由两边向中间靠拢，逐个检查每个字符。为了方便起见，我们使用l和r来代表待检查的左右字符的下标，
-
-如果str[l] \not= str[r] 则令 l++,r—,
-
-如果str[l] = str[r] ,则代表我们需要插入”01“串来干预。如果str[l] = str[r] = '0' 那么就在第r+1位置插入”01“ ，这样新的r就是r+2，一定是1，满足str[l] \not = str[r] ,  相反，如果str[l] = str[r] = '1',则在第l个位置前插入01。
-
-
-代码#include&lt;bits/stdc++.h&gt;using namespace std;#define int long long#define OI ios::sync_with_stdio(false);cin.tie(0);cout.tie(0);void solve() &#123;     int n;    cin&gt;&gt; n;    string str;    cin&gt;&gt;str;    if(n&amp;1 || count(str.begin(),str.end(),&#x27;0&#x27;) != count(str.begin(),str.end(),&#x27;1&#x27;)) &#123;cout&lt;&lt;-1&lt;&lt;endl;return ;&#125;     int l = 0;    int r = n - 1;    vector&lt;int&gt; ans;    while(l &lt;= r)&#123;        while(str[l] != str[r]) &#123;l++;r--;&#125;        if(str[l] == &#x27;0&#x27;)&#123;            str.insert(r+1,&quot;01&quot;);            ans.push_back(r + 1);            r += 2;        &#125;        if(str[l] == &#x27;1&#x27;)&#123;            str.insert(l,&quot;01&quot;);            r += 2;            ans.push_back(l);        &#125;        l++;r--;    &#125;    cout&lt;&lt;ans.size()&lt;&lt;endl;    for(auto p : ans) cout&lt;&lt;p&lt;&lt;&quot; &quot;;    cout &lt;&lt; endl;    return ;&#125;signed main()&#123;    int T;    cin&gt;&gt;T;    while(T--)&#123;        solve();    &#125;    return 0;&#125;
-D. Doremy’s Connecting Plan题意给出n个节点，需要你连接一些边使得整张图中任意两点之间是可达的。 当两个节点undefinedi,j)满足如下条件时，这两个节点之间可以连边 ：\sum_{k \in S} a_k \ge c * i * j。  其中S表示为此时从i或j$ 可到达的节点集合。
-如果可以通过某种连边顺序得到连通图就输出YES，否则输出NO
-思路贪心思想： 每次连边都令i = 1，这样我们只需要关注j的顺序就好 。 此时连边的条件变为undefined\sum _{k \in S}a_k) + a_j \ge c * j,其中S为已经和i相连的节点。可以发现，我们何时将1与j相连，不等式右边不变，而左边则越晚相连越大。 因此我们将2~n号节点按照c * j - a_j$ 从小到大排序，然后按顺序与1号节点相连，即为最优解法。最终只需要判断通过该解法能否全部相连即可。
-代码#include&lt;bits/stdc++.h&gt;using namespace std;#define int long long#define OI ios::sync_with_stdio(false);cin.tie(0);cout.tie(0);typedef pair&lt;int,int&gt; PII;int n,c;bool cmp(PII p1,PII p2)&#123;    return p1.first - p1.second * c &gt; p2.first - p2.second * c;&#125;void solve() &#123;     cin&gt;&gt;n&gt;&gt; c;    vector&lt; pair&lt;int,int&gt; &gt; vec(n+5);    for(int i = 1;i&lt;=n;i++)&#123;        cin&gt;&gt;vec[i].first;        vec[i].second = i;    &#125;    sort(vec.begin()+2,vec.begin()+1+n,cmp);//按照cmp排序    int sum = vec[1].first;    for(int i = 2;i&lt;=n;i++)&#123;        if(sum + vec[i].first &lt; vec[i].second * c)&#123;            cout&lt;&lt;&quot;No\n&quot;;            return;        &#125;        sum += vec[i].first;    &#125;    cout&lt;&lt;&quot;Yes\n&quot;;    return ;&#125;signed main()&#123;    int T;    cin&gt;&gt;T;    while(T--)&#123;        solve();    &#125;    return 0;&#125;
 ]]></content>
       <categories>
         <category>题解</category>
@@ -962,6 +962,60 @@ D. Birthday Gift题意给你一个长度为n的数组a,即 a_1,a_2,...,a_n 。 �
       </tags>
   </entry>
   <entry>
+    <title>Codeforces Round 958 (Div. 2)</title>
+    <url>/c72741a50d03/</url>
+    <content><![CDATA[[比赛链接https://codeforces.com/contest/1988](https://codeforces.com/contest/1988)
+A. Split the Multiset题意起初S中只有一个数字 n , 你每次操作可以选择S中的一个任意一个数x，将他拆分成最多k个数，并且这k个数的和仍为x ，问最少需要多少次拆分，能让S中只剩下n个1
+思路可以发现，每次拆分出k-1  个 1 效率最高。 所以对于n,k ,我们有总拆分次数为undefinedlceil \frac{n-1}{k-1} \rceil$ 。
+代码#include&lt;bits/stdc++.h&gt;using namespace std;#define IO ios::sync_with_stdio(false);cin.tie(0);cout.tie(0);#define int long long#define rep(i,l,r) for(int i = l;i&lt;=r;i++)#define per(i,r,l) for(int i = r;i&gt;=l;i--)const int INF = 0x3f3f3f3f3f3f3f3f;typedef pair&lt;int,int&gt; PII;void solve()&#123;    int n,k;    cin&gt;&gt;n&gt;&gt;k;    cout&lt;&lt; (n -1 + k - 2) / (k - 1)&lt;&lt;endl;&#125;signed main()&#123;    int T = 1;    cin&gt;&gt;T;    while(T--)&#123;        solve();    &#125;    return 0;&#125;
+B. Make Majority题意给你一个长度为n的01序列a，你可以进行任意次如下操作：
+
+选择两个数l,r (1\le l\le r \le |a|)   , 其中 |a| 表示a的长度。
+将这段区间替换为c， (如果选择的区间中1的数量**大于**0的数量，那么c=1，否则c=0）
+
+问能否在进行一定次数的操作后， 使得a变为 1
+思路首先我们可以先选择连续的0 ， 这样这些连续的0就一定会变为一个0 。这样每个0周围都会有1~2个1 。 我们说此刻的序列为a'
+于是我们每次可以选择一个0，以及它旁边的两个1， 这样这三个数就会被替换为。不断循环往复， 每次替换都会减少一个1以及一个0。  因此我们直接统计a' 中1和0的数量，若1的数量更多那么就输出Yes,  否则输出No 
+代码#include&lt;bits/stdc++.h&gt;using namespace std;#define IO ios::sync_with_stdio(false);cin.tie(0);cout.tie(0);#define int long long#define rep(i,l,r) for(int i = l;i&lt;=r;i++)#define per(i,r,l) for(int i = r;i&gt;=l;i--)const int INF = 0x3f3f3f3f3f3f3f3f;typedef pair&lt;int,int&gt; PII;void solve()&#123;    int n;    cin&gt;&gt;n;    string str;    cin&gt;&gt;str;    string s;    rep(i,0,n-1)&#123;        if(str[i] == &#x27;0&#x27;)&#123;            s += str[i];            while(i&lt;n &amp;&amp; str[i] == &#x27;0&#x27;) i++;        &#125;        if(i == n) continue;        s += str[i];    &#125;    int c0 = 0,c1 = 0;    for(auto p : s)&#123;        if( p == &#x27;0&#x27;) c0 ++;        else c1 ++;    &#125;    if(c0 &gt;= c1) cout&lt;&lt;&quot;No\n&quot;;    else cout&lt;&lt;&quot;Yes\n&quot;;&#125;signed main()&#123;    int T = 1;    cin&gt;&gt;T;    while(T--)&#123;        solve();    &#125;    return 0;&#125;
+C. Increasing Sequence with Fixed OR题意给你一个数n , 请你构造一个数列a , 使得1 \le a_1 < a_2 < ... < a_k  , 并且对于任意的2\le i \le k 都有 a_{i-1} | a_i = n 其中|表示按位或运算。要求你构造的k尽可能大。
+思路因为要求相邻的数按位或都是n， 所以对于任意的 a_i ，一定有a_i | n = n，  即a_i 一定是从二进制的n中选择一些1来组成。于是我们便只需要考虑n为全1的情况即可（因为n中的数位0在 a_i 中一定为0 )
+
+因为a_i  | a_{i+1} = n 所以对于某一位j ,若a_{i,j} = 0 那么 一定有a_{i+1,j} = 1  。
+再根据另一个条件1 \le a_1 < a_2 < ... < a_k ，我们可以得知，当a_{i,j} = 1 时 ，那么a_{i+1,j},a_{i+2,j},...,a_{k,j} 都是1。
+
+于是我们便可以这样构造我们的数列：01111,10111,11011,11101,11110,11111 , 于是若n的二进制中中有t个1，那么我们构造的数列长度便为t+1 . 构造方法即 **让0从高到低地位于t个位中的每一位，最后再加上n本身**。
+需要注意的是，如果n是二进制数， 即n中只有一位1，那么答案是1，数列的值为n本身。
+代码#include&lt;bits/stdc++.h&gt;using namespace std;#define IO ios::sync_with_stdio(false);cin.tie(0);cout.tie(0);#define int long long#define rep(i,l,r) for(int i = l;i&lt;=r;i++)#define per(i,r,l) for(int i = r;i&gt;=l;i--)const int INF = 0x3f3f3f3f3f3f3f3f;typedef pair&lt;int,int&gt; PII;void solve()&#123;    int n;    cin&gt;&gt;n;    vector&lt;int&gt; v;    for(int i = 0;i&lt;63;i++)&#123;        if((1ll&lt;&lt;i) &amp; n)&#123;            v.push_back(i);        &#125;    &#125;    if(v.size() == 1) &#123;cout&lt;&lt;1&lt;&lt;&#x27;\n&#x27;&lt;&lt;n&lt;&lt;&#x27;\n&#x27;;return ;&#125;    cout&lt;&lt;(v.size()+1)&lt;&lt;endl;    for(int i = v.size()-1;i&gt;=0;i--)&#123;        int t = n;        t ^= (1ll&lt;&lt;v[i]);        cout&lt;&lt;t&lt;&lt;&quot; &quot;;    &#125;    cout&lt;&lt;n&lt;&lt;&#x27;\n&#x27;;&#125;signed main()&#123;    int T = 1;    cin&gt;&gt;T;    while(T--)&#123;        solve();    &#125;    return 0;&#125;
+D. The Omnipotent Monster Killer题意有n头怪兽， 每个怪兽都有其自己的攻击力，他们通过n-1条边连成一个树。 你可以进行足够多的回合。在每个回合中， 会进行如下过程：
+
+所有活着的怪兽都对你造成一次等同于其攻击力的伤害
+你选择一些怪兽（这些怪兽不能相邻），将他们杀死
+
+问最少受到多少伤害，你才能够杀死所有的怪物。
+思路首先可以发现，对于n头怪兽，我们最多需要 log_2n 个回合就可以在最优解的情况下将他们全部击杀。（考虑完全树）。
+这样对于n < 3 * 10^5 ,总回合数最多19个回合就可以将他们全部击败。
+于是我们考虑树形dp，  设定节点1为dp[i][j] 表示节点i在第j 个回合被杀死，那么以它为根节点的子树所造成的总伤害。
+于是有：
+最终答案：ans = min_{1\le j \le 19} dp[1][j] 
+状态转移：dp[i][j] = \sum_{v\in sons(i)} min_{1\le k\le 19 \& k \not=j} dp[v][k] + ack[i] * j
+复杂度O(n * log^2n)
+代码#include&lt;bits/stdc++.h&gt;using namespace std;#define IO ios::sync_with_stdio(false);cin.tie(0);cout.tie(0);#define int long long#define rep(i,l,r) for(int i = l;i&lt;=r;i++)#define per(i,r,l) for(int i = r;i&gt;=l;i--)const int INF = 0x3f3f3f3f3f3f3f3f;typedef pair&lt;int,int&gt; PII;int dp[300005][25];int ack[300005];vector&lt;int&gt; edge[300005];void dfs(int u,int fa)&#123;    for(int i = 1;i&lt;=22;i++)&#123;        dp[u][i] = INF;    &#125;    for(auto p : edge[u])&#123;        if(p == fa) continue;        dfs(p,u);    &#125;    for(int j = 1;j&lt;=22;j++)&#123;        bool f = 0;        dp[u][j] = 0;        for(auto p : edge[u])&#123;            if(p == fa) continue;            f = 1;            int mn = INF;            for(int k = 1;k&lt;=22;k++)&#123;                if(k == j) continue;                   mn = min(mn,dp[p][k]);            &#125;            dp[u][j] += mn;        &#125;        dp[u][j] += ack[u] * j;    &#125;    return ;&#125;void solve()&#123;    int n;    cin&gt;&gt;n;    rep(i,1,n) cin&gt;&gt;ack[i];    if(n == 1) &#123;cout&lt;&lt;ack[1] &lt;&lt; endl; return ;&#125;    rep(i,1,n) edge[i].clear();    for(int i = 1;i&lt;n;i++)&#123;        int x ,y;cin&gt;&gt;x&gt;&gt;y;        edge[x].push_back(y);        edge[y].push_back(x);    &#125;    dfs(1,0);    int ans = INF;    for(int i= 1;i&lt;=22;i++)&#123;        ans = min(ans,dp[1][i]);    &#125;    cout&lt;&lt;ans&lt;&lt;&#x27;\n&#x27;;&#125;signed main()&#123;    int T = 1;    cin&gt;&gt;T;    while(T--)&#123;        solve();    &#125;    return 0;&#125;
+优化O(nlogn)对于递推过程，如果我们用前缀/后缀 数组记录 前缀最小值，以及后缀最小值。
+即pre[u][i] = MIN_{1\le j\le i} dp[u][j] \\lst[u][i] = MIN_{i\le j\le 19} dp[u][j]
+于是我们在递推时就可以直接写dp[i][j] = \sum_{v\in sons(i)} min(pre[v][j-1],lst[v][j+1]) + ack[i] * j 。
+我们就可以省去一层循环。 实现复杂度O(nlogn)
+#include&lt;bits/stdc++.h&gt;using namespace std;#define IO ios::sync_with_stdio(false);cin.tie(0);cout.tie(0);#define int long long#define rep(i,l,r) for(int i = l;i&lt;=r;i++)#define per(i,r,l) for(int i = r;i&gt;=l;i--)const int INF = 0x3f3f3f3f3f3f3f3f;typedef pair&lt;int,int&gt; PII;int dp[300005][25];int ack[300005];vector&lt;int&gt; edge[300005];int pre[300005][25];int lst[300005][25];void dfs(int u,int fa)&#123;    for(int i = 1;i&lt;= 19;i++)&#123;        dp[u][i] = INF;    &#125;    for(auto p : edge[u])&#123;        if(p == fa) continue;        dfs(p,u);    &#125;    for(int j = 1;j&lt;= 19;j++)&#123;        bool f = 0;        dp[u][j] = 0;        for(auto p : edge[u])&#123;            if(p == fa) continue;            f = 1;			//直接利用前后缀求出mn            int mn = min(pre[p][j-1],lst[p][j+1]);            dp[u][j] += mn;        &#125;        dp[u][j] += ack[u] * j;    &#125;	// 求前后缀	pre[u][0] = INF;	for(int i = 1;i&lt;= 19;i++)&#123;		pre[u][i] = min(dp[u][i],pre[u][i-1]);	&#125;	lst[u][20] = INF;	for(int i =  19;i&gt;=1;i--)&#123;		lst[u][i] = min(dp[u][i],lst[u][i+1]);	&#125;    return ;&#125;void solve()&#123;    int n;    cin&gt;&gt;n;    rep(i,1,n) cin&gt;&gt;ack[i];    if(n == 1) &#123;cout&lt;&lt;ack[1] &lt;&lt; endl; return ;&#125;    rep(i,1,n) edge[i].clear();    for(int i = 1;i&lt;n;i++)&#123;        int x ,y;cin&gt;&gt;x&gt;&gt;y;        edge[x].push_back(y);        edge[y].push_back(x);    &#125;    dfs(1,0);    int ans = INF;    for(int i= 1;i&lt;= 19;i++)&#123;        ans = min(ans,dp[1][i]);    &#125;    cout&lt;&lt;ans&lt;&lt;&#x27;\n&#x27;;&#125;signed main()&#123;    int T = 1;    cin&gt;&gt;T;    while(T--)&#123;        solve();    &#125;    return 0;&#125;
+优化O(n)如果再细心一些，可以发现，对于一个节点i , 设它的度数为deg_i ， 它会在第b_i 轮被杀死，  那么一定有b_i \le deg_i 。于是我们没必要对每个结点都循环到19, 只需要循环到它对应的度数即可。
+]]></content>
+      <categories>
+        <category>题解</category>
+      </categories>
+      <tags>
+        <tag>题解</tag>
+        <tag>C++</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Codeforces Round 941 (Div. 2)</title>
     <url>/1991cceefb9e/</url>
     <content><![CDATA[[题目链接](https://codeforces.com/contest/1966)
@@ -1017,60 +1071,6 @@ a中不存在某个子序列的和为k
 对于[k+1,n]  部分，我们先选两个数k+1,k+2 。 此时我们可以表示出[k+1,k+2]之间的数，
 我们设能表示的最大的数是mx, 那么下一个要表示的数nxt就是mx + 1 ,我们选择数nxt -(k+1) 作为下一个要加的数，这时候就可以将”可表示区域“ 拓宽为[k+1,mx+nxt-(k+1)] ,但是我们发现，如果num = nxt - (k + 1) \le k 那么会导致k被num + (k - num) 表示出来，就出现了问题，如果出现了这个问题，我们就不能直接将nxt - (k+1) 插入答案序列中，而是选择换成nxt 直接插入序列中。
 代码#include&lt;bits/stdc++.h&gt;using namespace std;#define IO ios::sync_with_stdio(false);cin.tie(0);cout.tie(0);#define int long long#define rep(i,l,r) for(int i = l;i&lt;=r;i++)#define per(i,r,l) for(int i = r;i&gt;=l;i--)const int INF = 0x3f3f3f3f3f3f3f3f;typedef pair&lt;int,int&gt; PII;void solve()&#123;	int n,k;	cin&gt;&gt;n&gt;&gt;k;	int mx = 0;	int nx = 1;	vector&lt;int&gt; ans;	while(mx + (mx + 1) &lt; k - 1)&#123;		ans.push_back(mx+1);		mx += mx + 1;	&#125;	ans.push_back(k - 1 - mx);	mx = k - 1;	ans.push_back(k+1);	ans.push_back(k+2);	mx = k+2;	while(mx &lt; n)&#123;		int tt = mx-k;		if(tt &lt;= k)&#123;			ans.push_back(mx+1);			mx += mx+1;			continue;		&#125;		ans.push_back(tt);		mx += tt;	&#125;	cout&lt;&lt;ans.size()&lt;&lt;endl;	for(auto p : ans)&#123;		cout&lt;&lt;p&lt;&lt;&quot; &quot;;	&#125;	puts(&quot;&quot;);&#125;signed main()&#123;	int T = 1;	cin&gt;&gt;T;	while(T--)&#123;		solve();	&#125;	return 0;&#125;
-]]></content>
-      <categories>
-        <category>题解</category>
-      </categories>
-      <tags>
-        <tag>题解</tag>
-        <tag>C++</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Codeforces Round 958 (Div. 2)</title>
-    <url>/c72741a50d03/</url>
-    <content><![CDATA[[比赛链接https://codeforces.com/contest/1988](https://codeforces.com/contest/1988)
-A. Split the Multiset题意起初S中只有一个数字 n , 你每次操作可以选择S中的一个任意一个数x，将他拆分成最多k个数，并且这k个数的和仍为x ，问最少需要多少次拆分，能让S中只剩下n个1
-思路可以发现，每次拆分出k-1  个 1 效率最高。 所以对于n,k ,我们有总拆分次数为undefinedlceil \frac{n-1}{k-1} \rceil$ 。
-代码#include&lt;bits/stdc++.h&gt;using namespace std;#define IO ios::sync_with_stdio(false);cin.tie(0);cout.tie(0);#define int long long#define rep(i,l,r) for(int i = l;i&lt;=r;i++)#define per(i,r,l) for(int i = r;i&gt;=l;i--)const int INF = 0x3f3f3f3f3f3f3f3f;typedef pair&lt;int,int&gt; PII;void solve()&#123;    int n,k;    cin&gt;&gt;n&gt;&gt;k;    cout&lt;&lt; (n -1 + k - 2) / (k - 1)&lt;&lt;endl;&#125;signed main()&#123;    int T = 1;    cin&gt;&gt;T;    while(T--)&#123;        solve();    &#125;    return 0;&#125;
-B. Make Majority题意给你一个长度为n的01序列a，你可以进行任意次如下操作：
-
-选择两个数l,r (1\le l\le r \le |a|)   , 其中 |a| 表示a的长度。
-将这段区间替换为c， (如果选择的区间中1的数量**大于**0的数量，那么c=1，否则c=0）
-
-问能否在进行一定次数的操作后， 使得a变为 1
-思路首先我们可以先选择连续的0 ， 这样这些连续的0就一定会变为一个0 。这样每个0周围都会有1~2个1 。 我们说此刻的序列为a'
-于是我们每次可以选择一个0，以及它旁边的两个1， 这样这三个数就会被替换为。不断循环往复， 每次替换都会减少一个1以及一个0。  因此我们直接统计a' 中1和0的数量，若1的数量更多那么就输出Yes,  否则输出No 
-代码#include&lt;bits/stdc++.h&gt;using namespace std;#define IO ios::sync_with_stdio(false);cin.tie(0);cout.tie(0);#define int long long#define rep(i,l,r) for(int i = l;i&lt;=r;i++)#define per(i,r,l) for(int i = r;i&gt;=l;i--)const int INF = 0x3f3f3f3f3f3f3f3f;typedef pair&lt;int,int&gt; PII;void solve()&#123;    int n;    cin&gt;&gt;n;    string str;    cin&gt;&gt;str;    string s;    rep(i,0,n-1)&#123;        if(str[i] == &#x27;0&#x27;)&#123;            s += str[i];            while(i&lt;n &amp;&amp; str[i] == &#x27;0&#x27;) i++;        &#125;        if(i == n) continue;        s += str[i];    &#125;    int c0 = 0,c1 = 0;    for(auto p : s)&#123;        if( p == &#x27;0&#x27;) c0 ++;        else c1 ++;    &#125;    if(c0 &gt;= c1) cout&lt;&lt;&quot;No\n&quot;;    else cout&lt;&lt;&quot;Yes\n&quot;;&#125;signed main()&#123;    int T = 1;    cin&gt;&gt;T;    while(T--)&#123;        solve();    &#125;    return 0;&#125;
-C. Increasing Sequence with Fixed OR题意给你一个数n , 请你构造一个数列a , 使得1 \le a_1 < a_2 < ... < a_k  , 并且对于任意的2\le i \le k 都有 a_{i-1} | a_i = n 其中|表示按位或运算。要求你构造的k尽可能大。
-思路因为要求相邻的数按位或都是n， 所以对于任意的 a_i ，一定有a_i | n = n，  即a_i 一定是从二进制的n中选择一些1来组成。于是我们便只需要考虑n为全1的情况即可（因为n中的数位0在 a_i 中一定为0 )
-
-因为a_i  | a_{i+1} = n 所以对于某一位j ,若a_{i,j} = 0 那么 一定有a_{i+1,j} = 1  。
-再根据另一个条件1 \le a_1 < a_2 < ... < a_k ，我们可以得知，当a_{i,j} = 1 时 ，那么a_{i+1,j},a_{i+2,j},...,a_{k,j} 都是1。
-
-于是我们便可以这样构造我们的数列：01111,10111,11011,11101,11110,11111 , 于是若n的二进制中中有t个1，那么我们构造的数列长度便为t+1 . 构造方法即 **让0从高到低地位于t个位中的每一位，最后再加上n本身**。
-需要注意的是，如果n是二进制数， 即n中只有一位1，那么答案是1，数列的值为n本身。
-代码#include&lt;bits/stdc++.h&gt;using namespace std;#define IO ios::sync_with_stdio(false);cin.tie(0);cout.tie(0);#define int long long#define rep(i,l,r) for(int i = l;i&lt;=r;i++)#define per(i,r,l) for(int i = r;i&gt;=l;i--)const int INF = 0x3f3f3f3f3f3f3f3f;typedef pair&lt;int,int&gt; PII;void solve()&#123;    int n;    cin&gt;&gt;n;    vector&lt;int&gt; v;    for(int i = 0;i&lt;63;i++)&#123;        if((1ll&lt;&lt;i) &amp; n)&#123;            v.push_back(i);        &#125;    &#125;    if(v.size() == 1) &#123;cout&lt;&lt;1&lt;&lt;&#x27;\n&#x27;&lt;&lt;n&lt;&lt;&#x27;\n&#x27;;return ;&#125;    cout&lt;&lt;(v.size()+1)&lt;&lt;endl;    for(int i = v.size()-1;i&gt;=0;i--)&#123;        int t = n;        t ^= (1ll&lt;&lt;v[i]);        cout&lt;&lt;t&lt;&lt;&quot; &quot;;    &#125;    cout&lt;&lt;n&lt;&lt;&#x27;\n&#x27;;&#125;signed main()&#123;    int T = 1;    cin&gt;&gt;T;    while(T--)&#123;        solve();    &#125;    return 0;&#125;
-D. The Omnipotent Monster Killer题意有n头怪兽， 每个怪兽都有其自己的攻击力，他们通过n-1条边连成一个树。 你可以进行足够多的回合。在每个回合中， 会进行如下过程：
-
-所有活着的怪兽都对你造成一次等同于其攻击力的伤害
-你选择一些怪兽（这些怪兽不能相邻），将他们杀死
-
-问最少受到多少伤害，你才能够杀死所有的怪物。
-思路首先可以发现，对于n头怪兽，我们最多需要 log_2n 个回合就可以在最优解的情况下将他们全部击杀。（考虑完全树）。
-这样对于n < 3 * 10^5 ,总回合数最多19个回合就可以将他们全部击败。
-于是我们考虑树形dp，  设定节点1为dp[i][j] 表示节点i在第j 个回合被杀死，那么以它为根节点的子树所造成的总伤害。
-于是有：
-最终答案：ans = min_{1\le j \le 19} dp[1][j] 
-状态转移：dp[i][j] = \sum_{v\in sons(i)} min_{1\le k\le 19 \& k \not=j} dp[v][k] + ack[i] * j
-复杂度O(n * log^2n)
-代码#include&lt;bits/stdc++.h&gt;using namespace std;#define IO ios::sync_with_stdio(false);cin.tie(0);cout.tie(0);#define int long long#define rep(i,l,r) for(int i = l;i&lt;=r;i++)#define per(i,r,l) for(int i = r;i&gt;=l;i--)const int INF = 0x3f3f3f3f3f3f3f3f;typedef pair&lt;int,int&gt; PII;int dp[300005][25];int ack[300005];vector&lt;int&gt; edge[300005];void dfs(int u,int fa)&#123;    for(int i = 1;i&lt;=22;i++)&#123;        dp[u][i] = INF;    &#125;    for(auto p : edge[u])&#123;        if(p == fa) continue;        dfs(p,u);    &#125;    for(int j = 1;j&lt;=22;j++)&#123;        bool f = 0;        dp[u][j] = 0;        for(auto p : edge[u])&#123;            if(p == fa) continue;            f = 1;            int mn = INF;            for(int k = 1;k&lt;=22;k++)&#123;                if(k == j) continue;                   mn = min(mn,dp[p][k]);            &#125;            dp[u][j] += mn;        &#125;        dp[u][j] += ack[u] * j;    &#125;    return ;&#125;void solve()&#123;    int n;    cin&gt;&gt;n;    rep(i,1,n) cin&gt;&gt;ack[i];    if(n == 1) &#123;cout&lt;&lt;ack[1] &lt;&lt; endl; return ;&#125;    rep(i,1,n) edge[i].clear();    for(int i = 1;i&lt;n;i++)&#123;        int x ,y;cin&gt;&gt;x&gt;&gt;y;        edge[x].push_back(y);        edge[y].push_back(x);    &#125;    dfs(1,0);    int ans = INF;    for(int i= 1;i&lt;=22;i++)&#123;        ans = min(ans,dp[1][i]);    &#125;    cout&lt;&lt;ans&lt;&lt;&#x27;\n&#x27;;&#125;signed main()&#123;    int T = 1;    cin&gt;&gt;T;    while(T--)&#123;        solve();    &#125;    return 0;&#125;
-优化O(nlogn)对于递推过程，如果我们用前缀/后缀 数组记录 前缀最小值，以及后缀最小值。
-即pre[u][i] = MIN_{1\le j\le i} dp[u][j] \\lst[u][i] = MIN_{i\le j\le 19} dp[u][j]
-于是我们在递推时就可以直接写dp[i][j] = \sum_{v\in sons(i)} min(pre[v][j-1],lst[v][j+1]) + ack[i] * j 。
-我们就可以省去一层循环。 实现复杂度O(nlogn)
-#include&lt;bits/stdc++.h&gt;using namespace std;#define IO ios::sync_with_stdio(false);cin.tie(0);cout.tie(0);#define int long long#define rep(i,l,r) for(int i = l;i&lt;=r;i++)#define per(i,r,l) for(int i = r;i&gt;=l;i--)const int INF = 0x3f3f3f3f3f3f3f3f;typedef pair&lt;int,int&gt; PII;int dp[300005][25];int ack[300005];vector&lt;int&gt; edge[300005];int pre[300005][25];int lst[300005][25];void dfs(int u,int fa)&#123;    for(int i = 1;i&lt;= 19;i++)&#123;        dp[u][i] = INF;    &#125;    for(auto p : edge[u])&#123;        if(p == fa) continue;        dfs(p,u);    &#125;    for(int j = 1;j&lt;= 19;j++)&#123;        bool f = 0;        dp[u][j] = 0;        for(auto p : edge[u])&#123;            if(p == fa) continue;            f = 1;			//直接利用前后缀求出mn            int mn = min(pre[p][j-1],lst[p][j+1]);            dp[u][j] += mn;        &#125;        dp[u][j] += ack[u] * j;    &#125;	// 求前后缀	pre[u][0] = INF;	for(int i = 1;i&lt;= 19;i++)&#123;		pre[u][i] = min(dp[u][i],pre[u][i-1]);	&#125;	lst[u][20] = INF;	for(int i =  19;i&gt;=1;i--)&#123;		lst[u][i] = min(dp[u][i],lst[u][i+1]);	&#125;    return ;&#125;void solve()&#123;    int n;    cin&gt;&gt;n;    rep(i,1,n) cin&gt;&gt;ack[i];    if(n == 1) &#123;cout&lt;&lt;ack[1] &lt;&lt; endl; return ;&#125;    rep(i,1,n) edge[i].clear();    for(int i = 1;i&lt;n;i++)&#123;        int x ,y;cin&gt;&gt;x&gt;&gt;y;        edge[x].push_back(y);        edge[y].push_back(x);    &#125;    dfs(1,0);    int ans = INF;    for(int i= 1;i&lt;= 19;i++)&#123;        ans = min(ans,dp[1][i]);    &#125;    cout&lt;&lt;ans&lt;&lt;&#x27;\n&#x27;;&#125;signed main()&#123;    int T = 1;    cin&gt;&gt;T;    while(T--)&#123;        solve();    &#125;    return 0;&#125;
-优化O(n)如果再细心一些，可以发现，对于一个节点i , 设它的度数为deg_i ， 它会在第b_i 轮被杀死，  那么一定有b_i \le deg_i 。于是我们没必要对每个结点都循环到19, 只需要循环到它对应的度数即可。
 ]]></content>
       <categories>
         <category>题解</category>
@@ -1193,6 +1193,47 @@ F. Bomb题意给两个长度为n的数组a,b , 你至多进行k(1\le k \le 10^9)
       </tags>
   </entry>
   <entry>
+    <title>Codeforces Round 963 (Div. 2)</title>
+    <url>/8f85cb476a13/</url>
+    <content><![CDATA[[Codeforces Round 963 (Div. 2)](https://codeforces.com/contest/1993)
+A. Question Marks题意有一场考试一共4*n 道题目，其中答案为A,B,C,D 的题目各n 道，  现在你有一份考试的结果，由字母A,B,C,D 组成，请问最多得到多少分。
+思路每种选项最多答对n道题目，我们统计每个选项的出现次数 ，和n取较小值 ，将结果加起来即可。
+代码#include&lt;bits/stdc++.h&gt;using namespace std;#define IO ios::sync_with_stdio(false);cin.tie(0);cout.tie(0);#define int long long#define rep(i,l,r) for(int i = l;i&lt;=r;i++)#define per(i,r,l) for(int i = r;i&gt;=l;i--)const int INF = 0x3f3f3f3f3f3f3f3f;typedef pair&lt;int,int&gt; PII; void solve()&#123;    int n;    cin&gt;&gt;n;    string str;    cin&gt;&gt;str;    int cnt[150] = &#123;0&#125;;    for(auto &amp; p : str)&#123;        cnt[p] ++;    &#125;        int ans = 0;    for(int i = &#x27;A&#x27;;i&lt;=&#x27;D&#x27;;i++)&#123;        ans += min(cnt[i],n);    &#125;    cout&lt;&lt;ans&lt;&lt;&#x27;\n&#x27;;&#125;signed main()&#123;    int T = 1;    cin&gt;&gt;T;    while(T--)&#123;        solve();    &#125;    return 0;&#125;
+B. Parity and Sum题意给你一个由n个正整数组成数组a ， 你每次操作可以选择两个下标 undefinedi,j), 满足a_i与a_j的奇偶性不同。将a_i和a_j中的较小值转换为a_i+a_j$ 。 
+问最少需要操作几次才能够使得数组a中的所有的数奇偶性相同。
+思路我们将奇数和偶数分开来， 奇数在数组odd中，偶数在数组even中 ， 那么我们每次操作即为从odd和even中各选择一个数， 最后目标为使odd数组为空或者even数组为空。
+首先，如果odd数组初始为空，或者even初始数组为空，那么答案即为0 。
+因为我们每次操作一定选择的是一个奇数和一个偶数，那么我们最终加和后的结果一定是奇数 ，于是每次操作只会使得奇数越来越多，偶数越来越少。
+下面给出结论： 假设起初有cnt个偶数 ，那么需要的操作次数最少为cnt， 最多为cnt+1 。
+我们假设选择的奇数为 x，偶数为y。 如果x < y 那么会让奇数x 变为另一个奇数x+y ； 如果x>y 那么会让偶数y变为奇数x+y 。即只有第二种操作才能令偶数的数量减少一个。 因此最少需要cnt次才能将所有的偶数变为奇数。
+因此我们应该尽可能地保证每次选择的奇数比偶数要大，于是我们每次一定会选择目前最大的奇数mx , 如果在这种选择下仍然会出现奇数更小的情况，那么我们就一定无法在cnt次操作下完成目标了。 此时我们可以选择将mx和最大的偶数进行操作，得到的新的奇数一定比所有的偶数大，之后每次都选择这个奇数，便可以保证每次都满足奇数大于偶数了。 最终需要cnt+1次操作。
+代码#include&lt;bits/stdc++.h&gt;using namespace std;#define IO ios::sync_with_stdio(false);cin.tie(0);cout.tie(0);#define int long long#define rep(i,l,r) for(int i = l;i&lt;=r;i++)#define per(i,r,l) for(int i = r;i&gt;=l;i--)const int INF = 0x3f3f3f3f3f3f3f3f;typedef pair&lt;int,int&gt; PII;void solve()&#123;    int n;    cin&gt;&gt;n;    vector&lt;int&gt; odd,even;    for(int i =1;i&lt;=n;i++)&#123;        int x;cin&gt;&gt;x;        if(x%2) odd.push_back(x);        else even.push_back(x);    &#125;    if((!odd.size()&amp;&amp;even.size())) &#123;cout&lt;&lt;&quot;0&quot;&lt;&lt;endl;return ;&#125;    if((odd.size()&amp;&amp;!even.size())) &#123;cout&lt;&lt;&quot;0&quot;&lt;&lt;endl;return ;&#125;    sort(odd.begin(),odd.end());    sort(even.begin(),even.end());    int sz = even.size();    int mx = odd.back();    queue&lt;int&gt; q;    for(auto p:even) q.push(p);    int ans = 0;    while(q.size())&#123;        if(mx &gt; q.front()) &#123;            ans++;            mx = mx + q.front();            q.pop();        &#125;else&#123;            ans ++;            mx = mx + q.front();        &#125;    &#125;    cout&lt;&lt;min(ans,sz+1)&lt;&lt;&#x27;\n&#x27;;&#125;signed main()&#123;    int T = 1;    cin&gt;&gt;T;    while(T--)&#123;        solve();    &#125;    return 0;&#125;
+C. Light Switches题意有n个房间，每个房间都有一盏灯，起初所有的灯都是灭的，第i个房间会在a_i, a_i+k,a_i+2*k,... 的时间刻转换灯的状态，即在[a_i,a_i+k-1] , [a_i+2*k,a_i+3*k-1],... 区间内亮灯。
+问最早在哪个时刻，能保证所有n盏灯都是亮着的。如果不存在某个时刻所有的灯都是亮着的，那么输出-1 .
+思路题意即为将所有房间的亮灯区间取交集，然后取最小值。
+我们可以对所有的房间按照a_i 从小到大进行排序 ，然后依次取交集，  因为每个区间都为2*k重复区间，所以每次取交集后一定也为2*k 重复区间，于是我们只需要使用undefinedl,r)来表示区间[l+j*2k,r+j*2k]$ 即可。
+起初l = a[1], r = a[1]+k-1 ,之后我们遍历每个区间[l_i,r_i] , 如果当前遍历的区间与交集的初始区间[l,r] 相差距离超过2*k 便可以通过令l,r 都加上t个2*k（其中t = \frac{l_i - l}{2*k} ），来使得两个区间的左端点的距离不超过2*k ， 此时如果l_i > r 那么取交集一定为空，我们尝试让[l,r] 再向后移动一个2*k ，试图令[l_i,r_i ] 与[l+2k,r+2k]取交集。 （取交集即为l= max(l,l_i), r = min(r,r_i) ）
+如果某次遍历时使得l>r 那么此时交集已经为空，直接输出-1即可。
+如果遍历结束，那么最终的答案即为l 。
+代码#include&lt;bits/stdc++.h&gt;using namespace std;#define IO ios::sync_with_stdio(false);cin.tie(0);cout.tie(0);#define int long long#define rep(i,l,r) for(int i = l;i&lt;=r;i++)#define per(i,r,l) for(int i = r;i&gt;=l;i--)const int INF = 0x3f3f3f3f3f3f3f3f;typedef pair&lt;int,int&gt; PII;void solve()&#123;    int n,k;    cin&gt;&gt;n&gt;&gt;k;    vector&lt;int&gt;a(n+5);    rep(i,1,n) cin&gt;&gt;a[i];    sort(a.begin()+1,a.begin()+1+n);    int l = a[1];    int r = a[1] + k - 1;    for(int i=2;i&lt;=n;i++)&#123;        if(a[i] &lt;= r &amp;&amp; a[i] &gt;= l)&#123;            l = a[i];            &#125;                int t = (a[i] - l) / (2*k);        l += t * 2 * k;        r += t * 2 * k;        if(a[i] &gt; r)&#123;            l+=2*k;            r+=2*k;        &#125;        l = max(l,a[i]);        r = min(r,a[i]+k-1);        if(l &gt; r) &#123;            cout&lt;&lt;&quot;-1\n&quot;;            return ;        &#125;    &#125;    cout&lt;&lt;l&lt;&lt;&#x27;\n&#x27;;&#125;signed main()&#123;    int T = 1;    cin&gt;&gt;T;    while(T--)&#123;        solve();    &#125;    return 0;&#125;
+D. Med-imize题意有一个长度为n的数组a_0,a_1,...,a_{n-1} (注意本题的数组下标从0开始) ， 以及一个整数k , 我们每次选择一个长度为k的子数组，将其从数组a中删除，直到数组的中的数组元素数量不大于k。
+问最终数组a的中位数最大是多少。本题的中位数为对数组的元素排序后，第undefinedfrac{sz+1}{2}个元素，其中sz$为数组的长度。
+思路我们可以二分答案来求最终的中位数 。于是问题变成了： 给定一个数mid ，能否存在一个最终数组a' ，使得a' 中的大于等于mid的数的数量，比小于mid的数的数量更多。
+我们将满足a_i \ge mid 的元素设置为b_i = 1 , 否则就设置为b_i = -1 。 我们尽可能让最终选出的b' 数组的和尽可能大，最后判断是否大于0即可。
+但是我们不能任意选择剩下的元素，最终一定会剩下m个元素(m =(n-1)\%k+1 )    ，并且最终剩下的数组a'_i \in \{a_{i\%k + t * k}\} 即选出的最终的下标为i的数的原始下标一定在i的同余集中。
+很好证明这点： 假设我们选出了第3个数（即下标为2），那么之前一定进行过选择了2个数，然后又删除了几组数（每组一定为k个数），所以这个数的原始下标一定为t*k + i 。
+我们用dp[i] 表示考虑前i个数，b[i]数组最大为多少，由于我们每次只能成组地删除元素，那么就代表了如果我们选择不要b[i] 这个元素，那么dp[i]=max(dp[i],dp[i-k]) , 而如果我们选择要这个元素，那么dp[i] = max(dp[i],dp[i-1]+b[i])  ， 最终比较dp[n-1]>0 是否成立即可。
+代码#include&lt;bits/stdc++.h&gt;using namespace std;#define IO ios::sync_with_stdio(false);cin.tie(0);cout.tie(0);#define int long long#define rep(i,l,r) for(int i = l;i&lt;=r;i++)#define per(i,r,l) for(int i = r;i&gt;=l;i--)const int INF = 0x3f3f3f3f3f3f3f3f;typedef pair&lt;int,int&gt; PII;// 本题数据在数组中从下标0开始存储int a[500005];int b[500005];int dp[500005];int n,k;bool check(int mid)&#123;    for(int i = 0;i &lt; n;i++)&#123;        if(a[i] &gt;= mid) b[i] = 1;        else b[i] = -1;     &#125;    dp[0] = b[0];    for(int i = 1;i&lt;n;i++)&#123;        if(i%k == 0)&#123;            dp[i] = max(dp[i-k],b[i]);        &#125;else&#123;            dp[i] = dp[i-1] + b[i];            if(i &gt; k)                dp[i] = max(dp[i],dp[i-k]);        &#125;    &#125;    return dp[n-1] &gt; 0;&#125;void solve()&#123;    cin&gt;&gt;n&gt;&gt;k;    rep(i,0,n-1) cin&gt;&gt;a[i];    int l,r;    l = 1;r = 1e9;    while(l&lt;r)&#123;        int mid = (l+r+1)&gt;&gt;1;        if(check(mid))&#123;            l = mid;        &#125;else&#123;            r = mid-1;        &#125;    &#125;    cout&lt;&lt;l&lt;&lt;&#x27;\n&#x27;;&#125;signed main()&#123;    int T = 1;    cin&gt;&gt;T;    while(T--)&#123;        solve();    &#125;    return 0;&#125;
+]]></content>
+      <categories>
+        <category>题解</category>
+      </categories>
+      <tags>
+        <tag>题解</tag>
+        <tag>C++</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Codeforces Round 986 (Div. 2)</title>
     <url>/c31164113f39/</url>
     <content><![CDATA[https://codeforces.com/contest/2028
@@ -1244,47 +1285,6 @@ D. Alice’s Adventures in Cards题意你在和q,k,j 三个人玩纸牌游戏，
 当可以和某个玩家交换时，则更新三者的最小p值。
 最终若能到达1那么就代表是有解的。同时我们记录dp的过程来找到具体的解决方案。
 代码#include&lt;bits/stdc++.h&gt;using namespace std;#define IO ios::sync_with_stdio(false);cin.tie(0);cout.tie(0);#define int long long#define rep(i,l,r) for(int i = l;i&lt;=r;i++)#define per(i,r,l) for(int i = r;i&gt;=l;i--)const int INF = 0x3f3f3f3f3f3f3f3f;typedef pair&lt;int,int&gt; PII;void solve()&#123;    int n;    cin&gt;&gt;n;    vector&lt;vector&lt;int&gt; &gt; p(3,vector&lt;int&gt;(n+1));    string s = &quot;qkj&quot;;    rep(i,0,2) rep(j,1,n) cin&gt;&gt;p[i][j];    array&lt;int,3&gt; minp = &#123;n,n,n&#125;;    vector&lt;pair&lt;char,int&gt; &gt; sol(n+5,&#123;&#x27;?&#x27;,-1&#125;);    for(int i = n-1;i&gt;=1;i--)&#123;        int win = -1;        rep(j,0,2) if(p[j][i] &gt; p[j][minp[j]]) win = j;        if(win == -1) continue;        sol[i] = &#123;s[win],minp[win]&#125;;        rep(j,0,2) if(p[j][i] &lt; p[j][minp[j]]) minp[j] = i;    &#125;    if(sol[1].first == &#x27;?&#x27;)&#123;        cout&lt;&lt;&quot;NO\n&quot;;return ;    &#125;    cout&lt;&lt;&quot;YES\n&quot;;    vector&lt;pair&lt;char,int&gt; &gt; ans;    ans.push_back(sol[1]);    while(ans.back().second != -1)&#123;        ans.push_back(sol[ans.back().second]);    &#125;    ans.pop_back();    cout&lt;&lt;ans.size()&lt;&lt;&#x27;\n&#x27;;    for(auto &amp; [x,y]:ans)&#123;        cout&lt;&lt;x&lt;&lt;&quot; &quot;&lt;&lt;y&lt;&lt;&#x27;\n&#x27;;    &#125;&#125;signed main()&#123;    IO;    int T = 1;    cin&gt;&gt;T;    while(T--)&#123;        solve();    &#125;    return 0;&#125;
-]]></content>
-      <categories>
-        <category>题解</category>
-      </categories>
-      <tags>
-        <tag>题解</tag>
-        <tag>C++</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Codeforces Round 963 (Div. 2)</title>
-    <url>/8f85cb476a13/</url>
-    <content><![CDATA[[Codeforces Round 963 (Div. 2)](https://codeforces.com/contest/1993)
-A. Question Marks题意有一场考试一共4*n 道题目，其中答案为A,B,C,D 的题目各n 道，  现在你有一份考试的结果，由字母A,B,C,D 组成，请问最多得到多少分。
-思路每种选项最多答对n道题目，我们统计每个选项的出现次数 ，和n取较小值 ，将结果加起来即可。
-代码#include&lt;bits/stdc++.h&gt;using namespace std;#define IO ios::sync_with_stdio(false);cin.tie(0);cout.tie(0);#define int long long#define rep(i,l,r) for(int i = l;i&lt;=r;i++)#define per(i,r,l) for(int i = r;i&gt;=l;i--)const int INF = 0x3f3f3f3f3f3f3f3f;typedef pair&lt;int,int&gt; PII; void solve()&#123;    int n;    cin&gt;&gt;n;    string str;    cin&gt;&gt;str;    int cnt[150] = &#123;0&#125;;    for(auto &amp; p : str)&#123;        cnt[p] ++;    &#125;        int ans = 0;    for(int i = &#x27;A&#x27;;i&lt;=&#x27;D&#x27;;i++)&#123;        ans += min(cnt[i],n);    &#125;    cout&lt;&lt;ans&lt;&lt;&#x27;\n&#x27;;&#125;signed main()&#123;    int T = 1;    cin&gt;&gt;T;    while(T--)&#123;        solve();    &#125;    return 0;&#125;
-B. Parity and Sum题意给你一个由n个正整数组成数组a ， 你每次操作可以选择两个下标 undefinedi,j), 满足a_i与a_j的奇偶性不同。将a_i和a_j中的较小值转换为a_i+a_j$ 。 
-问最少需要操作几次才能够使得数组a中的所有的数奇偶性相同。
-思路我们将奇数和偶数分开来， 奇数在数组odd中，偶数在数组even中 ， 那么我们每次操作即为从odd和even中各选择一个数， 最后目标为使odd数组为空或者even数组为空。
-首先，如果odd数组初始为空，或者even初始数组为空，那么答案即为0 。
-因为我们每次操作一定选择的是一个奇数和一个偶数，那么我们最终加和后的结果一定是奇数 ，于是每次操作只会使得奇数越来越多，偶数越来越少。
-下面给出结论： 假设起初有cnt个偶数 ，那么需要的操作次数最少为cnt， 最多为cnt+1 。
-我们假设选择的奇数为 x，偶数为y。 如果x < y 那么会让奇数x 变为另一个奇数x+y ； 如果x>y 那么会让偶数y变为奇数x+y 。即只有第二种操作才能令偶数的数量减少一个。 因此最少需要cnt次才能将所有的偶数变为奇数。
-因此我们应该尽可能地保证每次选择的奇数比偶数要大，于是我们每次一定会选择目前最大的奇数mx , 如果在这种选择下仍然会出现奇数更小的情况，那么我们就一定无法在cnt次操作下完成目标了。 此时我们可以选择将mx和最大的偶数进行操作，得到的新的奇数一定比所有的偶数大，之后每次都选择这个奇数，便可以保证每次都满足奇数大于偶数了。 最终需要cnt+1次操作。
-代码#include&lt;bits/stdc++.h&gt;using namespace std;#define IO ios::sync_with_stdio(false);cin.tie(0);cout.tie(0);#define int long long#define rep(i,l,r) for(int i = l;i&lt;=r;i++)#define per(i,r,l) for(int i = r;i&gt;=l;i--)const int INF = 0x3f3f3f3f3f3f3f3f;typedef pair&lt;int,int&gt; PII;void solve()&#123;    int n;    cin&gt;&gt;n;    vector&lt;int&gt; odd,even;    for(int i =1;i&lt;=n;i++)&#123;        int x;cin&gt;&gt;x;        if(x%2) odd.push_back(x);        else even.push_back(x);    &#125;    if((!odd.size()&amp;&amp;even.size())) &#123;cout&lt;&lt;&quot;0&quot;&lt;&lt;endl;return ;&#125;    if((odd.size()&amp;&amp;!even.size())) &#123;cout&lt;&lt;&quot;0&quot;&lt;&lt;endl;return ;&#125;    sort(odd.begin(),odd.end());    sort(even.begin(),even.end());    int sz = even.size();    int mx = odd.back();    queue&lt;int&gt; q;    for(auto p:even) q.push(p);    int ans = 0;    while(q.size())&#123;        if(mx &gt; q.front()) &#123;            ans++;            mx = mx + q.front();            q.pop();        &#125;else&#123;            ans ++;            mx = mx + q.front();        &#125;    &#125;    cout&lt;&lt;min(ans,sz+1)&lt;&lt;&#x27;\n&#x27;;&#125;signed main()&#123;    int T = 1;    cin&gt;&gt;T;    while(T--)&#123;        solve();    &#125;    return 0;&#125;
-C. Light Switches题意有n个房间，每个房间都有一盏灯，起初所有的灯都是灭的，第i个房间会在a_i, a_i+k,a_i+2*k,... 的时间刻转换灯的状态，即在[a_i,a_i+k-1] , [a_i+2*k,a_i+3*k-1],... 区间内亮灯。
-问最早在哪个时刻，能保证所有n盏灯都是亮着的。如果不存在某个时刻所有的灯都是亮着的，那么输出-1 .
-思路题意即为将所有房间的亮灯区间取交集，然后取最小值。
-我们可以对所有的房间按照a_i 从小到大进行排序 ，然后依次取交集，  因为每个区间都为2*k重复区间，所以每次取交集后一定也为2*k 重复区间，于是我们只需要使用undefinedl,r)来表示区间[l+j*2k,r+j*2k]$ 即可。
-起初l = a[1], r = a[1]+k-1 ,之后我们遍历每个区间[l_i,r_i] , 如果当前遍历的区间与交集的初始区间[l,r] 相差距离超过2*k 便可以通过令l,r 都加上t个2*k（其中t = \frac{l_i - l}{2*k} ），来使得两个区间的左端点的距离不超过2*k ， 此时如果l_i > r 那么取交集一定为空，我们尝试让[l,r] 再向后移动一个2*k ，试图令[l_i,r_i ] 与[l+2k,r+2k]取交集。 （取交集即为l= max(l,l_i), r = min(r,r_i) ）
-如果某次遍历时使得l>r 那么此时交集已经为空，直接输出-1即可。
-如果遍历结束，那么最终的答案即为l 。
-代码#include&lt;bits/stdc++.h&gt;using namespace std;#define IO ios::sync_with_stdio(false);cin.tie(0);cout.tie(0);#define int long long#define rep(i,l,r) for(int i = l;i&lt;=r;i++)#define per(i,r,l) for(int i = r;i&gt;=l;i--)const int INF = 0x3f3f3f3f3f3f3f3f;typedef pair&lt;int,int&gt; PII;void solve()&#123;    int n,k;    cin&gt;&gt;n&gt;&gt;k;    vector&lt;int&gt;a(n+5);    rep(i,1,n) cin&gt;&gt;a[i];    sort(a.begin()+1,a.begin()+1+n);    int l = a[1];    int r = a[1] + k - 1;    for(int i=2;i&lt;=n;i++)&#123;        if(a[i] &lt;= r &amp;&amp; a[i] &gt;= l)&#123;            l = a[i];            &#125;                int t = (a[i] - l) / (2*k);        l += t * 2 * k;        r += t * 2 * k;        if(a[i] &gt; r)&#123;            l+=2*k;            r+=2*k;        &#125;        l = max(l,a[i]);        r = min(r,a[i]+k-1);        if(l &gt; r) &#123;            cout&lt;&lt;&quot;-1\n&quot;;            return ;        &#125;    &#125;    cout&lt;&lt;l&lt;&lt;&#x27;\n&#x27;;&#125;signed main()&#123;    int T = 1;    cin&gt;&gt;T;    while(T--)&#123;        solve();    &#125;    return 0;&#125;
-D. Med-imize题意有一个长度为n的数组a_0,a_1,...,a_{n-1} (注意本题的数组下标从0开始) ， 以及一个整数k , 我们每次选择一个长度为k的子数组，将其从数组a中删除，直到数组的中的数组元素数量不大于k。
-问最终数组a的中位数最大是多少。本题的中位数为对数组的元素排序后，第undefinedfrac{sz+1}{2}个元素，其中sz$为数组的长度。
-思路我们可以二分答案来求最终的中位数 。于是问题变成了： 给定一个数mid ，能否存在一个最终数组a' ，使得a' 中的大于等于mid的数的数量，比小于mid的数的数量更多。
-我们将满足a_i \ge mid 的元素设置为b_i = 1 , 否则就设置为b_i = -1 。 我们尽可能让最终选出的b' 数组的和尽可能大，最后判断是否大于0即可。
-但是我们不能任意选择剩下的元素，最终一定会剩下m个元素(m =(n-1)\%k+1 )    ，并且最终剩下的数组a'_i \in \{a_{i\%k + t * k}\} 即选出的最终的下标为i的数的原始下标一定在i的同余集中。
-很好证明这点： 假设我们选出了第3个数（即下标为2），那么之前一定进行过选择了2个数，然后又删除了几组数（每组一定为k个数），所以这个数的原始下标一定为t*k + i 。
-我们用dp[i] 表示考虑前i个数，b[i]数组最大为多少，由于我们每次只能成组地删除元素，那么就代表了如果我们选择不要b[i] 这个元素，那么dp[i]=max(dp[i],dp[i-k]) , 而如果我们选择要这个元素，那么dp[i] = max(dp[i],dp[i-1]+b[i])  ， 最终比较dp[n-1]>0 是否成立即可。
-代码#include&lt;bits/stdc++.h&gt;using namespace std;#define IO ios::sync_with_stdio(false);cin.tie(0);cout.tie(0);#define int long long#define rep(i,l,r) for(int i = l;i&lt;=r;i++)#define per(i,r,l) for(int i = r;i&gt;=l;i--)const int INF = 0x3f3f3f3f3f3f3f3f;typedef pair&lt;int,int&gt; PII;// 本题数据在数组中从下标0开始存储int a[500005];int b[500005];int dp[500005];int n,k;bool check(int mid)&#123;    for(int i = 0;i &lt; n;i++)&#123;        if(a[i] &gt;= mid) b[i] = 1;        else b[i] = -1;     &#125;    dp[0] = b[0];    for(int i = 1;i&lt;n;i++)&#123;        if(i%k == 0)&#123;            dp[i] = max(dp[i-k],b[i]);        &#125;else&#123;            dp[i] = dp[i-1] + b[i];            if(i &gt; k)                dp[i] = max(dp[i],dp[i-k]);        &#125;    &#125;    return dp[n-1] &gt; 0;&#125;void solve()&#123;    cin&gt;&gt;n&gt;&gt;k;    rep(i,0,n-1) cin&gt;&gt;a[i];    int l,r;    l = 1;r = 1e9;    while(l&lt;r)&#123;        int mid = (l+r+1)&gt;&gt;1;        if(check(mid))&#123;            l = mid;        &#125;else&#123;            r = mid-1;        &#125;    &#125;    cout&lt;&lt;l&lt;&lt;&#x27;\n&#x27;;&#125;signed main()&#123;    int T = 1;    cin&gt;&gt;T;    while(T--)&#123;        solve();    &#125;    return 0;&#125;
 ]]></content>
       <categories>
         <category>题解</category>
@@ -1693,28 +1693,6 @@ D - Prefix Purchase题意给出一个n个数的数组a. 起初 a_1 = a_2 =...= a
       </tags>
   </entry>
   <entry>
-    <title>mysql远程连接</title>
-    <url>/a726c975d078/</url>
-    <content><![CDATA[搞了一天的mysql远程连接， 也算是踩过坑了，这里记录一下
-如果你的mysql无法被远程连接，那么请依次检查如下条件：
-1. 服务器的防火墙（安全组）放行端口如果mysql服务在云服务器上运行， 那么请检查云服务器是否将端口3306开放。 如果没有开放请设置为通行状态。。这里不同的云服务器厂商的截图不同，我这里给出华为云的安全组设置
-华为云：![在这里插入图片描述](https://img-blog.csdnimg.cn/direct/e44f593c14434d7e87359c45016de270.png#pic_center)
-2. 启动mysql的远程连接服务在命令台中使用mysql -uroot 进入你的mysql数据库。mysql -uroot 选择mysql库use mysql检查user表中的host和User信息。select host,User from user;如果你的root字段对应的host是localhost，那么代表root账户只能本地登录。+-----------+------------------+| host      | User             |+-----------+------------------+| localhost | root             || localhost | debian-sys-maint || localhost | mysql.infoschema || localhost | mysql.session    || localhost | mysql.sys        |+-----------+------------------+
-可以将host字段更改为%表示允许所有ip登录root账号。
-update user  set host = &#x27;%&#x27; where user = &#x27;root&#x27;;   
-更改后使用查表命令检查一下select host,User from user;更改后应该为如下：+-----------+------------------+| host      | User             |+-----------+------------------+| %         | root             || localhost | debian-sys-maint || localhost | mysql.infoschema || localhost | mysql.session    || localhost | mysql.sys        |+-----------+------------------+
-3. 更改密码验证方式如果mysql版本是5.7或更低，无需考虑本条。
-在mysql版本8.0版本后， 使用sha2方式来验证密码。 就导致我们不能正确连接。需要设置为允许密码连接。ALTER USER &#x27;root&#x27;@&#x27;%&#x27; IDENTIFIED WITH mysql_native_password BY &#x27;password&#x27;;
-]]></content>
-      <categories>
-        <category>笔记</category>
-      </categories>
-      <tags>
-        <tag>笔记</tag>
-        <tag>mysql</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>markdown基础语法</title>
     <url>/887d60201e7d/</url>
     <content><![CDATA[Markdown语法安装离线编辑软件TyporaTypora下载。[官网](https://typoraio.cn/)下载后去github上下载破解器https://github.com/WittonBell/typoraCracker
@@ -1806,37 +1784,25 @@ d
       </tags>
   </entry>
   <entry>
-    <title>python配置cuda</title>
-    <url>/b4bdaa4b4566/</url>
-    <content><![CDATA[使用pytorch进行深度学习的时候，往往想用GPU进行运算来提高速度。于是搜索便知道了CUDA。
-下面给出一个自检的建议：
-
-检查cuda的版本是否适配自己的GPU。
-
-打开NVDIA控制面板，点击左下角“系统信息”，然后就可以看到NVDIA GPU的详细信息，其中就包含了CUDA的版本。在官网安装合适版本的cuda-toolkit。
-![image-20240827162727766](C:\Users\lsk\AppData\Roaming\Typora\typora-user-images\image-20240827162727766.png)
-
-安装了cuda，但是命令行输入nvcc -V 报错显示没有nvcc 
-
-这时候可能没有将CUDA添加到环境变量。检查系统变量中是否包含了CUDA_PATH ,以及CUDA_PATH_Vx.x  , 以及PATH中是否包含了cuda的bin目录。
-![image-20240827162641803](C:\Users\lsk\AppData\Roaming\Typora\typora-user-images\image-20240827162641803.png)
-
-在命令行输入nvcc -V 可以正常运行，但是在python中使用print(torch.cuda.is_available()) 显示的是False。 这时候考虑torch安装错误。
-
-（直接使用pip install torch 会安装cpu版本的torch，导致无法使用cuda）
-卸载原先的torch，pip uninstall torch
-然后在PyTorch官网找到正确版本进行下载安装。我的CUDA版本是12.6，PyTorch官网的最新版本支持CUDA12.4 安装命令如下：
-pip3 install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu124
-![image-20240827162529085](C:\Users\lsk\AppData\Roaming\Typora\typora-user-images\image-20240827162529085.png)
-此时在python中再运行print(torch.cuda.is_available())就会显示True了。
+    <title>mysql远程连接</title>
+    <url>/a726c975d078/</url>
+    <content><![CDATA[搞了一天的mysql远程连接， 也算是踩过坑了，这里记录一下
+如果你的mysql无法被远程连接，那么请依次检查如下条件：
+1. 服务器的防火墙（安全组）放行端口如果mysql服务在云服务器上运行， 那么请检查云服务器是否将端口3306开放。 如果没有开放请设置为通行状态。。这里不同的云服务器厂商的截图不同，我这里给出华为云的安全组设置
+华为云：![在这里插入图片描述](https://img-blog.csdnimg.cn/direct/e44f593c14434d7e87359c45016de270.png#pic_center)
+2. 启动mysql的远程连接服务在命令台中使用mysql -uroot 进入你的mysql数据库。mysql -uroot 选择mysql库use mysql检查user表中的host和User信息。select host,User from user;如果你的root字段对应的host是localhost，那么代表root账户只能本地登录。+-----------+------------------+| host      | User             |+-----------+------------------+| localhost | root             || localhost | debian-sys-maint || localhost | mysql.infoschema || localhost | mysql.session    || localhost | mysql.sys        |+-----------+------------------+
+可以将host字段更改为%表示允许所有ip登录root账号。
+update user  set host = &#x27;%&#x27; where user = &#x27;root&#x27;;   
+更改后使用查表命令检查一下select host,User from user;更改后应该为如下：+-----------+------------------+| host      | User             |+-----------+------------------+| %         | root             || localhost | debian-sys-maint || localhost | mysql.infoschema || localhost | mysql.session    || localhost | mysql.sys        |+-----------+------------------+
+3. 更改密码验证方式如果mysql版本是5.7或更低，无需考虑本条。
+在mysql版本8.0版本后， 使用sha2方式来验证密码。 就导致我们不能正确连接。需要设置为允许密码连接。ALTER USER &#x27;root&#x27;@&#x27;%&#x27; IDENTIFIED WITH mysql_native_password BY &#x27;password&#x27;;
 ]]></content>
       <categories>
         <category>笔记</category>
       </categories>
       <tags>
         <tag>笔记</tag>
-        <tag>python</tag>
-        <tag>深度学习</tag>
+        <tag>mysql</tag>
       </tags>
   </entry>
   <entry>
@@ -2411,6 +2377,40 @@ const char * state1 = &quot;test1&quot;;const char * state2 = &quot;ABCDEFG&quot
       <tags>
         <tag>C++</tag>
         <tag>笔记</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>python配置cuda</title>
+    <url>/b4bdaa4b4566/</url>
+    <content><![CDATA[使用pytorch进行深度学习的时候，往往想用GPU进行运算来提高速度。于是搜索便知道了CUDA。
+下面给出一个自检的建议：
+
+检查cuda的版本是否适配自己的GPU。
+
+打开NVDIA控制面板，点击左下角“系统信息”，然后就可以看到NVDIA GPU的详细信息，其中就包含了CUDA的版本。在官网安装合适版本的cuda-toolkit。
+![image-20240827162727766](C:\Users\lsk\AppData\Roaming\Typora\typora-user-images\image-20240827162727766.png)
+
+安装了cuda，但是命令行输入nvcc -V 报错显示没有nvcc 
+
+这时候可能没有将CUDA添加到环境变量。检查系统变量中是否包含了CUDA_PATH ,以及CUDA_PATH_Vx.x  , 以及PATH中是否包含了cuda的bin目录。
+![image-20240827162641803](C:\Users\lsk\AppData\Roaming\Typora\typora-user-images\image-20240827162641803.png)
+
+在命令行输入nvcc -V 可以正常运行，但是在python中使用print(torch.cuda.is_available()) 显示的是False。 这时候考虑torch安装错误。
+
+（直接使用pip install torch 会安装cpu版本的torch，导致无法使用cuda）
+卸载原先的torch，pip uninstall torch
+然后在PyTorch官网找到正确版本进行下载安装。我的CUDA版本是12.6，PyTorch官网的最新版本支持CUDA12.4 安装命令如下：
+pip3 install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu124
+![image-20240827162529085](C:\Users\lsk\AppData\Roaming\Typora\typora-user-images\image-20240827162529085.png)
+此时在python中再运行print(torch.cuda.is_available())就会显示True了。
+]]></content>
+      <categories>
+        <category>笔记</category>
+      </categories>
+      <tags>
+        <tag>笔记</tag>
+        <tag>python</tag>
+        <tag>深度学习</tag>
       </tags>
   </entry>
   <entry>
@@ -3074,30 +3074,6 @@ undefinedF: 1 \le n \le 10^3 , G: 1\le n \le 10^5)$
       </tags>
   </entry>
   <entry>
-    <title>小白月赛 76</title>
-    <url>/611f7aaa17d8/</url>
-    <content><![CDATA[牛客小白月赛76 https://ac.nowcoder.com/acm/contest/60393
-F. Kevin的矩阵1.题意给出n个数字的数字序列组成一个矩阵，m表示矩阵初始的列数，这n个数从左至右从上至下排列在矩阵中。要求进行若干次操作，使得矩阵的某一列的值全部为k可以执行的操作有:1.将矩阵的列数加1或者减12.改变矩阵中某个数的值一共有t组数据，并且保证所有数据中的n的和小于2e5
-2.思路不论数据怎样，每组样例中所进行的操作数都不多于2 次操作1.初始的列数m小于 ,那么可以花费至多 – m次 操作将列数变为 ，然后花费至多 + 1 次操作改变某一列上面的值来保证这一列的值全部为k。假设m为最糟糕的情况，即m = 1，那么总共最多需要 2 * 次操作。2.初始的列数m大于 那么直接将某一列中的所有不为k的数都变为k。最多花费  次操作表示即可符合要求，因为m  所以，所以总操作数永远小于 2 *因此可以只对列数 [m – , m+]的区域进行遍历。(如果列数在这个范围之外,那么进行列数变换的操作花费已经大于最糟糕的情况了)
-3.代码实现#include&lt;iostream&gt;#include&lt;cmath&gt;using namespace std;const int INF = 0x3f3f3f3f;int a[200010];int main()&#123;    int t;    cin&gt;&gt;t;    int n,m,k;    while(t--)&#123;        int ans = INF;        cin&gt;&gt;n&gt;&gt;m&gt;&gt;k;        for(int i = 1;i&lt;=n;i++)&#123;            scanf(&quot;%d&quot;,&amp;a[i]);        &#125;        int l = m - 2 * sqrt(n) - 5;        l = max(l,1);        int r = m + 2 * sqrt(n) + 5;        r = min(n,r);        for(int c = l;c&lt;=r;c++)&#123;            for(int i = 1;i&lt;=c;i++)&#123;                int num = a[i];                int cnt = abs(m - c);                for(int j = i;j &lt;= n;j+=c)&#123;                    if(a[j] != k)&#123;                        cnt++;                    &#125;                &#125;                ans = min(ans,cnt);            &#125;        &#125;        cout&lt;&lt;ans&lt;&lt;endl;    &#125;    return 0;&#125;
-G.Kevin逛超市1.题意在n个物品中有1个是“有问题的”，为了找到这个物品，依次循环进行以下操作:选出这些物品当中的前 (n+1)/2 个数进行一次检测，如果检测到了“目标物品”，就选择这组物品重复操作，如果没有检测到，就选择另外的 n/2 个物品重复操作直到待检测的物品只有一个并且经过检测后确认该物品是“有问题的”，停止检测。可以得出总的期望次数 ,要求计算 mod 998244353 的结果。输入一个数t代表一共有t组样例，每组样例输入一个数n(t &lt;= 2* n&lt;=)输出每组样例的期望次数每组样例输出一个数代表结果
-2.思路
-期望dp，容易得出dp[i] = 1 + dp[i/2] + dp[(i+1)/2] 这样可以通过dfs来在logn的规模下进行求解。
-通过map记录已经搜索的数据，实现记忆化搜索
-需要特判dp[1]和dp[2] (dp[1]需要特判自不必多说，dp[2]需要特判在于按照题目规则 dp[2] = 而按照递归方程得出的dp[2] = 1 + dp[1] + dp[1] = 2不符合题意)
-
-3.代码#include &lt;bits/stdc++.h&gt;using namespace std;typedef long long LL;const int mod = 998244353;unordered_map&lt;int, int&gt; mp;int qp(int a, int k)//快速幂 quick pow&#123;    int res = 1;    while (k)    &#123;        if (k &amp; 1) res = (LL) res * a % mod;        a = (LL) a * a % mod;        k &gt;&gt;= 1;    &#125;     return res;&#125; int dfs(int l, int r)&#123;    int len = r - l + 1, mid = l + r &gt;&gt; 1;    if (len == 1) return 1;    if (mp[len] != 0) return mp[len];     int &amp;val = mp[len];    if (mid - l + 1 == 1) val = dfs(l, mid);    else val = dfs(l, mid) + mid - l + 1;    val %= mod;    val = (val + dfs(mid + 1, r)) % mod;    val = (val + r - mid) % mod;    return val;&#125; void solve()&#123;    int n;    cin &gt;&gt; n;    cout &lt;&lt; (LL)dfs(1, n) * qp(n, mod - 2) % mod &lt;&lt; &quot;\n&quot;;&#125; int main()&#123;    ios::sync_with_stdio(false);    cin.tie(nullptr);     int T;    cin &gt;&gt; T;     while (T -- ) solve();     return 0;&#125;
-4.节时本题对时间要求不严格，但如果需要节时，可以考虑如下：使用二维数组mp[70][2]来代替map进行记录，其中mp[i][j]中的i代表进行第i次二分后的两个数，j如果为0就是较小者，为1就是较大者
-]]></content>
-      <categories>
-        <category>题解</category>
-      </categories>
-      <tags>
-        <tag>题解</tag>
-        <tag>C++</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>牛客周赛round59</title>
     <url>/89dfe069fba2/</url>
     <content><![CDATA[比赛链接https://ac.nowcoder.com/acm/contest/89860
@@ -3151,6 +3127,30 @@ F - 小红的数组回文值题意定义一个数组的回文值为：至少需�
 于是两侧的方案数为undefinedsum_{k=0}^{min(le,ri)} C_{le}^{k} C{ri}^k, 我们根据组合数的公式C_n^m = C_n^{n-m}，就可以将式子变为\sum_{k=0}^{min(le,ri)} C_{le}^{le-k} C_{ri}^k,那么根据**范德蒙恒等式** ， 方案数即为C_{le+ri}^{le},  因此对于这个数对(i,j)，它的贡献为2^{mid} * C_{le+ri}^{le}$ 
 注：范德蒙恒等式如下：C_{n+m}^k = \sum_{t=0}^{k} C_n^t C_m^{k-t} , 解释为：有两个盒子，分别装有n个球和m个球 , 从中一共选择k个球（C_{n+m}^k） 等价于， 从第一个盒子中选择t个球C_n^t，从另一个盒子中选择k-t个球 C_m^{k-t} 。枚举每个t \in [0,k] 将方案数相加。
 代码#include&lt;bits/stdc++.h&gt;using namespace std;#define IO ios::sync_with_stdio(false);cin.tie(0);cout.tie(0);#define int long long#define rep(i,l,r) for(int i = l;i&lt;=r;i++)#define per(i,r,l) for(int i = r;i&gt;=l;i--)const int INF = 0x3f3f3f3f3f3f3f3f;typedef pair&lt;int,int&gt; PII;int a[2005];int fac[2005];int ifac[2005];const int mod = 1e9+7;int qpow(int x,int n)&#123;    int ans = 1;    while(n)&#123;        if(n&amp;1) ans = ans * x % mod;        x = x * x % mod;        n &gt;&gt;= 1;    &#125;    return ans;&#125;int inv(int x)&#123;    return qpow(x,mod-2);&#125;int C(int n,int m)&#123;    if(m == 0 || n == m) return 1;    return fac[n] * ifac[n-m] % mod * ifac[m] % mod;&#125;void solve()&#123;    fac[0] = 1;    for(int i = 1;i&lt;=2000;i++) fac[i] = fac[i-1] * i % mod;    for(int i = 1;i&lt;=2000;i++) ifac[i] = inv(fac[i]);    int n;    cin&gt;&gt;n;    for(int i = 1;i&lt;=n;i++)&#123;        cin&gt;&gt;a[i];    &#125;    int ans = 0;    for(int i = 1;i&lt;=n;i++)&#123;        for(int j = i+1;j&lt;=n;j++)&#123;            int l = i-1,m = (j-i-1),r=(n-j);            int sum = 0;            int mn = min(l,r);            ans = (ans + (a[i]!=a[j])*qpow(2,m)*(C(l+r,l))%mod)%mod;        &#125;    &#125;    cout&lt;&lt;ans;&#125;signed main()&#123;    int T = 1;    // cin&gt;&gt;T;    while(T--)&#123;        solve();    &#125;    return 0;&#125;
+]]></content>
+      <categories>
+        <category>题解</category>
+      </categories>
+      <tags>
+        <tag>题解</tag>
+        <tag>C++</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>小白月赛 76</title>
+    <url>/611f7aaa17d8/</url>
+    <content><![CDATA[牛客小白月赛76 https://ac.nowcoder.com/acm/contest/60393
+F. Kevin的矩阵1.题意给出n个数字的数字序列组成一个矩阵，m表示矩阵初始的列数，这n个数从左至右从上至下排列在矩阵中。要求进行若干次操作，使得矩阵的某一列的值全部为k可以执行的操作有:1.将矩阵的列数加1或者减12.改变矩阵中某个数的值一共有t组数据，并且保证所有数据中的n的和小于2e5
+2.思路不论数据怎样，每组样例中所进行的操作数都不多于2 次操作1.初始的列数m小于 ,那么可以花费至多 – m次 操作将列数变为 ，然后花费至多 + 1 次操作改变某一列上面的值来保证这一列的值全部为k。假设m为最糟糕的情况，即m = 1，那么总共最多需要 2 * 次操作。2.初始的列数m大于 那么直接将某一列中的所有不为k的数都变为k。最多花费  次操作表示即可符合要求，因为m  所以，所以总操作数永远小于 2 *因此可以只对列数 [m – , m+]的区域进行遍历。(如果列数在这个范围之外,那么进行列数变换的操作花费已经大于最糟糕的情况了)
+3.代码实现#include&lt;iostream&gt;#include&lt;cmath&gt;using namespace std;const int INF = 0x3f3f3f3f;int a[200010];int main()&#123;    int t;    cin&gt;&gt;t;    int n,m,k;    while(t--)&#123;        int ans = INF;        cin&gt;&gt;n&gt;&gt;m&gt;&gt;k;        for(int i = 1;i&lt;=n;i++)&#123;            scanf(&quot;%d&quot;,&amp;a[i]);        &#125;        int l = m - 2 * sqrt(n) - 5;        l = max(l,1);        int r = m + 2 * sqrt(n) + 5;        r = min(n,r);        for(int c = l;c&lt;=r;c++)&#123;            for(int i = 1;i&lt;=c;i++)&#123;                int num = a[i];                int cnt = abs(m - c);                for(int j = i;j &lt;= n;j+=c)&#123;                    if(a[j] != k)&#123;                        cnt++;                    &#125;                &#125;                ans = min(ans,cnt);            &#125;        &#125;        cout&lt;&lt;ans&lt;&lt;endl;    &#125;    return 0;&#125;
+G.Kevin逛超市1.题意在n个物品中有1个是“有问题的”，为了找到这个物品，依次循环进行以下操作:选出这些物品当中的前 (n+1)/2 个数进行一次检测，如果检测到了“目标物品”，就选择这组物品重复操作，如果没有检测到，就选择另外的 n/2 个物品重复操作直到待检测的物品只有一个并且经过检测后确认该物品是“有问题的”，停止检测。可以得出总的期望次数 ,要求计算 mod 998244353 的结果。输入一个数t代表一共有t组样例，每组样例输入一个数n(t &lt;= 2* n&lt;=)输出每组样例的期望次数每组样例输出一个数代表结果
+2.思路
+期望dp，容易得出dp[i] = 1 + dp[i/2] + dp[(i+1)/2] 这样可以通过dfs来在logn的规模下进行求解。
+通过map记录已经搜索的数据，实现记忆化搜索
+需要特判dp[1]和dp[2] (dp[1]需要特判自不必多说，dp[2]需要特判在于按照题目规则 dp[2] = 而按照递归方程得出的dp[2] = 1 + dp[1] + dp[1] = 2不符合题意)
+
+3.代码#include &lt;bits/stdc++.h&gt;using namespace std;typedef long long LL;const int mod = 998244353;unordered_map&lt;int, int&gt; mp;int qp(int a, int k)//快速幂 quick pow&#123;    int res = 1;    while (k)    &#123;        if (k &amp; 1) res = (LL) res * a % mod;        a = (LL) a * a % mod;        k &gt;&gt;= 1;    &#125;     return res;&#125; int dfs(int l, int r)&#123;    int len = r - l + 1, mid = l + r &gt;&gt; 1;    if (len == 1) return 1;    if (mp[len] != 0) return mp[len];     int &amp;val = mp[len];    if (mid - l + 1 == 1) val = dfs(l, mid);    else val = dfs(l, mid) + mid - l + 1;    val %= mod;    val = (val + dfs(mid + 1, r)) % mod;    val = (val + r - mid) % mod;    return val;&#125; void solve()&#123;    int n;    cin &gt;&gt; n;    cout &lt;&lt; (LL)dfs(1, n) * qp(n, mod - 2) % mod &lt;&lt; &quot;\n&quot;;&#125; int main()&#123;    ios::sync_with_stdio(false);    cin.tie(nullptr);     int T;    cin &gt;&gt; T;     while (T -- ) solve();     return 0;&#125;
+4.节时本题对时间要求不严格，但如果需要节时，可以考虑如下：使用二维数组mp[70][2]来代替map进行记录，其中mp[i][j]中的i代表进行第i次二分后的两个数，j如果为0就是较小者，为1就是较大者
 ]]></content>
       <categories>
         <category>题解</category>
