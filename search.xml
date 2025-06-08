@@ -1,25 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>2023ICPC网络赛第二场</title>
-    <url>/026c0040b952/</url>
-    <content><![CDATA[[The 2023 ICPC Asia Regionals Online Contest (2) (pintia.cn)](https://pintia.cn/market/item/1705511462254264320)
-**K Super-knight**题意有一个士兵，起初在n*n的棋盘的左下角，每次向右移动a格，向上移动b格，当越过地图边界时，则到地图的另一边（类似于没有边界墙的贪吃蛇），对这个士兵能到达的格子做标记，所有被标记的格子中，离左下角格子最近的距离是多少。（假设最近的格子为undefinedx, y)，就输出(x - 1)^2+(y - 1)^2$ )
-（ 2 \le n \le 10^{18}, 1 \le a,b \le 200)
-思路可以得出，在经过n次移动后，一定回回到起始点，所以最终的路径一定是循环的。
-但n太大，无法通过这样判断所有的被标记的点。
-可以发现，在移动了若干次后，除非穿过地图边界，否则只会增加 与原点的距离。因此我们只需要考虑**刚穿过地图边界的点** 即可。这样可以省下很多时间：（每次直接刚好跨出地图边界，设从undefinednowx,nowy)点开始跨，那么一大步就跨了大约min(\frac{n}{a},\frac{n}{b})$步，而一共进行n小步就可以回到初始点完成一次循环，因此总共需要的大跨步的次数仅仅是 a ，b的数量级，于是我们就可以在规定的时间内完成计算）
-代码#include&lt;iostream&gt;using namespace std;#define int long long int a,b,n;inline int dis(int x,int y)&#123;	return (x * x  + y * y ); &#125;int cnt = 0;signed main()&#123;	int t;	cin&gt;&gt;t;	while(t--)&#123;		cin&gt;&gt;a&gt;&gt;b&gt;&gt;n;		a = a % n;		b = b % n;		int nowa = a % n;		int nowb = b % n;		int minn = a * a + b * b;		while(nowa !=0 || nowb != 0)&#123;			cnt ++;			if(nowa &lt;=300 &amp;&amp; nowb &lt;=300) 				minn = min(minn,dis(nowa,nowb));			int k = min((n - nowa - 1) / a,(n - nowb - 1) / b) + 1;			nowa = (nowa + a * k % n) % n;			nowb = (nowb + b * k % n) % n;					&#125;		cout&lt;&lt;&quot;**&quot;&lt;&lt;cnt&lt;&lt;endl;		cout&lt;&lt;minn&lt;&lt;endl;	&#125;	return 0;&#125;
-L]]></content>
-      <categories>
-        <category>题解</category>
-      </categories>
-      <tags>
-        <tag>C++</tag>
-        <tag>题解</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>2022绵阳站E</title>
     <url>/4b96d5c23f0d/</url>
     <content><![CDATA[2022 CCPC 绵阳站 E题 （图上DP，根号分治）题意有一个由n城市组成的国家，城市之间由一条权值为w的边连接，共m条这样的边，并且保证整个国家是连通的。每个城市中有a_i 个居民。
@@ -36,9 +17,9 @@ L]]></content>
         <category>题解</category>
       </categories>
       <tags>
-        <tag>题解</tag>
         <tag>DP</tag>
         <tag>分治</tag>
+        <tag>题解</tag>
       </tags>
   </entry>
   <entry>
@@ -59,8 +40,27 @@ G Spanning Tree题意起初树只有n个节点，没有边，按照如下操作�
         <category>题解</category>
       </categories>
       <tags>
-        <tag>C++</tag>
         <tag>题解</tag>
+        <tag>C++</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>2023ICPC网络赛第二场</title>
+    <url>/026c0040b952/</url>
+    <content><![CDATA[[The 2023 ICPC Asia Regionals Online Contest (2) (pintia.cn)](https://pintia.cn/market/item/1705511462254264320)
+**K Super-knight**题意有一个士兵，起初在n*n的棋盘的左下角，每次向右移动a格，向上移动b格，当越过地图边界时，则到地图的另一边（类似于没有边界墙的贪吃蛇），对这个士兵能到达的格子做标记，所有被标记的格子中，离左下角格子最近的距离是多少。（假设最近的格子为undefinedx, y)，就输出(x - 1)^2+(y - 1)^2$ )
+（ 2 \le n \le 10^{18}, 1 \le a,b \le 200)
+思路可以得出，在经过n次移动后，一定回回到起始点，所以最终的路径一定是循环的。
+但n太大，无法通过这样判断所有的被标记的点。
+可以发现，在移动了若干次后，除非穿过地图边界，否则只会增加 与原点的距离。因此我们只需要考虑**刚穿过地图边界的点** 即可。这样可以省下很多时间：（每次直接刚好跨出地图边界，设从undefinednowx,nowy)点开始跨，那么一大步就跨了大约min(\frac{n}{a},\frac{n}{b})$步，而一共进行n小步就可以回到初始点完成一次循环，因此总共需要的大跨步的次数仅仅是 a ，b的数量级，于是我们就可以在规定的时间内完成计算）
+代码#include&lt;iostream&gt;using namespace std;#define int long long int a,b,n;inline int dis(int x,int y)&#123;	return (x * x  + y * y ); &#125;int cnt = 0;signed main()&#123;	int t;	cin&gt;&gt;t;	while(t--)&#123;		cin&gt;&gt;a&gt;&gt;b&gt;&gt;n;		a = a % n;		b = b % n;		int nowa = a % n;		int nowb = b % n;		int minn = a * a + b * b;		while(nowa !=0 || nowb != 0)&#123;			cnt ++;			if(nowa &lt;=300 &amp;&amp; nowb &lt;=300) 				minn = min(minn,dis(nowa,nowb));			int k = min((n - nowa - 1) / a,(n - nowb - 1) / b) + 1;			nowa = (nowa + a * k % n) % n;			nowb = (nowb + b * k % n) % n;					&#125;		cout&lt;&lt;&quot;**&quot;&lt;&lt;cnt&lt;&lt;endl;		cout&lt;&lt;minn&lt;&lt;endl;	&#125;	return 0;&#125;
+L]]></content>
+      <categories>
+        <category>题解</category>
+      </categories>
+      <tags>
+        <tag>题解</tag>
+        <tag>C++</tag>
       </tags>
   </entry>
   <entry>
@@ -154,8 +154,8 @@ L. 找最大值只考虑奇数，如果比当前的最大值大，就更新最�
         <category>题解</category>
       </categories>
       <tags>
-        <tag>C++</tag>
         <tag>题解</tag>
+        <tag>C++</tag>
       </tags>
   </entry>
   <entry>
@@ -465,8 +465,8 @@ f(&quot;abc&quot;,2) = abcabc。g(&quot;abc&quot;,2) = aabbcc
         <category>题解</category>
       </categories>
       <tags>
-        <tag>C++</tag>
         <tag>题解</tag>
+        <tag>C++</tag>
       </tags>
   </entry>
   <entry>
@@ -501,31 +501,8 @@ A - green_gold_dog, array and permutation题意有一个长度为n的数组a，�
         <category>题解</category>
       </categories>
       <tags>
-        <tag>C++</tag>
         <tag>题解</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Codeforces Round 904 (Div. 2)</title>
-    <url>/b104fde463a2/</url>
-    <content><![CDATA[[Dashboard - Codeforces Round 904 (Div. 2) - Codeforces](https://codeforces.com/contest/1884)
-C. Medium Design题意给长度为m的数组a，初始均为0。1\le m \le 10^9
-给出一些区间，请你选出其中某些区间。每选择一个区间，就令区间中的数都加一，问 数组中最大值max(a) ,和最小值min(a) 的差，最大为多少。
-思路考虑以下贪心策略：如果我们确定了最终第i个数是最大的那个数，即a[i] = max(a) , 那么我们就可以选择所有的包含i的区间。然后摒弃所有不包含i的区间。（选上包含i的区间一定会令max(a)++) , 这样我们可以遍历所有的数组下标i。 计算假使i为最大数时的ans，最终选择最大的ans即可。
-我们可以先对区间进行排序。 然后根据右端点从小到大维护优先队列pq。这样按顺序遍历区间数组，就可以引入所有左端点小于等于i的区间。然后通过剔除优先队列中的右端点小于i的区间。 这样优先队列中就保存了所有的包含i的区间。  因此有 max(a) = pq.size() ,
-再考虑寻找最小值min(a) , 如果我们使用 cntl 左端点为1的区间的数量。同理使用 cntr记录右端点为m的区间的数量 。那么 min(a) = min(cntl,cntr) 。
-本题m较大。需要离散化处理。
-代码#include&lt;bits/stdc++.h&gt;using namespace std;typedef pair&lt;int,int&gt; PII;struct cmp&#123;	bool operator()(PII x,PII y)&#123;return x.second &gt; y.second;&#125;&#125;;int main()&#123;	int t;	cin&gt;&gt;t;	cin.tie(0);cout.tie(0);	while(t--)&#123;		int n,m;		cin&gt;&gt;n&gt;&gt;m;		vector&lt;int &gt; vec(2 * n+5);//存储端点		vector&lt;PII&gt; seq(2*n+5);//存储区间		int l ,r;		for(int i = 1;i&lt;=n;i++)&#123;			cin&gt;&gt;l&gt;&gt;r;			seq[i] = make_pair(l,r);			vec[2 * i - 1] = l;			vec[2 * i] = r;		&#125;		//离散化处理		vec[0] = 1;//引入1和m两个端点		vec[2 * n + 1] = m;		sort(vec.begin(),vec.begin()+2+2*n);//排序		int len = unique(vec.begin(),vec.begin()+2+2*n) - vec.begin();//去重		// for(int i = 0;i&lt;len;i++) cout&lt;&lt;vec[i] &lt;&lt;&quot; &quot;;		// puts(&quot;&quot;);			unordered_map&lt;int,int&gt; mp;		for(int i = 0;i&lt;len;i++)&#123;			mp[vec[i]] = i;		&#125;		sort(seq.begin() + 1,seq.begin()+1+n);//对区间排序		int ans = -1;		int cntl = 0,cntr = 0;		priority_queue&lt;PII , vector&lt;PII&gt; ,cmp&gt; pq; //优先队列		int p = 1;		for(int i = 0;i&lt;len;i++)&#123;			while(p&lt;=n &amp;&amp; seq[p].first &lt;= vec[i])&#123;//入队				if(seq[p].first == 1) cntl ++;				if(seq[p].second == m) cntr ++;				pq.push(seq[p]);				p++;			&#125;			while(pq.size() &amp;&amp; pq.top().second &lt; vec[i])&#123;//出队				PII temp = pq.top();				if(temp.first == 1) cntl--;				pq.pop();			&#125;			ans = max(ans,(int)pq.size() - min(cntl,cntr));		&#125;		cout&lt;&lt;ans&lt;&lt;endl;	&#125;	return 0;&#125;
-D. Counting Rhyme题意给出有n个数的数组a，问有多少个undefinedi,j)对（(i,j)与(j,i)视为同一个对）,满足 **不存在** 任何k，使得a_k 是 a_i,a_j$  的公因子。
-（1 \le n \le 10^6, 1 \le a_i \le n）
-思路dp，设dp[i] 为以i为最大公因子的对有多少个。我们可以统计 有多少个数有i这个因子 ， 假设有cc个数，那么就会有undefinedfrac{cc * (cc - 1)}{2}个以i为**公因子**（不是最大公因子）的对。 我们要求最大公因子，就还需要令 dp[i] = dp[i] - \sum _{t = 2} ^{i * t &lt;= n} {dp[t * i]}。（即减去以i$的倍数为最大公因子的对的数量）。
-所以最终的dp状态转移方程为dp[i] = \frac{cc * (cc - 1)}{2}- \sum _{t = 2} ^{i * t ]]></content>
-      <categories>
-        <category>题解</category>
-      </categories>
-      <tags>
         <tag>C++</tag>
-        <tag>题解</tag>
       </tags>
   </entry>
   <entry>
@@ -554,6 +531,29 @@ D]]></content>
       </tags>
   </entry>
   <entry>
+    <title>Codeforces Round 904 (Div. 2)</title>
+    <url>/b104fde463a2/</url>
+    <content><![CDATA[[Dashboard - Codeforces Round 904 (Div. 2) - Codeforces](https://codeforces.com/contest/1884)
+C. Medium Design题意给长度为m的数组a，初始均为0。1\le m \le 10^9
+给出一些区间，请你选出其中某些区间。每选择一个区间，就令区间中的数都加一，问 数组中最大值max(a) ,和最小值min(a) 的差，最大为多少。
+思路考虑以下贪心策略：如果我们确定了最终第i个数是最大的那个数，即a[i] = max(a) , 那么我们就可以选择所有的包含i的区间。然后摒弃所有不包含i的区间。（选上包含i的区间一定会令max(a)++) , 这样我们可以遍历所有的数组下标i。 计算假使i为最大数时的ans，最终选择最大的ans即可。
+我们可以先对区间进行排序。 然后根据右端点从小到大维护优先队列pq。这样按顺序遍历区间数组，就可以引入所有左端点小于等于i的区间。然后通过剔除优先队列中的右端点小于i的区间。 这样优先队列中就保存了所有的包含i的区间。  因此有 max(a) = pq.size() ,
+再考虑寻找最小值min(a) , 如果我们使用 cntl 左端点为1的区间的数量。同理使用 cntr记录右端点为m的区间的数量 。那么 min(a) = min(cntl,cntr) 。
+本题m较大。需要离散化处理。
+代码#include&lt;bits/stdc++.h&gt;using namespace std;typedef pair&lt;int,int&gt; PII;struct cmp&#123;	bool operator()(PII x,PII y)&#123;return x.second &gt; y.second;&#125;&#125;;int main()&#123;	int t;	cin&gt;&gt;t;	cin.tie(0);cout.tie(0);	while(t--)&#123;		int n,m;		cin&gt;&gt;n&gt;&gt;m;		vector&lt;int &gt; vec(2 * n+5);//存储端点		vector&lt;PII&gt; seq(2*n+5);//存储区间		int l ,r;		for(int i = 1;i&lt;=n;i++)&#123;			cin&gt;&gt;l&gt;&gt;r;			seq[i] = make_pair(l,r);			vec[2 * i - 1] = l;			vec[2 * i] = r;		&#125;		//离散化处理		vec[0] = 1;//引入1和m两个端点		vec[2 * n + 1] = m;		sort(vec.begin(),vec.begin()+2+2*n);//排序		int len = unique(vec.begin(),vec.begin()+2+2*n) - vec.begin();//去重		// for(int i = 0;i&lt;len;i++) cout&lt;&lt;vec[i] &lt;&lt;&quot; &quot;;		// puts(&quot;&quot;);			unordered_map&lt;int,int&gt; mp;		for(int i = 0;i&lt;len;i++)&#123;			mp[vec[i]] = i;		&#125;		sort(seq.begin() + 1,seq.begin()+1+n);//对区间排序		int ans = -1;		int cntl = 0,cntr = 0;		priority_queue&lt;PII , vector&lt;PII&gt; ,cmp&gt; pq; //优先队列		int p = 1;		for(int i = 0;i&lt;len;i++)&#123;			while(p&lt;=n &amp;&amp; seq[p].first &lt;= vec[i])&#123;//入队				if(seq[p].first == 1) cntl ++;				if(seq[p].second == m) cntr ++;				pq.push(seq[p]);				p++;			&#125;			while(pq.size() &amp;&amp; pq.top().second &lt; vec[i])&#123;//出队				PII temp = pq.top();				if(temp.first == 1) cntl--;				pq.pop();			&#125;			ans = max(ans,(int)pq.size() - min(cntl,cntr));		&#125;		cout&lt;&lt;ans&lt;&lt;endl;	&#125;	return 0;&#125;
+D. Counting Rhyme题意给出有n个数的数组a，问有多少个undefinedi,j)对（(i,j)与(j,i)视为同一个对）,满足 **不存在** 任何k，使得a_k 是 a_i,a_j$  的公因子。
+（1 \le n \le 10^6, 1 \le a_i \le n）
+思路dp，设dp[i] 为以i为最大公因子的对有多少个。我们可以统计 有多少个数有i这个因子 ， 假设有cc个数，那么就会有undefinedfrac{cc * (cc - 1)}{2}个以i为**公因子**（不是最大公因子）的对。 我们要求最大公因子，就还需要令 dp[i] = dp[i] - \sum _{t = 2} ^{i * t &lt;= n} {dp[t * i]}。（即减去以i$的倍数为最大公因子的对的数量）。
+所以最终的dp状态转移方程为dp[i] = \frac{cc * (cc - 1)}{2}- \sum _{t = 2} ^{i * t ]]></content>
+      <categories>
+        <category>题解</category>
+      </categories>
+      <tags>
+        <tag>题解</tag>
+        <tag>C++</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Codeforces Round 906 (Div. 2)</title>
     <url>/c8f7ca88a8b7/</url>
     <content><![CDATA[[Dashboard - Codeforces Round 906 (Div. 2) - Codeforces](https://codeforces.com/contest/1890)
@@ -576,8 +576,8 @@ D. Doremy’s Connecting Plan题意给出n个节点，需要你连接一些边�
         <category>题解</category>
       </categories>
       <tags>
-        <tag>C++</tag>
         <tag>题解</tag>
+        <tag>C++</tag>
       </tags>
   </entry>
   <entry>
@@ -651,8 +651,8 @@ int mp[1005][1005];int vis[1005][1005];struct Node&#123;    int x,y;    int step
         <category>题解</category>
       </categories>
       <tags>
-        <tag>C++</tag>
         <tag>题解</tag>
+        <tag>C++</tag>
       </tags>
   </entry>
   <entry>
@@ -716,8 +716,98 @@ D]]></content>
         <category>题解</category>
       </categories>
       <tags>
-        <tag>C++</tag>
         <tag>题解</tag>
+        <tag>C++</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Codeforces Round 931 (Div. 2)</title>
+    <url>/671b7bf0f727/</url>
+    <content><![CDATA[[题目链接 -  Codeforces Round 931 (Div. 2)](https://codeforces.com/contest/1934)
+A. Too Min Too Max题意给出一个数组， 现在要你选择四个下标i,j,k,l , 问|a_i - a_j|+|a_j - a_k|+|a_k - a_l|+|a_l - a_i| 最大是多少。（i , j,k,l 必须互不相同）
+思路题目要求的其实就是选出四个数组成一个环，使得相邻两个数的差的和最大。
+于是我们先探究 ： 如果选出了某四个数，如何调整他们在环中的顺序能使得总和最大。 不难想到， 将较大的两个数放在第一和第三位， 较小的两个数放在第二和第四位时， 得到的结果最大。 此时为(a_i - a_j) +( a_k - a_j )+ (a_k - a_l)+(a_i - a_l) ，即2*(a_i + a_k - a_j -a_l) 
+第二步我们考虑如何选择这四个数能使得结果最大。 很明显我们需要尽可能让 较大的两个数a_i,a_k 更大，较小的两个数a_j.a_l更小。
+于是对于整个数组，选出最大的两个数，以及最小的两个数，就可以得到最优结果。
+对数组a进行排序， 就得到了最终结果为 2*(a_n + a_{n-1} - a_1 - a_2)
+代码#include&lt;bits/stdc++.h&gt;using namespace std;#define IO ios::sync_with_stdio(false);cin.tie(0);cout.tie(0);#define int long long#define rep(i,l,r) for(int i = l;i&lt;=r;i++)#define per(i,r,l) for(int i = r;i&gt;=l;i--)const int INF = 0x3f3f3f3f3f3f3f3f;typedef pair&lt;int,int&gt; PII;void solve()&#123;	int n;	cin&gt;&gt;n;	vector&lt;int&gt; a;	rep(i,1,n)&#123;int num;cin&gt;&gt;num;a.push_back(num);&#125;	sort(a.begin(),a.end());	cout&lt;&lt;2*(a[n-1]+a[n-2]-a[0]-a[1])&lt;&lt;&#x27;\n&#x27;;&#125;signed main()&#123;	int T = 1;	cin&gt;&gt;T;	while(T--)&#123;		solve();	&#125;	return 0;&#125;
+B. Yet Another Coin Problem题意现在有一些面值为1,3,6,10,15 的硬币 ， 问如何选择各个硬币的数量，使得总面值恰好为n，并且硬币的总数量最少。
+undefined1 \le n \le 10^9)$
+思路我们观察这些硬币的面值，可以发现3,6,15 都是3的倍数。而另一个大面值硬币又可以表示为10 = 3*3+1 。于是我们有如下策略：
+
+尽可能多地选择3 ，此时可能剩下[0,2]的面值。即md = 0,1,2 , 如果md 为0，那么我们就可以将这些面值为3的硬币尽可能多地兑换为面值为15和6的硬币。
+如果有剩余， 若手中面值3的硬币的数量大于等于3 ，就可以将这三个3和一个1 换成一个10。 
+
+如果有剩余并且手中的面值3的硬币数量小于3，那么就只能用面值为1的硬币来填补这个空缺了。
+
+
+代码#include&lt;bits/stdc++.h&gt;using namespace std;#define IO ios::sync_with_stdio(false);cin.tie(0);cout.tie(0);#define int long long#define rep(i,l,r) for(int i = l;i&lt;=r;i++)#define per(i,r,l) for(int i = r;i&gt;=l;i--)const int INF = 0x3f3f3f3f3f3f3f3f;typedef pair&lt;int,int&gt; PII;void solve()&#123;	int n;	cin&gt;&gt;n;	int md = n%3; //md是除以3后的余数	int t = n/3;// t是除以3后的结果	int ans = 0;	if(md == 2)&#123;//如果余两个,那么就尝试将一个余数和3个3结合。		if(t&gt;=3) &#123;ans++;t-=3;&#125;//成功结合		else ans++;//不能结合		md = 1;	&#125;	if(md == 1)&#123;//同理		if(t &gt;= 3) &#123;ans++;t-=3;&#125;		else ans++;		md = 0;	&#125;	//这时候md一定为0    ans += t / 5; // 能换成多少个15    t %= 5;    ans += t / 2;// 剩下的还能换成多少个6    t %= 2;    ans+=t; // 都换不成了，就用3吧    //输出答案	cout&lt;&lt;ans&lt;&lt;&#x27;\n&#x27;;&#125;signed main()&#123;	int T = 1;	cin&gt;&gt;T;	while(T--)&#123;		solve();	&#125;	return 0;&#125;
+C. Find a Mine题意和上一场的C一样，又是交互题。 给出一个n *m的网格，其中有两个位置有地雷，但你不知道他们在哪， 你最多可以询问四次。
+每次提供一个坐标， 裁判会告诉你两个地雷距离这个坐标的**曼哈顿距离** 中的最小值是多少。 现在需要你在最多四次询问之后，给出任意一颗地雷的具体坐标。
+
+**曼哈顿距离** ： 两个坐标undefinedx1 ,y1) , (x2,y2)的曼哈顿距离为|x1-x2|+|y1-y2|。对于如下5*5的网格， 点(3,3)$与所有点的曼哈顿距离如下
+![picture1](https://img-blog.csdnimg.cn/direct/c973e460ff2e494a825b401370902c50.jpeg#pic_center)
+思路我们发现确定一个点以及一个曼哈顿距离后 ，我们可以得到可能的范围是一个菱形。 如果我们将询问点设置在表格的一角，那么表格中可能的格子就组成了一个对角线。 于是我们询问地图的三个角，就得到了三条对角线，他们三者相交一定最多次出现两个交点。（也可能是一个）。之后我们再询问其中一个交点，如果给出的答案是0，就代表他是地雷，如果不是0，就代表另一个是地雷。
+![picture2](https://img-blog.csdnimg.cn/direct/125e47c86af345418a45d7be3affd375.jpeg#pic_center)
+我们可能遇到两个对角线相交没有准确格子的情况（如上图中的红对角线和蓝对角线，二者没有共同的格子）
+代码这里有些地方需要讲解一下：
+在代码中，先询问了左上，右下，右上三个角。得到了三个曼哈顿距离 a, b,c。
+怎么求两个交点呢？ 先看左上和右上两个对角线形成的交点。假设为undefinedx_1,y_1)$ ，那么就有
+x_1 - 1 + y_1 - 1 = a
+m - y_1 + x_1 - 1 = c  解方程可以得到 x_1 = \frac{a+c-m+3}{2} , y_1 = \frac{a-c+1+m}{2} , 但我们发现可能会出现x和y不是整数的时候（也就是a+c-m为偶数的时候），这时候就不可取。（代码中表示为将x和y都设置为-1）
+按照同样的方法
+m - y_2 + x_2 - 1 = c
+n-x_2 + m - y_2 = b  
+可以找到另一个交点x_2 = \frac{2*m+n-b-c-1}{2} , y_2 = \frac{n+c-b+1}{2}。
+#include&lt;bits/stdc++.h&gt;using namespace std;#define IO ios::sync_with_stdio(false);cin.tie(0);cout.tie(0);#define int long long#define rep(i,l,r) for(int i = l;i&lt;=r;i++)#define per(i,r,l) for(int i = r;i&gt;=l;i--)const int INF = 0x3f3f3f3f3f3f3f3f;typedef pair&lt;int,int&gt; PII;int n,m;bool inrange(int x,int y)&#123;	if(x&lt;=n &amp;&amp; x &gt;= 1 &amp;&amp; 1&lt;=y &amp;&amp; y&lt;=m) return true;	else return false;&#125;void solve()&#123;	cin&gt;&gt;n&gt;&gt;m;	cout&lt;&lt;&quot;? 1 1&quot;&lt;&lt;endl;	int a; cin&gt;&gt;a;	cout&lt;&lt;&quot;? &quot;&lt;&lt;n&lt;&lt;&quot; &quot;&lt;&lt;m&lt;&lt;endl;	int b;cin&gt;&gt;b;	cout&lt;&lt;&quot;? 1 &quot;&lt;&lt;m&lt;&lt;endl;	int c;cin&gt;&gt;c;	int x1,y1,x2,y2;	int t = a+c - (m-1);	if(t%2)&#123;x1 = y1 = -1;&#125;	else &#123;y1 = t/2+1;x1 = (a-t/2)+1;&#125;	t = b+c - (n-1);	if(t%2)&#123;x2 = y2 = -1;&#125;	else&#123;y2 = m-t/2;x2=(c-t/2)+1;&#125;	if(!inrange(x1,y1)) &#123;cout&lt;&lt;&quot;! &quot;&lt;&lt;x2&lt;&lt;&quot; &quot;&lt;&lt;y2&lt;&lt;endl;&#125;	else if(!inrange(x2,y2)) &#123;cout&lt;&lt;&quot;! &quot;&lt;&lt;x1&lt;&lt;&quot; &quot;&lt;&lt;y1&lt;&lt;endl;&#125;	else&#123;		cout&lt;&lt;&quot;? &quot;&lt;&lt;x1&lt;&lt;&quot; &quot;&lt;&lt;y1&lt;&lt;endl;		int d;cin&gt;&gt;d;		if(d == 0) cout&lt;&lt;&quot;! &quot;&lt;&lt;x1&lt;&lt;&quot; &quot;&lt;&lt;y1&lt;&lt;endl;		else cout&lt;&lt;&quot;! &quot;&lt;&lt;x2&lt;&lt;&quot; &quot;&lt;&lt;y2&lt;&lt;endl;	&#125;&#125;signed main()&#123;	int T = 1;	cin&gt;&gt;T;	while(T--)&#123;		solve();	&#125;	return 0;&#125;
+D1. XOR Break — Solo Version题意给出操作方法为：若操作前的数值为y，那么选择一个x ，使得x]]></content>
+      <categories>
+        <category>题解</category>
+      </categories>
+      <tags>
+        <tag>题解</tag>
+        <tag>C++</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Codeforces Round 932 (Div. 2)</title>
+    <url>/e61f0f23734b/</url>
+    <content><![CDATA[A. Entertainment in MAC题意有一个字符串s和偶数n，  你可以对这个字符串进行n次操作（不能多不能少）
+
+操作一：将s的反向字符串拼接到s的后面，比如对字符串abc进行操作会变成  abccba
+操作二：将当前的字符串反转
+
+问进行完这n次操作后，最终的字符串的字典序最小的可能是什么样子的。
+思路可以发现，如果这个字符串翻转后更大（比如abc ，进行翻转后是cba 比原先更大了）,那么我们就可以进行n次翻转，这样最终的字符串就是原先的字符串，也就实现最小了。
+如果这个字符串s在反转后更小了，那么我们就必须执行奇数次翻转，才能保证这个s最终是较小的。但题目中说n是偶数，所以就意味着我们必须进行至少一次拼接操作， 那么显而易见，拼接操作进行的越少越好， 因此需要翻转n-1次，然后拼接一次。 （比如bca， 如果进行偶数次翻转，那么最终的字符串前三个字符是bca ，而进行奇数次翻转时最终的字符串的前三个字符是acb 一定更小）
+代码#include&lt;bits/stdc++.h&gt;using namespace std;#define IO ios::sync_with_stdio(false);cin.tie(0);cout.tie(0);#define int long long#define rep(i,l,r) for(int i = l;i&lt;=r;i++)#define per(i,r,l) for(int i = r;i&gt;=l;i--)const int INF = 0x3f3f3f3f3f3f3f3f;typedef pair&lt;int,int&gt; PII;void solve()&#123;    int n;    cin&gt;&gt;n;    string str;    cin&gt;&gt;str;    string rs = str;    reverse(rs.begin(),rs.end());    if(rs &lt; str)&#123;        cout&lt;&lt;(rs + str)&lt;&lt;&#x27;\n&#x27;;    &#125;else cout&lt;&lt;str&lt;&lt;&#x27;\n&#x27;;&#125;signed main()&#123;    int T = 1;    cin&gt;&gt;T;    while(T--)&#123;        solve();    &#125;    return 0;&#125;
+B. Informatics in MAC题意给出一个长度为n的数组a， 有a_1, a_2,...,a_n （1\le a_i \le n) , 请你给这个数组分为至少两组（每组之间的数都是连续的，所以相当于插入至少一个隔板来分组）， 并且让每组的mex都是相同的。 如果不能分出至少两组，那么就输出 -1 。
+一个数组的mex表示为 这个数组中没有出现过的最小的自然数 。如mex(\{0,1,3,2\}) = 4 , mex(\{3,1,0,1 \}) = 2  。
+思路我们可以先找到整个数组的mex ，我们称为mx， 这样一定可以分出一个子数组，使得他的mex 为mx , 所以我们就看能否分出两组即可。我们从左到右开始收集数组中的元素， 如果收集到了全部的[0,mx-1] 这mx个数，由于我们已经知道整个数组中不含有mx,所以这个子数组的mex一定是mx，接下来我们再按此法不断收集，每当有完整的[0,mx-1]就分一组，最后看一下能否分出至少两组即可。
+代码#include&lt;bits/stdc++.h&gt;using namespace std;#define IO ios::sync_with_stdio(false);cin.tie(0);cout.tie(0);#define int long long#define rep(i,l,r) for(int i = l;i&lt;=r;i++)#define per(i,r,l) for(int i = r;i&gt;=l;i--)const int INF = 0x3f3f3f3f3f3f3f3f;typedef pair&lt;int,int&gt; PII;void solve()&#123;    int n;    cin&gt;&gt;n;    vector&lt;int&gt; a(n+5);    rep(i,1,n) cin&gt;&gt;a[i];    vector&lt;int&gt; cnt(n+5);    rep(i,1,n) cnt[a[i]] ++;    int mn = INF;    if(cnt[0] == 0)&#123;        cout&lt;&lt;n&lt;&lt;&#x27;\n&#x27;; rep(i,1,n) cout&lt;&lt;i&lt;&lt;&#x27; &#x27;&lt;&lt;i&lt;&lt;&#x27;\n&#x27;;        return ;     &#125;    int mex = 0;    for(int i =0;i&lt;=n;i++)&#123;        if(cnt[i] == 0)&#123;            mex = i; break;        &#125;     &#125;    int l = 1;    vector&lt;PII&gt; ans;    set&lt;int&gt; st;    for(int i = 1;i&lt;=n;i++)&#123;        if(a[i]&lt;mex) st.insert(a[i]);        if(st.size() == mex) &#123;            ans.push_back(&#123;l,i&#125;);            st.clear();l = i+1;        &#125;    &#125;    if(ans.size() == 1) &#123;cout&lt;&lt;-1&lt;&lt;&#x27;\n&#x27;;return ;&#125;    ans.back().second = n;    cout&lt;&lt;ans.size()&lt;&lt;endl;    for(auto p : ans)&#123;        cout&lt;&lt;p.first&lt;&lt;&quot; &quot;&lt;&lt;p.second&lt;&lt;&#x27;\n&#x27;;    &#125;    return ;&#125;signed main()&#123;    int T = 1;    cin&gt;&gt;T;    while(T--)&#123;        solve();    &#125;    return 0;&#125;
+C. Messenger in MAC题意给出一个数组a和数组b， 我们可以从中取出一些数，这些数的总花费为如下公式：
+
+\Large \sum_{i=1}^{k} a_{p_i} + \sum_{i=1}^{k - 1} |b_{p_i} - b_{p_{i+1}}|现在问保证这个花费不大于l的情况下， 最多能选出**多少个数** 。1\le n^2 \le 4*10^6
+思路不难发现，如果已经确定我们选择的数之后，那么第一项undefinedLarge \sum_{i=1}^{k} a_{p_i}就是一个定值，而第二项\Large \sum_{i=1}^{k - 1} |b_{p_i} - b_{p_{i+1}}|的最小值即为MAX(b_{p_1},…,b_{p_k}) - MIN(b_{p_1},…,b_{p_k})。即最大的b减去最小的b$。
+于是我们对数据按照b从小到大进行排序，我们选择出的一个数，就是他最右边数的b减去最左边数的b。
+**思路一**：我们枚举左右端点，在确定左右端点后，我们只需要在这个区间中找到尽可能小的一些数，让他们相加小于l - a_l -a_r - (b_r - b_l) 即可。
+在枚举右端点的时候， 使用一个优先队列来维护”总值不超过l“ ，于是就可以在O(n^2logn) 的复杂度内完成枚举所有的左右端点，每当更新一次区间， 就更新一次优先队列，当优先队列中的元素总和不满足要求时便可以快速地出队较大值的元素，从而保证优先队列中的总和满足条件的情况下，数尽可能少，数的数量尽可能多。
+**思路二** ： DP， 我们令dp[i][j]表示为从i个数中我们选第一个数时视为 贡献了 a_i - b_i ，中间的数可以当作背包来选择，每次枚举j时， 我们都试图将i视为最后选择的一项来选出第j+1项，这时候就要加a_i +b_i 即要多算一个结尾贡献的b_i， 所以我们判断dp[i][j]+a[i]+b[i] \le l  如果成立， 那么就代表这种情况下是可以选出j+1 项的，于是ans = max(ans,j+1)
+在枚举完j之后，我们让dp[i][1] = min(dp[i-1][1],a[i]-b[i]) , 表示在加入新的第i项后，从这i项中选择1项最小是多少。
+我们还要考虑只选择一个数的情况，即当a[i] \le l 成立时，ans = max(ans,1) 
+最终输出ans即可。
+代码思路一
+#include&lt;bits/stdc++.h&gt;using namespace std;#define IO ios::sync_with_stdio(false);cin.tie(0);cout.tie(0);#define int long long#define rep(i,l,r) for(int i = l;i&lt;=r;i++)#define per(i,r,l) for(int i = r;i&gt;=l;i--)const int INF = 0x3f3f3f3f3f3f3f3f;typedef pair&lt;int,int&gt; PII;struct Node&#123;    int a,b;    friend bool operator&lt;(Node n1,Node n2)&#123;        return n1.b &lt; n2.b;    &#125;&#125;;void solve()&#123;    int n,x;    cin&gt;&gt;n&gt;&gt;x;    vector&lt;Node&gt; vec(n+5);    rep(i,1,n)&#123;        cin&gt;&gt;vec[i].a&gt;&gt;vec[i].b;    &#125;    int ans = 0;    sort(vec.begin()+1,vec.begin()+1+n);    for(int i = 1;i&lt;=n;i++)&#123;        priority_queue&lt;int&gt; pq;        int sum = 0;        for(int j = i;j&lt;=n;j++)&#123;            pq.push(vec[j].a);sum+=vec[j].a;            while(pq.size() &amp;&amp; vec[j].b-vec[i].b + sum &gt; x)&#123;                sum -= pq.top();                pq.pop();            &#125;            ans = max(ans,(int)pq.size());        &#125;    &#125;    cout&lt;&lt;ans&lt;&lt;endl;&#125;signed main()&#123;    int T = 1;    cin&gt;&gt;T;    while(T--)&#123;        solve();    &#125;    return 0;&#125;
+**思路二**：jiangly的代码
+//***jiangly&#x27;s code ***//https://codeforces.com/contest/1935/submission/249766518#include &lt;bits/stdc++.h&gt;using i64 = long long;constexpr i64 inf = 1E18;void solve() &#123;    int n, l;    std::cin &gt;&gt; n &gt;&gt; l;        std::vector&lt;int&gt; a(n), b(n);    for (int i = 0; i &lt; n; i++) &#123;        std::cin &gt;&gt; a[i] &gt;&gt; b[i];    &#125;        int ans = 0;    //构造一个p从0~n-1的顺序列，之后按照b数组从小到大排序，就得到了一个下标的映射    std::vector&lt;int&gt; p(n);     std::iota(p.begin(), p.end(), 0);    std::sort(p.begin(), p.end(),        [&amp;](int i, int j) &#123;            return b[i] &lt; b[j];        &#125;);        std::vector&lt;i64&gt; dp(n + 1, inf);    // 这时候我们按照排好序的下标顺序作为i来访问a和b数组，就可以保证每次的i都是b[i]逐渐增大的    for (auto i : p) &#123;        for (int j = n - 1; j &gt;= 1; j--) &#123;            dp[j + 1] = std::min(dp[j + 1], dp[j] + a[i]);            //或许等价于压缩前的dp[i][j+1] = min(d[i-1][j+1],dp[i-1][j]+a[i])            if (dp[j] + a[i] + b[i] &lt;= l) &#123;                ans = std::max(ans, j + 1);            &#125;        &#125;        dp[1] = std::min(dp[1], 1LL * a[i] - b[i]);        if (a[i] &lt;= l) &#123;            ans = std::max(ans, 1);        &#125;    &#125;    std::cout &lt;&lt; ans &lt;&lt; &quot;\n&quot;;&#125;int main() &#123;    std::ios::sync_with_stdio(false);    std::cin.tie(nullptr);        int t;    std::cin &gt;&gt; t;        while (t--) &#123;        solve();    &#125;        return 0;&#125;
+D. Exam in MAC题意给出一个集合s 以及一个整数c ， 问有多少对undefinedx,y), 0\le x \le y \le c满足x+y和y-x都不在集合s$中 。
+0 \le s_1 < s_2 ]]></content>
+      <categories>
+        <category>题解</category>
+      </categories>
+      <tags>
+        <tag>题解</tag>
+        <tag>C++</tag>
       </tags>
   </entry>
   <entry>
@@ -805,57 +895,8 @@ F - Rudolf and Imbalance题意现在给你三个数组a,d,f , 长度分别为n�
         <category>题解</category>
       </categories>
       <tags>
-        <tag>C++</tag>
         <tag>题解</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Codeforces Round 931 (Div. 2)</title>
-    <url>/671b7bf0f727/</url>
-    <content><![CDATA[[题目链接 -  Codeforces Round 931 (Div. 2)](https://codeforces.com/contest/1934)
-A. Too Min Too Max题意给出一个数组， 现在要你选择四个下标i,j,k,l , 问|a_i - a_j|+|a_j - a_k|+|a_k - a_l|+|a_l - a_i| 最大是多少。（i , j,k,l 必须互不相同）
-思路题目要求的其实就是选出四个数组成一个环，使得相邻两个数的差的和最大。
-于是我们先探究 ： 如果选出了某四个数，如何调整他们在环中的顺序能使得总和最大。 不难想到， 将较大的两个数放在第一和第三位， 较小的两个数放在第二和第四位时， 得到的结果最大。 此时为(a_i - a_j) +( a_k - a_j )+ (a_k - a_l)+(a_i - a_l) ，即2*(a_i + a_k - a_j -a_l) 
-第二步我们考虑如何选择这四个数能使得结果最大。 很明显我们需要尽可能让 较大的两个数a_i,a_k 更大，较小的两个数a_j.a_l更小。
-于是对于整个数组，选出最大的两个数，以及最小的两个数，就可以得到最优结果。
-对数组a进行排序， 就得到了最终结果为 2*(a_n + a_{n-1} - a_1 - a_2)
-代码#include&lt;bits/stdc++.h&gt;using namespace std;#define IO ios::sync_with_stdio(false);cin.tie(0);cout.tie(0);#define int long long#define rep(i,l,r) for(int i = l;i&lt;=r;i++)#define per(i,r,l) for(int i = r;i&gt;=l;i--)const int INF = 0x3f3f3f3f3f3f3f3f;typedef pair&lt;int,int&gt; PII;void solve()&#123;	int n;	cin&gt;&gt;n;	vector&lt;int&gt; a;	rep(i,1,n)&#123;int num;cin&gt;&gt;num;a.push_back(num);&#125;	sort(a.begin(),a.end());	cout&lt;&lt;2*(a[n-1]+a[n-2]-a[0]-a[1])&lt;&lt;&#x27;\n&#x27;;&#125;signed main()&#123;	int T = 1;	cin&gt;&gt;T;	while(T--)&#123;		solve();	&#125;	return 0;&#125;
-B. Yet Another Coin Problem题意现在有一些面值为1,3,6,10,15 的硬币 ， 问如何选择各个硬币的数量，使得总面值恰好为n，并且硬币的总数量最少。
-undefined1 \le n \le 10^9)$
-思路我们观察这些硬币的面值，可以发现3,6,15 都是3的倍数。而另一个大面值硬币又可以表示为10 = 3*3+1 。于是我们有如下策略：
-
-尽可能多地选择3 ，此时可能剩下[0,2]的面值。即md = 0,1,2 , 如果md 为0，那么我们就可以将这些面值为3的硬币尽可能多地兑换为面值为15和6的硬币。
-如果有剩余， 若手中面值3的硬币的数量大于等于3 ，就可以将这三个3和一个1 换成一个10。 
-
-如果有剩余并且手中的面值3的硬币数量小于3，那么就只能用面值为1的硬币来填补这个空缺了。
-
-
-代码#include&lt;bits/stdc++.h&gt;using namespace std;#define IO ios::sync_with_stdio(false);cin.tie(0);cout.tie(0);#define int long long#define rep(i,l,r) for(int i = l;i&lt;=r;i++)#define per(i,r,l) for(int i = r;i&gt;=l;i--)const int INF = 0x3f3f3f3f3f3f3f3f;typedef pair&lt;int,int&gt; PII;void solve()&#123;	int n;	cin&gt;&gt;n;	int md = n%3; //md是除以3后的余数	int t = n/3;// t是除以3后的结果	int ans = 0;	if(md == 2)&#123;//如果余两个,那么就尝试将一个余数和3个3结合。		if(t&gt;=3) &#123;ans++;t-=3;&#125;//成功结合		else ans++;//不能结合		md = 1;	&#125;	if(md == 1)&#123;//同理		if(t &gt;= 3) &#123;ans++;t-=3;&#125;		else ans++;		md = 0;	&#125;	//这时候md一定为0    ans += t / 5; // 能换成多少个15    t %= 5;    ans += t / 2;// 剩下的还能换成多少个6    t %= 2;    ans+=t; // 都换不成了，就用3吧    //输出答案	cout&lt;&lt;ans&lt;&lt;&#x27;\n&#x27;;&#125;signed main()&#123;	int T = 1;	cin&gt;&gt;T;	while(T--)&#123;		solve();	&#125;	return 0;&#125;
-C. Find a Mine题意和上一场的C一样，又是交互题。 给出一个n *m的网格，其中有两个位置有地雷，但你不知道他们在哪， 你最多可以询问四次。
-每次提供一个坐标， 裁判会告诉你两个地雷距离这个坐标的**曼哈顿距离** 中的最小值是多少。 现在需要你在最多四次询问之后，给出任意一颗地雷的具体坐标。
-
-**曼哈顿距离** ： 两个坐标undefinedx1 ,y1) , (x2,y2)的曼哈顿距离为|x1-x2|+|y1-y2|。对于如下5*5的网格， 点(3,3)$与所有点的曼哈顿距离如下
-![picture1](https://img-blog.csdnimg.cn/direct/c973e460ff2e494a825b401370902c50.jpeg#pic_center)
-思路我们发现确定一个点以及一个曼哈顿距离后 ，我们可以得到可能的范围是一个菱形。 如果我们将询问点设置在表格的一角，那么表格中可能的格子就组成了一个对角线。 于是我们询问地图的三个角，就得到了三条对角线，他们三者相交一定最多次出现两个交点。（也可能是一个）。之后我们再询问其中一个交点，如果给出的答案是0，就代表他是地雷，如果不是0，就代表另一个是地雷。
-![picture2](https://img-blog.csdnimg.cn/direct/125e47c86af345418a45d7be3affd375.jpeg#pic_center)
-我们可能遇到两个对角线相交没有准确格子的情况（如上图中的红对角线和蓝对角线，二者没有共同的格子）
-代码这里有些地方需要讲解一下：
-在代码中，先询问了左上，右下，右上三个角。得到了三个曼哈顿距离 a, b,c。
-怎么求两个交点呢？ 先看左上和右上两个对角线形成的交点。假设为undefinedx_1,y_1)$ ，那么就有
-x_1 - 1 + y_1 - 1 = a
-m - y_1 + x_1 - 1 = c  解方程可以得到 x_1 = \frac{a+c-m+3}{2} , y_1 = \frac{a-c+1+m}{2} , 但我们发现可能会出现x和y不是整数的时候（也就是a+c-m为偶数的时候），这时候就不可取。（代码中表示为将x和y都设置为-1）
-按照同样的方法
-m - y_2 + x_2 - 1 = c
-n-x_2 + m - y_2 = b  
-可以找到另一个交点x_2 = \frac{2*m+n-b-c-1}{2} , y_2 = \frac{n+c-b+1}{2}。
-#include&lt;bits/stdc++.h&gt;using namespace std;#define IO ios::sync_with_stdio(false);cin.tie(0);cout.tie(0);#define int long long#define rep(i,l,r) for(int i = l;i&lt;=r;i++)#define per(i,r,l) for(int i = r;i&gt;=l;i--)const int INF = 0x3f3f3f3f3f3f3f3f;typedef pair&lt;int,int&gt; PII;int n,m;bool inrange(int x,int y)&#123;	if(x&lt;=n &amp;&amp; x &gt;= 1 &amp;&amp; 1&lt;=y &amp;&amp; y&lt;=m) return true;	else return false;&#125;void solve()&#123;	cin&gt;&gt;n&gt;&gt;m;	cout&lt;&lt;&quot;? 1 1&quot;&lt;&lt;endl;	int a; cin&gt;&gt;a;	cout&lt;&lt;&quot;? &quot;&lt;&lt;n&lt;&lt;&quot; &quot;&lt;&lt;m&lt;&lt;endl;	int b;cin&gt;&gt;b;	cout&lt;&lt;&quot;? 1 &quot;&lt;&lt;m&lt;&lt;endl;	int c;cin&gt;&gt;c;	int x1,y1,x2,y2;	int t = a+c - (m-1);	if(t%2)&#123;x1 = y1 = -1;&#125;	else &#123;y1 = t/2+1;x1 = (a-t/2)+1;&#125;	t = b+c - (n-1);	if(t%2)&#123;x2 = y2 = -1;&#125;	else&#123;y2 = m-t/2;x2=(c-t/2)+1;&#125;	if(!inrange(x1,y1)) &#123;cout&lt;&lt;&quot;! &quot;&lt;&lt;x2&lt;&lt;&quot; &quot;&lt;&lt;y2&lt;&lt;endl;&#125;	else if(!inrange(x2,y2)) &#123;cout&lt;&lt;&quot;! &quot;&lt;&lt;x1&lt;&lt;&quot; &quot;&lt;&lt;y1&lt;&lt;endl;&#125;	else&#123;		cout&lt;&lt;&quot;? &quot;&lt;&lt;x1&lt;&lt;&quot; &quot;&lt;&lt;y1&lt;&lt;endl;		int d;cin&gt;&gt;d;		if(d == 0) cout&lt;&lt;&quot;! &quot;&lt;&lt;x1&lt;&lt;&quot; &quot;&lt;&lt;y1&lt;&lt;endl;		else cout&lt;&lt;&quot;! &quot;&lt;&lt;x2&lt;&lt;&quot; &quot;&lt;&lt;y2&lt;&lt;endl;	&#125;&#125;signed main()&#123;	int T = 1;	cin&gt;&gt;T;	while(T--)&#123;		solve();	&#125;	return 0;&#125;
-D1. XOR Break — Solo Version题意给出操作方法为：若操作前的数值为y，那么选择一个x ，使得x]]></content>
-      <categories>
-        <category>题解</category>
-      </categories>
-      <tags>
         <tag>C++</tag>
-        <tag>题解</tag>
       </tags>
   </entry>
   <entry>
@@ -872,49 +913,52 @@ D. Seraphim the Owl题意同学A想插队 ，他前面有n个人， 他想要查
         <category>题解</category>
       </categories>
       <tags>
-        <tag>C++</tag>
         <tag>题解</tag>
+        <tag>C++</tag>
       </tags>
   </entry>
   <entry>
-    <title>Codeforces Round 932 (Div. 2)</title>
-    <url>/e61f0f23734b/</url>
-    <content><![CDATA[A. Entertainment in MAC题意有一个字符串s和偶数n，  你可以对这个字符串进行n次操作（不能多不能少）
+    <title>Codeforces Round 936 (Div. 2)</title>
+    <url>/6f9f5c409815/</url>
+    <content><![CDATA[[题目链接](https://codeforces.com/contest/1946)
+A. Median of an Array题意给出一个数组a，每次操作可以让其中一个数增加一。 问最少需要几次操作能改变中位数的值。
+长度为n的数组a的中位数表示为，令b是a排完序后的数组，那么b_{\lceil \frac{n}{2}\rceil} 即为a的中位数。
+思路假设中位数为m ，那么我们就需要让最终的中位数变为m+1 。做法就是对一些值为m 各进行一次操作。我们假设小于等于m的数的数量为cnt , 起初一定有cnt \ge \lceil \frac{n}{2}\rceil为了让m+1是中位数，就必须cnt< \lceil \frac{n}{2}\rceil 。 每次操作能使得cnt减少1 。于是我们需要的操作数量就是cnt - \lceil \frac{n}{2}\rceil + 1
+代码#include&lt;bits/stdc++.h&gt;using namespace std;#define IO ios::sync_with_stdio(false);cin.tie(0);cout.tie(0);#define int long long#define rep(i,l,r) for(int i = l;i&lt;=r;i++)#define per(i,r,l) for(int i = r;i&gt;=l;i--)const int INF = 0x3f3f3f3f3f3f3f3f;typedef pair&lt;int,int&gt; PII;void solve()&#123;    map&lt;int,int&gt; mp; //每个数都出现了几次    int n;    cin&gt;&gt;n;    rep(i,1,n)&#123;        int num;cin&gt;&gt;num;        mp[num] ++;    &#125;    int cnt = 0;    for(auto p:mp)&#123;        if(cnt+p.second &lt; (n+1)/2)&#123;            cnt += p.second;        &#125;        else&#123;//这时候找到了中位数，并且数量是cnt            cout&lt;&lt;cnt + p.second - (n+1)/2 + 1&lt;&lt;endl;            return;        &#125;    &#125;&#125;signed main()&#123;    int T = 1;    cin&gt;&gt;T;    while(T--)&#123;        solve();    &#125;    return 0;&#125;
+B. Maximum Sum题意给出一个初始长度为n的数组a 。
+对于每步操作，你可以选出其中一个子数组，将这个子数组的总和作为一个新项，插入到整个数组的任意位置。(可以选择空的子数组，这样就插入了一个0)
+按照如上操作进行k次后， 问整个数组的总和最大是多少。
+思路首先介绍选取策略：我们选取总和最大的子数组（最大区间和）作为第一步操作。这样得到的第一个sum一定是最大的。接下来我们将sum放在这个子数组的末尾，下一次选取子数组时，我们就可以多加上新的那个数(如果新增的数小于0，那么肯定是不能加的，直接令子数组设置为空，sum就变为了0），依次类推共进行k次即可。
+例如：
+3 32 2 8
+我们进行的三步操作为
+2 2 8## 选取[2 2 8]2 2 8 12## 选取[2 2 8 12]2 2 8 12 24## 选取[2 2 8 12 24]2 2 8 12 24 48
+可以发现，如果我们新增了一个sum在这个子数组之后，下一次就会是sum* 2 ，也就是每次新增的都是上一次的两倍。最终整段子数组的数值总和即为sum_0 * 2^{k} （sum_0表示最初子数组的总和，k表示操作次数），那么整个数组的总和就是SUM + sum_0(2^k - 1) ，其中SUM表示整个初始数组的总和。
+代码#include&lt;bits/stdc++.h&gt;using namespace std;#define IO ios::sync_with_stdio(false);cin.tie(0);cout.tie(0);#define int long long#define rep(i,l,r) for(int i = l;i&lt;=r;i++)#define per(i,r,l) for(int i = r;i&gt;=l;i--)const int INF = 0x3f3f3f3f3f3f3f3f;typedef pair&lt;int,int&gt; PII;int mod = 1e9+7;int qpow(int x,int n)&#123; //快速幂    int ans = 1;    while(n)&#123;        if(n&amp;1) ans = ans * x % mod;        x = x * x % mod;        n &gt;&gt;= 1;    &#125;    return ans;&#125;void solve()&#123;    int n,k;    cin&gt;&gt;n&gt;&gt;k;    vector&lt;int&gt; dp(n+5,-INF);//dp数组用来找最大区间和    vector&lt;int&gt; num(n+5);    int sum = 0;    rep(i,1,n)&#123;//求整个数组的和        cin&gt;&gt;num[i];        sum += num[i];    &#125;    rep(i,1,n)&#123;        dp[i] = max(num[i],dp[i-1]+num[i]);    &#125;    int mx = -INF;    rep(i,0,n)&#123;        mx = max(mx,dp[i]);    &#125;    //此时的mx就是最大区间和,也就是sum0    int ans = sum;//    if(mx &gt; 0) ans+=mx%mod*qpow(2,k)-mx;//这里记得要对mx取模再乘2的次幂    cout&lt;&lt;(ans%mod+mod)%mod&lt;&lt;&#x27;\n&#x27;;//记得取模&#125;signed main()&#123;    int T = 1;    cin&gt;&gt;T;    while(T--)&#123;        solve();    &#125;    return 0;&#125;
+C. Tree Cutting题意给你一个树，让你删掉其中k条边，于是就得到了k+1 个子树，现在问在进行完k次删边后，**这些子树的大小(即子树中节点的数量)的最小值x** ，最大可能是多少。
+思路最小的最大值（或者最大的最小值），一般情况都是二分答案。
+check函数为: 使用dfs遍历整棵树，来检索最多能分成几棵子树，如果分出的子树数量大于等于k+1 那么就是True，否则就是False
+对于dfs函数，我们可以使用一个返回值来表示**当前节点下的子树能贡献多少个节点给祖先** 。
 
-操作一：将s的反向字符串拼接到s的后面，比如对字符串abc进行操作会变成  abccba
-操作二：将当前的字符串反转
+如果当前收获的节点数大于等于x，那么就意味着当前这棵子树可以独立地构成一个合格的子树。于是我们切断他和父亲的边，让答案加一。并且return 0;
+如果当前收获的节点数cnt小于x，那么就不能独立构成一个合格的子树，就需要将所有的节点都传递到父亲节点。也就是return cnt;
 
-问进行完这n次操作后，最终的字符串的字典序最小的可能是什么样子的。
-思路可以发现，如果这个字符串翻转后更大（比如abc ，进行翻转后是cba 比原先更大了）,那么我们就可以进行n次翻转，这样最终的字符串就是原先的字符串，也就实现最小了。
-如果这个字符串s在反转后更小了，那么我们就必须执行奇数次翻转，才能保证这个s最终是较小的。但题目中说n是偶数，所以就意味着我们必须进行至少一次拼接操作， 那么显而易见，拼接操作进行的越少越好， 因此需要翻转n-1次，然后拼接一次。 （比如bca， 如果进行偶数次翻转，那么最终的字符串前三个字符是bca ，而进行奇数次翻转时最终的字符串的前三个字符是acb 一定更小）
-代码#include&lt;bits/stdc++.h&gt;using namespace std;#define IO ios::sync_with_stdio(false);cin.tie(0);cout.tie(0);#define int long long#define rep(i,l,r) for(int i = l;i&lt;=r;i++)#define per(i,r,l) for(int i = r;i&gt;=l;i--)const int INF = 0x3f3f3f3f3f3f3f3f;typedef pair&lt;int,int&gt; PII;void solve()&#123;    int n;    cin&gt;&gt;n;    string str;    cin&gt;&gt;str;    string rs = str;    reverse(rs.begin(),rs.end());    if(rs &lt; str)&#123;        cout&lt;&lt;(rs + str)&lt;&lt;&#x27;\n&#x27;;    &#125;else cout&lt;&lt;str&lt;&lt;&#x27;\n&#x27;;&#125;signed main()&#123;    int T = 1;    cin&gt;&gt;T;    while(T--)&#123;        solve();    &#125;    return 0;&#125;
-B. Informatics in MAC题意给出一个长度为n的数组a， 有a_1, a_2,...,a_n （1\le a_i \le n) , 请你给这个数组分为至少两组（每组之间的数都是连续的，所以相当于插入至少一个隔板来分组）， 并且让每组的mex都是相同的。 如果不能分出至少两组，那么就输出 -1 。
-一个数组的mex表示为 这个数组中没有出现过的最小的自然数 。如mex(\{0,1,3,2\}) = 4 , mex(\{3,1,0,1 \}) = 2  。
-思路我们可以先找到整个数组的mex ，我们称为mx， 这样一定可以分出一个子数组，使得他的mex 为mx , 所以我们就看能否分出两组即可。我们从左到右开始收集数组中的元素， 如果收集到了全部的[0,mx-1] 这mx个数，由于我们已经知道整个数组中不含有mx,所以这个子数组的mex一定是mx，接下来我们再按此法不断收集，每当有完整的[0,mx-1]就分一组，最后看一下能否分出至少两组即可。
-代码#include&lt;bits/stdc++.h&gt;using namespace std;#define IO ios::sync_with_stdio(false);cin.tie(0);cout.tie(0);#define int long long#define rep(i,l,r) for(int i = l;i&lt;=r;i++)#define per(i,r,l) for(int i = r;i&gt;=l;i--)const int INF = 0x3f3f3f3f3f3f3f3f;typedef pair&lt;int,int&gt; PII;void solve()&#123;    int n;    cin&gt;&gt;n;    vector&lt;int&gt; a(n+5);    rep(i,1,n) cin&gt;&gt;a[i];    vector&lt;int&gt; cnt(n+5);    rep(i,1,n) cnt[a[i]] ++;    int mn = INF;    if(cnt[0] == 0)&#123;        cout&lt;&lt;n&lt;&lt;&#x27;\n&#x27;; rep(i,1,n) cout&lt;&lt;i&lt;&lt;&#x27; &#x27;&lt;&lt;i&lt;&lt;&#x27;\n&#x27;;        return ;     &#125;    int mex = 0;    for(int i =0;i&lt;=n;i++)&#123;        if(cnt[i] == 0)&#123;            mex = i; break;        &#125;     &#125;    int l = 1;    vector&lt;PII&gt; ans;    set&lt;int&gt; st;    for(int i = 1;i&lt;=n;i++)&#123;        if(a[i]&lt;mex) st.insert(a[i]);        if(st.size() == mex) &#123;            ans.push_back(&#123;l,i&#125;);            st.clear();l = i+1;        &#125;    &#125;    if(ans.size() == 1) &#123;cout&lt;&lt;-1&lt;&lt;&#x27;\n&#x27;;return ;&#125;    ans.back().second = n;    cout&lt;&lt;ans.size()&lt;&lt;endl;    for(auto p : ans)&#123;        cout&lt;&lt;p.first&lt;&lt;&quot; &quot;&lt;&lt;p.second&lt;&lt;&#x27;\n&#x27;;    &#125;    return ;&#125;signed main()&#123;    int T = 1;    cin&gt;&gt;T;    while(T--)&#123;        solve();    &#125;    return 0;&#125;
-C. Messenger in MAC题意给出一个数组a和数组b， 我们可以从中取出一些数，这些数的总花费为如下公式：
+代码#include&lt;bits/stdc++.h&gt;using namespace std;#define IO ios::sync_with_stdio(false);cin.tie(0);cout.tie(0);#define int long long#define rep(i,l,r) for(int i = l;i&lt;=r;i++)#define per(i,r,l) for(int i = r;i&gt;=l;i--)const int INF = 0x3f3f3f3f3f3f3f3f;typedef pair&lt;int,int&gt; PII;const int maxn = 1e5+5;vector&lt;int&gt; ed[maxn];int n,k;vector&lt;int&gt; vis(maxn);int ans;int dfs(int now,int x)&#123;    int sum = 1;    vis[now] = 1;    for(auto v : ed[now])&#123;        if(!vis[v])&#123;            vis[v] = 1;            sum += dfs(v,x);        &#125;    &#125;    if(sum &gt;= x) &#123;ans ++;return 0;&#125;    else return sum;&#125;bool check(int x)&#123;    //初始化一些变量为0    ans = 0;    rep(i,1,n) vis[i] = 0;    //dfs求一下ans的值    dfs(1,x);    return ans&gt;=(k+1);&#125;void solve()&#123;    cin&gt;&gt;n&gt;&gt;k;    rep(i,1,n) ed[i].clear();    rep(i,1,n-1)&#123;        int u,v;cin&gt;&gt;u&gt;&gt;v;        ed[u].push_back(v);        ed[v].push_back(u);    &#125;    int l = 1,r = n;    while(l&lt;r)&#123;        int mid = (l+r+1)/2;        if(check(mid)) l = mid;        else r = mid-1;    &#125;    cout&lt;&lt;l&lt;&lt;endl;    return ;&#125;signed main()&#123;    int T = 1;    cin&gt;&gt;T;    while(T--)&#123;        solve();    &#125;    return 0;&#125;
+D. Birthday Gift题意给你一个长度为n的数组a,即 a_1,a_2,...,a_n 。 现在你需要将他们划分为一些部分，来使得  **每一部分的异或和** 全部**按位或** 起来后的答案ans 满足ans\le x 。问你最多能划分多少部分。如果无解就输出undefined1$。
+即找到k组undefinedl,r)对， 使得l_i \le r_i并且r_i + 1 = l_{i+1}, l_1 = 1,r_k = n。满足(a_{l_1} \oplus a_{l_1+1}\oplus … \oplus a_{r_1})|(a_{l_2} \oplus a_{l_2+1}\oplus … \oplus a_{r_2})|…|(a_{l_k} \oplus a_{l_k+1}\oplus … \oplus a_{r_k}) \le x $
+问k最大是多少。
+思路我们用sum_i表示**a的前i项的异或和**。即sum_i = a_1 \oplus a_2 ...\oplus a_i ，那么原式就变为了undefinedsum_{r_1}\oplus sum_{l_1-1}) | (sum_{r_2}\oplus sum_{l_2-1})|…|(sum_{r_k}\oplus sum_{l_k-1}) \le x 。 这个式子还是有些麻烦，我们发现他还等价于sum_{r_1} | sum_{r_2}|…|sum_{r_k} \le x$ 。于是我们就把区间异或的或，变成了单点的或。
+有一点需要注意的是，sum_n 是必选项。
+于是我们考虑x的每一位，
 
-\Large \sum_{i=1}^{k} a_{p_i} + \sum_{i=1}^{k - 1} |b_{p_i} - b_{p_{i+1}}|现在问保证这个花费不大于l的情况下， 最多能选出**多少个数** 。1\le n^2 \le 4*10^6
-思路不难发现，如果已经确定我们选择的数之后，那么第一项undefinedLarge \sum_{i=1}^{k} a_{p_i}就是一个定值，而第二项\Large \sum_{i=1}^{k - 1} |b_{p_i} - b_{p_{i+1}}|的最小值即为MAX(b_{p_1},…,b_{p_k}) - MIN(b_{p_1},…,b_{p_k})。即最大的b减去最小的b$。
-于是我们对数据按照b从小到大进行排序，我们选择出的一个数，就是他最右边数的b减去最左边数的b。
-**思路一**：我们枚举左右端点，在确定左右端点后，我们只需要在这个区间中找到尽可能小的一些数，让他们相加小于l - a_l -a_r - (b_r - b_l) 即可。
-在枚举右端点的时候， 使用一个优先队列来维护”总值不超过l“ ，于是就可以在O(n^2logn) 的复杂度内完成枚举所有的左右端点，每当更新一次区间， 就更新一次优先队列，当优先队列中的元素总和不满足要求时便可以快速地出队较大值的元素，从而保证优先队列中的总和满足条件的情况下，数尽可能少，数的数量尽可能多。
-**思路二** ： DP， 我们令dp[i][j]表示为从i个数中我们选第一个数时视为 贡献了 a_i - b_i ，中间的数可以当作背包来选择，每次枚举j时， 我们都试图将i视为最后选择的一项来选出第j+1项，这时候就要加a_i +b_i 即要多算一个结尾贡献的b_i， 所以我们判断dp[i][j]+a[i]+b[i] \le l  如果成立， 那么就代表这种情况下是可以选出j+1 项的，于是ans = max(ans,j+1)
-在枚举完j之后，我们让dp[i][1] = min(dp[i-1][1],a[i]-b[i]) , 表示在加入新的第i项后，从这i项中选择1项最小是多少。
-我们还要考虑只选择一个数的情况，即当a[i] \le l 成立时，ans = max(ans,1) 
-最终输出ans即可。
-代码思路一
-#include&lt;bits/stdc++.h&gt;using namespace std;#define IO ios::sync_with_stdio(false);cin.tie(0);cout.tie(0);#define int long long#define rep(i,l,r) for(int i = l;i&lt;=r;i++)#define per(i,r,l) for(int i = r;i&gt;=l;i--)const int INF = 0x3f3f3f3f3f3f3f3f;typedef pair&lt;int,int&gt; PII;struct Node&#123;    int a,b;    friend bool operator&lt;(Node n1,Node n2)&#123;        return n1.b &lt; n2.b;    &#125;&#125;;void solve()&#123;    int n,x;    cin&gt;&gt;n&gt;&gt;x;    vector&lt;Node&gt; vec(n+5);    rep(i,1,n)&#123;        cin&gt;&gt;vec[i].a&gt;&gt;vec[i].b;    &#125;    int ans = 0;    sort(vec.begin()+1,vec.begin()+1+n);    for(int i = 1;i&lt;=n;i++)&#123;        priority_queue&lt;int&gt; pq;        int sum = 0;        for(int j = i;j&lt;=n;j++)&#123;            pq.push(vec[j].a);sum+=vec[j].a;            while(pq.size() &amp;&amp; vec[j].b-vec[i].b + sum &gt; x)&#123;                sum -= pq.top();                pq.pop();            &#125;            ans = max(ans,(int)pq.size());        &#125;    &#125;    cout&lt;&lt;ans&lt;&lt;endl;&#125;signed main()&#123;    int T = 1;    cin&gt;&gt;T;    while(T--)&#123;        solve();    &#125;    return 0;&#125;
-**思路二**：jiangly的代码
-//***jiangly&#x27;s code ***//https://codeforces.com/contest/1935/submission/249766518#include &lt;bits/stdc++.h&gt;using i64 = long long;constexpr i64 inf = 1E18;void solve() &#123;    int n, l;    std::cin &gt;&gt; n &gt;&gt; l;        std::vector&lt;int&gt; a(n), b(n);    for (int i = 0; i &lt; n; i++) &#123;        std::cin &gt;&gt; a[i] &gt;&gt; b[i];    &#125;        int ans = 0;    //构造一个p从0~n-1的顺序列，之后按照b数组从小到大排序，就得到了一个下标的映射    std::vector&lt;int&gt; p(n);     std::iota(p.begin(), p.end(), 0);    std::sort(p.begin(), p.end(),        [&amp;](int i, int j) &#123;            return b[i] &lt; b[j];        &#125;);        std::vector&lt;i64&gt; dp(n + 1, inf);    // 这时候我们按照排好序的下标顺序作为i来访问a和b数组，就可以保证每次的i都是b[i]逐渐增大的    for (auto i : p) &#123;        for (int j = n - 1; j &gt;= 1; j--) &#123;            dp[j + 1] = std::min(dp[j + 1], dp[j] + a[i]);            //或许等价于压缩前的dp[i][j+1] = min(d[i-1][j+1],dp[i-1][j]+a[i])            if (dp[j] + a[i] + b[i] &lt;= l) &#123;                ans = std::max(ans, j + 1);            &#125;        &#125;        dp[1] = std::min(dp[1], 1LL * a[i] - b[i]);        if (a[i] &lt;= l) &#123;            ans = std::max(ans, 1);        &#125;    &#125;    std::cout &lt;&lt; ans &lt;&lt; &quot;\n&quot;;&#125;int main() &#123;    std::ios::sync_with_stdio(false);    std::cin.tie(nullptr);        int t;    std::cin &gt;&gt; t;        while (t--) &#123;        solve();    &#125;        return 0;&#125;
-D. Exam in MAC题意给出一个集合s 以及一个整数c ， 问有多少对undefinedx,y), 0\le x \le y \le c满足x+y和y-x都不在集合s$中 。
-0 \le s_1 < s_2 ]]></content>
+如果这一位是0， 那么就不做改变，直接看有多少个sum_i满足sum_i | x == x 。
+如果这一位是1，那么我们就可以将这一位置为0，然后将所有较小位置为1，我们设处理后的x为xx，那么有xx = (x - (1]]></content>
       <categories>
         <category>题解</category>
       </categories>
       <tags>
-        <tag>C++</tag>
         <tag>题解</tag>
+        <tag>C++</tag>
       </tags>
   </entry>
   <entry>
@@ -978,52 +1022,8 @@ a中不存在某个子序列的和为k
         <category>题解</category>
       </categories>
       <tags>
-        <tag>C++</tag>
         <tag>题解</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Codeforces Round 936 (Div. 2)</title>
-    <url>/6f9f5c409815/</url>
-    <content><![CDATA[[题目链接](https://codeforces.com/contest/1946)
-A. Median of an Array题意给出一个数组a，每次操作可以让其中一个数增加一。 问最少需要几次操作能改变中位数的值。
-长度为n的数组a的中位数表示为，令b是a排完序后的数组，那么b_{\lceil \frac{n}{2}\rceil} 即为a的中位数。
-思路假设中位数为m ，那么我们就需要让最终的中位数变为m+1 。做法就是对一些值为m 各进行一次操作。我们假设小于等于m的数的数量为cnt , 起初一定有cnt \ge \lceil \frac{n}{2}\rceil为了让m+1是中位数，就必须cnt< \lceil \frac{n}{2}\rceil 。 每次操作能使得cnt减少1 。于是我们需要的操作数量就是cnt - \lceil \frac{n}{2}\rceil + 1
-代码#include&lt;bits/stdc++.h&gt;using namespace std;#define IO ios::sync_with_stdio(false);cin.tie(0);cout.tie(0);#define int long long#define rep(i,l,r) for(int i = l;i&lt;=r;i++)#define per(i,r,l) for(int i = r;i&gt;=l;i--)const int INF = 0x3f3f3f3f3f3f3f3f;typedef pair&lt;int,int&gt; PII;void solve()&#123;    map&lt;int,int&gt; mp; //每个数都出现了几次    int n;    cin&gt;&gt;n;    rep(i,1,n)&#123;        int num;cin&gt;&gt;num;        mp[num] ++;    &#125;    int cnt = 0;    for(auto p:mp)&#123;        if(cnt+p.second &lt; (n+1)/2)&#123;            cnt += p.second;        &#125;        else&#123;//这时候找到了中位数，并且数量是cnt            cout&lt;&lt;cnt + p.second - (n+1)/2 + 1&lt;&lt;endl;            return;        &#125;    &#125;&#125;signed main()&#123;    int T = 1;    cin&gt;&gt;T;    while(T--)&#123;        solve();    &#125;    return 0;&#125;
-B. Maximum Sum题意给出一个初始长度为n的数组a 。
-对于每步操作，你可以选出其中一个子数组，将这个子数组的总和作为一个新项，插入到整个数组的任意位置。(可以选择空的子数组，这样就插入了一个0)
-按照如上操作进行k次后， 问整个数组的总和最大是多少。
-思路首先介绍选取策略：我们选取总和最大的子数组（最大区间和）作为第一步操作。这样得到的第一个sum一定是最大的。接下来我们将sum放在这个子数组的末尾，下一次选取子数组时，我们就可以多加上新的那个数(如果新增的数小于0，那么肯定是不能加的，直接令子数组设置为空，sum就变为了0），依次类推共进行k次即可。
-例如：
-3 32 2 8
-我们进行的三步操作为
-2 2 8## 选取[2 2 8]2 2 8 12## 选取[2 2 8 12]2 2 8 12 24## 选取[2 2 8 12 24]2 2 8 12 24 48
-可以发现，如果我们新增了一个sum在这个子数组之后，下一次就会是sum* 2 ，也就是每次新增的都是上一次的两倍。最终整段子数组的数值总和即为sum_0 * 2^{k} （sum_0表示最初子数组的总和，k表示操作次数），那么整个数组的总和就是SUM + sum_0(2^k - 1) ，其中SUM表示整个初始数组的总和。
-代码#include&lt;bits/stdc++.h&gt;using namespace std;#define IO ios::sync_with_stdio(false);cin.tie(0);cout.tie(0);#define int long long#define rep(i,l,r) for(int i = l;i&lt;=r;i++)#define per(i,r,l) for(int i = r;i&gt;=l;i--)const int INF = 0x3f3f3f3f3f3f3f3f;typedef pair&lt;int,int&gt; PII;int mod = 1e9+7;int qpow(int x,int n)&#123; //快速幂    int ans = 1;    while(n)&#123;        if(n&amp;1) ans = ans * x % mod;        x = x * x % mod;        n &gt;&gt;= 1;    &#125;    return ans;&#125;void solve()&#123;    int n,k;    cin&gt;&gt;n&gt;&gt;k;    vector&lt;int&gt; dp(n+5,-INF);//dp数组用来找最大区间和    vector&lt;int&gt; num(n+5);    int sum = 0;    rep(i,1,n)&#123;//求整个数组的和        cin&gt;&gt;num[i];        sum += num[i];    &#125;    rep(i,1,n)&#123;        dp[i] = max(num[i],dp[i-1]+num[i]);    &#125;    int mx = -INF;    rep(i,0,n)&#123;        mx = max(mx,dp[i]);    &#125;    //此时的mx就是最大区间和,也就是sum0    int ans = sum;//    if(mx &gt; 0) ans+=mx%mod*qpow(2,k)-mx;//这里记得要对mx取模再乘2的次幂    cout&lt;&lt;(ans%mod+mod)%mod&lt;&lt;&#x27;\n&#x27;;//记得取模&#125;signed main()&#123;    int T = 1;    cin&gt;&gt;T;    while(T--)&#123;        solve();    &#125;    return 0;&#125;
-C. Tree Cutting题意给你一个树，让你删掉其中k条边，于是就得到了k+1 个子树，现在问在进行完k次删边后，**这些子树的大小(即子树中节点的数量)的最小值x** ，最大可能是多少。
-思路最小的最大值（或者最大的最小值），一般情况都是二分答案。
-check函数为: 使用dfs遍历整棵树，来检索最多能分成几棵子树，如果分出的子树数量大于等于k+1 那么就是True，否则就是False
-对于dfs函数，我们可以使用一个返回值来表示**当前节点下的子树能贡献多少个节点给祖先** 。
-
-如果当前收获的节点数大于等于x，那么就意味着当前这棵子树可以独立地构成一个合格的子树。于是我们切断他和父亲的边，让答案加一。并且return 0;
-如果当前收获的节点数cnt小于x，那么就不能独立构成一个合格的子树，就需要将所有的节点都传递到父亲节点。也就是return cnt;
-
-代码#include&lt;bits/stdc++.h&gt;using namespace std;#define IO ios::sync_with_stdio(false);cin.tie(0);cout.tie(0);#define int long long#define rep(i,l,r) for(int i = l;i&lt;=r;i++)#define per(i,r,l) for(int i = r;i&gt;=l;i--)const int INF = 0x3f3f3f3f3f3f3f3f;typedef pair&lt;int,int&gt; PII;const int maxn = 1e5+5;vector&lt;int&gt; ed[maxn];int n,k;vector&lt;int&gt; vis(maxn);int ans;int dfs(int now,int x)&#123;    int sum = 1;    vis[now] = 1;    for(auto v : ed[now])&#123;        if(!vis[v])&#123;            vis[v] = 1;            sum += dfs(v,x);        &#125;    &#125;    if(sum &gt;= x) &#123;ans ++;return 0;&#125;    else return sum;&#125;bool check(int x)&#123;    //初始化一些变量为0    ans = 0;    rep(i,1,n) vis[i] = 0;    //dfs求一下ans的值    dfs(1,x);    return ans&gt;=(k+1);&#125;void solve()&#123;    cin&gt;&gt;n&gt;&gt;k;    rep(i,1,n) ed[i].clear();    rep(i,1,n-1)&#123;        int u,v;cin&gt;&gt;u&gt;&gt;v;        ed[u].push_back(v);        ed[v].push_back(u);    &#125;    int l = 1,r = n;    while(l&lt;r)&#123;        int mid = (l+r+1)/2;        if(check(mid)) l = mid;        else r = mid-1;    &#125;    cout&lt;&lt;l&lt;&lt;endl;    return ;&#125;signed main()&#123;    int T = 1;    cin&gt;&gt;T;    while(T--)&#123;        solve();    &#125;    return 0;&#125;
-D. Birthday Gift题意给你一个长度为n的数组a,即 a_1,a_2,...,a_n 。 现在你需要将他们划分为一些部分，来使得  **每一部分的异或和** 全部**按位或** 起来后的答案ans 满足ans\le x 。问你最多能划分多少部分。如果无解就输出undefined1$。
-即找到k组undefinedl,r)对， 使得l_i \le r_i并且r_i + 1 = l_{i+1}, l_1 = 1,r_k = n。满足(a_{l_1} \oplus a_{l_1+1}\oplus … \oplus a_{r_1})|(a_{l_2} \oplus a_{l_2+1}\oplus … \oplus a_{r_2})|…|(a_{l_k} \oplus a_{l_k+1}\oplus … \oplus a_{r_k}) \le x $
-问k最大是多少。
-思路我们用sum_i表示**a的前i项的异或和**。即sum_i = a_1 \oplus a_2 ...\oplus a_i ，那么原式就变为了undefinedsum_{r_1}\oplus sum_{l_1-1}) | (sum_{r_2}\oplus sum_{l_2-1})|…|(sum_{r_k}\oplus sum_{l_k-1}) \le x 。 这个式子还是有些麻烦，我们发现他还等价于sum_{r_1} | sum_{r_2}|…|sum_{r_k} \le x$ 。于是我们就把区间异或的或，变成了单点的或。
-有一点需要注意的是，sum_n 是必选项。
-于是我们考虑x的每一位，
-
-如果这一位是0， 那么就不做改变，直接看有多少个sum_i满足sum_i | x == x 。
-如果这一位是1，那么我们就可以将这一位置为0，然后将所有较小位置为1，我们设处理后的x为xx，那么有xx = (x - (1]]></content>
-      <categories>
-        <category>题解</category>
-      </categories>
-      <tags>
         <tag>C++</tag>
-        <tag>题解</tag>
       </tags>
   </entry>
   <entry>
@@ -1076,8 +1076,8 @@ D. The Omnipotent Monster Killer题意有n头怪兽， 每个怪兽都有其自�
         <category>题解</category>
       </categories>
       <tags>
-        <tag>C++</tag>
         <tag>题解</tag>
+        <tag>C++</tag>
       </tags>
   </entry>
   <entry>
@@ -1133,8 +1133,8 @@ if(sum[i+k][j] - sum[i][j]==0)
         <category>题解</category>
       </categories>
       <tags>
-        <tag>C++</tag>
         <tag>题解</tag>
+        <tag>C++</tag>
       </tags>
   </entry>
   <entry>
@@ -1188,8 +1188,8 @@ F. Bomb题意给两个长度为n的数组a,b , 你至多进行k(1\le k \le 10^9)
         <category>题解</category>
       </categories>
       <tags>
-        <tag>C++</tag>
         <tag>题解</tag>
+        <tag>C++</tag>
       </tags>
   </entry>
   <entry>
@@ -1229,8 +1229,8 @@ D. Med-imize题意有一个长度为n的数组a_0,a_1,...,a_{n-1} (注意本题�
         <category>题解</category>
       </categories>
       <tags>
-        <tag>C++</tag>
         <tag>题解</tag>
+        <tag>C++</tag>
       </tags>
   </entry>
   <entry>
@@ -1290,42 +1290,8 @@ D. Alice’s Adventures in Cards题意你在和q,k,j 三个人玩纸牌游戏，
         <category>题解</category>
       </categories>
       <tags>
-        <tag>C++</tag>
         <tag>题解</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Educational Codeforces Round 157 (Rated for Div. 2)</title>
-    <url>/ab10feeb834a/</url>
-    <content><![CDATA[[Dashboard - Educational Codeforces Round 157 (Rated for Div. 2) - Codeforces](https://codeforces.com/contest/1895)
-C. Smilo and Monsters题意有n头怪物，每个怪物有各自的血量。每次操作可以
-
-对一个怪物造成一点伤害，并令连击值x加一。
-
-消耗所有的连击值x，选择一个生命值大于等于x的怪物，对他造成x点伤害，然后连击值降为0。
-
-
-问最少多少操作能够杀死所有的怪物？
-思路方案一、模拟
-由于我们连击值越高，效益越大。所以先对怪物的血量由低到高排序，然后在血量较低的怪物身上使用普攻，然后当连击值和当前血量最高的怪物相等时，使用绝招杀死怪物。因此我们需要用l，r两个变量来记录当前普攻杀到了哪个怪物，以及大招该杀哪个怪物。
-需要特判的是：可能普攻杀死一个最小的怪物时，连击值已经超过了最大血量怪物需要的连击值。这时候需要回退一些普攻操作。例如当前连击值为4，然后用6次普攻杀死了一个血量为6的小怪，但是另一只大怪的血量只有6，我们应该对小怪只造成2点普攻伤害，然后直接杀死大怪。（反例为 4 6 6 6 6）
-还有就是杀死所有的小怪后，连击值不足以杀死大怪，这时候我们应该对大怪进行一些普攻，等连击值和大怪剩余血量相等时，直接使用大招杀死。
-方案二、二分答案
-代码#include&lt;bits/stdc++.h&gt;using namespace std;#define int long long#define rep(i,l,r) for(int i = l;i&lt;=r;i++)#define per(i,r,l) for(int i = r;i&gt;=l;i--)void solve()&#123;	int n;	cin&gt;&gt;n;	vector&lt;int &gt; vec(n+5);//血量数组	int sum = 0;	for(int i = 1;i&lt;=n;i++)&#123;		scanf(&quot;%lld&quot;,&amp;vec[i]);		sum += vec[i];	&#125;	sort(vec.begin()+1,vec.begin()+1+n);	int x = 0;	int ans = 0;	for(int l = 1,r = n;l&lt;=r;)&#123;//l，r双指针		if(x + sum &gt;= 2 * vec[r])&#123;//如果杀死小怪能够获得足够的连击值			while(x &lt; vec[r])&#123;//杀死小怪,直到够杀死大怪				x += vec[l];				ans += vec[l];				sum -= vec[l];				l++;			&#125;			if(x != vec[r]) &#123;//如果普攻砍多了				l--;				vec[l] = x - vec[r];				ans -= vec[l];				sum += vec[l];			&#125;			x = 0;			ans++;			sum -= vec[r];			r--;		&#125;		else &#123;			while(l&lt;r)&#123;//不够的话，先普攻杀死其他所有的小怪				x += vec[l];				ans += vec[l];				l ++;			&#125;			int t = (vec[r] + x) / 2;//找到斩杀线			ans += vec[r] - t;			if(t != 0) ans++; 			break;		&#125;	&#125;	cout&lt;&lt;ans&lt;&lt;endl;&#125;signed main()&#123;	int T;	cin&gt;&gt;T;	while(T--)&#123;		solve();	&#125;	return 0;&#125;
-D. XOR Construction给出n-1个数 a_1,a_2,...,a_{n-1} ，你需要构造出一个排列b。使得b_1 \oplus b_2 = a_1 , b_2 \oplus b_3 = a_2,...,b_{n-1} \oplus b_n = a_{n-1} 。
-可以发现，只要我们知道了b1，就可以递推出b_2,b_3,...,b_n:
-b_2 = b_1 \oplus a_1\\ b_3= b_2 \oplus a_2 = b_1 \oplus a_1 \oplus a_2 \\...
-我们设F(x) 代表a的前x项的异或和。 那么b_i =b_1 \oplus  F(i-1)。
-我们最终以此方法构造的b数组可能会不映射到0~n-1上，但一定可以保证b中的每个数都不同。因此我们需要判断是否存在b_i\ge n ，如果存在，那么这个b数组就不成立。如果我们遍历b_1为0~n-1， 对于每个b_1  产生的b数组进行判断，那么时间复杂度就会变为O(n * n) ，导致超时。
-我们可以考虑使用字典树存储a的各个前缀和，然后通过遍历字典树来在log2n的复杂度下找到最大的b_i ,并进行合理性判断。这样我们的时间复杂度就降到了O(nlog2n)
-代码#include&lt;bits/stdc++.h&gt;using namespace std;int nex[400005][2];//注意如果只开2e5+5的数组容量,会产生段错误int cnt = 0;int n;void ins(int x)&#123;//向字典树中插入一个数	int p = 0;	for(int i = 20;i&gt;=0;i--)&#123;		int t = (x &gt;&gt; i) &amp; 1;		if(!nex[p][t])&#123;			nex[p][t] = ++cnt;		&#125;		p = nex[p][t];	&#125;	return ;&#125;bool func(int x)&#123;//查找最大的b元素，并判断是否小于等于n-1	int ans = 0;	int p = 0;	for(int i = 20;i&gt;=0;i--)&#123;		int t = (x &gt;&gt; i) &amp; 1;		if(nex[p][t ^ 1])&#123;			ans += (1 &lt;&lt; i);			p = nex[p][t ^ 1];		&#125;else p = nex[p][t];	&#125;	return ans &lt; n;&#125;int main()&#123;	cin&gt;&gt;n;	vector&lt;int&gt; vec(n+5);	for(int i =1;i&lt;n;i++)&#123;//求前缀异或，以及插入进字典树中		cin&gt;&gt;vec[i];		vec[i] ^= vec[i-1];		ins(vec[i]);	&#125;	for(int i = 0;i&lt;n;i++)&#123;//遍历b1		if(func(i)) &#123;//如果成立			for(int j = 0;j&lt;n;j++)&#123;//输出b数组				cout&lt;&lt;(vec[j] ^ i)&lt;&lt;&quot; &quot;;			&#125;			break;		&#125;	&#125;	return 0;&#125;
-]]></content>
-      <categories>
-        <category>题解</category>
-      </categories>
-      <tags>
         <tag>C++</tag>
-        <tag>题解</tag>
       </tags>
   </entry>
   <entry>
@@ -1392,6 +1358,76 @@ undefineda_i &gt;&gt; 0) \&amp; 1$
       </tags>
   </entry>
   <entry>
+    <title>Educational Codeforces Round 157 (Rated for Div. 2)</title>
+    <url>/ab10feeb834a/</url>
+    <content><![CDATA[[Dashboard - Educational Codeforces Round 157 (Rated for Div. 2) - Codeforces](https://codeforces.com/contest/1895)
+C. Smilo and Monsters题意有n头怪物，每个怪物有各自的血量。每次操作可以
+
+对一个怪物造成一点伤害，并令连击值x加一。
+
+消耗所有的连击值x，选择一个生命值大于等于x的怪物，对他造成x点伤害，然后连击值降为0。
+
+
+问最少多少操作能够杀死所有的怪物？
+思路方案一、模拟
+由于我们连击值越高，效益越大。所以先对怪物的血量由低到高排序，然后在血量较低的怪物身上使用普攻，然后当连击值和当前血量最高的怪物相等时，使用绝招杀死怪物。因此我们需要用l，r两个变量来记录当前普攻杀到了哪个怪物，以及大招该杀哪个怪物。
+需要特判的是：可能普攻杀死一个最小的怪物时，连击值已经超过了最大血量怪物需要的连击值。这时候需要回退一些普攻操作。例如当前连击值为4，然后用6次普攻杀死了一个血量为6的小怪，但是另一只大怪的血量只有6，我们应该对小怪只造成2点普攻伤害，然后直接杀死大怪。（反例为 4 6 6 6 6）
+还有就是杀死所有的小怪后，连击值不足以杀死大怪，这时候我们应该对大怪进行一些普攻，等连击值和大怪剩余血量相等时，直接使用大招杀死。
+方案二、二分答案
+代码#include&lt;bits/stdc++.h&gt;using namespace std;#define int long long#define rep(i,l,r) for(int i = l;i&lt;=r;i++)#define per(i,r,l) for(int i = r;i&gt;=l;i--)void solve()&#123;	int n;	cin&gt;&gt;n;	vector&lt;int &gt; vec(n+5);//血量数组	int sum = 0;	for(int i = 1;i&lt;=n;i++)&#123;		scanf(&quot;%lld&quot;,&amp;vec[i]);		sum += vec[i];	&#125;	sort(vec.begin()+1,vec.begin()+1+n);	int x = 0;	int ans = 0;	for(int l = 1,r = n;l&lt;=r;)&#123;//l，r双指针		if(x + sum &gt;= 2 * vec[r])&#123;//如果杀死小怪能够获得足够的连击值			while(x &lt; vec[r])&#123;//杀死小怪,直到够杀死大怪				x += vec[l];				ans += vec[l];				sum -= vec[l];				l++;			&#125;			if(x != vec[r]) &#123;//如果普攻砍多了				l--;				vec[l] = x - vec[r];				ans -= vec[l];				sum += vec[l];			&#125;			x = 0;			ans++;			sum -= vec[r];			r--;		&#125;		else &#123;			while(l&lt;r)&#123;//不够的话，先普攻杀死其他所有的小怪				x += vec[l];				ans += vec[l];				l ++;			&#125;			int t = (vec[r] + x) / 2;//找到斩杀线			ans += vec[r] - t;			if(t != 0) ans++; 			break;		&#125;	&#125;	cout&lt;&lt;ans&lt;&lt;endl;&#125;signed main()&#123;	int T;	cin&gt;&gt;T;	while(T--)&#123;		solve();	&#125;	return 0;&#125;
+D. XOR Construction给出n-1个数 a_1,a_2,...,a_{n-1} ，你需要构造出一个排列b。使得b_1 \oplus b_2 = a_1 , b_2 \oplus b_3 = a_2,...,b_{n-1} \oplus b_n = a_{n-1} 。
+可以发现，只要我们知道了b1，就可以递推出b_2,b_3,...,b_n:
+b_2 = b_1 \oplus a_1\\ b_3= b_2 \oplus a_2 = b_1 \oplus a_1 \oplus a_2 \\...
+我们设F(x) 代表a的前x项的异或和。 那么b_i =b_1 \oplus  F(i-1)。
+我们最终以此方法构造的b数组可能会不映射到0~n-1上，但一定可以保证b中的每个数都不同。因此我们需要判断是否存在b_i\ge n ，如果存在，那么这个b数组就不成立。如果我们遍历b_1为0~n-1， 对于每个b_1  产生的b数组进行判断，那么时间复杂度就会变为O(n * n) ，导致超时。
+我们可以考虑使用字典树存储a的各个前缀和，然后通过遍历字典树来在log2n的复杂度下找到最大的b_i ,并进行合理性判断。这样我们的时间复杂度就降到了O(nlog2n)
+代码#include&lt;bits/stdc++.h&gt;using namespace std;int nex[400005][2];//注意如果只开2e5+5的数组容量,会产生段错误int cnt = 0;int n;void ins(int x)&#123;//向字典树中插入一个数	int p = 0;	for(int i = 20;i&gt;=0;i--)&#123;		int t = (x &gt;&gt; i) &amp; 1;		if(!nex[p][t])&#123;			nex[p][t] = ++cnt;		&#125;		p = nex[p][t];	&#125;	return ;&#125;bool func(int x)&#123;//查找最大的b元素，并判断是否小于等于n-1	int ans = 0;	int p = 0;	for(int i = 20;i&gt;=0;i--)&#123;		int t = (x &gt;&gt; i) &amp; 1;		if(nex[p][t ^ 1])&#123;			ans += (1 &lt;&lt; i);			p = nex[p][t ^ 1];		&#125;else p = nex[p][t];	&#125;	return ans &lt; n;&#125;int main()&#123;	cin&gt;&gt;n;	vector&lt;int&gt; vec(n+5);	for(int i =1;i&lt;n;i++)&#123;//求前缀异或，以及插入进字典树中		cin&gt;&gt;vec[i];		vec[i] ^= vec[i-1];		ins(vec[i]);	&#125;	for(int i = 0;i&lt;n;i++)&#123;//遍历b1		if(func(i)) &#123;//如果成立			for(int j = 0;j&lt;n;j++)&#123;//输出b数组				cout&lt;&lt;(vec[j] ^ i)&lt;&lt;&quot; &quot;;			&#125;			break;		&#125;	&#125;	return 0;&#125;
+]]></content>
+      <categories>
+        <category>题解</category>
+      </categories>
+      <tags>
+        <tag>题解</tag>
+        <tag>C++</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Educational Codeforces Round 157</title>
+    <url>/990c826af7c6/</url>
+    <content><![CDATA[[Dashboard - Educational Codeforces Round 157 (Rated for Div. 2) - Codeforces](https://codeforces.com/contest/1895)
+C. Torn Lucky Ticket题意给出n个**长度不大于5**的字符串s_1，s_2，...，s_n（只由数字组成）， 你需要选择其中两个串undefinedi，j)（i和j可以相等，并且(i,j)与(j,i)视为两个不同的选择）,  令s = s_i + s_j$。 问有多少种选择，使得：
+
+s的长度为偶数
+s的前一半的数字的总和等于后一半的数字总和
+
+1\le n \le 2*10^5
+思路我们使用string类型的一维数组dat存储原始数据。 使用二维的vector数组vec（算上vector一共三维）存储处理后的数据。
+vec[i][j] 中存储的元素表示长度为 i的字符串， 他的后缀s[j,i-1] 的数字的总和 减去 前缀s[0,j-1]的数字总和。
+我们对所有的vector类型进行排序。以便于我们使用lower_bound和upper_bound 来在logn的复杂度下查找其中某个数的数量。
+之后我们遍历所有的字符串s_i,  把他作为前半部分，我们考虑如下方法来寻找合适后半部分：
+假设后半部分字符串为s_j ，前半部分的长度为len_i,后半部分为len_j。那么如果
+
+len_i = len_j ，我们需要计算出s_i 中的数字和k，然后在长度为len_i的串中找总和为k的数量。也就是
+
+upper_bound(vec[leni][0].begin(),vec[leni][0].end(),k) - lower_bound(vec[leni][0].begin(),vec[leni][0].end(),k)  `
+
+len_i < len_j , 我们需要从后半部分的字符串中提取出一些前缀字符（最多两个），与前半部分拼接。因此要找的是
+upper_bound(vec[lenj][t].begin(),vec[lenj][t].end(),k) - lower_bound(vec[lenj][t].begin(),vec[lenj][t].end(),k) 其中t = \frac{len_j - len_i}{2} 
+
+len_i > len_j ，此时我们需要根据lenj的长度来计算前半部分的前缀减去后缀的值k，然后在vec[lenj][0] 中搜索k的数目。比如此时len_i = 5 ，而len_j = 3 ,那么k = s[0]+s[1]+s[2]+s[3]-s[4] 。而如果len_i=5,len_j = 1 ，那么k = s[0]+s[1]+s[2]-s[3]-s[4] 。 
+
+
+代码#include&lt;bits/stdc++.h&gt;using namespace std;#define int long long#define rep(i,l,r) for(int i = l;i&lt;=r;i++)#define per(i,r,l) for(int i = r;i&gt;=l;i--)typedef pair&lt;int,int&gt; PII;vector&lt;int&gt; vec[7][7];//vecpre[i][j] 长度为i的串的j前缀// vector&lt;int&gt; vecend[7][7];const int MAXN = 2e5+5;string dat[MAXN];int t;int find(int len,int pre)&#123;	return upper_bound(vec[len][pre].begin(),vec[len][pre].end(),t) -\	lower_bound(vec[len][pre].begin(),vec[len][pre].end(),t);&#125;void solve()&#123;	int n;	cin&gt;&gt;n;	string str;	for(int i =1;i&lt;=n;i++)&#123;		cin&gt;&gt;str;		dat[i] = str;		int len = str.length();		int sum = 0;		for(int i = 0;i&lt;len;i++)&#123;			sum += str[i] - &#x27;0&#x27;;		&#125;		int t = 0;		vec[len][0].push_back(sum);		for(int i =0;i&lt;str.length()/2;i++)&#123;			t = t + str[i] - &#x27;0&#x27;;			vec[len][i+1].push_back(sum - 2 * t);		&#125;	&#125;	for(int i = 1;i&lt;=5;i++)&#123;		sort(vec[i][0].begin(),vec[i][0].end());		for(int j = 1;j&lt;=5;j++)&#123;			sort(vec[i][j].begin(),vec[i][j].end());		&#125;	&#125;	int ans = 0;	for(int i = 1;i&lt;=n;i++)&#123;		if(dat[i].length() == 1)&#123;			t = dat[i][0] - &#x27;0&#x27;;			ans += find(1,0);			ans += find(3,1);			ans += find(5,2);			&#125;		if(dat[i].length() == 3)&#123;			t = (dat[i][0] - &#x27;0&#x27;) + (dat[i][1] - &#x27;0&#x27;) + (dat[i][2] - &#x27;0&#x27;);			ans += find(3,0);			ans += find(5,1);			t -= 2 * (dat[i][2] - &#x27;0&#x27;);			ans += find(1,0);			&#125;		if(dat[i].length() == 5)&#123;			t = 0;			for(int j = 0;j&lt;5;j++) t += dat[i][j] - &#x27;0&#x27;;			ans += find(5,0);			t -= 2 * (dat[i][4] - &#x27;0&#x27;);			ans+= find(3,0);			t -= 2 * (dat[i][3] - &#x27;0&#x27;);			ans += find(1,0);			&#125;		if(dat[i].length() == 2)&#123;			t = dat[i][0] - &#x27;0&#x27; + dat[i][1] - &#x27;0&#x27;;			ans += find(2,0);			ans += find(4,1);		&#125;		if(dat[i].length() == 4)&#123;			t = 0;			for(int j = 0;j&lt;4;j++) t += dat[i][j] - &#x27;0&#x27;;			ans += find(4,0);			t -= (dat[i][3] - &#x27;0&#x27;) * 2;			ans += find(2,0);		&#125;	&#125;	cout&lt;&lt;ans;&#125;signed main()&#123;	int T;	T = 1;	while(T--)&#123;		solve();	&#125;	return 0;&#125;
+]]></content>
+      <categories>
+        <category>题解</category>
+      </categories>
+      <tags>
+        <tag>题解</tag>
+        <tag>C++</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Educational Codeforces Round 157</title>
     <url>/cb21718951db/</url>
     <content><![CDATA[[Educational Codeforces Round 161 (Rated for Div. 2)](https://codeforces.com/contest/1922)
@@ -1418,8 +1454,8 @@ D. Berserk Monsters题意有n个怪兽并排，给出一些怪兽的攻击力a�
         <category>题解</category>
       </categories>
       <tags>
-        <tag>C++</tag>
         <tag>题解</tag>
+        <tag>C++</tag>
       </tags>
   </entry>
   <entry>
@@ -1466,57 +1502,8 @@ D. Maximize the Root题意给你一棵树，每个节点都有一个初始值，
         <category>题解</category>
       </categories>
       <tags>
-        <tag>C++</tag>
         <tag>题解</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Educational Codeforces Round 157</title>
-    <url>/990c826af7c6/</url>
-    <content><![CDATA[[Dashboard - Educational Codeforces Round 157 (Rated for Div. 2) - Codeforces](https://codeforces.com/contest/1895)
-C. Torn Lucky Ticket题意给出n个**长度不大于5**的字符串s_1，s_2，...，s_n（只由数字组成）， 你需要选择其中两个串undefinedi，j)（i和j可以相等，并且(i,j)与(j,i)视为两个不同的选择）,  令s = s_i + s_j$。 问有多少种选择，使得：
-
-s的长度为偶数
-s的前一半的数字的总和等于后一半的数字总和
-
-1\le n \le 2*10^5
-思路我们使用string类型的一维数组dat存储原始数据。 使用二维的vector数组vec（算上vector一共三维）存储处理后的数据。
-vec[i][j] 中存储的元素表示长度为 i的字符串， 他的后缀s[j,i-1] 的数字的总和 减去 前缀s[0,j-1]的数字总和。
-我们对所有的vector类型进行排序。以便于我们使用lower_bound和upper_bound 来在logn的复杂度下查找其中某个数的数量。
-之后我们遍历所有的字符串s_i,  把他作为前半部分，我们考虑如下方法来寻找合适后半部分：
-假设后半部分字符串为s_j ，前半部分的长度为len_i,后半部分为len_j。那么如果
-
-len_i = len_j ，我们需要计算出s_i 中的数字和k，然后在长度为len_i的串中找总和为k的数量。也就是
-
-upper_bound(vec[leni][0].begin(),vec[leni][0].end(),k) - lower_bound(vec[leni][0].begin(),vec[leni][0].end(),k)  `
-
-len_i < len_j , 我们需要从后半部分的字符串中提取出一些前缀字符（最多两个），与前半部分拼接。因此要找的是
-upper_bound(vec[lenj][t].begin(),vec[lenj][t].end(),k) - lower_bound(vec[lenj][t].begin(),vec[lenj][t].end(),k) 其中t = \frac{len_j - len_i}{2} 
-
-len_i > len_j ，此时我们需要根据lenj的长度来计算前半部分的前缀减去后缀的值k，然后在vec[lenj][0] 中搜索k的数目。比如此时len_i = 5 ，而len_j = 3 ,那么k = s[0]+s[1]+s[2]+s[3]-s[4] 。而如果len_i=5,len_j = 1 ，那么k = s[0]+s[1]+s[2]-s[3]-s[4] 。 
-
-
-代码#include&lt;bits/stdc++.h&gt;using namespace std;#define int long long#define rep(i,l,r) for(int i = l;i&lt;=r;i++)#define per(i,r,l) for(int i = r;i&gt;=l;i--)typedef pair&lt;int,int&gt; PII;vector&lt;int&gt; vec[7][7];//vecpre[i][j] 长度为i的串的j前缀// vector&lt;int&gt; vecend[7][7];const int MAXN = 2e5+5;string dat[MAXN];int t;int find(int len,int pre)&#123;	return upper_bound(vec[len][pre].begin(),vec[len][pre].end(),t) -\	lower_bound(vec[len][pre].begin(),vec[len][pre].end(),t);&#125;void solve()&#123;	int n;	cin&gt;&gt;n;	string str;	for(int i =1;i&lt;=n;i++)&#123;		cin&gt;&gt;str;		dat[i] = str;		int len = str.length();		int sum = 0;		for(int i = 0;i&lt;len;i++)&#123;			sum += str[i] - &#x27;0&#x27;;		&#125;		int t = 0;		vec[len][0].push_back(sum);		for(int i =0;i&lt;str.length()/2;i++)&#123;			t = t + str[i] - &#x27;0&#x27;;			vec[len][i+1].push_back(sum - 2 * t);		&#125;	&#125;	for(int i = 1;i&lt;=5;i++)&#123;		sort(vec[i][0].begin(),vec[i][0].end());		for(int j = 1;j&lt;=5;j++)&#123;			sort(vec[i][j].begin(),vec[i][j].end());		&#125;	&#125;	int ans = 0;	for(int i = 1;i&lt;=n;i++)&#123;		if(dat[i].length() == 1)&#123;			t = dat[i][0] - &#x27;0&#x27;;			ans += find(1,0);			ans += find(3,1);			ans += find(5,2);			&#125;		if(dat[i].length() == 3)&#123;			t = (dat[i][0] - &#x27;0&#x27;) + (dat[i][1] - &#x27;0&#x27;) + (dat[i][2] - &#x27;0&#x27;);			ans += find(3,0);			ans += find(5,1);			t -= 2 * (dat[i][2] - &#x27;0&#x27;);			ans += find(1,0);			&#125;		if(dat[i].length() == 5)&#123;			t = 0;			for(int j = 0;j&lt;5;j++) t += dat[i][j] - &#x27;0&#x27;;			ans += find(5,0);			t -= 2 * (dat[i][4] - &#x27;0&#x27;);			ans+= find(3,0);			t -= 2 * (dat[i][3] - &#x27;0&#x27;);			ans += find(1,0);			&#125;		if(dat[i].length() == 2)&#123;			t = dat[i][0] - &#x27;0&#x27; + dat[i][1] - &#x27;0&#x27;;			ans += find(2,0);			ans += find(4,1);		&#125;		if(dat[i].length() == 4)&#123;			t = 0;			for(int j = 0;j&lt;4;j++) t += dat[i][j] - &#x27;0&#x27;;			ans += find(4,0);			t -= (dat[i][3] - &#x27;0&#x27;) * 2;			ans += find(2,0);		&#125;	&#125;	cout&lt;&lt;ans;&#125;signed main()&#123;	int T;	T = 1;	while(T--)&#123;		solve();	&#125;	return 0;&#125;
-]]></content>
-      <categories>
-        <category>题解</category>
-      </categories>
-      <tags>
         <tag>C++</tag>
-        <tag>题解</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>XCPC模板</title>
-    <url>/b5a224851012/</url>
-    <content><![CDATA[线段树struct Info&#123;    LL sum = 0;&#125;; struct Tag&#123;    LL add = 0;&#125;; Info operator+(const Info &amp;a, const Info &amp;b)&#123;    return &#123;a.sum + b.sum&#125;;&#125; void apply(Info &amp;x, Tag &amp;a, Tag f)&#123;    if (f.add)&#123;        a.add += f.add;        x.sum += f.add;    &#125;&#125; template&lt;class Info, class Tag&gt;struct LazySegmentTree&#123;    int n;    vector&lt;Info&gt; info;    vector&lt;Tag&gt; tag;     LazySegmentTree() &#123;&#125;     LazySegmentTree(int n, Info _init = Info())&#123;        init(vector&lt;Info&gt;(n, _init));    &#125;     LazySegmentTree(const vector&lt;Info&gt; &amp;_init)&#123;        init(_init);    &#125;     void init(const vector&lt;Info&gt; &amp;_init)&#123;        n = (int)_init.size();        info.assign((n &lt;&lt; 2) + 1, Info());        tag.assign((n &lt;&lt; 2) + 1, Tag());        function&lt;void(int, int, int)&gt; build = [&amp;](int p, int l, int r)&#123;            if (l == r)&#123;                info[p] = _init[l - 1];                return;            &#125;            int m = (l + r) / 2;            build(2 * p, l, m);            build(2 * p + 1, m + 1, r);            pull(p);        &#125;;        build(1, 1, n);    &#125;        void pull(int p)&#123;        info[p] = info[2 * p] + info[2 * p + 1];    &#125;        void apply(int p, const Tag &amp;v)&#123;        ::apply(info[p], tag[p], v);    &#125;        void push(int p)&#123;        apply(2 * p, tag[p]);        apply(2 * p + 1, tag[p]);        tag[p] = Tag();    &#125;        void modify(int p, int l, int r, int x, const Info &amp;v)&#123;        if (l == r)&#123;            info[p] = v;            return;        &#125;        int m = (l + r) / 2;        push(p);        if (x &lt;= m)&#123;            modify(2 * p, l, m, x, v);        &#125;         else&#123;            modify(2 * p + 1, m + 1, r, x, v);        &#125;        pull(p);    &#125;        void modify(int p, const Info &amp;v)&#123;        modify(1, 1, n, p, v);    &#125;        Info query(int p, int l, int r, int x, int y)&#123;        if (l &gt; y || r &lt; x)&#123;            return Info();        &#125;        if (l &gt;= x &amp;&amp; r &lt;= y)&#123;            return info[p];        &#125;        int m = (l + r) / 2;        push(p);        return query(2 * p, l, m, x, y) + query(2 * p + 1, m + 1, r, x, y);    &#125;        Info query(int l, int r)&#123;        return query(1, 1, n, l, r);    &#125;        void modify(int p, int l, int r, int x, int y, const Tag &amp;v)&#123;        if (l &gt; y || r &lt; x)&#123;            return;        &#125;        if (l &gt;= x &amp;&amp; r &lt;= y)&#123;            apply(p, v);            return;        &#125;        int m = (l + r) / 2;        push(p);        modify(2 * p, l, m, x, y, v);        modify(2 * p + 1, m + 1, r, x, y, v);        pull(p);    &#125;        void modify(int l, int r, const Tag &amp;v)&#123;        return modify(1, 1, n, l, r, v);    &#125;&#125;;
-]]></content>
-      <categories>
-        <category>数据结构</category>
-      </categories>
-      <tags>
-        <tag>模板</tag>
-        <tag>数据结构</tag>
       </tags>
   </entry>
   <entry>
@@ -1551,8 +1538,21 @@ D. Prime XOR Coloring题意给你一个无向图，图中有n个节点，编号�
         <category>题解</category>
       </categories>
       <tags>
-        <tag>C++</tag>
         <tag>题解</tag>
+        <tag>C++</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>XCPC模板</title>
+    <url>/b5a224851012/</url>
+    <content><![CDATA[线段树struct Info&#123;    LL sum = 0;&#125;; struct Tag&#123;    LL add = 0;&#125;; Info operator+(const Info &amp;a, const Info &amp;b)&#123;    return &#123;a.sum + b.sum&#125;;&#125; void apply(Info &amp;x, Tag &amp;a, Tag f)&#123;    if (f.add)&#123;        a.add += f.add;        x.sum += f.add;    &#125;&#125; template&lt;class Info, class Tag&gt;struct LazySegmentTree&#123;    int n;    vector&lt;Info&gt; info;    vector&lt;Tag&gt; tag;     LazySegmentTree() &#123;&#125;     LazySegmentTree(int n, Info _init = Info())&#123;        init(vector&lt;Info&gt;(n, _init));    &#125;     LazySegmentTree(const vector&lt;Info&gt; &amp;_init)&#123;        init(_init);    &#125;     void init(const vector&lt;Info&gt; &amp;_init)&#123;        n = (int)_init.size();        info.assign((n &lt;&lt; 2) + 1, Info());        tag.assign((n &lt;&lt; 2) + 1, Tag());        function&lt;void(int, int, int)&gt; build = [&amp;](int p, int l, int r)&#123;            if (l == r)&#123;                info[p] = _init[l - 1];                return;            &#125;            int m = (l + r) / 2;            build(2 * p, l, m);            build(2 * p + 1, m + 1, r);            pull(p);        &#125;;        build(1, 1, n);    &#125;        void pull(int p)&#123;        info[p] = info[2 * p] + info[2 * p + 1];    &#125;        void apply(int p, const Tag &amp;v)&#123;        ::apply(info[p], tag[p], v);    &#125;        void push(int p)&#123;        apply(2 * p, tag[p]);        apply(2 * p + 1, tag[p]);        tag[p] = Tag();    &#125;        void modify(int p, int l, int r, int x, const Info &amp;v)&#123;        if (l == r)&#123;            info[p] = v;            return;        &#125;        int m = (l + r) / 2;        push(p);        if (x &lt;= m)&#123;            modify(2 * p, l, m, x, v);        &#125;         else&#123;            modify(2 * p + 1, m + 1, r, x, v);        &#125;        pull(p);    &#125;        void modify(int p, const Info &amp;v)&#123;        modify(1, 1, n, p, v);    &#125;        Info query(int p, int l, int r, int x, int y)&#123;        if (l &gt; y || r &lt; x)&#123;            return Info();        &#125;        if (l &gt;= x &amp;&amp; r &lt;= y)&#123;            return info[p];        &#125;        int m = (l + r) / 2;        push(p);        return query(2 * p, l, m, x, y) + query(2 * p + 1, m + 1, r, x, y);    &#125;        Info query(int l, int r)&#123;        return query(1, 1, n, l, r);    &#125;        void modify(int p, int l, int r, int x, int y, const Tag &amp;v)&#123;        if (l &gt; y || r &lt; x)&#123;            return;        &#125;        if (l &gt;= x &amp;&amp; r &lt;= y)&#123;            apply(p, v);            return;        &#125;        int m = (l + r) / 2;        push(p);        modify(2 * p, l, m, x, y, v);        modify(2 * p + 1, m + 1, r, x, y, v);        pull(p);    &#125;        void modify(int l, int r, const Tag &amp;v)&#123;        return modify(1, 1, n, l, r, v);    &#125;&#125;;
+]]></content>
+      <categories>
+        <category>数据结构</category>
+      </categories>
+      <tags>
+        <tag>模板</tag>
+        <tag>数据结构</tag>
       </tags>
   </entry>
   <entry>
@@ -1655,8 +1655,8 @@ D - Prefix Purchase题意给出一个n个数的数组a. 起初 a_1 = a_2 =...= a
         <category>题解</category>
       </categories>
       <tags>
-        <tag>C++</tag>
         <tag>题解</tag>
+        <tag>C++</tag>
       </tags>
   </entry>
   <entry>
@@ -1751,28 +1751,6 @@ d
       </tags>
   </entry>
   <entry>
-    <title>mysql远程连接</title>
-    <url>/a726c975d078/</url>
-    <content><![CDATA[搞了一天的mysql远程连接， 也算是踩过坑了，这里记录一下
-如果你的mysql无法被远程连接，那么请依次检查如下条件：
-1. 服务器的防火墙（安全组）放行端口如果mysql服务在云服务器上运行， 那么请检查云服务器是否将端口3306开放。 如果没有开放请设置为通行状态。。这里不同的云服务器厂商的截图不同，我这里给出华为云的安全组设置
-华为云：![在这里插入图片描述](https://img-blog.csdnimg.cn/direct/e44f593c14434d7e87359c45016de270.png#pic_center)
-2. 启动mysql的远程连接服务在命令台中使用mysql -uroot 进入你的mysql数据库。mysql -uroot 选择mysql库use mysql检查user表中的host和User信息。select host,User from user;如果你的root字段对应的host是localhost，那么代表root账户只能本地登录。+-----------+------------------+| host      | User             |+-----------+------------------+| localhost | root             || localhost | debian-sys-maint || localhost | mysql.infoschema || localhost | mysql.session    || localhost | mysql.sys        |+-----------+------------------+
-可以将host字段更改为%表示允许所有ip登录root账号。
-update user  set host = &#x27;%&#x27; where user = &#x27;root&#x27;;   
-更改后使用查表命令检查一下select host,User from user;更改后应该为如下：+-----------+------------------+| host      | User             |+-----------+------------------+| %         | root             || localhost | debian-sys-maint || localhost | mysql.infoschema || localhost | mysql.session    || localhost | mysql.sys        |+-----------+------------------+
-3. 更改密码验证方式如果mysql版本是5.7或更低，无需考虑本条。
-在mysql版本8.0版本后， 使用sha2方式来验证密码。 就导致我们不能正确连接。需要设置为允许密码连接。ALTER USER &#x27;root&#x27;@&#x27;%&#x27; IDENTIFIED WITH mysql_native_password BY &#x27;password&#x27;;
-]]></content>
-      <categories>
-        <category>笔记</category>
-      </categories>
-      <tags>
-        <tag>笔记</tag>
-        <tag>mysql</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>强化学习数学原理笔记</title>
     <url>/887930e5b441/</url>
     <content><![CDATA[可能会出现公式加载错误的情况，可以直接下载[pdf版本](https://lsk404.github.io/files/RLnote.pdf)。
@@ -1803,6 +1781,28 @@ reward: 他是一个实数，代表我们的奖励，如果reward>0,则代表希
         <tag>笔记</tag>
         <tag>强化学习</tag>
         <tag>数学</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>mysql远程连接</title>
+    <url>/a726c975d078/</url>
+    <content><![CDATA[搞了一天的mysql远程连接， 也算是踩过坑了，这里记录一下
+如果你的mysql无法被远程连接，那么请依次检查如下条件：
+1. 服务器的防火墙（安全组）放行端口如果mysql服务在云服务器上运行， 那么请检查云服务器是否将端口3306开放。 如果没有开放请设置为通行状态。。这里不同的云服务器厂商的截图不同，我这里给出华为云的安全组设置
+华为云：![在这里插入图片描述](https://img-blog.csdnimg.cn/direct/e44f593c14434d7e87359c45016de270.png#pic_center)
+2. 启动mysql的远程连接服务在命令台中使用mysql -uroot 进入你的mysql数据库。mysql -uroot 选择mysql库use mysql检查user表中的host和User信息。select host,User from user;如果你的root字段对应的host是localhost，那么代表root账户只能本地登录。+-----------+------------------+| host      | User             |+-----------+------------------+| localhost | root             || localhost | debian-sys-maint || localhost | mysql.infoschema || localhost | mysql.session    || localhost | mysql.sys        |+-----------+------------------+
+可以将host字段更改为%表示允许所有ip登录root账号。
+update user  set host = &#x27;%&#x27; where user = &#x27;root&#x27;;   
+更改后使用查表命令检查一下select host,User from user;更改后应该为如下：+-----------+------------------+| host      | User             |+-----------+------------------+| %         | root             || localhost | debian-sys-maint || localhost | mysql.infoschema || localhost | mysql.session    || localhost | mysql.sys        |+-----------+------------------+
+3. 更改密码验证方式如果mysql版本是5.7或更低，无需考虑本条。
+在mysql版本8.0版本后， 使用sha2方式来验证密码。 就导致我们不能正确连接。需要设置为允许密码连接。ALTER USER &#x27;root&#x27;@&#x27;%&#x27; IDENTIFIED WITH mysql_native_password BY &#x27;password&#x27;;
+]]></content>
+      <categories>
+        <category>笔记</category>
+      </categories>
+      <tags>
+        <tag>笔记</tag>
+        <tag>mysql</tag>
       </tags>
   </entry>
   <entry>
@@ -1896,144 +1896,6 @@ pip3 install torch torchvision torchaudio --index-url https://download.pytorch.o
         <tag>题解</tag>
         <tag>python</tag>
         <tag>蓝桥杯</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>十六届蓝桥杯模拟赛3题解</title>
-    <url>/27d697c28fe4/</url>
-    <content><![CDATA[第16届蓝桥杯模拟赛3 python组
-*思路和答案不保证正确*
-1.填空如果一个数 p 是个质数，同时又是整数 a 的约数，则 p 称为 a 的一个质因数。
-请问， 2024 的最大的质因数是多少？
-因为是填空题，所以直接枚举2023~2 ，第一个即是质数也是2024的因数的数就是答案。
-def isprime(x):    for i in range(2,int(x ** 0.5)+1):        if(x % i == 0):            return False    return Truefor i in range(2023,1,-1):    if(2024 % i == 0 and isprime(i)):        print(i)# 23# 11# 2
-2.填空对于两个整数 a, b，既是 a 的整数倍又是 b 的整数倍的数称为 a 和 b 的公倍数。公倍数中最小的正整数称为 a 和 b 的最小公倍数。
-请问， 2024 和 1024 的最小公倍数是多少？
-经典求lcm: lcm(a,b) = \frac{a * b}{ gcd(a* b)}
-def gcd(x,y):    if(y == 0): return x    return gcd(y,x % y)def lcm(x,y):    return x * y // gcd(x,y)print(lcm(2024,1024))## 259072
-(python3.9版本以后的math库中含有lcm函数可以直接调用)
-import mathprint(math.lcm(2024,1024))## 259072
-3.填空如果一个数 p 是个质数，同时又是整数 a 的约数，则 p 称为 a 的一个质因数。
-请问， 2024 的所有质因数的和是多少？
-第一个填空使用的代码已经计算出了2024的质因数为：23,11,8,4,2 ，加到一起就可以了
-def isprime(x):    for i in range(2,int(x ** 0.5)+1):        if(x % i == 0):            return False    return Trues = 0for i in range(2023,1,-1):    if(2024 % i == 0 and isprime(i)):        s = s + iprint(s)## 36
-4.填空请问，在不超过 2024 的数中，最大的质数是多少？
-枚举2023~2，找到第一个质数
-def isprime(x):    for i in range(2,int(x ** 0.5)+1):        if(x % i == 0):            return False    return Trues = 0for i in range(2023,1,-1):    if(isprime(i)):        print(i)        break## 2017
-5.填空如果两个整数 a, b 除了 1 以外，没有其它的公约数，则称整数 a 与 b 互质。
-请问，与 2024 互质的数中（包括1），第 2024 小的数是多少？
-while循环从1开始找满足gcd(x,2024) == 1 的数，找第2024个
-def gcd(x,y):    if(y == 0): return x    return gcd(y,x % y)cnt = 0p = 0while(cnt &lt; 2024):    p += 1    if(gcd(p,2024) == 1):        cnt += 1print(p)## 4655
-6.填空对于字符串 S=ANQNANBNQNANQNQNBNINQNQNANQNINANQNANBNQNANQNQNBNBNQNQNANQNINANQNANBNQNANQNQNBNINQNQNANQNINBNQNANBNQN ，请找到 S 的一个长度不超过 10 的子串 A，使得（A的长度）乘以（A在S中出现的次数）最大。
-请问这个子串是什么？（如果有多个满足条件的，请回答字典序最小的）。
-字符串不长，直接枚举所有长度不超过10的子串，然后将他们的出现次数记录在字典中，然后在字典中找答案就好
-s = &quot;ANQNANBNQNANQNQNBNINQNQNANQNINANQNANBNQNANQNQNBNBNQNQNANQNINANQNANBNQNANQNQNBNINQNQNANQNINBNQNANBNQN&quot;dic = &#123;&#125;for length in range(1,11):    for i in range(0,len(s) - length):        dic[s[i:i+length]] = dic.get(s[i:i+length],0) + 1ansstr = &quot;&quot;ansnum = 0for s,cnt in dic.items():    num = cnt * len(s)    if(num &gt; ansnum) or (num == ansnum and s &lt; ansstr):        ansstr = s        ansnum = numprint(ansstr)# NQN
-7.填空如果一个字符串中只包含字符 0 和字符 1，则称为一个 01 串（包含全为 0 的串和全为 1 的串）。
-请问有多少个长度为 24 的 01 串，满足任意 5 个连续的位置中不超过 3 个位置的值为 1 。
-长度为24的01串总共有2^{24} 个，大约1.7*10^7 , 可以花点时间暴力枚举所有的字符串（反正是填空题）
-import timedef check(x):    lst = []    for i in range(0,24):        if(x &amp; ( 1 &lt;&lt; i)):            lst.append(i)    if(len(lst)&lt;=2):        return True    for i in range(len(lst)-2):        if(lst[i+2] - lst[i]&lt;= 4):            return False    return Trueans = 0tik = time.time()for x in range(1&lt;&lt;24):    # 这些01串可以用0~(2**24-1)的二进制数表示    if(check(x)):        ans += 1tok = time.time()print(tok-tik) # 花了25.859452724456787秒运行程序print(ans) # 最终答案是162165
-也可以使用dfs来解决本题：
-import timelis = [] # 存储当前数的1的位置ans = 0def dfs(step):    global ans    if(step == 25):        ans += 1        return     if(len(lis) &lt; 2 or step - lis[-2] &gt; 4):        lis.append(step) # 选1        dfs(step + 1)         lis.pop() # 还原现场    dfs(step + 1) # 选0tic = time.time()dfs(1)tok = time.time()print(tok - tic)# 花了0.04025077819824219秒运行程序print(ans) # 最终答案是162165
-8. 玉米地题意【问题描述】小蓝种了一块玉米地，玉米地长 n 米，宽 m 米，每平方米产玉米 a 千克。请问小蓝的玉米地一共能产多少千克玉米？
-【输入格式】输入三行。第一行包含一个正整数 n ，第二行包含一个正整数 m ，第三行包含一个正整数 a 。
-【输出格式】输出一行，包含一个整数，表示答案。
-【样例输入】2024900
-【样例输出】432000
-【评测用例规模与约定】对于所有评测用例，1 &lt;= n &lt;= 1000, 1 &lt;= m &lt;= 1000, 1 &lt;= a &lt;= 2000。
-思路直接输出n*m*a 
-n = int(input())m = int(input())a = int(input())print(n * m * a)
-9.再创新高题意【问题描述】小蓝有一个数组 a[1], a[2], …, a[n]， 一个“再创新高”的位置是指一个位置 p ，a[p] 的值比之前每个位置的值都大。
-请求出小蓝的数组中有多少个再创新高的位置。
-【输入格式】输入的第一行包含一个整数 n 。
-第二行包含 n 个整数，相邻数之间使用一个空格分隔，依次表示 a[1], a[2], …, a[n] 。
-【输出格式】输出一行，包含一个整数，表示答案。
-【样例输入】81 2 3 4 5 6 6 6
-【样例输出】6
-【样例输入】93 2 1 6 5 4 9 8 7
-【样例输出】3
-【评测用例规模与约定】对于 30% 的评测用例，1 &lt;= n &lt;= 100，0 &lt;= a[i] &lt;= 1000。
-对于 60% 的评测用例，1 &lt;= n &lt;= 1000，0 &lt;= a[i] &lt;= 1000。
-对于所有评测用例，1 &lt;= n &lt;= 10000，0 &lt;= a[i] &lt;= 1000000。
-思路枚举数组，不断记录max值，每当max更新就让答案加一
-n = int(input())lst = list(map(int,input().split()))mx = -1ans = 0for x in lst:    if(x &gt; mx):        ans += 1        mx = xprint(ans)
-10.四个字符串拼接题意【问题描述】给定四个字符串 a, b, c, d，请将这四个字符串按照任意顺序依次连接拼成一个字符串。
-请问拼成的字符串字典序最小是多少？
-【输入格式】输入四行，每行包含一个字符串。
-【输出格式】输出一行包含一个字符串，表示答案。
-【样例输入】LANLANQIAOBEI
-【样例输出】BEILANLANQIAO
-【评测用例规模与约定】对于所有评测用例，输入的字符串非空串，由大写字母组成，长度不超过 1000 。
-思路四个字符串拼接只有A_4^4 种可能，直接枚举所有可能的情况，找到最小的字符串即可。
-将四个字符串装入一个列表中，然后使用itertools库中的permutations函数来生成所有可能的排列
-import itertoolslst = []for i in range(4):    s = input()    lst.append(s)per = itertools.permutations(lst) # 生成一个包含所有排列情况的可迭代对象ans = &quot;&quot;.join(lst) # 拼接列表中的字符串for i in per:    ans = min(ans,&quot;&quot;.join(i))print(ans)
-更好的解法如果字符串数量增多，全排列的数量会大大增长导致我们无法枚举所有的可能。我们可以考虑直接找到最优的字符串。
-我们假设字符串目前拼接顺序如下S1,a,b,S2 ，其中a,b 是单元字符串，而S1,S2则分别表示其他字符串拼接后的串。现在我们考虑交换a和b的位置能否使得整个字符串的字典序更小：
-显而易见当a+b&lt;b+a时，a在前时字典序更小，b+a&lt;a+b 时交换a和b的位置能够使得最终的字符串字典序更小。 （此处的+ 表示字符串的拼接，&gt; , &lt; 表示字典序比较）
-于是我们按照上述的比较规则对这个字符串数组进行排序，最终的顺序就是答案
-from functools import cmp_to_keylst = []for i in range(4):    s = input()    lst.append(s)def cmp(s1,s2): # 比较函数    if(s1+s2 &lt; s2+s1):        return -1 # -1表示不需要交换位置    elif(s1+s2 &gt; s2+s1):        return 1 # 1表示需要交换位置    else :        return 0lst.sort(key = cmp_to_key(cmp))print(&quot;&quot;.join(lst))
-11.领取礼物题意【问题描述】蓝桥村正在给村民们发放礼物。礼物通过一个礼物发放机完成。
-村民们在机器前排着队领取礼物。
-每个礼物有一个价值 v[i] ，有的高，有的低。每位村民有自己对于礼物的期望值 e[i] 。
-礼物发放机每次会显示一个礼物，如果礼物的价值大于等于村民的期望值，村民就会高兴地把礼物拿走，并离开礼物发放机。如果礼物的价值比村民的期望值低，村民会让这个礼物取消，并让礼物发放机显示下一个礼物，并重新检查是否满足期望。村民会重复让礼物发放机显示下⼀个礼物，直到礼物发放机没有更多可以显示的礼物或礼物的价值大于等于自己的期望值。
-如果礼物发放机中的所有礼物都显示完了，那么还没领到礼物的村民就无法领取礼物了。
-如果所有的村民都领到了礼物，而礼物发放机还有礼物显示，村民们也不会再领取礼物。
-现在，小蓝知道了每位村民的期望值，也知道了礼物发放机上礼物的显示顺序，请问总共有多少村民拿到了礼物？
-【输入格式】输入的第一行包含一个整数 n ，表示村民的个数。
-第二行包含 n 个整数，相邻数之间使用一个空格分隔，依次表示排队的每位村民的期望值 e[i] 。
-第三行包含一个整数 m ，表示礼物发放机会显示的礼物个数。
-第四行包含 m 个整数，相邻数之间使用一个空格分隔，依次表示礼物发放机显示的礼物的价值 v[i] 。
-【输出格式】输出一行，包含一个整数，表示答案。
-【样例输入】66 5 5 3 6 099 9 8 2 4 4 3 5 3
-【样例输出】4
-【样例说明】前 4 位村民依次取到了第 1, 2, 3, 5 件礼物。后面的礼物未能满足第 5 位村民。
-【评测用例规模与约定】对于 30% 的评测用例，1 &lt;= n, m &lt;= 20 ， 0 &lt;= e[i], v[i] &lt;= 100 。
-对于 60% 的评测用例，1 &lt;= n, m &lt;= 300 ， 0 &lt;= e[i], v[i] &lt;= 10000 。
-对于所有评测用例，1 &lt;= n, m &lt;= 10000 ， 0 &lt;= e[i], v[i] &lt;= 1000000 。
-思路模拟礼物分发的过程即可
-使用for循环按顺序枚举每个村民，对于每个村民使用while循环来查找符合的礼物。
-当所有村民都领到礼物，或者所有的礼物都分发完就结束循环
-n = int(input())villager = list(map(int,input().split()))m = int(input())gift = list(map(int,input().split()))p = 0 # 现在分发到哪个礼物了ans = 0for x in villager:    while(p &lt; len(gift) and gift[p] &lt; x):        p += 1    if(p == len(gift)):# 如果所有礼物都发完了        break    ans += 1 # 有合适的礼物给他    p += 1print(ans)
-12. 十字矩阵题意【问题描述】小蓝有一个 n 行 m 列的矩阵 a[i][j]，他想着矩阵中找出一个“十”字形状的区域，使得区域内的值的和最大。
-一个“十”字形状的区域可以由两个行号r1 、 r2 和两个列号 c1 、 c2 表示。“十”字的区域内包括第 r1 行到 r2 行的所有元素，以及第 c1 列到 c2 列的所有元素，既不在这几行也不在这几列的元素不在区域内。
-为了保证是一个“十”字的形状，必须满足 1 < r1 ]]></content>
-      <categories>
-        <category>题解</category>
-      </categories>
-      <tags>
-        <tag>题解</tag>
-        <tag>python</tag>
-        <tag>蓝桥杯</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>单调栈</title>
-    <url>/a0bd89e96c0d/</url>
-    <content><![CDATA[单调栈指的是一个栈，栈内的元素是单调的。
-单调递增栈：从栈底到栈顶元素依次**从大到小**。
-单调递减栈：从栈底到栈顶元素依次**从小到大**。
-建立一个单调栈例：如果要维护一个递增单调栈（也就是栈顶的元素最小），那么元素要入栈时，如果为**空栈**或者**栈顶元素比入栈元素大**，就入栈，否则就依次将栈顶元素出栈，直到满足条件。
-伪代码：
-stack&lt;int&gt; s1;//一般需要在数组中添加一个结束标识符    for(遍历数组)&#123;        if(栈为空||栈顶元素大于当前元素)&#123;            入栈;        &#125;else&#123;            while(栈不为空&amp;&amp;栈顶元素小于当前元素)&#123;                栈顶元素出栈;                更新结果;            &#125;            当前元素入栈;        &#125;    &#125;
-应用1.视野总和： 有n个人在排队，他们身高各不相同，都向右看，能看到比自己个子矮的人的头顶，直到下一个比自己更高的人。
-**输入：**n个数表示n个人的身高**输出：**所有人能看到的头顶总和
-例：输入： 4 3 7 1输出：2(个子为4的人能看见个子为3的人，7能看见1)
-思路：本质就是找到下一个比自己个子高的人，然后计算相隔的距离(也就是中间有几个人)，再加和。可以通过构建单调递增栈来解决。当遇到下一个比自己高的人时就开始处理数据。
-const int INT_INF = 0x3F3F3F3F;int fieldSum(vector&lt;int&gt;&amp; v)&#123;    v.push_back(INT_INF);    stack&lt;int&gt; st;    int sum = 0;    for(int i = 0;i&lt;v.size();i++)&#123;        if(st.empty() || v[i]&lt;st.top())&#123;//如果空栈或者将要入栈的元素更小            st.push(v[i]);        &#125;else &#123;            while(!(st.empty() || v[i]&lt;st.top()))&#123;                int top = st.top();                st.pop();                sum += (i - top - 1);//处理数据            &#125;            st.push(v[i]);        &#125;    &#125;    return sum;&#125;
-2.柱形图中的最大矩形面积链接：https://ac.nowcoder.com/acm/contest/22669/Q
-柱状图是有一些宽度相等的矩形下端对齐以后横向排列的图形，但是小A的柱状图却不是一个规范的柱状图，**它的每个矩形下端的宽度可以是不相同的一些整数**，分别为a[i]a[i]a[i],每个矩形的高度是h[i]h[i]h[i],现在小A只想知道，在这个图形里面包含的最大矩形面积是多少
- 输入描述:
-一行一个整数N，表示长方形的个数接下来一行N个整数表示每个长方形的宽度接下来一行N个整数表示每个长方形的高度
-输出描述:
-一行一个整数，表示最大的矩形面积
-输入
-71 1 1 1 1 1 12 1 4 5 1 3 3
-输出
-#include&lt;bits/stdc++.h&gt;using namespace std;typedef pair&lt;int,int&gt; pii;//pair int int(pii)typedef long long int ll;const int INF = 0x3f3f3f3f;//无限大ll maxSqu(vector&lt;pii&gt; vec)&#123;    vec.push_back(make_pair(-1*INF,0));//在数组最后插入一个结束标识符，保证运行的时候能处理掉所有的数据    stack&lt;pii&gt; st;    ll max = -1*INF;//存储结果    for(int i  = 0;i&lt;vec.size();i++)&#123;//遍历数组        if(st.empty() || st.top().first&lt;= vec[i].first)&#123;//如果符合条件就入栈            st.push(vec[i]);        &#125;else&#123;//不符合条件就依次出栈直到可以入栈            int wid = 0;//用来表示现在宽度是多少            while(!st.empty() &amp;&amp; st.top().first &gt; vec[i].first)&#123;//出栈                pii top = st.top();                st.pop();                wid+=top.second;                ll res = ll(wid)*top.first;                max = max&gt;res?max:res;            &#125;            //下面这两行很关键，用来实现向左拓展矩形(通过将栈顶元素的宽度改成它以及它左边比它高的矩形的宽度的和)            st.push(vec[i]);            st.top().second += wid;        &#125;    &#125;    return max;&#125;int main()&#123;    int n;    cin&gt;&gt;n;    vector&lt;pii&gt; v(n);    for(int i = 0;i&lt;n;i++)&#123;        cin&gt;&gt;v[i].second;    &#125;    for(int i = 0;i&lt;n;i++)&#123;        cin&gt;&gt;v[i].first;    &#125;    cout&lt;&lt;maxSqu(v);    return 0;&#125;]]></content>
-      <categories>
-        <category>数据结构</category>
-      </categories>
-      <tags>
-        <tag>数据结构</tag>
       </tags>
   </entry>
   <entry>
@@ -2611,85 +2473,141 @@ const char * state1 = &quot;test1&quot;;const char * state2 = &quot;ABCDEFG&quot
       </tags>
   </entry>
   <entry>
-    <title>搭建qqbot经历</title>
-    <url>/378335218210/</url>
-    <content><![CDATA[2024-7-4
-虽然最终没有成功配置好qqbot，但是感觉这个过程还是值得记录的，所以写出了下文
-最终因为登陆qq时的code45问题导致没有成功登录，据说更换qq号或者配置签名服务器是有可能可行的。
-安装环境安装mcl（mirai的控制台）创建一个文件夹mcl 并进入文件夹
-mkdir mcl &amp;&amp; cd mcl
-寻找适合你的操作系统的的mcl安装包 ([下载链接](https://github.com/iTXTech/mcl-installer/releases))，将安装包下载到刚刚创建的文件夹中
-下面shell指令以mcl-installer-1.0.7-linux-amd64为例
-wget https://github.com/iTXTech/mcl-installer/releases/download/v1.0.7/mcl-installer-1.0.7-linux-amd64
-赋予可运行权限，运行
-chmod +x 
-./mcl-installer-1.0.7-linux-amd64
-这时候就安装好mcl了，之后只需要进入文件夹后使用
-./mcl
-就可以打开mcl了
-安装mirai-api-http打开mcl的目录，使用指令安装
-./mcl --update-package net.mamoe:mirai-api-http --channel stable-v2 --type plugin
-运行mcl
-./mcl -u
-安装aliceBot使用pip安装
-pip install alicebotpip install alicebot-adapter-mirai
-安装验证器验证器用在登录qq中
-fix-protocol-versionhttps://github.com/cssxsh/fix-protocol-version
-基于**mirai**的qsign api对接。
-qsign（签名）已经及咯！TAT
-仓库
-https://github.com/MrXiaoM/qsign/tree/bak
-发行版下载
-https://github.com/MrXiaoM/qsign/releases
-mirai-login-solver-sakura[mirai-login-solver-sakura](https://github.com/KasukuSakura/mirai-login-solver-sakura) 滑块验证解决器
-进入mcl的plugins，将github项目中的发行版jar放入文件夹中
-wget https://github.com/KasukuSakura/mirai-login-solver-sakura/releases/download/v0.0.12/mirai-login-solver-sakura-0.0.12.mirai2.jar
-mirai-device-generator[mirai-device-generator](https://github.com/cssxsh/mirai-device-generator) 仿真设备信息生成器
-在mcl目录中使用指令一键安装
-./mcl --update-package xyz.cssxsh.mirai:mirai-device-generator --channel maven-stable --type plugin
-配置Mirai协议适配器配置Mirai-api-httphttps://docs.alicebot.dev/guide/adapters/mirai-adapter (aliceBot手册)
-编辑 mirai-api-http 的配置文件 setting.yml。
-Websocket Adapter模式
-在mirai中的setting.yml文件中合并如下内容（即若原先出现了某个属性，则进行修改，若原先没有某属性则添加）
-(setting.yml文件在 ./config/net.mamoe.mirai-api-http/setting.yml, 若您没有该文件，请检查是否安装并更新好**mirai-api-http**)
-adapters:  - wsenableVerify: trueverifyKey: 1234567890adapterSettings:  ws:    host: localhost    port: 8080    reservedSyncId: -1
-创建一个aliceBot项目[官方文档](https://docs.alicebot.dev/guide/quick-start)
-项目结构.├── plugins (插件目录)│   └── xxx.py├── config.toml (配置文件)└── main.py
-具体步骤创建一个目录
-mkdir alicebot-start &amp;&amp; cd alicebot-start
-创建plugins文件夹，用来存放插件
-mkdir plugins
-创建一个main.py文件，并写入如下信息
-
-shell指令：
-
-vim main.py
-
-文件内容：
-
-from alicebot import Botbot = Bot()if __name__ == &quot;__main__&quot;:    bot.run()
-创建config.toml并编写内容
-
-shell指令:
-
-vim config.toml
-
-文件内容（其中verify_key填写为上文setting.yml中的verifykey内容 ， qq = 填写为qqbot的qq号）
-
-[bot]adapters = [&quot;alicebot.adapter.mirai&quot;][adapter.mirai]adapter_type = &quot;ws&quot;verify_key = &quot;1234567890&quot;qq = 机器人QQ号
-运行后台运行指令以运行python为例
-nohup python3 -u main.py &gt; out.log 2&gt;&amp;1 &amp;
-该命令会运行当前目录下的test.py并把输出和报错都发送到文件out.log中。
-使用jobs指令查看后台运行的进程
-jobs
-使用kill 指令杀死某个后台运行的进程(注意使用kill 1代表杀死进程号为1的进程， kill %1才是杀死作业号为1的作业）
-kill %1
-]]></content>
+    <title>单调栈</title>
+    <url>/a0bd89e96c0d/</url>
+    <content><![CDATA[单调栈指的是一个栈，栈内的元素是单调的。
+单调递增栈：从栈底到栈顶元素依次**从大到小**。
+单调递减栈：从栈底到栈顶元素依次**从小到大**。
+建立一个单调栈例：如果要维护一个递增单调栈（也就是栈顶的元素最小），那么元素要入栈时，如果为**空栈**或者**栈顶元素比入栈元素大**，就入栈，否则就依次将栈顶元素出栈，直到满足条件。
+伪代码：
+stack&lt;int&gt; s1;//一般需要在数组中添加一个结束标识符    for(遍历数组)&#123;        if(栈为空||栈顶元素大于当前元素)&#123;            入栈;        &#125;else&#123;            while(栈不为空&amp;&amp;栈顶元素小于当前元素)&#123;                栈顶元素出栈;                更新结果;            &#125;            当前元素入栈;        &#125;    &#125;
+应用1.视野总和： 有n个人在排队，他们身高各不相同，都向右看，能看到比自己个子矮的人的头顶，直到下一个比自己更高的人。
+**输入：**n个数表示n个人的身高**输出：**所有人能看到的头顶总和
+例：输入： 4 3 7 1输出：2(个子为4的人能看见个子为3的人，7能看见1)
+思路：本质就是找到下一个比自己个子高的人，然后计算相隔的距离(也就是中间有几个人)，再加和。可以通过构建单调递增栈来解决。当遇到下一个比自己高的人时就开始处理数据。
+const int INT_INF = 0x3F3F3F3F;int fieldSum(vector&lt;int&gt;&amp; v)&#123;    v.push_back(INT_INF);    stack&lt;int&gt; st;    int sum = 0;    for(int i = 0;i&lt;v.size();i++)&#123;        if(st.empty() || v[i]&lt;st.top())&#123;//如果空栈或者将要入栈的元素更小            st.push(v[i]);        &#125;else &#123;            while(!(st.empty() || v[i]&lt;st.top()))&#123;                int top = st.top();                st.pop();                sum += (i - top - 1);//处理数据            &#125;            st.push(v[i]);        &#125;    &#125;    return sum;&#125;
+2.柱形图中的最大矩形面积链接：https://ac.nowcoder.com/acm/contest/22669/Q
+柱状图是有一些宽度相等的矩形下端对齐以后横向排列的图形，但是小A的柱状图却不是一个规范的柱状图，**它的每个矩形下端的宽度可以是不相同的一些整数**，分别为a[i]a[i]a[i],每个矩形的高度是h[i]h[i]h[i],现在小A只想知道，在这个图形里面包含的最大矩形面积是多少
+ 输入描述:
+一行一个整数N，表示长方形的个数接下来一行N个整数表示每个长方形的宽度接下来一行N个整数表示每个长方形的高度
+输出描述:
+一行一个整数，表示最大的矩形面积
+输入
+71 1 1 1 1 1 12 1 4 5 1 3 3
+输出
+#include&lt;bits/stdc++.h&gt;using namespace std;typedef pair&lt;int,int&gt; pii;//pair int int(pii)typedef long long int ll;const int INF = 0x3f3f3f3f;//无限大ll maxSqu(vector&lt;pii&gt; vec)&#123;    vec.push_back(make_pair(-1*INF,0));//在数组最后插入一个结束标识符，保证运行的时候能处理掉所有的数据    stack&lt;pii&gt; st;    ll max = -1*INF;//存储结果    for(int i  = 0;i&lt;vec.size();i++)&#123;//遍历数组        if(st.empty() || st.top().first&lt;= vec[i].first)&#123;//如果符合条件就入栈            st.push(vec[i]);        &#125;else&#123;//不符合条件就依次出栈直到可以入栈            int wid = 0;//用来表示现在宽度是多少            while(!st.empty() &amp;&amp; st.top().first &gt; vec[i].first)&#123;//出栈                pii top = st.top();                st.pop();                wid+=top.second;                ll res = ll(wid)*top.first;                max = max&gt;res?max:res;            &#125;            //下面这两行很关键，用来实现向左拓展矩形(通过将栈顶元素的宽度改成它以及它左边比它高的矩形的宽度的和)            st.push(vec[i]);            st.top().second += wid;        &#125;    &#125;    return max;&#125;int main()&#123;    int n;    cin&gt;&gt;n;    vector&lt;pii&gt; v(n);    for(int i = 0;i&lt;n;i++)&#123;        cin&gt;&gt;v[i].second;    &#125;    for(int i = 0;i&lt;n;i++)&#123;        cin&gt;&gt;v[i].first;    &#125;    cout&lt;&lt;maxSqu(v);    return 0;&#125;]]></content>
       <categories>
-        <category>搭建环境</category>
+        <category>数据结构</category>
       </categories>
       <tags>
-        <tag>qqbot</tag>
+        <tag>数据结构</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>十六届蓝桥杯模拟赛3题解</title>
+    <url>/27d697c28fe4/</url>
+    <content><![CDATA[第16届蓝桥杯模拟赛3 python组
+*思路和答案不保证正确*
+1.填空如果一个数 p 是个质数，同时又是整数 a 的约数，则 p 称为 a 的一个质因数。
+请问， 2024 的最大的质因数是多少？
+因为是填空题，所以直接枚举2023~2 ，第一个即是质数也是2024的因数的数就是答案。
+def isprime(x):    for i in range(2,int(x ** 0.5)+1):        if(x % i == 0):            return False    return Truefor i in range(2023,1,-1):    if(2024 % i == 0 and isprime(i)):        print(i)# 23# 11# 2
+2.填空对于两个整数 a, b，既是 a 的整数倍又是 b 的整数倍的数称为 a 和 b 的公倍数。公倍数中最小的正整数称为 a 和 b 的最小公倍数。
+请问， 2024 和 1024 的最小公倍数是多少？
+经典求lcm: lcm(a,b) = \frac{a * b}{ gcd(a* b)}
+def gcd(x,y):    if(y == 0): return x    return gcd(y,x % y)def lcm(x,y):    return x * y // gcd(x,y)print(lcm(2024,1024))## 259072
+(python3.9版本以后的math库中含有lcm函数可以直接调用)
+import mathprint(math.lcm(2024,1024))## 259072
+3.填空如果一个数 p 是个质数，同时又是整数 a 的约数，则 p 称为 a 的一个质因数。
+请问， 2024 的所有质因数的和是多少？
+第一个填空使用的代码已经计算出了2024的质因数为：23,11,8,4,2 ，加到一起就可以了
+def isprime(x):    for i in range(2,int(x ** 0.5)+1):        if(x % i == 0):            return False    return Trues = 0for i in range(2023,1,-1):    if(2024 % i == 0 and isprime(i)):        s = s + iprint(s)## 36
+4.填空请问，在不超过 2024 的数中，最大的质数是多少？
+枚举2023~2，找到第一个质数
+def isprime(x):    for i in range(2,int(x ** 0.5)+1):        if(x % i == 0):            return False    return Trues = 0for i in range(2023,1,-1):    if(isprime(i)):        print(i)        break## 2017
+5.填空如果两个整数 a, b 除了 1 以外，没有其它的公约数，则称整数 a 与 b 互质。
+请问，与 2024 互质的数中（包括1），第 2024 小的数是多少？
+while循环从1开始找满足gcd(x,2024) == 1 的数，找第2024个
+def gcd(x,y):    if(y == 0): return x    return gcd(y,x % y)cnt = 0p = 0while(cnt &lt; 2024):    p += 1    if(gcd(p,2024) == 1):        cnt += 1print(p)## 4655
+6.填空对于字符串 S=ANQNANBNQNANQNQNBNINQNQNANQNINANQNANBNQNANQNQNBNBNQNQNANQNINANQNANBNQNANQNQNBNINQNQNANQNINBNQNANBNQN ，请找到 S 的一个长度不超过 10 的子串 A，使得（A的长度）乘以（A在S中出现的次数）最大。
+请问这个子串是什么？（如果有多个满足条件的，请回答字典序最小的）。
+字符串不长，直接枚举所有长度不超过10的子串，然后将他们的出现次数记录在字典中，然后在字典中找答案就好
+s = &quot;ANQNANBNQNANQNQNBNINQNQNANQNINANQNANBNQNANQNQNBNBNQNQNANQNINANQNANBNQNANQNQNBNINQNQNANQNINBNQNANBNQN&quot;dic = &#123;&#125;for length in range(1,11):    for i in range(0,len(s) - length):        dic[s[i:i+length]] = dic.get(s[i:i+length],0) + 1ansstr = &quot;&quot;ansnum = 0for s,cnt in dic.items():    num = cnt * len(s)    if(num &gt; ansnum) or (num == ansnum and s &lt; ansstr):        ansstr = s        ansnum = numprint(ansstr)# NQN
+7.填空如果一个字符串中只包含字符 0 和字符 1，则称为一个 01 串（包含全为 0 的串和全为 1 的串）。
+请问有多少个长度为 24 的 01 串，满足任意 5 个连续的位置中不超过 3 个位置的值为 1 。
+长度为24的01串总共有2^{24} 个，大约1.7*10^7 , 可以花点时间暴力枚举所有的字符串（反正是填空题）
+import timedef check(x):    lst = []    for i in range(0,24):        if(x &amp; ( 1 &lt;&lt; i)):            lst.append(i)    if(len(lst)&lt;=2):        return True    for i in range(len(lst)-2):        if(lst[i+2] - lst[i]&lt;= 4):            return False    return Trueans = 0tik = time.time()for x in range(1&lt;&lt;24):    # 这些01串可以用0~(2**24-1)的二进制数表示    if(check(x)):        ans += 1tok = time.time()print(tok-tik) # 花了25.859452724456787秒运行程序print(ans) # 最终答案是162165
+也可以使用dfs来解决本题：
+import timelis = [] # 存储当前数的1的位置ans = 0def dfs(step):    global ans    if(step == 25):        ans += 1        return     if(len(lis) &lt; 2 or step - lis[-2] &gt; 4):        lis.append(step) # 选1        dfs(step + 1)         lis.pop() # 还原现场    dfs(step + 1) # 选0tic = time.time()dfs(1)tok = time.time()print(tok - tic)# 花了0.04025077819824219秒运行程序print(ans) # 最终答案是162165
+8. 玉米地题意【问题描述】小蓝种了一块玉米地，玉米地长 n 米，宽 m 米，每平方米产玉米 a 千克。请问小蓝的玉米地一共能产多少千克玉米？
+【输入格式】输入三行。第一行包含一个正整数 n ，第二行包含一个正整数 m ，第三行包含一个正整数 a 。
+【输出格式】输出一行，包含一个整数，表示答案。
+【样例输入】2024900
+【样例输出】432000
+【评测用例规模与约定】对于所有评测用例，1 &lt;= n &lt;= 1000, 1 &lt;= m &lt;= 1000, 1 &lt;= a &lt;= 2000。
+思路直接输出n*m*a 
+n = int(input())m = int(input())a = int(input())print(n * m * a)
+9.再创新高题意【问题描述】小蓝有一个数组 a[1], a[2], …, a[n]， 一个“再创新高”的位置是指一个位置 p ，a[p] 的值比之前每个位置的值都大。
+请求出小蓝的数组中有多少个再创新高的位置。
+【输入格式】输入的第一行包含一个整数 n 。
+第二行包含 n 个整数，相邻数之间使用一个空格分隔，依次表示 a[1], a[2], …, a[n] 。
+【输出格式】输出一行，包含一个整数，表示答案。
+【样例输入】81 2 3 4 5 6 6 6
+【样例输出】6
+【样例输入】93 2 1 6 5 4 9 8 7
+【样例输出】3
+【评测用例规模与约定】对于 30% 的评测用例，1 &lt;= n &lt;= 100，0 &lt;= a[i] &lt;= 1000。
+对于 60% 的评测用例，1 &lt;= n &lt;= 1000，0 &lt;= a[i] &lt;= 1000。
+对于所有评测用例，1 &lt;= n &lt;= 10000，0 &lt;= a[i] &lt;= 1000000。
+思路枚举数组，不断记录max值，每当max更新就让答案加一
+n = int(input())lst = list(map(int,input().split()))mx = -1ans = 0for x in lst:    if(x &gt; mx):        ans += 1        mx = xprint(ans)
+10.四个字符串拼接题意【问题描述】给定四个字符串 a, b, c, d，请将这四个字符串按照任意顺序依次连接拼成一个字符串。
+请问拼成的字符串字典序最小是多少？
+【输入格式】输入四行，每行包含一个字符串。
+【输出格式】输出一行包含一个字符串，表示答案。
+【样例输入】LANLANQIAOBEI
+【样例输出】BEILANLANQIAO
+【评测用例规模与约定】对于所有评测用例，输入的字符串非空串，由大写字母组成，长度不超过 1000 。
+思路四个字符串拼接只有A_4^4 种可能，直接枚举所有可能的情况，找到最小的字符串即可。
+将四个字符串装入一个列表中，然后使用itertools库中的permutations函数来生成所有可能的排列
+import itertoolslst = []for i in range(4):    s = input()    lst.append(s)per = itertools.permutations(lst) # 生成一个包含所有排列情况的可迭代对象ans = &quot;&quot;.join(lst) # 拼接列表中的字符串for i in per:    ans = min(ans,&quot;&quot;.join(i))print(ans)
+更好的解法如果字符串数量增多，全排列的数量会大大增长导致我们无法枚举所有的可能。我们可以考虑直接找到最优的字符串。
+我们假设字符串目前拼接顺序如下S1,a,b,S2 ，其中a,b 是单元字符串，而S1,S2则分别表示其他字符串拼接后的串。现在我们考虑交换a和b的位置能否使得整个字符串的字典序更小：
+显而易见当a+b&lt;b+a时，a在前时字典序更小，b+a&lt;a+b 时交换a和b的位置能够使得最终的字符串字典序更小。 （此处的+ 表示字符串的拼接，&gt; , &lt; 表示字典序比较）
+于是我们按照上述的比较规则对这个字符串数组进行排序，最终的顺序就是答案
+from functools import cmp_to_keylst = []for i in range(4):    s = input()    lst.append(s)def cmp(s1,s2): # 比较函数    if(s1+s2 &lt; s2+s1):        return -1 # -1表示不需要交换位置    elif(s1+s2 &gt; s2+s1):        return 1 # 1表示需要交换位置    else :        return 0lst.sort(key = cmp_to_key(cmp))print(&quot;&quot;.join(lst))
+11.领取礼物题意【问题描述】蓝桥村正在给村民们发放礼物。礼物通过一个礼物发放机完成。
+村民们在机器前排着队领取礼物。
+每个礼物有一个价值 v[i] ，有的高，有的低。每位村民有自己对于礼物的期望值 e[i] 。
+礼物发放机每次会显示一个礼物，如果礼物的价值大于等于村民的期望值，村民就会高兴地把礼物拿走，并离开礼物发放机。如果礼物的价值比村民的期望值低，村民会让这个礼物取消，并让礼物发放机显示下一个礼物，并重新检查是否满足期望。村民会重复让礼物发放机显示下⼀个礼物，直到礼物发放机没有更多可以显示的礼物或礼物的价值大于等于自己的期望值。
+如果礼物发放机中的所有礼物都显示完了，那么还没领到礼物的村民就无法领取礼物了。
+如果所有的村民都领到了礼物，而礼物发放机还有礼物显示，村民们也不会再领取礼物。
+现在，小蓝知道了每位村民的期望值，也知道了礼物发放机上礼物的显示顺序，请问总共有多少村民拿到了礼物？
+【输入格式】输入的第一行包含一个整数 n ，表示村民的个数。
+第二行包含 n 个整数，相邻数之间使用一个空格分隔，依次表示排队的每位村民的期望值 e[i] 。
+第三行包含一个整数 m ，表示礼物发放机会显示的礼物个数。
+第四行包含 m 个整数，相邻数之间使用一个空格分隔，依次表示礼物发放机显示的礼物的价值 v[i] 。
+【输出格式】输出一行，包含一个整数，表示答案。
+【样例输入】66 5 5 3 6 099 9 8 2 4 4 3 5 3
+【样例输出】4
+【样例说明】前 4 位村民依次取到了第 1, 2, 3, 5 件礼物。后面的礼物未能满足第 5 位村民。
+【评测用例规模与约定】对于 30% 的评测用例，1 &lt;= n, m &lt;= 20 ， 0 &lt;= e[i], v[i] &lt;= 100 。
+对于 60% 的评测用例，1 &lt;= n, m &lt;= 300 ， 0 &lt;= e[i], v[i] &lt;= 10000 。
+对于所有评测用例，1 &lt;= n, m &lt;= 10000 ， 0 &lt;= e[i], v[i] &lt;= 1000000 。
+思路模拟礼物分发的过程即可
+使用for循环按顺序枚举每个村民，对于每个村民使用while循环来查找符合的礼物。
+当所有村民都领到礼物，或者所有的礼物都分发完就结束循环
+n = int(input())villager = list(map(int,input().split()))m = int(input())gift = list(map(int,input().split()))p = 0 # 现在分发到哪个礼物了ans = 0for x in villager:    while(p &lt; len(gift) and gift[p] &lt; x):        p += 1    if(p == len(gift)):# 如果所有礼物都发完了        break    ans += 1 # 有合适的礼物给他    p += 1print(ans)
+12. 十字矩阵题意【问题描述】小蓝有一个 n 行 m 列的矩阵 a[i][j]，他想着矩阵中找出一个“十”字形状的区域，使得区域内的值的和最大。
+一个“十”字形状的区域可以由两个行号r1 、 r2 和两个列号 c1 、 c2 表示。“十”字的区域内包括第 r1 行到 r2 行的所有元素，以及第 c1 列到 c2 列的所有元素，既不在这几行也不在这几列的元素不在区域内。
+为了保证是一个“十”字的形状，必须满足 1 < r1 ]]></content>
+      <categories>
+        <category>题解</category>
+      </categories>
+      <tags>
+        <tag>题解</tag>
+        <tag>python</tag>
+        <tag>蓝桥杯</tag>
       </tags>
   </entry>
   <entry>
@@ -2783,8 +2701,90 @@ L. 找最大值只考虑奇数，如果比当前的最大值大，就更新最�
         <category>题解</category>
       </categories>
       <tags>
-        <tag>C++</tag>
         <tag>题解</tag>
+        <tag>C++</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>搭建qqbot经历</title>
+    <url>/378335218210/</url>
+    <content><![CDATA[2024-7-4
+虽然最终没有成功配置好qqbot，但是感觉这个过程还是值得记录的，所以写出了下文
+最终因为登陆qq时的code45问题导致没有成功登录，据说更换qq号或者配置签名服务器是有可能可行的。
+安装环境安装mcl（mirai的控制台）创建一个文件夹mcl 并进入文件夹
+mkdir mcl &amp;&amp; cd mcl
+寻找适合你的操作系统的的mcl安装包 ([下载链接](https://github.com/iTXTech/mcl-installer/releases))，将安装包下载到刚刚创建的文件夹中
+下面shell指令以mcl-installer-1.0.7-linux-amd64为例
+wget https://github.com/iTXTech/mcl-installer/releases/download/v1.0.7/mcl-installer-1.0.7-linux-amd64
+赋予可运行权限，运行
+chmod +x 
+./mcl-installer-1.0.7-linux-amd64
+这时候就安装好mcl了，之后只需要进入文件夹后使用
+./mcl
+就可以打开mcl了
+安装mirai-api-http打开mcl的目录，使用指令安装
+./mcl --update-package net.mamoe:mirai-api-http --channel stable-v2 --type plugin
+运行mcl
+./mcl -u
+安装aliceBot使用pip安装
+pip install alicebotpip install alicebot-adapter-mirai
+安装验证器验证器用在登录qq中
+fix-protocol-versionhttps://github.com/cssxsh/fix-protocol-version
+基于**mirai**的qsign api对接。
+qsign（签名）已经及咯！TAT
+仓库
+https://github.com/MrXiaoM/qsign/tree/bak
+发行版下载
+https://github.com/MrXiaoM/qsign/releases
+mirai-login-solver-sakura[mirai-login-solver-sakura](https://github.com/KasukuSakura/mirai-login-solver-sakura) 滑块验证解决器
+进入mcl的plugins，将github项目中的发行版jar放入文件夹中
+wget https://github.com/KasukuSakura/mirai-login-solver-sakura/releases/download/v0.0.12/mirai-login-solver-sakura-0.0.12.mirai2.jar
+mirai-device-generator[mirai-device-generator](https://github.com/cssxsh/mirai-device-generator) 仿真设备信息生成器
+在mcl目录中使用指令一键安装
+./mcl --update-package xyz.cssxsh.mirai:mirai-device-generator --channel maven-stable --type plugin
+配置Mirai协议适配器配置Mirai-api-httphttps://docs.alicebot.dev/guide/adapters/mirai-adapter (aliceBot手册)
+编辑 mirai-api-http 的配置文件 setting.yml。
+Websocket Adapter模式
+在mirai中的setting.yml文件中合并如下内容（即若原先出现了某个属性，则进行修改，若原先没有某属性则添加）
+(setting.yml文件在 ./config/net.mamoe.mirai-api-http/setting.yml, 若您没有该文件，请检查是否安装并更新好**mirai-api-http**)
+adapters:  - wsenableVerify: trueverifyKey: 1234567890adapterSettings:  ws:    host: localhost    port: 8080    reservedSyncId: -1
+创建一个aliceBot项目[官方文档](https://docs.alicebot.dev/guide/quick-start)
+项目结构.├── plugins (插件目录)│   └── xxx.py├── config.toml (配置文件)└── main.py
+具体步骤创建一个目录
+mkdir alicebot-start &amp;&amp; cd alicebot-start
+创建plugins文件夹，用来存放插件
+mkdir plugins
+创建一个main.py文件，并写入如下信息
+
+shell指令：
+
+vim main.py
+
+文件内容：
+
+from alicebot import Botbot = Bot()if __name__ == &quot;__main__&quot;:    bot.run()
+创建config.toml并编写内容
+
+shell指令:
+
+vim config.toml
+
+文件内容（其中verify_key填写为上文setting.yml中的verifykey内容 ， qq = 填写为qqbot的qq号）
+
+[bot]adapters = [&quot;alicebot.adapter.mirai&quot;][adapter.mirai]adapter_type = &quot;ws&quot;verify_key = &quot;1234567890&quot;qq = 机器人QQ号
+运行后台运行指令以运行python为例
+nohup python3 -u main.py &gt; out.log 2&gt;&amp;1 &amp;
+该命令会运行当前目录下的test.py并把输出和报错都发送到文件out.log中。
+使用jobs指令查看后台运行的进程
+jobs
+使用kill 指令杀死某个后台运行的进程(注意使用kill 1代表杀死进程号为1的进程， kill %1才是杀死作业号为1的作业）
+kill %1
+]]></content>
+      <categories>
+        <category>搭建环境</category>
+      </categories>
+      <tags>
+        <tag>qqbot</tag>
       </tags>
   </entry>
   <entry>
@@ -2928,7 +2928,7 @@ Linux**题型：**
 
 **编程题：**
 给出有序单链表，对他去重。（即将1 2 3 3 4 4 4 5 9， 变为 1 2 3 4 5 9)
-2023大二下期末回顾英语没有阅读题所以时间比较充足连线题和正误题都是书中原文改编，注意看课后题。尤其是课后题中的选择题和短句子填空等。翻译考察了茶文化。作文考察 “the inportance of Chinese myths and legends in modern life”。中国神话传说对于现代生活的影响。要求列举几个神话并介绍他对于中国人的道德观价值观等的影响，以及如何传承发展中国神话传说。
+2024大二下期末回顾英语没有阅读题所以时间比较充足连线题和正误题都是书中原文改编，注意看课后题。尤其是课后题中的选择题和短句子填空等。翻译考察了茶文化。作文考察 “the inportance of Chinese myths and legends in modern life”。中国神话传说对于现代生活的影响。要求列举几个神话并介绍他对于中国人的道德观价值观等的影响，以及如何传承发展中国神话传说。
 操作系统选择 30填空 20判断 20大题x3 30考的很杂，很多概念io的五层，spooling技术的各个区。等等但是选择题有很多原题，一定要看历年考题和考研题(尤其是老师发的习题资料)大题1.给出作业进入顺序，问抢占式情况下，每个作业进入内存的时间，完成时间，和平均周转时间2.给出页面调用顺序，求FIFO和LRU分别的缺页次数和缺页率3.有一个景点，最多容纳1000人，一个入口一个出口，写同步互斥代码。
 习概一大题1.为什么说中国特色社会主义进入新时代2.如何铸就中国文化二大题1.中国式现代化需要把握的重大关系2.新时代下如何建设美丽中国
 物联网工程导论20填空(20x1)5多选(5x2)5简答(5x10)1设计题(20)大部分都是白皮书原题，尤其是简单题基本都是白皮书原题。简答题：1.物联网和互联网的区别2.物联网的三层模型3.RFID的组成部分和各个功能，无源RFID标签怎么工作的4.ipv6的特点以及为什么物联网时代将成为最重要重要的协议之一5.GNSS是什么，以及阐述GPS的三个部分设计题设计一个联网的物联系统，要求写出功能介绍，硬件配置，逻辑关系，并介绍用到的物联网技术
@@ -2941,7 +2941,7 @@ Linux**题型：**
 
 第一问：求出时钟频率6MHz，定时器工作方式1的情况下，定时1ms的定时器初值X第二问：程序填空，考察中断入口，以及填入初值5.多机通信第一问：画多机通信图第二问：六选四型程序填空
 
-2023大三上期末回顾数据库**填空**amstrong 公理系统数据模式 三要素索引选择策略去重关键词定义表时的唯一性范式的定义等等…**大题简答：**连接操作算法有哪些，在连接两个表(10行和1000行)时各需要扫描表几次并发导致的几种问题是什么，以及哪些方法防止了哪个问题**计算：**一、sql语法：选择语句(考到了三重select 加 in 加 not exists)，插入语句，创建视图二、ER图给出一个系统，画出er图
+2024大三上期末回顾数据库**填空**amstrong 公理系统数据模式 三要素索引选择策略去重关键词定义表时的唯一性范式的定义等等…**大题简答：**连接操作算法有哪些，在连接两个表(10行和1000行)时各需要扫描表几次并发导致的几种问题是什么，以及哪些方法防止了哪个问题**计算：**一、sql语法：选择语句(考到了三重select 加 in 加 not exists)，插入语句，创建视图二、ER图给出一个系统，画出er图
 
 写出该er图的关系模式3.指出关系模式中的主码和外码三、函数依赖集
 求最小依赖集
@@ -3026,8 +3026,8 @@ undefinedF: 1 \le n \le 10^3 , G: 1\le n \le 10^5)$
         <category>题解</category>
       </categories>
       <tags>
-        <tag>C++</tag>
         <tag>题解</tag>
+        <tag>C++</tag>
       </tags>
   </entry>
   <entry>
@@ -3072,8 +3072,32 @@ F.小红的数组题意给n个数a_1,a_2,...,a_n , 以及q组询问 , 每次询�
         <category>题解</category>
       </categories>
       <tags>
-        <tag>C++</tag>
         <tag>题解</tag>
+        <tag>C++</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>小白月赛 76</title>
+    <url>/611f7aaa17d8/</url>
+    <content><![CDATA[牛客小白月赛76 https://ac.nowcoder.com/acm/contest/60393
+F. Kevin的矩阵1.题意给出n个数字的数字序列组成一个矩阵，m表示矩阵初始的列数，这n个数从左至右从上至下排列在矩阵中。要求进行若干次操作，使得矩阵的某一列的值全部为k可以执行的操作有:1.将矩阵的列数加1或者减12.改变矩阵中某个数的值一共有t组数据，并且保证所有数据中的n的和小于2e5
+2.思路不论数据怎样，每组样例中所进行的操作数都不多于2 次操作1.初始的列数m小于 ,那么可以花费至多 – m次 操作将列数变为 ，然后花费至多 + 1 次操作改变某一列上面的值来保证这一列的值全部为k。假设m为最糟糕的情况，即m = 1，那么总共最多需要 2 * 次操作。2.初始的列数m大于 那么直接将某一列中的所有不为k的数都变为k。最多花费  次操作表示即可符合要求，因为m  所以，所以总操作数永远小于 2 *因此可以只对列数 [m – , m+]的区域进行遍历。(如果列数在这个范围之外,那么进行列数变换的操作花费已经大于最糟糕的情况了)
+3.代码实现#include&lt;iostream&gt;#include&lt;cmath&gt;using namespace std;const int INF = 0x3f3f3f3f;int a[200010];int main()&#123;    int t;    cin&gt;&gt;t;    int n,m,k;    while(t--)&#123;        int ans = INF;        cin&gt;&gt;n&gt;&gt;m&gt;&gt;k;        for(int i = 1;i&lt;=n;i++)&#123;            scanf(&quot;%d&quot;,&amp;a[i]);        &#125;        int l = m - 2 * sqrt(n) - 5;        l = max(l,1);        int r = m + 2 * sqrt(n) + 5;        r = min(n,r);        for(int c = l;c&lt;=r;c++)&#123;            for(int i = 1;i&lt;=c;i++)&#123;                int num = a[i];                int cnt = abs(m - c);                for(int j = i;j &lt;= n;j+=c)&#123;                    if(a[j] != k)&#123;                        cnt++;                    &#125;                &#125;                ans = min(ans,cnt);            &#125;        &#125;        cout&lt;&lt;ans&lt;&lt;endl;    &#125;    return 0;&#125;
+G.Kevin逛超市1.题意在n个物品中有1个是“有问题的”，为了找到这个物品，依次循环进行以下操作:选出这些物品当中的前 (n+1)/2 个数进行一次检测，如果检测到了“目标物品”，就选择这组物品重复操作，如果没有检测到，就选择另外的 n/2 个物品重复操作直到待检测的物品只有一个并且经过检测后确认该物品是“有问题的”，停止检测。可以得出总的期望次数 ,要求计算 mod 998244353 的结果。输入一个数t代表一共有t组样例，每组样例输入一个数n(t &lt;= 2* n&lt;=)输出每组样例的期望次数每组样例输出一个数代表结果
+2.思路
+期望dp，容易得出dp[i] = 1 + dp[i/2] + dp[(i+1)/2] 这样可以通过dfs来在logn的规模下进行求解。
+通过map记录已经搜索的数据，实现记忆化搜索
+需要特判dp[1]和dp[2] (dp[1]需要特判自不必多说，dp[2]需要特判在于按照题目规则 dp[2] = 而按照递归方程得出的dp[2] = 1 + dp[1] + dp[1] = 2不符合题意)
+
+3.代码#include &lt;bits/stdc++.h&gt;using namespace std;typedef long long LL;const int mod = 998244353;unordered_map&lt;int, int&gt; mp;int qp(int a, int k)//快速幂 quick pow&#123;    int res = 1;    while (k)    &#123;        if (k &amp; 1) res = (LL) res * a % mod;        a = (LL) a * a % mod;        k &gt;&gt;= 1;    &#125;     return res;&#125; int dfs(int l, int r)&#123;    int len = r - l + 1, mid = l + r &gt;&gt; 1;    if (len == 1) return 1;    if (mp[len] != 0) return mp[len];     int &amp;val = mp[len];    if (mid - l + 1 == 1) val = dfs(l, mid);    else val = dfs(l, mid) + mid - l + 1;    val %= mod;    val = (val + dfs(mid + 1, r)) % mod;    val = (val + r - mid) % mod;    return val;&#125; void solve()&#123;    int n;    cin &gt;&gt; n;    cout &lt;&lt; (LL)dfs(1, n) * qp(n, mod - 2) % mod &lt;&lt; &quot;\n&quot;;&#125; int main()&#123;    ios::sync_with_stdio(false);    cin.tie(nullptr);     int T;    cin &gt;&gt; T;     while (T -- ) solve();     return 0;&#125;
+4.节时本题对时间要求不严格，但如果需要节时，可以考虑如下：使用二维数组mp[70][2]来代替map进行记录，其中mp[i][j]中的i代表进行第i次二分后的两个数，j如果为0就是较小者，为1就是较大者
+]]></content>
+      <categories>
+        <category>题解</category>
+      </categories>
+      <tags>
+        <tag>题解</tag>
+        <tag>C++</tag>
       </tags>
   </entry>
   <entry>
@@ -3135,32 +3159,8 @@ F - 小红的数组回文值题意定义一个数组的回文值为：至少需�
         <category>题解</category>
       </categories>
       <tags>
-        <tag>C++</tag>
         <tag>题解</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>小白月赛 76</title>
-    <url>/611f7aaa17d8/</url>
-    <content><![CDATA[牛客小白月赛76 https://ac.nowcoder.com/acm/contest/60393
-F. Kevin的矩阵1.题意给出n个数字的数字序列组成一个矩阵，m表示矩阵初始的列数，这n个数从左至右从上至下排列在矩阵中。要求进行若干次操作，使得矩阵的某一列的值全部为k可以执行的操作有:1.将矩阵的列数加1或者减12.改变矩阵中某个数的值一共有t组数据，并且保证所有数据中的n的和小于2e5
-2.思路不论数据怎样，每组样例中所进行的操作数都不多于2 次操作1.初始的列数m小于 ,那么可以花费至多 – m次 操作将列数变为 ，然后花费至多 + 1 次操作改变某一列上面的值来保证这一列的值全部为k。假设m为最糟糕的情况，即m = 1，那么总共最多需要 2 * 次操作。2.初始的列数m大于 那么直接将某一列中的所有不为k的数都变为k。最多花费  次操作表示即可符合要求，因为m  所以，所以总操作数永远小于 2 *因此可以只对列数 [m – , m+]的区域进行遍历。(如果列数在这个范围之外,那么进行列数变换的操作花费已经大于最糟糕的情况了)
-3.代码实现#include&lt;iostream&gt;#include&lt;cmath&gt;using namespace std;const int INF = 0x3f3f3f3f;int a[200010];int main()&#123;    int t;    cin&gt;&gt;t;    int n,m,k;    while(t--)&#123;        int ans = INF;        cin&gt;&gt;n&gt;&gt;m&gt;&gt;k;        for(int i = 1;i&lt;=n;i++)&#123;            scanf(&quot;%d&quot;,&amp;a[i]);        &#125;        int l = m - 2 * sqrt(n) - 5;        l = max(l,1);        int r = m + 2 * sqrt(n) + 5;        r = min(n,r);        for(int c = l;c&lt;=r;c++)&#123;            for(int i = 1;i&lt;=c;i++)&#123;                int num = a[i];                int cnt = abs(m - c);                for(int j = i;j &lt;= n;j+=c)&#123;                    if(a[j] != k)&#123;                        cnt++;                    &#125;                &#125;                ans = min(ans,cnt);            &#125;        &#125;        cout&lt;&lt;ans&lt;&lt;endl;    &#125;    return 0;&#125;
-G.Kevin逛超市1.题意在n个物品中有1个是“有问题的”，为了找到这个物品，依次循环进行以下操作:选出这些物品当中的前 (n+1)/2 个数进行一次检测，如果检测到了“目标物品”，就选择这组物品重复操作，如果没有检测到，就选择另外的 n/2 个物品重复操作直到待检测的物品只有一个并且经过检测后确认该物品是“有问题的”，停止检测。可以得出总的期望次数 ,要求计算 mod 998244353 的结果。输入一个数t代表一共有t组样例，每组样例输入一个数n(t &lt;= 2* n&lt;=)输出每组样例的期望次数每组样例输出一个数代表结果
-2.思路
-期望dp，容易得出dp[i] = 1 + dp[i/2] + dp[(i+1)/2] 这样可以通过dfs来在logn的规模下进行求解。
-通过map记录已经搜索的数据，实现记忆化搜索
-需要特判dp[1]和dp[2] (dp[1]需要特判自不必多说，dp[2]需要特判在于按照题目规则 dp[2] = 而按照递归方程得出的dp[2] = 1 + dp[1] + dp[1] = 2不符合题意)
-
-3.代码#include &lt;bits/stdc++.h&gt;using namespace std;typedef long long LL;const int mod = 998244353;unordered_map&lt;int, int&gt; mp;int qp(int a, int k)//快速幂 quick pow&#123;    int res = 1;    while (k)    &#123;        if (k &amp; 1) res = (LL) res * a % mod;        a = (LL) a * a % mod;        k &gt;&gt;= 1;    &#125;     return res;&#125; int dfs(int l, int r)&#123;    int len = r - l + 1, mid = l + r &gt;&gt; 1;    if (len == 1) return 1;    if (mp[len] != 0) return mp[len];     int &amp;val = mp[len];    if (mid - l + 1 == 1) val = dfs(l, mid);    else val = dfs(l, mid) + mid - l + 1;    val %= mod;    val = (val + dfs(mid + 1, r)) % mod;    val = (val + r - mid) % mod;    return val;&#125; void solve()&#123;    int n;    cin &gt;&gt; n;    cout &lt;&lt; (LL)dfs(1, n) * qp(n, mod - 2) % mod &lt;&lt; &quot;\n&quot;;&#125; int main()&#123;    ios::sync_with_stdio(false);    cin.tie(nullptr);     int T;    cin &gt;&gt; T;     while (T -- ) solve();     return 0;&#125;
-4.节时本题对时间要求不严格，但如果需要节时，可以考虑如下：使用二维数组mp[70][2]来代替map进行记录，其中mp[i][j]中的i代表进行第i次二分后的两个数，j如果为0就是较小者，为1就是较大者
-]]></content>
-      <categories>
-        <category>题解</category>
-      </categories>
-      <tags>
         <tag>C++</tag>
-        <tag>题解</tag>
       </tags>
   </entry>
   <entry>
